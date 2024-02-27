@@ -1,0 +1,95 @@
+[
+    {
+        "name":"Fantom Opera",
+        "symbol":"FTM",
+        "chainId":"250",
+        "RPC" :"https://rpcapi.fantom.network",
+        "explorer":"https://ftmscan.com",
+        "explorerAPI" :"https://api.ftmscan.com",
+        "isTestnet": false
+    },
+    {
+        "name":"Kava",
+        "symbol":"KAVA",
+        "chainId":"2222",
+        "RPC" :"https://kava-evm.publicnode.com",
+        "explorer":"https://kavascan.com",
+        "explorerAPI" :"https://kavascan.com", 
+        "isTestnet": false
+    },
+    {
+        "name":"Astar",
+        "symbol":"ASTR",
+        "chainId":"592",
+        "RPC" :"https://astar.public.blastapi.io",
+        "explorer":"https://astar.subscan.io",
+        "explorerAPI" :"https://astar.subscan.io", 
+        "isTestnet": false
+    },
+    {
+        "name":"Huobi ECO Chain Mainnet",
+        "symbol":"HT",
+        "chainId":"128",
+        "RPC" :"https://http-mainnet.hecochain.com",
+        "explorer":"https://hecoscan.io",
+        "explorerAPI" :"https://hecoscan.io", 
+        "isTestnet": false
+    },
+    {
+        "name":"Manta Pacific Mainnet",
+        "symbol":"ETH",
+        "chainId":"169",
+        "RPC" :"https://1rpc.io/manta",
+        "explorer":"https://manta.socialscan.io",
+        "explorerAPI" :"https://manta.socialscan.io", 
+        "isTestnet": false
+    },
+    {
+        "name":"Cronos Mainnet",
+        "symbol":"CRO",
+        "chainId":"25",
+        "RPC" :"https://1rpc.io/cro",
+        "explorer":"https://cronoscan.com",
+        "explorerAPI" :"https://api.cronoscan.com", 
+        "isTestnet": false
+    },
+    {
+        "name":"Gnosis",
+        "symbol":"XDAI",
+        "chainId":"100",
+        "RPC" :"https://1rpc.io/gnosis",
+        "explorer":"https://gnosisscan.io",
+        "explorerAPI" :"https://gnosisscan.io", 
+        "isTestnet": false
+    },
+    {
+        "name":"Klaytn Mainnet Cypress",
+        "symbol":"KLAY",
+        "chainId":"8217",
+        "RPC" :"https://klaytn-pokt.nodies.app",
+        "explorer":"https://klaytnscope.com",
+        "explorerAPI" :"https://klaytnscope.com", 
+        "isTestnet": false
+    },
+   
+    {
+        "name":"Celo Mainnet",
+        "symbol":"CELO",
+        "chainId":"42220",
+        "RPC" :"https://1rpc.io/celo",
+        "explorer":"https://celoscan.io",
+        "explorerAPI" :"https://celoscan.io", 
+        "isTestnet": false
+    },
+
+    {
+        "name":"Arbitrum One",
+        "symbol":"ETH",
+        "chainId":"42161",
+        "RPC" :"https://arbitrum.drpc.org",
+        "explorer":"https://arbiscan.io",
+        "explorerAPI" :"https://arbiscan.io", 
+        "isTestnet": false
+    }
+   
+]

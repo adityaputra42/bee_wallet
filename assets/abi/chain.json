@@ -1,0 +1,134 @@
+[
+   
+    {
+        "name" : "Peta Mainnet",
+        "symbol" : "PETA",
+        "RPC" : "https://mainnet.petachain.io",
+        "chainId" : "234",
+        "explorer" : "https://petascan.io",
+        "explorerAPI" : "https://petascan.io",
+        "logo":"assets/logo/peta.png", 
+        "baseLogo":"assets/logo/peta.png", 
+        "baseNetwork":"eth",
+        "decimal":18,
+        "contractAddress":null,
+        "isTestnet": false
+    }
+    ,
+    {
+       "name" : "Ethereum Mainnet",
+       "symbol" : "ETH",
+       "RPC" : "https://endpoints.omniatech.io/v1/eth/mainnet/public",
+       "chainId" : "1",
+       "explorer" : "https://etherscan.io",
+       "explorerAPI" : "https://api.etherscan.io",
+       "logo":"assets/logo/eth.png",
+       "baseLogo":"assets/logo/eth.png", 
+       "baseNetwork":"eth",
+       "decimal":18,
+       "contractAddress":null,
+       "isTestnet": false
+       
+   },
+   {
+       "name" : "Binance Smart Chain Mainnet",
+       "symbol" : "BNB",
+       "RPC" : "https://1rpc.io/bnb",
+       "chainId" : "56",
+       "explorer" : "https://bscscan.com",
+       "explorerAPI" : "https://api.bscscan.com",
+       "logo":  "assets/logo/bnb.png", 
+       "baseLogo":"assets/logo/bnb.png", 
+       "baseNetwork":"eth",
+       "decimal":18,
+       "contractAddress":null,
+       "isTestnet": false
+   },
+   {
+       "name" : "Polygon Mainnet",
+       "symbol" : "MATIC",
+       "RPC" : "https://polygon.meowrpc.com",
+       "chainId" : "137",
+       "explorer" : "https://polygonscan.com",
+       "explorerAPI" : "https://api.polygonscan.com",
+       "logo":"assets/logo/matic.png", 
+       "baseLogo":"assets/logo/matic.png", 
+       "baseNetwork":"eth",
+       "decimal":18,
+       "contractAddress":null,
+       "isTestnet": false
+   },
+   
+   {
+       "name" : "Base",
+       "symbol" : "ETH",
+       "RPC" : "https://base.meowrpc.com",
+       "chainId" : "8453",
+       "explorer" : "https://basescan.org",
+       "explorerAPI" : "https://api.basescan.org",
+       "logo":"assets/logo/eth.png", 
+       "baseLogo":"assets/logo/eth.png", 
+       "baseNetwork":"eth",
+       "decimal":18,
+       "contractAddress":null,
+       "isTestnet": false
+   },
+  
+   {
+       "name" : "Goerli Testnet",
+       "symbol" : "gETH",
+       "RPC" : "https://ethereum-goerli.publicnode.com",
+       "chainId" : "5",
+       "explorer" : "https://goerli.etherscan.io",
+       "explorerAPI" : "https://api-goerli.etherscan.io",
+       "logo":"assets/logo/eth.png", 
+       "baseLogo":"assets/logo/eth.png", 
+       "baseNetwork":"eth",
+       "decimal":18,
+       "contractAddress":null,
+       "isTestnet": true
+   },
+   {
+       "name" : "Base Goerli",
+       "symbol" : "ETH",
+       "RPC" : "https://base-goerli.publicnode.com",
+       "chainId" : "84531",
+       "explorer" : "https://goerli.basescan.org",
+       "explorerAPI" : "https://goerli.basescan.org",
+       "logo":"assets/logo/eth.png", 
+       "baseNetwork":"eth",
+       "baseLogo":"assets/logo/eth.png", 
+       "decimal":18,
+       "contractAddress":null,
+       "isTestnet": false
+   },
+    {
+    "name":"Tether USD",
+    "symbol":"USDT",
+    "RPC" : "https://1rpc.io/bnb",
+    "chainId":"56",
+    "explorer" : "https://bscscan.com",
+    "explorerAPI" : "https://api.bscscan.com",
+    "logo":"assets/logo/usdt.png",
+    "baseLogo":"assets/logo/bnb.png", 
+    "baseNetwork":"eth",
+    "decimal":18,
+    "contractAddress":"0x55d398326f99059ff775485246999027b3197955",
+    "isTestnet": null
+},
+{
+    "name":"Tether USD",
+    "symbol":"USDT",
+    "RPC" : "https://polygon.meowrpc.com",  
+    "chainId":"137",
+    "explorer" : "https://polygonscan.com",
+    "explorerAPI" : "https://api.polygonscan.com",
+    "logo":"assets/logo/usdt.png",
+    "baseLogo":"assets/logo/matic.png", 
+    "baseNetwork":"eth",
+    "decimal":18,
+    "contractAddress":"0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+    "isTestnet": null
+}
+   
+]
