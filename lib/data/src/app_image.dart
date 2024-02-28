@@ -5,7 +5,7 @@ class AppImage {
   static const String ilustrasi2 = "assets/images/ilustrasi2.png";
   static const String ilustrasi3 = "assets/images/ilustrasi3.png";
   static const String ilustrasi4 = "assets/images/ilustrasi4.png";
-  static const String onboardLogo = "assets/images/onboard_logo.png";
+  static const String logo = "assets/images/logo.png";
   static const String fingerprint = "assets/images/fingerprint.png";
   static const String usdt = "assets/images/usdt.png";
   static const String pancakeSwap = 'assets/images/pancake.png';
