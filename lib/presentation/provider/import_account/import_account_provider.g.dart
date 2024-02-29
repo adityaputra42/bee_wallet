@@ -55,6 +55,39 @@ final privateKeyControllerProvider = AutoDisposeNotifierProvider<
 );
 
 typedef _$PrivateKeyController = AutoDisposeNotifier<TextEditingController>;
+String _$createPinRegisterHash() => r'55344c4b9c11ecab00bd90a8621b6fc5dc858e8e';
+
+/// See also [CreatePinRegister].
+@ProviderFor(CreatePinRegister)
+final createPinRegisterProvider = AutoDisposeNotifierProvider<CreatePinRegister,
+    TextEditingController>.internal(
+  CreatePinRegister.new,
+  name: r'createPinRegisterProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$createPinRegisterHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$CreatePinRegister = AutoDisposeNotifier<TextEditingController>;
+String _$confirmPinRegisterHash() =>
+    r'039acf93d8048f3ca886405c14f4df86a2c29d74';
+
+/// See also [ConfirmPinRegister].
+@ProviderFor(ConfirmPinRegister)
+final confirmPinRegisterProvider = AutoDisposeNotifierProvider<
+    ConfirmPinRegister, TextEditingController>.internal(
+  ConfirmPinRegister.new,
+  name: r'confirmPinRegisterProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$confirmPinRegisterHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ConfirmPinRegister = AutoDisposeNotifier<TextEditingController>;
 String _$disableImportHash() => r'a0b05fd701df48b25987d1c9840349efaa806bd5';
 
 /// See also [DisableImport].
@@ -71,7 +104,7 @@ final disableImportProvider =
 );
 
 typedef _$DisableImport = AutoDisposeNotifier<bool>;
-String _$importAccountHash() => r'186433de1d0d457f29885d139843f41b600490c0';
+String _$importAccountHash() => r'c76b63ff8ac36d806a21fed280d9f313c25d8f29';
 
 /// See also [ImportAccount].
 @ProviderFor(ImportAccount)

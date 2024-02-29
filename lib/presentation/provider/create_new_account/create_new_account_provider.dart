@@ -1,6 +1,9 @@
+import 'package:bee_wallet/data/model/password/password.dart';
+import 'package:bee_wallet/presentation/provider/import_account/import_account_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import '../../../config/config.dart';
 import '../../../utils/util.dart';
 part 'create_new_account_provider.g.dart';
 
@@ -52,13 +55,16 @@ class GenerateMnemonic extends _$GenerateMnemonic {
   Future<void> generateAccount() async {
     String mnemonic = WalletHelper().generateMnemonic();
     state = mnemonic;
+    Password pass =
+        Password(password: ref.watch(createPinRegisterProvider).text);
     if (mnemonic != '') {
       ref.read(loadingCreateAccountProvider.notifier).changeLoading(true);
       ref.watch(loadingCreateAccountProvider);
       var address = await MethodHelper()
           .computeMnemonic(mnemonic, ref.watch(nameWalletProvider).text);
       await DbHelper.instance.addAccount(address);
-
+      await DbHelper.instance.setPassword(pass);
+      ref.watch(appRouteProvider).goNamed('succes_register');
       ref.read(loadingCreateAccountProvider.notifier).changeLoading(false);
     }
   }

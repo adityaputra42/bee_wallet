@@ -8,16 +8,29 @@ class Styles {
       colorScheme: ColorScheme(
         brightness: isDarkTheme ? Brightness.dark : Brightness.light,
         primary: isDarkTheme ? AppColor.primaryColor : AppColor.primaryColor,
-        onPrimary: isDarkTheme ? Colors.white : Colors.white,
-        secondary: Colors.white,
-        onSecondary: Colors.white,
-        error: AppColor.redColor,
-        onError: AppColor.textStrongDark,
-        background: isDarkTheme ? AppColor.bgDark : AppColor.bgLight,
-        onBackground: isDarkTheme ? Colors.white : const Color(0xFFf9fcff),
-        surface:
+        onPrimary:
             isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,
+        secondary: AppColor.secondaryColor,
+        onSecondary:
+            isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,
+        error: AppColor.redColor,
+        onError:
+            isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,
+        background: isDarkTheme ? AppColor.bgDark : AppColor.bgLight,
+        onBackground:
+            isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,
+        surface: isDarkTheme ? AppColor.cardDark : AppColor.cardLight,
         onSurface:
+            isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,
+        onSurfaceVariant:
+            isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,
+        surfaceVariant:
+            isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,
+        surfaceTint:
+            isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,
+        onInverseSurface:
+            isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,
+        inverseSurface:
             isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,
       ),
       useMaterial3: false,

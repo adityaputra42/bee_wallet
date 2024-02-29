@@ -1,13 +1,13 @@
 
 
-import '../../../../../utils/util.dart';
+import '../../../../utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../config/config.dart';
-import '../../../../provider/provider.dart';
-import '../../../../widget/widget.dart';
+import '../../../../config/config.dart';
+import '../../../provider/provider.dart';
+import '../../../widget/widget.dart';
 
 final indexTabImport = StateProvider<int>((ref) => 0);
 

@@ -14,7 +14,7 @@ class PrimaryButton extends StatelessWidget {
     required this.onPressed,
     this.disable = false,
     this.activeColor = AppColor.primaryColor,
-    this.disableColor = AppColor.grayColor,
+    this.disableColor = AppColor.primaryColor,
     this.icon,
     this.loading = false,
   });
@@ -37,9 +37,7 @@ class PrimaryButton extends StatelessWidget {
       margin: margin,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
-          gradient: disable
-              ? AppColor.disableButtonGradient
-              : AppColor.primaryButtonGradient),
+          color: disable ? disableColor.withOpacity(0.6) : activeColor),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             elevation: 0,
@@ -63,7 +61,7 @@ class PrimaryButton extends StatelessWidget {
                   icon != null ? 8.0.width : 0.0.width,
                   Text(
                     title,
-                    style: AppFont.medium14.copyWith(
+                    style: AppFont.medium16.copyWith(
                         color: disable
                             ? AppColor.textStrongDark
                             : AppColor.textStrongDark),

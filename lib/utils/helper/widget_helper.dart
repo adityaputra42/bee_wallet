@@ -30,16 +30,16 @@ class WidgetHelper {
                           context.pop();
                         },
                     child: Container(
-                      width: 40.w,
-                      height: 40.w,
-                      padding: EdgeInsets.all(8.h),
+                      width: 36.w,
+                      height: 36.w,
+                      padding: EdgeInsets.all(6.h),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.r),
                           border: Border.all(
-                              width: 1.w, color: AppColor.grayColor)),
+                              width: 1.w, color: Theme.of(context).hintColor)),
                       child: Icon(
                         Icons.arrow_back_ios_new_rounded,
-                        color: AppColor.primaryColor,
+                        color: Theme.of(context).indicatorColor,
                         size: 20.w,
                       ),
                     ))
@@ -75,7 +75,7 @@ class WidgetHelper {
               ),
             ),
             16.0.width,
-            icon ?? 40.0.width,
+            icon ?? 32.0.width,
           ],
         ),
       ),

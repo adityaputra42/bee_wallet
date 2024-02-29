@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../config/config.dart';
+import '../../../data/model/model.dart';
 import '../../../utils/util.dart';
 
 part 'import_account_provider.g.dart';
@@ -47,6 +48,18 @@ class PrivateKeyController extends _$PrivateKeyController {
 }
 
 @riverpod
+class CreatePinRegister extends _$CreatePinRegister {
+  @override
+  TextEditingController build() => TextEditingController();
+}
+
+@riverpod
+class ConfirmPinRegister extends _$ConfirmPinRegister {
+  @override
+  TextEditingController build() => TextEditingController();
+}
+
+@riverpod
 class DisableImport extends _$DisableImport {
   @override
   bool build() => true;
@@ -68,18 +81,17 @@ class ImportAccount extends _$ImportAccount {
 
   Future<void> import(BuildContext context) async {
     ref.read(loadingImportProvider.notifier).changeLoading(true);
-    log("validasi jalan");
+    Password pass =
+        Password(password: ref.watch(createPinRegisterProvider).text);
     if (WalletHelper()
         .validateMnemonic(ref.watch(pharseControllerProvider).text)) {
-      log("valid");
-      var address = await MethodHelper().computeMnemonic(
-          ref.watch(pharseControllerProvider).text, "my Wallet");
+      var address = await MethodHelper()
+          .computeMnemonic(ref.watch(pharseControllerProvider).text, "Account");
       await DbHelper.instance.addAccount(address);
-      log("succes save");
+      await DbHelper.instance.setPassword(pass);
       ref.watch(appRouteProvider).goNamed('main');
       PrefHelper.instance.setLogin(true);
     } else {
-      log("invalid");
       MethodHelper().showSnack(
           context: context,
           content: "Invalid seed pharse",

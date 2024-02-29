@@ -59,7 +59,7 @@ class SecondaryButton extends StatelessWidget {
                   icon != null ? 8.0.width : 0.0.width,
                   Text(
                     title,
-                    style: AppFont.medium14
+                    style: AppFont.medium16
                         .copyWith(color: textColor ?? AppColor.primaryColor),
                     textAlign: TextAlign.center,
                   ),

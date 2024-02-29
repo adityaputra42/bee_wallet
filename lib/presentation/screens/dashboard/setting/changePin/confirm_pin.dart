@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:bee_wallet/presentation/pages/dashboard/setting/changePin/change_pin.dart';
+import 'package:bee_wallet/presentation/screens/dashboard/setting/changePin/change_pin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

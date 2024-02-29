@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -26,26 +27,30 @@ class InputPin extends StatelessWidget {
       child: PinCodeTextField(
         keyboardType: keyboardType,
         autoDisposeControllers: false,
-        autoFocus: false,
+        autoFocus: true,
         appContext: context,
         length: lenght,
+        enableActiveFill: true,
         obscureText: obsecure,
         animationType: AnimationType.fade,
         cursorColor: Theme.of(context).indicatorColor,
-        textStyle: AppFont.medium14.copyWith(
+        textStyle: AppFont.medium18.copyWith(
           color: Theme.of(context).indicatorColor,
         ),
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         animationDuration: const Duration(milliseconds: 500),
         pinTheme: PinTheme(
-          inactiveColor: AppColor.grayColor,
+          inactiveColor: Theme.of(context).cardColor,
           activeColor: AppColor.primaryColor,
           selectedColor: AppColor.primaryColor,
+          selectedFillColor: Theme.of(context).cardColor,
+          activeFillColor: Theme.of(context).cardColor,
+          inactiveFillColor: Theme.of(context).cardColor,
           shape: PinCodeFieldShape.box,
           borderRadius: BorderRadius.circular(8.r),
-          fieldHeight: 40.w,
-          fieldWidth: 40.w,
-          borderWidth: 0.5.h,
-          activeFillColor: Colors.white,
+          fieldHeight: 48.w,
+          fieldWidth: 48.w,
+          borderWidth: 1.h,
         ),
         controller: controller,
         onCompleted: onCompleted,

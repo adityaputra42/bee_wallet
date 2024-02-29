@@ -18,7 +18,7 @@ class Numpadcustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(
-        horizontal: 12.w,
+        horizontal: 24.w,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -29,81 +29,95 @@ class Numpadcustom extends StatelessWidget {
                 number: 1,
                 controller: controller,
               ),
-              8.0.width,
+              12.0.width,
               NumbButton(
                 number: 2,
                 controller: controller,
               ),
-              8.0.width,
+              12.0.width,
               NumbButton(
                 number: 3,
                 controller: controller,
               ),
             ],
           ),
-          8.0.height,
+          12.0.height,
           Row(
             children: [
               NumbButton(
                 number: 4,
                 controller: controller,
               ),
-              8.0.width,
+              12.0.width,
               NumbButton(
                 number: 5,
                 controller: controller,
               ),
-              8.0.width,
+              12.0.width,
               NumbButton(
                 number: 6,
                 controller: controller,
               ),
             ],
           ),
-          8.0.height,
+          12.0.height,
           Row(
             children: [
               NumbButton(
                 number: 7,
                 controller: controller,
               ),
-              8.0.width,
+              12.0.width,
               NumbButton(
                 number: 8,
                 controller: controller,
               ),
-              8.0.width,
+              12.0.width,
               NumbButton(
                 number: 9,
                 controller: controller,
               ),
             ],
           ),
-          8.0.height,
+          12.0.height,
           Row(
             children: [
               Expanded(
-                child: SizedBox(
-                  height: 45.h,
-                ),
+                child: Container(
+                    height: 60.h,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        color: Theme.of(context).cardColor),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Center(
+                        child: Text(
+                          ".",
+                          style: AppFont.semibold24.copyWith(
+                              color: Theme.of(context).indicatorColor),
+                        ),
+                      ),
+                    )),
               ),
-              8.0.width,
+              12.0.width,
               NumbButton(
                 number: 0,
                 controller: controller,
               ),
-              8.0.width,
+              12.0.width,
               Expanded(
-                child: SizedBox(
-                    width: 90.w,
-                    height: 45.h,
+                child: Container(
+                    height: 60.h,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        color: Theme.of(context).cardColor),
                     child: TextButton(
                       onPressed: () => delete(),
                       child: Center(
                           child: Icon(
                         Icons.backspace_outlined,
                         color: Theme.of(context).indicatorColor,
-                        size: 24.w,
+                        size: 32.w,
                       )),
                     )),
               )
@@ -119,18 +133,18 @@ class NumbButton extends StatelessWidget {
   final int number;
   final TextEditingController controller;
   const NumbButton({
-    Key? key,
+    super.key,
     required this.number,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        height: 45.h,
+        height: 60.h,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(8.r),
             color: Theme.of(context).cardColor),
         child: TextButton(
             onPressed: () {
@@ -139,7 +153,7 @@ class NumbButton extends StatelessWidget {
             child: Center(
               child: Text(
                 number.toString(),
-                style: AppFont.reguler16
+                style: AppFont.medium24
                     .copyWith(color: Theme.of(context).indicatorColor),
               ),
             )),
