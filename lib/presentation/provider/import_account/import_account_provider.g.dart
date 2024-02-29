@@ -38,23 +38,23 @@ final pharseControllerProvider = AutoDisposeNotifierProvider<PharseController,
 );
 
 typedef _$PharseController = AutoDisposeNotifier<TextEditingController>;
-String _$privateKeyControllerHash() =>
-    r'853dba627e1ccc8c1ad5c1f9993daf642bea750f';
+String _$accountNameControllerHash() =>
+    r'61632bff91c5a120695d281264ffdb58b2ebd185';
 
-/// See also [PrivateKeyController].
-@ProviderFor(PrivateKeyController)
-final privateKeyControllerProvider = AutoDisposeNotifierProvider<
-    PrivateKeyController, TextEditingController>.internal(
-  PrivateKeyController.new,
-  name: r'privateKeyControllerProvider',
+/// See also [AccountNameController].
+@ProviderFor(AccountNameController)
+final accountNameControllerProvider = AutoDisposeNotifierProvider<
+    AccountNameController, TextEditingController>.internal(
+  AccountNameController.new,
+  name: r'accountNameControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$privateKeyControllerHash,
+      : _$accountNameControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$PrivateKeyController = AutoDisposeNotifier<TextEditingController>;
+typedef _$AccountNameController = AutoDisposeNotifier<TextEditingController>;
 String _$createPinRegisterHash() => r'55344c4b9c11ecab00bd90a8621b6fc5dc858e8e';
 
 /// See also [CreatePinRegister].
@@ -88,7 +88,7 @@ final confirmPinRegisterProvider = AutoDisposeNotifierProvider<
 );
 
 typedef _$ConfirmPinRegister = AutoDisposeNotifier<TextEditingController>;
-String _$disableImportHash() => r'a0b05fd701df48b25987d1c9840349efaa806bd5';
+String _$disableImportHash() => r'f66ff84ee90f5c36e73197a6522e37eea07b2565';
 
 /// See also [DisableImport].
 @ProviderFor(DisableImport)
@@ -104,7 +104,7 @@ final disableImportProvider =
 );
 
 typedef _$DisableImport = AutoDisposeNotifier<bool>;
-String _$importAccountHash() => r'c76b63ff8ac36d806a21fed280d9f313c25d8f29';
+String _$importAccountHash() => r'dd83ad4e5fda4ecf36a61291cf116ee6c02ac4a9';
 
 /// See also [ImportAccount].
 @ProviderFor(ImportAccount)

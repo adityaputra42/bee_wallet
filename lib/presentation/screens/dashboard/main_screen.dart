@@ -53,18 +53,9 @@ class MainScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(8.r), topRight: Radius.circular(8.r)),
-        child: BottomAppBar(
-            shape: const CircularNotchedRectangle(),
-            notchMargin: 5.w,
-            clipBehavior: Clip.antiAlias,
-            child: CustomBottomNavBar(
-              onTap: (index) =>
-                  ref.read(indexNavBarProvider.notifier).state = index,
-              selectedIndex: ref.watch(indexNavBarProvider),
-            )),
+      bottomNavigationBar: CustomBottomNavBar(
+        onTap: (index) => ref.read(indexNavBarProvider.notifier).state = index,
+        selectedIndex: ref.watch(indexNavBarProvider),
       ),
       body: Consumer(builder: (context, ref, _) {
         return ref.watch(selectedAccountProvider).when(

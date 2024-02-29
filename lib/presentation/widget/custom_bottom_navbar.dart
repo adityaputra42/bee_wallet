@@ -1,8 +1,9 @@
-import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
+import 'package:iconify_flutter_plus/icons/ant_design.dart';
+import 'package:iconify_flutter_plus/icons/mdi.dart';
 import '../../config/config.dart';
-import '../../data/src/src.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   final int? selectedIndex;
@@ -11,18 +12,14 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
     return Container(
       width: double.infinity,
       height: 72.h,
       padding: EdgeInsets.symmetric(
-        horizontal: 24.w,
+        horizontal: 36.w,
       ),
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
-        boxShadow: const [
-          BoxShadow(spreadRadius: 3, blurRadius: 5, color: Colors.black12)
-        ],
+        color: Theme.of(context).colorScheme.background,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,24 +30,12 @@ class CustomBottomNavBar extends StatelessWidget {
                 onTap!(0);
               }
             },
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  AppIcon.walletIcon,
-                  color: (selectedIndex == 0)
-                      ? AppColor.primaryColor
-                      : AppColor.grayColor,
-                  width: 24.w,
-                ),
-                4.0.height,
-                Text(
-                  'Home',
-                  style: (selectedIndex == 0)
-                      ? AppFont.medium14.copyWith(color: AppColor.primaryColor)
-                      : AppFont.reguler14.copyWith(color: AppColor.grayColor),
-                )
-              ],
+            child: Iconify(
+              Mdi.wallet_outline,
+              color: (selectedIndex == 0)
+                  ? AppColor.primaryColor
+                  : AppColor.grayColor,
+              size: 32.w,
             ),
           ),
           GestureDetector(
@@ -59,24 +44,12 @@ class CustomBottomNavBar extends StatelessWidget {
                 onTap!(1);
               }
             },
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  AppIcon.activityIcon,
-                  color: (selectedIndex == 1)
-                      ? AppColor.primaryColor
-                      : AppColor.grayColor,
-                  width: 24.w,
-                ),
-                4.0.height,
-                Text(
-                  'Swap',
-                  style: (selectedIndex == 1)
-                      ? AppFont.medium14.copyWith(color: AppColor.primaryColor)
-                      : AppFont.reguler14.copyWith(color: AppColor.grayColor),
-                )
-              ],
+            child: Iconify(
+              AntDesign.swap_outlined,
+              color: (selectedIndex == 1)
+                  ? AppColor.primaryColor
+                  : AppColor.grayColor,
+              size: 32.w,
             ),
           ),
           GestureDetector(
@@ -85,24 +58,12 @@ class CustomBottomNavBar extends StatelessWidget {
                 onTap!(2);
               }
             },
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  AppIcon.dappIcon,
-                  color: (selectedIndex == 2)
-                      ? AppColor.primaryColor
-                      : AppColor.grayColor,
-                  width: 24.w,
-                ),
-                4.0.height,
-                Text(
-                  'Dapps',
-                  style: (selectedIndex == 2)
-                      ? AppFont.medium14.copyWith(color: AppColor.primaryColor)
-                      : AppFont.reguler14.copyWith(color: AppColor.grayColor),
-                )
-              ],
+            child: Icon(
+              Icons.widgets_outlined,
+              color: (selectedIndex == 2)
+                  ? AppColor.primaryColor
+                  : AppColor.grayColor,
+              size: 32.w,
             ),
           ),
           GestureDetector(
@@ -111,24 +72,12 @@ class CustomBottomNavBar extends StatelessWidget {
                 onTap!(3);
               }
             },
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  AppIcon.settingIcon,
-                  color: (selectedIndex == 3)
-                      ? AppColor.primaryColor
-                      : AppColor.grayColor,
-                  width: 24.w,
-                ),
-                4.0.height,
-                Text(
-                  'Setting',
-                  style: (selectedIndex == 3)
-                      ? AppFont.medium14.copyWith(color: AppColor.primaryColor)
-                      : AppFont.reguler14.copyWith(color: AppColor.grayColor),
-                )
-              ],
+            child: Icon(
+              Icons.settings_outlined,
+              color: (selectedIndex == 3)
+                  ? AppColor.primaryColor
+                  : AppColor.grayColor,
+              size: 32.w,
             ),
           ),
         ],

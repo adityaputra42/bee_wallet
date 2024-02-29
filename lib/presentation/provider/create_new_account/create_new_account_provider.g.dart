@@ -55,7 +55,7 @@ final disableCreateWalletProvider =
 );
 
 typedef _$DisableCreateWallet = AutoDisposeNotifier<bool>;
-String _$generateMnemonicHash() => r'46c70663280a04d5cb3a4757ee4378742ce9e30b';
+String _$generateMnemonicHash() => r'5e07bef441a8467470f9b2a5bf79356d308e83d5';
 
 /// See also [GenerateMnemonic].
 @ProviderFor(GenerateMnemonic)

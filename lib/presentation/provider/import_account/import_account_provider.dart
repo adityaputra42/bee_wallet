@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../config/config.dart';
@@ -34,13 +32,17 @@ class PharseController extends _$PharseController {
 }
 
 @riverpod
-class PrivateKeyController extends _$PrivateKeyController {
+class AccountNameController extends _$AccountNameController {
   @override
   TextEditingController build() => TextEditingController();
 
-  String? onValidatePrivateKey(String? value) {
+  setValue(String value) {
+    state.text = value;
+  }
+
+  String? onValidatePharse(String? value) {
     if (value == '') {
-      return "Secret pharse can't be empty";
+      return "Name can't be empty";
     } else {
       return null;
     }
@@ -64,7 +66,8 @@ class DisableImport extends _$DisableImport {
   @override
   bool build() => true;
   void validateButton() {
-    if (ref.watch(pharseControllerProvider).text != '') {
+    if (ref.watch(pharseControllerProvider).text != '' &&
+        ref.watch(accountNameControllerProvider).text != '') {
       state = false;
     } else {
       state = true;
@@ -85,8 +88,9 @@ class ImportAccount extends _$ImportAccount {
         Password(password: ref.watch(createPinRegisterProvider).text);
     if (WalletHelper()
         .validateMnemonic(ref.watch(pharseControllerProvider).text)) {
-      var address = await MethodHelper()
-          .computeMnemonic(ref.watch(pharseControllerProvider).text, "Account");
+      var address = await MethodHelper().computeMnemonic(
+          ref.watch(pharseControllerProvider).text,
+          ref.watch(accountNameControllerProvider).text);
       await DbHelper.instance.addAccount(address);
       await DbHelper.instance.setPassword(pass);
       ref.watch(appRouteProvider).goNamed('main');
@@ -100,26 +104,26 @@ class ImportAccount extends _$ImportAccount {
     ref.read(loadingImportProvider.notifier).changeLoading(false);
   }
 
-  Future<void> importByPrivateKey(BuildContext context) async {
-    ref.read(loadingImportProvider.notifier).changeLoading(true);
-    String mnemonic = WalletHelper().generateMnemonicFromPrivateKey(
-        ref.watch(privateKeyControllerProvider).text);
-    log(" hasil generate => $mnemonic");
-    if (WalletHelper().validateMnemonic(mnemonic)) {
-      log("valid");
-      var address = await MethodHelper().computeMnemonic(
-          ref.watch(pharseControllerProvider).text, "my Wallet");
-      await DbHelper.instance.addAccount(address);
-      log("succes save");
-      ref.watch(appRouteProvider).goNamed('main');
-      PrefHelper.instance.setLogin(true);
-    } else {
-      log("invalid");
-      MethodHelper().showSnack(
-          context: context,
-          content: "Invalid seed pharse",
-          backgorund: AppColor.redColor);
-    }
-    ref.read(loadingImportProvider.notifier).changeLoading(false);
-  }
+  // Future<void> importByPrivateKey(BuildContext context) async {
+  //   ref.read(loadingImportProvider.notifier).changeLoading(true);
+  //   String mnemonic = WalletHelper().generateMnemonicFromPrivateKey(
+  //       ref.watch(privateKeyControllerProvider).text);
+  //   log(" hasil generate => $mnemonic");
+  //   if (WalletHelper().validateMnemonic(mnemonic)) {
+  //     log("valid");
+  //     var address = await MethodHelper().computeMnemonic(
+  //         ref.watch(pharseControllerProvider).text, "my Wallet");
+  //     await DbHelper.instance.addAccount(address);
+  //     log("succes save");
+  //     ref.watch(appRouteProvider).goNamed('main');
+  //     PrefHelper.instance.setLogin(true);
+  //   } else {
+  //     log("invalid");
+  //     MethodHelper().showSnack(
+  //         context: context,
+  //         content: "Invalid seed pharse",
+  //         backgorund: AppColor.redColor);
+  //   }
+  //   ref.read(loadingImportProvider.notifier).changeLoading(false);
+  // }
 }

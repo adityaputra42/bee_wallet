@@ -1,7 +1,8 @@
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../../config/config.dart';
+
+import '../../../../../../../../config/config.dart';
 
 class QRScannerOverlay extends StatelessWidget {
   const QRScannerOverlay({super.key, required this.overlayColour});
@@ -10,9 +11,9 @@ class QRScannerOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double scanArea = (MediaQuery.of(context).size.width < 400 ||
-            MediaQuery.of(context).size.height < 400)
-        ? 268.w
+    double scanArea = (MediaQuery.of(context).size.width < 430 ||
+            MediaQuery.of(context).size.height < 932)
+        ? 248.w
         : 334.w;
     return Stack(children: [
       ColorFiltered(
@@ -53,7 +54,7 @@ class QRScannerOverlay extends StatelessWidget {
       Container(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         width: double.infinity,
-        margin: EdgeInsets.only(top: 48.h),
+        margin: EdgeInsets.only(top: 36.h),
         height: 60.h,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,28 +64,29 @@ class QRScannerOverlay extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 child: Container(
-                  width: 40.w,
-                  height: 40.w,
-                  padding: EdgeInsets.all(8.h),
+                  width: 36.h,
+                  height: 36.h,
+                  padding: EdgeInsets.all(6.h),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
-                      border:
-                          Border.all(width: 1.w, color: AppColor.grayColor)),
+                      border: Border.all(
+                          width: 1.w, color: Theme.of(context).highlightColor)),
                   child: Icon(
                     Icons.arrow_back_ios_new_rounded,
-                    color: AppColor.primaryColor,
+                    color: AppColor.textStrongDark,
                     size: 20.w,
                   ),
                 )),
             16.0.width,
             Expanded(
               child: Text(
-                "Scan Qr Code",
+                "Scan QR Code",
                 style:
-                    AppFont.medium16.copyWith(color: AppColor.textStrongDark),
+                    AppFont.medium14.copyWith(color: AppColor.textStrongDark),
                 textAlign: TextAlign.center,
               ),
             ),
+            56.0.width,
           ],
         ),
       )
