@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bee_wallet/data/model/token_chain/token_chain.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
 import 'package:bee_wallet/utils/util.dart';
 import '../../../../../config/config.dart';
+import '../../../../../data/src/src.dart';
 
 class SheetNetworkAddToken extends ConsumerWidget {
   const SheetNetworkAddToken({super.key});
@@ -19,14 +21,14 @@ class SheetNetworkAddToken extends ConsumerWidget {
         children: [
           Text(
             "Select Network",
-            style: AppFont.medium14
+            style: AppFont.medium18
                 .copyWith(color: Theme.of(context).indicatorColor),
           ),
           16.0.height,
           Expanded(
               child: ListView.builder(
             itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.only(bottom: 8.h),
+              padding: EdgeInsets.only(bottom: 12.h),
               child: cardChain(context, chainList[index], ref),
             ),
             itemCount: chainList.length,
@@ -45,9 +47,9 @@ class SheetNetworkAddToken extends ConsumerWidget {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(8.r),
             border: Border.all(
                 width: 1.w,
                 color: selectedChain.chainId == chain.chainId
@@ -58,15 +60,23 @@ class SheetNetworkAddToken extends ConsumerWidget {
           children: [
             Row(
               children: [
-                Image.asset(
-                  chain.logo ?? '',
-                  height: 32.w,
-                ),
+                 SizedBox(
+                        width: 32.w,
+                        height: 32.w,
+                        child: ClipPolygon(
+                          sides: 6,
+                          child: Container(
+                            padding: EdgeInsets.all(0.5.h),
+                            color: Theme.of(context).colorScheme.background,
+                            child: Image.asset(chain.logo ?? AppImage.logo),
+                          ),
+                        ),
+                      ),
                 12.0.width,
                 Expanded(
                   child: Text(
                     chain.name ?? '',
-                    style: AppFont.reguler14
+                    style: AppFont.medium16
                         .copyWith(color: Theme.of(context).indicatorColor),
                   ),
                 ),

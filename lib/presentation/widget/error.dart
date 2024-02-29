@@ -18,8 +18,8 @@ class ErrorView extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
-              AppImage.trouble,
-              width: 284.w,
+              AppImage.logo,
+              width: 144.w,
             ),
             16.0.height,
             Text(

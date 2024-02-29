@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/ant_design.dart';
+import 'package:iconify_flutter_plus/icons/material_symbols.dart';
 import 'package:iconify_flutter_plus/icons/mdi.dart';
 import '../../config/config.dart';
 
@@ -35,7 +36,7 @@ class CustomBottomNavBar extends StatelessWidget {
               color: (selectedIndex == 0)
                   ? AppColor.primaryColor
                   : AppColor.grayColor,
-              size: 32.w,
+              size: 28.w,
             ),
           ),
           GestureDetector(
@@ -49,7 +50,7 @@ class CustomBottomNavBar extends StatelessWidget {
               color: (selectedIndex == 1)
                   ? AppColor.primaryColor
                   : AppColor.grayColor,
-              size: 32.w,
+              size: 28.w,
             ),
           ),
           GestureDetector(
@@ -58,12 +59,12 @@ class CustomBottomNavBar extends StatelessWidget {
                 onTap!(2);
               }
             },
-            child: Icon(
-              Icons.widgets_outlined,
+            child: Iconify(
+              MaterialSymbols.widgets_outline_rounded,
               color: (selectedIndex == 2)
                   ? AppColor.primaryColor
                   : AppColor.grayColor,
-              size: 32.w,
+              size: 28.w,
             ),
           ),
           GestureDetector(
@@ -77,7 +78,7 @@ class CustomBottomNavBar extends StatelessWidget {
               color: (selectedIndex == 3)
                   ? AppColor.primaryColor
                   : AppColor.grayColor,
-              size: 32.w,
+              size: 28.w,
             ),
           ),
         ],

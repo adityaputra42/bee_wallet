@@ -20,7 +20,6 @@ import '../../presentation/screens/dashboard/home/detailNft/transfer/transaction
 import '../../presentation/screens/dashboard/home/detailNft/transfer/transfer_nft_screen.dart';
 import '../../presentation/screens/dashboard/home/detailToken/detail_activity.dart';
 import '../../presentation/screens/dashboard/home/detailToken/detail_token_screnn.dart';
-import '../../presentation/screens/dashboard/home/detailToken/detail_trade_token_screen.dart';
 import '../../presentation/screens/dashboard/home/manage_token/add_token.dart';
 import '../../presentation/screens/dashboard/home/manage_token/manage_token.dart';
 import '../../presentation/screens/dashboard/home/receive/receive_screen.dart';
@@ -121,11 +120,7 @@ GoRouter appRoute(AppRouteRef ref) {
                     name: 'detail_activity',
                     builder: (context, state) => DetailActivity(),
                   ),
-                  GoRoute(
-                    path: 'detail_trade_token',
-                    name: 'detail_trade_token',
-                    builder: (context, state) => const DetailTradeTokenScreen(),
-                  ),
+                 
                   GoRoute(
                     path: 'receive_token',
                     name: 'receive_token',

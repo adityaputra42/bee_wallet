@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -9,6 +11,8 @@ import 'package:bee_wallet/presentation/provider/account/account_provider.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
 import 'package:bee_wallet/presentation/widget/widget.dart';
 import 'package:bee_wallet/utils/util.dart';
+import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
+import 'package:iconify_flutter_plus/icons/material_symbols.dart';
 
 import '../../../../../config/theme/theme.dart';
 import '../../../../../data/src/src.dart';
@@ -36,6 +40,7 @@ class ManageToken extends ConsumerWidget {
                   backgroundColor: Theme.of(context).colorScheme.background,
                   showDragHandle: true,
                   isDismissible: false,
+                  isScrollControlled: true,
                   shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.vertical(top: Radius.circular(16.r))));
@@ -55,9 +60,9 @@ class ManageToken extends ConsumerWidget {
                           chainSelected.first.logo ?? "",
                           height: 32.w,
                         )
-                      : Image.asset(
-                          AppIcon.boxIcon,
-                          height: 32.w,
+                      : Iconify(
+                          MaterialSymbols.widgets_outline_rounded,
+                          size: 32.w,
                           color: AppColor.primaryColor,
                         ),
                   Icon(
@@ -69,40 +74,51 @@ class ManageToken extends ConsumerWidget {
               ),
             )),
       ),
-      bottomNavigationBar: PrimaryButton(
-        title: "Add Custom Token",
-        onPressed: () {
-          context.goNamed('add_token');
-        },
-        margin: EdgeInsets.fromLTRB(16.w, 8.w, 16.w, 24.h),
-      ),
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         child: Column(
           children: [
-            SearchField(
-              controller: ref.watch(searchManageToken),
-              onChange: (v) => ref
-                  .read(listManageTokenProvider.notifier)
-                  .onSearch(ref.watch(searchManageToken).text),
+            Row(
+              children: [
+                Expanded(
+                  child: SearchField(
+                    controller: ref.watch(searchManageToken),
+                    onChange: (v) => ref
+                        .read(listManageTokenProvider.notifier)
+                        .onSearch(ref.watch(searchManageToken).text),
+                  ),
+                ),
+                8.0.width,
+                GestureDetector(
+                  onTap: () {
+                    context.goNamed('add_token');
+                  },
+                  child: Container(
+                    width: 48.w,
+                    height: 48.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        color: Theme.of(context).cardColor),
+                    child: Icon(
+                      Icons.add_rounded,
+                      size: 32.w,
+                      color: Theme.of(context).indicatorColor,
+                    ),
+                  ),
+                )
+              ],
             ),
             16.0.height,
             Expanded(
-                child: Container(
-              padding: EdgeInsets.all(16.w),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  color: Theme.of(context).cardColor),
-              child: chainSelected.isEmpty
-                  ? const Empty(title: "Token not found")
-                  : ListView.builder(
-                      itemBuilder: (context, index) => Padding(
-                        padding: EdgeInsets.only(bottom: 8.h),
-                        child: cardChain(context, ref, chainSelected[index]),
-                      ),
-                      itemCount: chainSelected.length,
-                    ),
-            ))
+                child: chainSelected.isEmpty
+                    ? const Empty(title: "Token not found")
+                    : ListView.builder(
+                        itemBuilder: (context, index) => Padding(
+                          padding: EdgeInsets.only(bottom: 12.h),
+                          child: cardChain(context, ref, chainSelected[index]),
+                        ),
+                        itemCount: chainSelected.length,
+                      ))
           ],
         ),
       ),
@@ -115,36 +131,51 @@ class ManageToken extends ConsumerWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
-          color: Theme.of(context).colorScheme.background),
+          borderRadius: BorderRadius.circular(8.r),
+          color: Theme.of(context).cardColor),
       child: Column(
         children: [
           Row(
             children: [
               SizedBox(
-                width: 34.w,
-                height: 34.w,
+                width: 36.w,
+                height: 36.w,
                 child: Stack(
                   children: [
-                    Container(
-                      width: 32.w,
-                      height: 32.w,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: AssetImage(chain.logo ?? ''))),
+                    SizedBox(
+                      width: 34.w,
+                      height: 34.w,
+                      child: ClipPolygon(
+                        sides: 6,
+                        child: Container(
+                          padding: EdgeInsets.all(0.5.h),
+                          color: Theme.of(context).colorScheme.background,
+                          child: (chain.logo != null)
+                              ? Image.asset(chain.logo!)
+                              : Image.asset(AppImage.logo),
+                        ),
+                      ),
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
-                      child: Container(
+                      child: SizedBox(
                         width: 14.w,
                         height: 14.w,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                width: 1.w, color: Theme.of(context).cardColor),
-                            image: DecorationImage(
-                                image: AssetImage(chain.baseLogo ?? ''))),
+                        child: ClipPolygon(
+                          sides: 6,
+                          child: Container(
+                            padding: EdgeInsets.all(0.1.h),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 0.3.w,
+                                    color: Theme.of(context).cardColor),
+                                color:
+                                    Theme.of(context).colorScheme.background),
+                            child: (chain.baseLogo != null)
+                                ? Image.asset(chain.baseLogo!)
+                                : Image.asset(AppImage.logo),
+                          ),
+                        ),
                       ),
                     ),
                   ],

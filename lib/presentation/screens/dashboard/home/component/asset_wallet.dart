@@ -1,15 +1,21 @@
 // ignore_for_file: unused_result
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bee_wallet/data/src/app_chain_logo.dart';
 import 'package:bee_wallet/utils/util.dart';
+import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
+import 'package:iconify_flutter_plus/icons/material_symbols.dart';
 import '../../../../../config/config.dart';
 import '../../../../../data/model/token_chain/selected_token_chain.dart';
+import '../../../../../data/src/src.dart';
 import '../../../../provider/provider.dart';
 import '../../../../widget/widget.dart';
+import '../changeNetwork/select_network_screen.dart';
 
 final searSelectedChain = StateProvider.autoDispose<TextEditingController>(
     (ref) => TextEditingController());
@@ -23,26 +29,10 @@ class AssetWallet extends ConsumerWidget {
     final chain = ref.watch(selectedChainTokenProvider).valueOrNull ?? [];
     final chainList = (ref.watch(listTokenChainProvider).valueOrNull ?? []);
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Column(
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "Balance",
-                style: AppFont.medium12
-                    .copyWith(color: Theme.of(context).hintColor),
-              ),
-              4.0.width,
-              Icon(
-                Icons.visibility_outlined,
-                size: 14.w,
-                color: Theme.of(context).hintColor,
-              )
-            ],
-          ),
-          4.0.height,
+          16.0.height,
           Text(
             "\$${0.toStringAsFixed(2)}",
             style: AppFont.semibold30.copyWith(
@@ -50,8 +40,9 @@ class AssetWallet extends ConsumerWidget {
           ),
           4.0.height,
           Text(
-            "\$${0.toStringAsFixed(2)} (+0.000%) Today",
-            style: AppFont.medium12.copyWith(color: AppColor.greenColor),
+            "Estimate Balance in USD",
+            style:
+                AppFont.medium12.copyWith(color: Theme.of(context).hintColor),
           ),
           24.0.height,
           Row(
@@ -67,6 +58,7 @@ class AssetWallet extends ConsumerWidget {
               GestureDetector(
                 onTap: () {
                   context.goNamed('select_network');
+                 
                 },
                 child: Container(
                     padding:
@@ -80,10 +72,10 @@ class AssetWallet extends ConsumerWidget {
                         chainList.length != chain.length && chain.isNotEmpty
                             ? Image.asset(
                                 chain.first.baseLogo ?? AppChainLogo.evm)
-                            : Text(
-                                "All",
-                                style: AppFont.medium14
-                                    .copyWith(color: AppColor.grayColor),
+                            : Iconify(
+                                MaterialSymbols.widgets_outline_rounded,
+                                size: 32.w,
+                                color: AppColor.grayColor,
                               ),
                         2.0.width,
                         Icon(Icons.expand_more,
@@ -101,7 +93,6 @@ class AssetWallet extends ConsumerWidget {
                   height: 48.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
-                      // border: Border.all(width: 1.w,color: AppColor.primaryColor),
                       color: Theme.of(context).cardColor),
                   child: Icon(
                     Icons.tune,
@@ -143,7 +134,7 @@ class AssetWallet extends ConsumerWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(8.r),
             color: Theme.of(context).cardColor),
         child: Row(
           children: [
@@ -152,25 +143,38 @@ class AssetWallet extends ConsumerWidget {
               height: 36.w,
               child: Stack(
                 children: [
-                  Container(
+                  SizedBox(
                     width: 34.w,
                     height: 34.w,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: AssetImage(chain.logo ?? ''))),
+                    child: ClipPolygon(
+                      sides: 6,
+                      child: Container(
+                        padding: EdgeInsets.all(0.5.h),
+                        color: Theme.of(context).colorScheme.background,
+                        child: (chain.logo != null)
+                            ? Image.asset(chain.logo!)
+                            : Image.asset(AppImage.logo),
+                      ),
+                    ),
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: Container(
+                    child: SizedBox(
                       width: 14.w,
                       height: 14.w,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              width: 1.w, color: Theme.of(context).cardColor),
-                          image: DecorationImage(
-                              image: AssetImage(chain.baseLogo ?? ''))),
+                      child: ClipPolygon(
+                        sides: 6,
+                        child: Container(
+                          padding: EdgeInsets.all(0.1.h),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 0.3.w,
+                                  color: Theme.of(context).cardColor),
+                              color: Theme.of(context).colorScheme.background),
+                          child: Image.asset(chain.baseLogo??AppImage.logo)
+                              
+                        ),
+                      ),
                     ),
                   ),
                 ],

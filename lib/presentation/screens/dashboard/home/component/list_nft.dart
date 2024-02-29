@@ -1,6 +1,7 @@
 // ignore_for_file: unused_result
 
 import 'package:flutter/material.dart';
+import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -52,34 +53,43 @@ class ListNft extends ConsumerWidget {
                     listChain.length,
                     (index) => Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 12.w, vertical: 8.h),
+                              horizontal: 12.w, vertical: 10.h),
                           margin: EdgeInsets.only(
                               left: listChain[index] == listChain.first
-                                  ? 16.w
+                                  ? 24.w
                                   : 0,
                               right: listChain[index] == listChain.last
-                                  ? 16.w
+                                  ? 24.w
                                   : 12.w),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.r),
-                            gradient: ref.watch(indexbarNft) == index
-                                ? AppColor.primaryGradient
-                                : null,
                             color: ref.watch(indexbarNft) == index
-                                ? null
+                                ? AppColor.primaryColor
                                 : Theme.of(context).cardColor,
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Image.asset(
-                                listChain[index].logo ?? '',
-                                width: 20.w,
+                              SizedBox(
+                                width: 24.w,
+                                height: 24.w,
+                                child: ClipPolygon(
+                                  sides: 6,
+                                  child: Container(
+                                    padding: EdgeInsets.all(0.5.h),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background,
+                                    child: Image.asset(
+                                      listChain[index].logo ?? '',
+                                    ),
+                                  ),
+                                ),
                               ),
                               8.0.width,
                               Text(
                                 listChain[index].symbol ?? '',
-                                style: AppFont.medium12.copyWith(
+                                style: AppFont.medium14.copyWith(
                                     color: ref.watch(indexbarNft) == index
                                         ? AppColor.textStrongDark
                                         : Theme.of(context).hintColor),
@@ -90,7 +100,7 @@ class ListNft extends ConsumerWidget {
           ),
           8.0.height,
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Row(
               children: [
                 Expanded(
@@ -124,7 +134,7 @@ class ListNft extends ConsumerWidget {
                     child: Icon(
                       Icons.add_rounded,
                       size: 32.w,
-                      color: AppColor.primaryColor,
+                      color: Theme.of(context).indicatorColor,
                     ),
                   ),
                 )

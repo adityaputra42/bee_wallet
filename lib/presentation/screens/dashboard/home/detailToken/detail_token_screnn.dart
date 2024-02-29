@@ -2,9 +2,13 @@ import 'dart:math';
 
 import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
+import 'package:iconify_flutter_plus/icons/ant_design.dart';
+import 'package:iconify_flutter_plus/icons/prime.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:bee_wallet/data/model/model.dart';
 import 'package:bee_wallet/presentation/provider/account/account_provider.dart';
@@ -45,55 +49,65 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: WidgetHelper.appBar(
         context: context,
-        title: "${chain.name} (${chain.symbol})",
+        title: "${chain.name}",
         icon: GestureDetector(
-            onTap: () {
-              context.goNamed('detail_trade_token');
-            },
+            onTap: () {},
             child: Container(
-              width: 40.w,
-              height: 40.w,
+              width: 36.w,
+              height: 36.w,
               padding: EdgeInsets.all(8.h),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.r),
                   border: Border.all(width: 1.w, color: AppColor.grayColor)),
-              child: Icon(
-                Icons.candlestick_chart_outlined,
-                color: AppColor.primaryColor,
-                size: 24.w,
+              child: Iconify(
+                AntDesign.scan,
+                color: Theme.of(context).indicatorColor,
+                size: 20.w,
               ),
             )),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.symmetric(horizontal: 24.w,vertical: 16.h),
         child: Column(
           children: [
-            cardChain(context),
-            16.0.height,
             SizedBox(
               width: 50.w,
               height: 50.w,
               child: Stack(
                 children: [
-                  Container(
+                  SizedBox(
                     width: 48.w,
                     height: 48.w,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: AssetImage(chain.logo ?? ''))),
+                    child: ClipPolygon(
+                      sides: 6,
+                      child: Container(
+                        padding: EdgeInsets.all(0.5.h),
+                        color: Theme.of(context).colorScheme.background,
+                        child: (chain.logo != null)
+                            ? Image.asset(chain.logo!)
+                            : Image.asset(AppImage.logo),
+                      ),
+                    ),
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: Container(
+                    child: SizedBox(
                       width: 20.w,
                       height: 20.w,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              width: 1.w, color: Theme.of(context).cardColor),
-                          image: DecorationImage(
-                              image: AssetImage(chain.baseLogo ?? ''))),
+                      child: ClipPolygon(
+                        sides: 6,
+                        child: Container(
+                          padding: EdgeInsets.all(0.1.h),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 0.3.w,
+                                  color: Theme.of(context).cardColor),
+                              color: Theme.of(context).colorScheme.background),
+                          child: (chain.baseLogo != null)
+                              ? Image.asset(chain.baseLogo!)
+                              : Image.asset(AppImage.logo),
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -108,38 +122,34 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
             ),
             4.0.height,
             Text(
-              "\$${0.toStringAsFixed(2)} (+0.000%) Today",
-              style: AppFont.medium12.copyWith(color: AppColor.greenColor),
+              "~\$ ${2.73.toStringAsFixed(2)}",
+              style: AppFont.reguler16
+                  .copyWith(color: Theme.of(context).hintColor),
             ),
             16.0.height,
             Row(
               children: [
                 Expanded(
-                    child: SecondaryButton(
-                  borderColor: AppColor.grayColor,
-                  textColor: Theme.of(context).hintColor,
-                  title: "Swap",
-                  onPressed: () {
-                    // SuiHelper()
-                    //     .getTransaction(account: account!, isTestnet: true);
-                  },
-                )),
-                8.0.width,
-                Expanded(
-                    child: SecondaryButton(
-                  borderColor: AppColor.grayColor,
-                  textColor: Theme.of(context).hintColor,
+                    child: PrimaryButton(
+                  icon: Iconify(
+                    Prime.qrcode,
+                    size: 24.w,
+                    color: AppColor.textStrongDark,
+                  ),
                   title: "Receive",
                   onPressed: () {
                     context.goNamed('receive_token');
                   },
                 )),
-                8.0.width,
+                12.0.width,
                 Expanded(
-                    child: SecondaryButton(
-                  borderColor: AppColor.grayColor,
-                  textColor: Theme.of(context).hintColor,
-                  title: "Send",
+                    child: PrimaryButton(
+                  title: "Transfer",
+                  icon: Iconify(
+                    AntDesign.send_outlined,
+                    size: 24.w,
+                    color: AppColor.textStrongDark,
+                  ),
                   onPressed: () {
                     ref
                         .read(chainTransferProvider.notifier)
@@ -151,109 +161,94 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
               ],
             ),
             16.0.height,
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Transaction",
-                style: AppFont.medium14
-                    .copyWith(color: Theme.of(context).indicatorColor),
-              ),
-            ),
-            16.0.height,
             Expanded(
                 child: Container(
                     padding: EdgeInsets.all(16.w),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.r),
                         color: Theme.of(context).cardColor),
-                    child: RefreshIndicator(
-                      color: AppColor.primaryColor,
-                      backgroundColor: Theme.of(context).indicatorColor,
-                      onRefresh: () async => pagingController.refresh(),
-                      child: PagedListView<int, Activity>(
-                        pagingController: pagingController,
-                        builderDelegate: PagedChildBuilderDelegate<Activity>(
-                          firstPageProgressIndicatorBuilder: (context) =>
-                              const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                          noItemsFoundIndicatorBuilder: (context) =>
-                              const Empty(
-                            title: "No transactions found",
-                          ),
-                          firstPageErrorIndicatorBuilder: (context) => Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Image.asset(
-                                AppImage.trouble,
-                                width: 200.w,
-                              ),
-                              16.0.height,
-                              Text(
-                                "Oops...",
-                                style: AppFont.semibold24.copyWith(
-                                    color: Theme.of(context).indicatorColor),
-                                textAlign: TextAlign.center,
-                              ),
-                              .0.height,
-                              Text(
-                                "Error : ${pagingController.error}",
-                                style: AppFont.reguler14.copyWith(
-                                    color: Theme.of(context).hintColor),
-                                textAlign: TextAlign.center,
-                              ),
-                              24.0.height,
-                              PrimaryButton(
-                                title: "Try Again",
-                                height: 42,
-                                onPressed: () {
-                                  pagingController.refresh();
-                                },
-                                margin: EdgeInsets.symmetric(horizontal: 64.w),
-                              )
-                            ],
-                          ),
-                          // Column(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   children: [
-                          //     Text(
-                          //       "Error occurred",
-                          //       style: AppFont.semibold16.copyWith(
-                          //           color: Theme.of(context).indicatorColor),
-                          //     ),
-                          //     12.0.height,
-                          //     Text(
-                          //       "${pagingController.error}",
-                          //       style: AppFont.reguler12.copyWith(
-                          //           color: Theme.of(context).hintColor),
-                          //       textAlign: TextAlign.center,
-                          //     ),
-                          //     TextButton(
-                          //       onPressed: () {
-                          //         pagingController.refresh();
-                          //       },
-                          //       child: Text(
-                          //         "Coba Lagi",
-                          //         style: AppFont.medium14.copyWith(
-                          //             color: Theme.of(context).indicatorColor),
-                          //       ),
-                          //     )
-                          //   ],
-                          // ),
-                          itemBuilder: (context, item, index) => cardActivity(
-                              context: context,
-                              activity: item,
-                              address: account?.addressETH ?? "",
-                              chain: chain),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Transaction History",
+                          style: AppFont.medium14.copyWith(
+                              color: Theme.of(context).indicatorColor),
                         ),
-                      ),
+                        8.0.height,
+                        SizedBox(
+                          height: 1.w,
+                          child: Divider(
+                            thickness: 1.w,
+                            color: AppColor.grayColor,
+                          ),
+                        ),
+                        8.0.height,
+                        Expanded(
+                          child: RefreshIndicator(
+                            color: AppColor.primaryColor,
+                            backgroundColor: Theme.of(context).indicatorColor,
+                            onRefresh: () async => pagingController.refresh(),
+                            child: PagedListView<int, Activity>(
+                              pagingController: pagingController,
+                              builderDelegate:
+                                  PagedChildBuilderDelegate<Activity>(
+                                firstPageProgressIndicatorBuilder: (context) =>
+                                    const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                                noItemsFoundIndicatorBuilder: (context) =>
+                                    const Empty(
+                                  title: "No transactions found",
+                                ),
+                                firstPageErrorIndicatorBuilder: (context) =>
+                                    Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Image.asset(
+                                      AppImage.trouble,
+                                      width: 200.w,
+                                    ),
+                                    16.0.height,
+                                    Text(
+                                      "Oops...",
+                                      style: AppFont.semibold24.copyWith(
+                                          color:
+                                              Theme.of(context).indicatorColor),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    .0.height,
+                                    Text(
+                                      "Error : ${pagingController.error}",
+                                      style: AppFont.reguler14.copyWith(
+                                          color: Theme.of(context).hintColor),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    24.0.height,
+                                    PrimaryButton(
+                                      title: "Try Again",
+                                      height: 42,
+                                      onPressed: () {
+                                        pagingController.refresh();
+                                      },
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: 64.w),
+                                    )
+                                  ],
+                                ),
+                                itemBuilder: (context, item, index) => Padding(
+                                  padding: EdgeInsets.only(bottom: 12.h),
+                                  child: cardActivity(
+                                      context: context,
+                                      activity: item,
+                                      address: account?.addressETH ?? "",
+                                      chain: chain),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     )))
-
-            //    ListView.builder(
-            //     itemBuilder: (context, index) => cardActivity(context),
-            //     itemCount: 10,
-            //   ),
-            // ))
           ],
         ),
       ),
@@ -272,70 +267,66 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
         ref.watch(activityDetailProvider);
         context.goNamed('detail_activity');
       },
-      child: Container(
-        margin: EdgeInsets.only(bottom: 16.h),
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
-            color: Theme.of(context).colorScheme.background),
-        child: Row(
-          children: [
-            Container(
-              width: 36.w,
-              height: 36.w,
-              padding: EdgeInsets.all(6.h),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Theme.of(context).cardColor,
-              ),
-              child: Icon(
-                state == "Transfer" ? Icons.arrow_upward : Icons.arrow_downward,
-                size: 16.w,
-                color: AppColor.primaryColor,
-              ),
+      child: Row(
+        children: [
+          Container(
+            width: 42.w,
+            height: 42.w,
+            padding: EdgeInsets.all(6.h),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.r),
+              color: Theme.of(context).colorScheme.background,
             ),
-            8.0.width,
-            Expanded(
-                child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '$state  ${activity.symbol == "" ? chain?.symbol : activity.symbol}',
-                      style: AppFont.medium14
-                          .copyWith(color: Theme.of(context).indicatorColor),
-                    ),
-                    Text(
-                      DateFormat("hh:mm a")
-                          .format(DateTime.fromMillisecondsSinceEpoch(
-                                  int.parse(activity.timeStamp!) * 1000)
-                              .toLocal())
-                          .toLowerCase(),
-                      style: AppFont.medium12
-                          .copyWith(color: Theme.of(context).hintColor),
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "to : ${activity.to != null ? MethodHelper().shortAddress(address: activity.to ?? "~", length: 5) : "~"}",
-                      style: AppFont.reguler12
-                          .copyWith(color: Theme.of(context).hintColor),
-                    ),
-                    Text(
-                      "${(BigInt.parse(activity.value!).toDouble() / pow(10, 18)).toStringAsFixed(5)} ${activity.symbol == "" ? chain?.symbol : activity.symbol}",
-                      style: AppFont.medium14
-                          .copyWith(color: Theme.of(context).indicatorColor),
-                    ),
-                  ],
-                )
-              ],
-            ))
-          ],
-        ),
+            child: Icon(
+              state == "Transfer" ? Icons.arrow_upward : Icons.arrow_downward,
+              size: 24.w,
+              color: Theme.of(context).indicatorColor,
+            ),
+          ),
+          8.0.width,
+          Expanded(
+              child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    state,
+                    style: AppFont.semibold16
+                        .copyWith(color: Theme.of(context).indicatorColor),
+                  ),
+                  Text(
+                    "${state == "Transfer" ? "-" : "+"}${(BigInt.parse(activity.value!).toDouble() / pow(10, 18)).toStringAsFixed(5)} ${activity.symbol == "" ? chain?.symbol : activity.symbol}",
+                    style: AppFont.medium16.copyWith(
+                        color: state == "Transfer"
+                            ? AppColor.redColor
+                            : AppColor.greenColor),
+                  ),
+                ],
+              ),
+              4.0.height,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "to : ${activity.to != null ? MethodHelper().shortAddress(address: activity.to ?? "~", length: 5) : "~"}",
+                    style: AppFont.reguler14
+                        .copyWith(color: Theme.of(context).hintColor),
+                  ),
+                  Text(
+                    DateFormat("dd MMM yyyy - HH:mm")
+                        .format(DateTime.fromMillisecondsSinceEpoch(
+                                int.parse(activity.timeStamp!) * 1000)
+                            .toLocal())
+                        ,
+                    style: AppFont.medium14
+                        .copyWith(color: Theme.of(context).hintColor),
+                  )
+                ],
+              )
+            ],
+          ))
+        ],
       ),
     );
   }

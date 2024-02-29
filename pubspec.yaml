@@ -13,6 +13,7 @@ dependencies:
   bitcoin_base: ^3.0.1
   blockchain_utils: ^1.4.1
   blockies_ethereum: ^0.0.2
+  cached_network_image: ^3.3.1
   carousel_slider: ^4.2.1
   chart_sparkline: ^1.0.14
   collection: ^1.17.1
@@ -39,6 +40,7 @@ dependencies:
     sdk: flutter
   flutter_dotenv: ^5.1.0
   flutter_inappwebview: ^5.7.2+3
+  flutter_polygon: ^0.3.0+2
   flutter_riverpod: ^2.3.6
   flutter_screenutil: ^5.8.4
   flutter_switch: ^0.3.2

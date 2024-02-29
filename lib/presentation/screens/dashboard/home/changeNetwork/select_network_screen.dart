@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -7,8 +10,11 @@ import 'package:bee_wallet/data/src/app_icon.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
 import 'package:bee_wallet/presentation/widget/widget.dart';
 import 'package:bee_wallet/utils/util.dart';
+import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
+import 'package:iconify_flutter_plus/icons/material_symbols.dart';
 
 import '../../../../../config/theme/theme.dart';
+import '../../../../../data/src/src.dart';
 
 final searchListChain = StateProvider.autoDispose<TextEditingController>(
     (ref) => TextEditingController());
@@ -22,61 +28,58 @@ class SelectNetworkScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: WidgetHelper.appBar(
-        context: context,
-        title: 'Select Network',
-        icon: GestureDetector(
-            onTap: () {
-              context.goNamed("add_network");
-            },
-            child: Container(
-              width: 40.w,
-              height: 40.w,
-              padding: EdgeInsets.all(8.h),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  border: Border.all(width: 1.w, color: AppColor.grayColor)),
-              child: Icon(
-                Icons.add_circle_outline_rounded,
-                color: AppColor.primaryColor,
-                size: 20.w,
-              ),
-            )),
-      ),
+      appBar: WidgetHelper.appBar(context: context, title: "Change Network"),
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
           children: [
-            SearchField(
-                controller: ref.watch(searchListChain),
-                onChange: (v) => ref
-                    .read(listChainSearchProvider.notifier)
-                    .onSearch(ref.watch(searchListChain).text)),
+            16.0.height,
+            Row(
+              children: [
+                Expanded(
+                  child: SearchField(
+                      controller: ref.watch(searchListChain),
+                      onChange: (v) => ref
+                          .read(listChainSearchProvider.notifier)
+                          .onSearch(ref.watch(searchListChain).text)),
+                ),
+                12.0.width,
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: 48.w,
+                    height: 48.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        color: Theme.of(context).cardColor),
+                    child: Icon(
+                      Icons.add_rounded,
+                      size: 32.w,
+                      color: Theme.of(context).indicatorColor,
+                    ),
+                  ),
+                )
+              ],
+            ),
             16.0.height,
             Expanded(
-                child: Container(
-              padding: EdgeInsets.all(16.w),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  color: Theme.of(context).cardColor),
-              child: listChain.isEmpty
-                  ? const Empty(title: "Chain Not Found")
-                  : ListView(
-                      children: [
-                        cardSelectAll(context, ref),
-                        8.0.height,
-                        Column(
-                          children: List.generate(
-                              listChain.length,
-                              (index) => Padding(
-                                    padding: EdgeInsets.only(bottom: 8.h),
-                                    child: cardChain(
-                                        context, listChain[index], ref),
-                                  )),
-                        )
-                      ],
-                    ),
-            ))
+                child: listChain.isEmpty
+                    ? const Empty(title: "Chain Not Found")
+                    : ListView(
+                        children: [
+                          cardSelectAll(context, ref),
+                          12.0.height,
+                          Column(
+                            children: List.generate(
+                                listChain.length,
+                                (index) => Padding(
+                                      padding: EdgeInsets.only(bottom: 12.h),
+                                      child: cardChain(
+                                          context, listChain[index], ref),
+                                    )),
+                          )
+                        ],
+                      ))
           ],
         ),
       ),
@@ -99,20 +102,20 @@ class SelectNetworkScreen extends ConsumerWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(8.r),
             border: Border.all(
                 width: 1.w,
                 color: selectedChain.length == listchain.length
                     ? AppColor.primaryColor
-                    : Theme.of(context).colorScheme.background),
-            color: Theme.of(context).colorScheme.background),
+                    : Theme.of(context).cardColor),
+            color: Theme.of(context).cardColor),
         child: Column(
           children: [
             Row(
               children: [
-                Image.asset(
-                  AppIcon.boxIcon,
-                  height: 32.w,
+                Iconify(
+                  MaterialSymbols.widgets_outline_rounded,
+                  size: 32.w,
                   color: Theme.of(context).hintColor,
                 ),
                 12.0.width,
@@ -158,32 +161,49 @@ class SelectNetworkScreen extends ConsumerWidget {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(8.r),
             border: Border.all(
                 width: 1.w,
                 color: listTokenChain.length != selectedChain.length &&
                         selectedChain
                             .any((element) => element.chainId == chain.chainId)
                     ? AppColor.primaryColor
-                    : Theme.of(context).colorScheme.background),
-            color: Theme.of(context).colorScheme.background),
+                    : Theme.of(context).cardColor),
+            color: Theme.of(context).cardColor),
         child: Column(
           children: [
             Row(
               children: [
-                Image.asset(
-                  chain.logo ?? '',
-                  height: 32.w,
+                SizedBox(
+                  width: 36.w,
+                  height: 36.w,
+                  child: ClipPolygon(
+                    sides: 6,
+                    child: Container(
+                      padding: EdgeInsets.all(0.5.h),
+                      color: Theme.of(context).colorScheme.background,
+                      child: (chain.logo != null)
+                          ? Image.asset(chain.logo!)
+                          : Image.asset(AppImage.logo),
+                    ),
+                  ),
                 ),
                 12.0.width,
                 Expanded(
                   child: Text(
                     chain.name ?? '',
-                    style: AppFont.reguler14
+                    style: AppFont.medium16
                         .copyWith(color: Theme.of(context).indicatorColor),
+                    overflow: TextOverflow.ellipsis,
                   ),
+                ),
+                8.0.width,
+                Text(
+                  chain.symbol ?? '',
+                  style: AppFont.medium14
+                      .copyWith(color: Theme.of(context).indicatorColor),
                 ),
               ],
             ),

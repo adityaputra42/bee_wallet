@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bee_wallet/data/model/token_chain/token_chain.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
 import 'package:bee_wallet/utils/util.dart';
+import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
+import 'package:iconify_flutter_plus/icons/material_symbols.dart';
 import '../../../../../config/config.dart';
 import '../../../../../data/src/src.dart';
 
@@ -15,34 +18,37 @@ class SheetChangeNetworkToken extends ConsumerWidget {
         .where((e) => e.contractAddress == null)
         .toList();
     return Padding(
-      padding: EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 16.w),
-      child: Column(
-        children: [
-          Text(
-            "Select Network",
-            style: AppFont.medium14
-                .copyWith(color: Theme.of(context).indicatorColor),
-          ),
-          16.0.height,
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  cardSelectAll(context, ref),
-                  8.0.height,
-                  Column(
-                      children: List.generate(
-                    chainList.length,
-                    (index) => Padding(
-                      padding: EdgeInsets.only(bottom: 8.h),
-                      child: cardChain(context, chainList[index], ref),
-                    ),
-                  )),
-                ],
+      padding: EdgeInsets.fromLTRB(24.w, 0.h, 24.w, 0.w),
+      child: SizedBox(
+        height: MediaQuery.sizeOf(context).height * 0.65,
+        child: Column(
+          children: [
+            Text(
+              "Select Network",
+              style: AppFont.medium18
+                  .copyWith(color: Theme.of(context).indicatorColor),
+            ),
+            16.0.height,
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    cardSelectAll(context, ref),
+                    12.0.height,
+                    Column(
+                        children: List.generate(
+                      chainList.length,
+                      (index) => Padding(
+                        padding: EdgeInsets.only(bottom: 12.h),
+                        child: cardChain(context, chainList[index], ref),
+                      ),
+                    )),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -63,7 +69,7 @@ class SheetChangeNetworkToken extends ConsumerWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(8.r),
             border: Border.all(
                 width: 1.w,
                 color: listchain.length == selectedChain.length
@@ -74,9 +80,9 @@ class SheetChangeNetworkToken extends ConsumerWidget {
           children: [
             Row(
               children: [
-                Image.asset(
-                  AppIcon.boxIcon,
-                  height: 32.w,
+                Iconify(
+                  MaterialSymbols.widgets_outline_rounded,
+                  size: 32.w,
                   color: Theme.of(context).hintColor,
                 ),
                 12.0.width,
@@ -86,7 +92,7 @@ class SheetChangeNetworkToken extends ConsumerWidget {
                     children: [
                       Text(
                         "All",
-                        style: AppFont.medium14
+                        style: AppFont.medium16
                             .copyWith(color: Theme.of(context).indicatorColor),
                       ),
                       Text(
@@ -121,9 +127,9 @@ class SheetChangeNetworkToken extends ConsumerWidget {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(8.r),
             border: Border.all(
                 width: 1.w,
                 color: listchain.length != selectedChain.length &&
@@ -136,15 +142,25 @@ class SheetChangeNetworkToken extends ConsumerWidget {
           children: [
             Row(
               children: [
-                Image.asset(
-                  chain.logo ?? '',
+                SizedBox(
+                  width: 32.w,
                   height: 32.w,
+                  child: ClipPolygon(
+                    sides: 6,
+                    child: Container(
+                      padding: EdgeInsets.all(0.5.h),
+                      color: Theme.of(context).colorScheme.background,
+                      child: (chain.logo != null)
+                          ? Image.asset(chain.logo!)
+                          : Image.asset(AppImage.logo),
+                    ),
+                  ),
                 ),
                 12.0.width,
                 Expanded(
                   child: Text(
                     chain.name ?? '',
-                    style: AppFont.reguler14
+                    style: AppFont.medium16
                         .copyWith(color: Theme.of(context).indicatorColor),
                   ),
                 ),
