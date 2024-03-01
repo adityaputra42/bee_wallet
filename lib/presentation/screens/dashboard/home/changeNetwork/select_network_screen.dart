@@ -1,12 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:bee_wallet/data/model/token_chain/token_chain.dart';
-import 'package:bee_wallet/data/src/app_icon.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
 import 'package:bee_wallet/presentation/widget/widget.dart';
 import 'package:bee_wallet/utils/util.dart';

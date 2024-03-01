@@ -67,7 +67,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
             )),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w,vertical: 16.h),
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         child: Column(
           children: [
             SizedBox(
@@ -167,7 +167,8 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.r),
                         color: Theme.of(context).cardColor),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           "Transaction History",
@@ -248,7 +249,8 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                           ),
                         ),
                       ],
-                    )))
+                    ))),
+            8.0.height,
           ],
         ),
       ),
@@ -314,11 +316,10 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                         .copyWith(color: Theme.of(context).hintColor),
                   ),
                   Text(
-                    DateFormat("dd MMM yyyy - HH:mm")
-                        .format(DateTime.fromMillisecondsSinceEpoch(
+                    DateFormat("dd MMM yyyy - HH:mm").format(
+                        DateTime.fromMillisecondsSinceEpoch(
                                 int.parse(activity.timeStamp!) * 1000)
-                            .toLocal())
-                        ,
+                            .toLocal()),
                     style: AppFont.medium14
                         .copyWith(color: Theme.of(context).hintColor),
                   )

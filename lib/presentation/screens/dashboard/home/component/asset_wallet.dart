@@ -1,6 +1,5 @@
 // ignore_for_file: unused_result
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,7 +14,6 @@ import '../../../../../data/model/token_chain/selected_token_chain.dart';
 import '../../../../../data/src/src.dart';
 import '../../../../provider/provider.dart';
 import '../../../../widget/widget.dart';
-import '../changeNetwork/select_network_screen.dart';
 
 final searSelectedChain = StateProvider.autoDispose<TextEditingController>(
     (ref) => TextEditingController());
@@ -58,7 +56,6 @@ class AssetWallet extends ConsumerWidget {
               GestureDetector(
                 onTap: () {
                   context.goNamed('select_network');
-                 
                 },
                 child: Container(
                     padding:
@@ -165,15 +162,15 @@ class AssetWallet extends ConsumerWidget {
                       child: ClipPolygon(
                         sides: 6,
                         child: Container(
-                          padding: EdgeInsets.all(0.1.h),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 0.3.w,
-                                  color: Theme.of(context).cardColor),
-                              color: Theme.of(context).colorScheme.background),
-                          child: Image.asset(chain.baseLogo??AppImage.logo)
-                              
-                        ),
+                            padding: EdgeInsets.all(0.1.h),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 0.3.w,
+                                    color: Theme.of(context).cardColor),
+                                color:
+                                    Theme.of(context).colorScheme.background),
+                            child:
+                                Image.asset(chain.baseLogo ?? AppImage.logo)),
                       ),
                     ),
                   ),
