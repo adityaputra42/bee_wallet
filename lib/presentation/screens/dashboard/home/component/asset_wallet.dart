@@ -1,5 +1,6 @@
 // ignore_for_file: unused_result
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -71,7 +72,7 @@ class AssetWallet extends ConsumerWidget {
                                 chain.first.baseLogo ?? AppChainLogo.evm)
                             : Iconify(
                                 MaterialSymbols.widgets_outline_rounded,
-                                size: 32.w,
+                                size: 24.w,
                                 color: AppColor.grayColor,
                               ),
                         2.0.width,
@@ -136,13 +137,13 @@ class AssetWallet extends ConsumerWidget {
         child: Row(
           children: [
             SizedBox(
-              width: 36.w,
-              height: 36.w,
+              width: 34.w,
+              height: 34.w,
               child: Stack(
                 children: [
                   SizedBox(
-                    width: 34.w,
-                    height: 34.w,
+                    width: 32.w,
+                    height: 32.w,
                     child: ClipPolygon(
                       sides: 6,
                       child: Container(
@@ -157,8 +158,8 @@ class AssetWallet extends ConsumerWidget {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: SizedBox(
-                      width: 14.w,
-                      height: 14.w,
+                      width: 16.w,
+                      height: 16.w,
                       child: ClipPolygon(
                         sides: 6,
                         child: Container(
@@ -180,39 +181,23 @@ class AssetWallet extends ConsumerWidget {
             8.0.width,
             Expanded(
                 child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "${chain.symbol} (${chain.name})",
-                      style: AppFont.medium14
-                          .copyWith(color: Theme.of(context).indicatorColor),
-                    ),
-                    Text(
-                      0.toStringAsFixed(0),
-                      style: AppFont.medium16
-                          .copyWith(color: Theme.of(context).indicatorColor),
-                    )
-                  ],
+                Text(
+                  "${chain.name}",
+                  style: AppFont.medium16
+                      .copyWith(color: Theme.of(context).indicatorColor),
+                  overflow: TextOverflow.ellipsis,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "${chain.balance ?? 0} ${chain.symbol}",
-                      style: AppFont.reguler12
-                          .copyWith(color: Theme.of(context).hintColor),
-                    ),
-                    Text(
-                      "+2,75%",
-                      style:
-                          AppFont.medium12.copyWith(color: AppColor.greenColor),
-                    )
-                  ],
-                )
+                2.0.height,
               ],
-            ))
+            )),
+            16.0.width,
+            Text(
+              "${chain.balance ?? 0} ${chain.symbol}",
+              style: AppFont.reguler14
+                  .copyWith(color: Theme.of(context).hintColor),
+            ),
           ],
         ),
       ),

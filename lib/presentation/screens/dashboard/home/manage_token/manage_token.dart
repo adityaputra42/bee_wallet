@@ -56,9 +56,19 @@ class ManageToken extends ConsumerWidget {
                 children: [
                   chainSelected.isNotEmpty &&
                           chainList.length != chainSelected.length
-                      ? Image.asset(
-                          chainSelected.first.logo ?? "",
-                          height: 32.w,
+                      ? SizedBox(
+                          width:20.w,
+                          height: 20.w,
+                          child: ClipPolygon(
+                            sides: 6,
+                            child: Container(
+                              padding: EdgeInsets.all(0.5.h),
+                              color: Theme.of(context).colorScheme.background,
+                              child: (chainSelected.first.logo != null)
+                                  ? Image.asset(chainSelected.first.logo!)
+                                  : Image.asset(AppImage.logo),
+                            ),
+                          ),
                         )
                       : Iconify(
                           MaterialSymbols.widgets_outline_rounded,
@@ -210,7 +220,7 @@ class ManageToken extends ConsumerWidget {
                 height: 24.h,
                 toggleColor: AppColor.grayColor,
                 activeColor: AppColor.primaryColor,
-                inactiveColor: Theme.of(context).cardColor,
+                inactiveColor: Theme.of(context).colorScheme.background,
                 valueFontSize: 20.0,
                 toggleSize: 20.h,
                 value: listSelected.any((element) =>
