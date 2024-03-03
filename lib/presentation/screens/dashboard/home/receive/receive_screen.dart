@@ -37,14 +37,15 @@ class ReceiveScreen extends ConsumerWidget {
                   backgroundColor: Theme.of(context).colorScheme.background,
                   showDragHandle: true,
                   isDismissible: false,
-                  isScrollControlled: false,
+                  isScrollControlled: true,
+                  useSafeArea: true,
                   shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.vertical(top: Radius.circular(16.r))));
             },
             child: Container(
-              height: 40.w,
-              padding: EdgeInsets.all(8.h),
+              height: 36.w,
+              padding: EdgeInsets.symmetric(horizontal: 8.w,vertical: 4.h),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.r),
                   border: Border.all(width: 1.w, color: AppColor.grayColor)),
@@ -57,7 +58,7 @@ class ReceiveScreen extends ConsumerWidget {
                     child: ClipPolygon(
                       sides: 6,
                       child: Container(
-                        padding: EdgeInsets.all(0.5.h),
+                        padding: EdgeInsets.all(0.1.h),
                         color: Theme.of(context).colorScheme.background,
                         child: (chain.logo != null)
                             ? Image.asset(chain.logo!)
@@ -194,7 +195,8 @@ class ReceiveScreen extends ConsumerWidget {
                               ? (account?.addressSolana ?? "")
                               : '',
                       version: QrVersions.auto,
-                      backgroundColor: Theme.of(context).indicatorColor,
+                      backgroundColor: Theme.of(context).cardColor,
+                      foregroundColor: Theme.of(context).indicatorColor,
                       embeddedImageStyle:
                           QrEmbeddedImageStyle(size: Size(32.w, 32.w)),
                       size: 244.h,

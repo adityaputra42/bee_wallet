@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -103,19 +104,26 @@ class AssetWallet extends ConsumerWidget {
           ),
           16.0.height,
           Expanded(
-              child: RefreshIndicator(
-            onRefresh: () async {
-              ref.refresh(selectedChainTokenProvider);
-            },
-            child: listChain.isEmpty
-                ? const Empty(title: "No Data")
-                : ListView.builder(
-                    itemBuilder: (context, index) => Padding(
-                          padding: EdgeInsets.only(bottom: 12.h),
-                          child: cardChain(context, ref, listChain[index]),
-                        ),
-                    itemCount: listChain.length),
-          ))
+              child: Container(
+            padding: EdgeInsets.all(16.w),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Theme.of(context).cardColor),
+            child: RefreshIndicator(
+              onRefresh: () async {
+                ref.refresh(selectedChainTokenProvider);
+              },
+              child: listChain.isEmpty
+                  ? const Empty(title: "No Data")
+                  : ListView.builder(
+                      itemBuilder: (context, index) => Padding(
+                            padding: EdgeInsets.only(bottom: 8.h),
+                            child: cardChain(context, ref, listChain[index]),
+                          ),
+                      itemCount: listChain.length),
+            ),
+          )),
+          16.0.height,
         ],
       ),
     );
@@ -133,17 +141,17 @@ class AssetWallet extends ConsumerWidget {
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
-            color: Theme.of(context).cardColor),
+            color: Theme.of(context).colorScheme.background),
         child: Row(
           children: [
             SizedBox(
-              width: 34.w,
-              height: 34.w,
+              width: 44.w,
+              height: 44.w,
               child: Stack(
                 children: [
                   SizedBox(
-                    width: 32.w,
-                    height: 32.w,
+                    width: 42.w,
+                    height: 42.w,
                     child: ClipPolygon(
                       sides: 6,
                       child: Container(
@@ -158,8 +166,8 @@ class AssetWallet extends ConsumerWidget {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: SizedBox(
-                      width: 16.w,
-                      height: 16.w,
+                      width: 20.w,
+                      height: 20.w,
                       child: ClipPolygon(
                         sides: 6,
                         child: Container(
@@ -183,21 +191,45 @@ class AssetWallet extends ConsumerWidget {
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "${chain.name}",
-                  style: AppFont.medium16
-                      .copyWith(color: Theme.of(context).indicatorColor),
-                  overflow: TextOverflow.ellipsis,
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "${chain.name}",
+                        style: AppFont.semibold16
+                            .copyWith(color: Theme.of(context).indicatorColor),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    16.0.width,
+                    Text(
+                      "${chain.balance ?? 0} ${chain.symbol}",
+                      style: AppFont.medium14
+                          .copyWith(color: Theme.of(context).hintColor),
+                    ),
+                  ],
                 ),
                 2.0.height,
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "~\$0.0",
+                        style: AppFont.medium14
+                            .copyWith(color: Theme.of(context).hintColor),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    16.0.width,
+                    Text(
+                      "+1.36%",
+                      style:
+                          AppFont.medium14.copyWith(color: AppColor.greenColor),
+                    ),
+                  ],
+                ),
               ],
             )),
-            16.0.width,
-            Text(
-              "${chain.balance ?? 0} ${chain.symbol}",
-              style: AppFont.reguler14
-                  .copyWith(color: Theme.of(context).hintColor),
-            ),
           ],
         ),
       ),

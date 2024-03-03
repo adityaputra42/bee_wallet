@@ -141,38 +141,44 @@ class ListNft extends ConsumerWidget {
               ],
             ),
           ),
-          16.0.height,
           Expanded(
-              child: ref.watch(listNftProvider).when(
-            data: (data) {
-              final nftViews = ref.watch(listViewNftProvider);
-              return nftViews.isEmpty
-                  ? const Empty(
-                      title: "NFT Not found",
-                      width: 120,
-                    )
-                  : ListView.builder(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      itemBuilder: (context, index) => Padding(
-                        padding: EdgeInsets.only(bottom: 12.h),
-                        child: cardNft(context, nftViews[index], ref),
-                      ),
-                      itemCount: nftViews.length,
-                    );
-            },
-            error: (Object error, StackTrace stackTrace) {
-              return ErrorView(
-                error: error.toString(),
-                ontap: () {
-                  ref.refresh(listNftProvider);
-                },
-              );
-            },
-            loading: () {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            },
+              child: Container(
+            padding: EdgeInsets.all(16.w),
+            margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Theme.of(context).cardColor),
+            child: ref.watch(listNftProvider).when(
+              data: (data) {
+                final nftViews = ref.watch(listViewNftProvider);
+                return nftViews.isEmpty
+                    ? const Empty(
+                        title: "NFT Not found",
+                        width: 120,
+                      )
+                    : ListView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        itemBuilder: (context, index) => Padding(
+                          padding: EdgeInsets.only(bottom: 12.h),
+                          child: cardNft(context, nftViews[index], ref),
+                        ),
+                        itemCount: nftViews.length,
+                      );
+              },
+              error: (Object error, StackTrace stackTrace) {
+                return ErrorView(
+                  error: error.toString(),
+                  ontap: () {
+                    ref.refresh(listNftProvider);
+                  },
+                );
+              },
+              loading: () {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
           ))
         ],
       ),
@@ -194,15 +200,22 @@ class ListNft extends ConsumerWidget {
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
-            color: Theme.of(context).cardColor),
+            color: Theme.of(context).colorScheme.background),
         child: Row(
           children: [
-            ClipOval(
-              child: Image.memory(
-                MethodHelper().convertBase64ToUint8List(nft.image ?? ''),
-                fit: BoxFit.cover,
-                width: 36.w,
-                height: 36.w,
+            SizedBox(
+              width: 36.w,
+              height: 36.w,
+              child: ClipPolygon(
+                sides: 6,
+                child: Container(
+                  padding: EdgeInsets.all(0.5.h),
+                  color: Theme.of(context).colorScheme.background,
+                  child: Image.memory(
+                    MethodHelper().convertBase64ToUint8List(nft.image ?? ''),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
             8.0.width,

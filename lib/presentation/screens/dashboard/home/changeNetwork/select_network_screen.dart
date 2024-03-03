@@ -59,23 +59,30 @@ class SelectNetworkScreen extends ConsumerWidget {
             ),
             16.0.height,
             Expanded(
-                child: listChain.isEmpty
-                    ? const Empty(title: "Chain Not Found")
-                    : ListView(
-                        children: [
-                          cardSelectAll(context, ref),
-                          12.0.height,
-                          Column(
-                            children: List.generate(
-                                listChain.length,
-                                (index) => Padding(
-                                      padding: EdgeInsets.only(bottom: 12.h),
-                                      child: cardChain(
-                                          context, listChain[index], ref),
-                                    )),
-                          )
-                        ],
-                      ))
+                child: Container(
+              padding: EdgeInsets.all(16.w),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Theme.of(context).cardColor),
+              child: listChain.isEmpty
+                  ? const Empty(title: "Chain Not Found")
+                  : ListView(
+                      children: [
+                        cardSelectAll(context, ref),
+                        8.0.height,
+                        Column(
+                          children: List.generate(
+                              listChain.length,
+                              (index) => Padding(
+                                    padding: EdgeInsets.only(bottom: 8.h),
+                                    child: cardChain(
+                                        context, listChain[index], ref),
+                                  )),
+                        )
+                      ],
+                    ),
+            )),
+            16.0.height,
           ],
         ),
       ),
@@ -103,15 +110,15 @@ class SelectNetworkScreen extends ConsumerWidget {
                 width: 1.w,
                 color: selectedChain.length == listchain.length
                     ? AppColor.primaryColor
-                    : Theme.of(context).cardColor),
-            color: Theme.of(context).cardColor),
+                    : Theme.of(context).colorScheme.background),
+            color: Theme.of(context).colorScheme.background),
         child: Column(
           children: [
             Row(
               children: [
                 Iconify(
                   MaterialSymbols.widgets_outline_rounded,
-                  size: 32.w,
+                  size: 36.w,
                   color: Theme.of(context).hintColor,
                 ),
                 12.0.width,
@@ -121,12 +128,12 @@ class SelectNetworkScreen extends ConsumerWidget {
                     children: [
                       Text(
                         "All",
-                        style: AppFont.medium14
+                        style: AppFont.semibold16
                             .copyWith(color: Theme.of(context).indicatorColor),
                       ),
                       Text(
                         "Select all added network",
-                        style: AppFont.reguler12
+                        style: AppFont.reguler14
                             .copyWith(color: Theme.of(context).hintColor),
                       )
                     ],
@@ -166,8 +173,8 @@ class SelectNetworkScreen extends ConsumerWidget {
                         selectedChain
                             .any((element) => element.chainId == chain.chainId)
                     ? AppColor.primaryColor
-                    : Theme.of(context).cardColor),
-            color: Theme.of(context).cardColor),
+                    : Theme.of(context).colorScheme.background),
+            color: Theme.of(context).colorScheme.background),
         child: Column(
           children: [
             Row(
@@ -190,7 +197,7 @@ class SelectNetworkScreen extends ConsumerWidget {
                 Expanded(
                   child: Text(
                     chain.name ?? '',
-                    style: AppFont.medium16
+                    style: AppFont.semibold16
                         .copyWith(color: Theme.of(context).indicatorColor),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -199,7 +206,7 @@ class SelectNetworkScreen extends ConsumerWidget {
                 Text(
                   chain.symbol ?? '',
                   style: AppFont.medium14
-                      .copyWith(color: Theme.of(context).indicatorColor),
+                      .copyWith(color: Theme.of(context).hintColor),
                 ),
               ],
             ),

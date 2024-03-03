@@ -237,7 +237,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                                   ],
                                 ),
                                 itemBuilder: (context, item, index) => Padding(
-                                  padding: EdgeInsets.only(bottom: 12.h),
+                                  padding: EdgeInsets.only(bottom: 8.h),
                                   child: cardActivity(
                                       context: context,
                                       activity: item,
@@ -269,65 +269,71 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
         ref.watch(activityDetailProvider);
         context.goNamed('detail_activity');
       },
-      child: Row(
-        children: [
-          Container(
-            width: 42.w,
-            height: 42.w,
-            padding: EdgeInsets.all(6.h),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.r),
-              color: Theme.of(context).colorScheme.background,
-            ),
-            child: Icon(
-              state == "Transfer" ? Icons.arrow_upward : Icons.arrow_downward,
-              size: 24.w,
-              color: Theme.of(context).indicatorColor,
-            ),
-          ),
-          8.0.width,
-          Expanded(
-              child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    state,
-                    style: AppFont.semibold16
-                        .copyWith(color: Theme.of(context).indicatorColor),
-                  ),
-                  Text(
-                    "${state == "Transfer" ? "-" : "+"}${(BigInt.parse(activity.value!).toDouble() / pow(10, 18)).toStringAsFixed(5)} ${activity.symbol == "" ? chain?.symbol : activity.symbol}",
-                    style: AppFont.medium16.copyWith(
-                        color: state == "Transfer"
-                            ? AppColor.redColor
-                            : AppColor.greenColor),
-                  ),
-                ],
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: Theme.of(context).colorScheme.background),
+        child: Row(
+          children: [
+            Container(
+              width: 42.w,
+              height: 42.w,
+              padding: EdgeInsets.all(6.h),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.r),
+                color: Theme.of(context).cardColor,
               ),
-              4.0.height,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "to : ${activity.to != null ? MethodHelper().shortAddress(address: activity.to ?? "~", length: 5) : "~"}",
-                    style: AppFont.reguler14
-                        .copyWith(color: Theme.of(context).hintColor),
-                  ),
-                  Text(
-                    DateFormat("dd MMM yyyy - HH:mm").format(
-                        DateTime.fromMillisecondsSinceEpoch(
-                                int.parse(activity.timeStamp!) * 1000)
-                            .toLocal()),
-                    style: AppFont.medium14
-                        .copyWith(color: Theme.of(context).hintColor),
-                  )
-                ],
-              )
-            ],
-          ))
-        ],
+              child: Icon(
+                state == "Transfer" ? Icons.arrow_upward : Icons.arrow_downward,
+                size: 24.w,
+                color: Theme.of(context).indicatorColor,
+              ),
+            ),
+            12.0.width,
+            Expanded(
+                child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      state,
+                      style: AppFont.semibold16
+                          .copyWith(color: Theme.of(context).indicatorColor),
+                    ),
+                    Text(
+                      "${state == "Transfer" ? "-" : "+"}${(BigInt.parse(activity.value!).toDouble() / pow(10, 18)).toStringAsFixed(5)} ${activity.symbol == "" ? chain?.symbol : activity.symbol}",
+                      style: AppFont.medium16.copyWith(
+                          color: state == "Transfer"
+                              ? AppColor.redColor
+                              : AppColor.greenColor),
+                    ),
+                  ],
+                ),
+                2.0.height,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "to : ${activity.to != null ? MethodHelper().shortAddress(address: activity.to ?? "~", length: 5) : "~"}",
+                      style: AppFont.reguler14
+                          .copyWith(color: Theme.of(context).hintColor),
+                    ),
+                    Text(
+                      DateFormat("dd MMM yyyy - HH:mm").format(
+                          DateTime.fromMillisecondsSinceEpoch(
+                                  int.parse(activity.timeStamp!) * 1000)
+                              .toLocal()),
+                      style: AppFont.medium14
+                          .copyWith(color: Theme.of(context).hintColor),
+                    )
+                  ],
+                )
+              ],
+            ))
+          ],
+        ),
       ),
     );
   }

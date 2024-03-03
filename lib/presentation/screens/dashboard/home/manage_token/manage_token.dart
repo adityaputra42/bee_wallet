@@ -57,7 +57,7 @@ class ManageToken extends ConsumerWidget {
                   chainSelected.isNotEmpty &&
                           chainList.length != chainSelected.length
                       ? SizedBox(
-                          width:20.w,
+                          width: 20.w,
                           height: 20.w,
                           child: ClipPolygon(
                             sides: 6,
@@ -120,15 +120,21 @@ class ManageToken extends ConsumerWidget {
             ),
             16.0.height,
             Expanded(
-                child: chainSelected.isEmpty
-                    ? const Empty(title: "Token not found")
-                    : ListView.builder(
-                        itemBuilder: (context, index) => Padding(
-                          padding: EdgeInsets.only(bottom: 12.h),
-                          child: cardChain(context, ref, chainSelected[index]),
-                        ),
-                        itemCount: chainSelected.length,
-                      ))
+                child: Container(
+              padding: EdgeInsets.all(16.w),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Theme.of(context).cardColor),
+              child: chainSelected.isEmpty
+                  ? const Empty(title: "Token not found")
+                  : ListView.builder(
+                      itemBuilder: (context, index) => Padding(
+                        padding: EdgeInsets.only(bottom: 8.h),
+                        child: cardChain(context, ref, chainSelected[index]),
+                      ),
+                      itemCount: chainSelected.length,
+                    ),
+            ))
           ],
         ),
       ),
@@ -142,7 +148,7 @@ class ManageToken extends ConsumerWidget {
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
-          color: Theme.of(context).cardColor),
+          color: Theme.of(context).colorScheme.background),
       child: Column(
         children: [
           Row(
@@ -220,7 +226,7 @@ class ManageToken extends ConsumerWidget {
                 height: 24.h,
                 toggleColor: AppColor.grayColor,
                 activeColor: AppColor.primaryColor,
-                inactiveColor: Theme.of(context).colorScheme.background,
+                inactiveColor: Theme.of(context).cardColor,
                 valueFontSize: 20.0,
                 toggleSize: 20.h,
                 value: listSelected.any((element) =>
