@@ -6,6 +6,7 @@ import 'package:bee_wallet/data/model/token_chain/token_chain.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
 import 'package:bee_wallet/presentation/widget/widget.dart';
 import 'package:bee_wallet/utils/util.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/material_symbols.dart';
 
@@ -41,7 +42,9 @@ class SelectNetworkScreen extends ConsumerWidget {
                 ),
                 12.0.width,
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    context.goNamed("add_network");
+                  },
                   child: Container(
                     width: 48.w,
                     height: 48.w,
@@ -118,8 +121,8 @@ class SelectNetworkScreen extends ConsumerWidget {
               children: [
                 Iconify(
                   MaterialSymbols.widgets_outline_rounded,
-                  size: 36.w,
-                  color: Theme.of(context).hintColor,
+                  size: 32.w,
+                  color: AppColor.grayColor,
                 ),
                 12.0.width,
                 Expanded(
@@ -188,7 +191,10 @@ class SelectNetworkScreen extends ConsumerWidget {
                       padding: EdgeInsets.all(0.5.h),
                       color: Theme.of(context).colorScheme.background,
                       child: (chain.logo != null)
-                          ? Image.asset(chain.logo!)
+                          ? Image.asset(
+                              chain.logo!,
+                              fit: BoxFit.cover,
+                            )
                           : Image.asset(AppImage.logo),
                     ),
                   ),

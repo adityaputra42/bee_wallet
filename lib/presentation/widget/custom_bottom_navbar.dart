@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
-import 'package:iconify_flutter_plus/icons/ant_design.dart';
+import 'package:iconify_flutter_plus/icons/ph.dart';
 import 'package:iconify_flutter_plus/icons/material_symbols.dart';
 import 'package:iconify_flutter_plus/icons/mdi.dart';
 import '../../config/config.dart';
@@ -20,7 +20,8 @@ class CustomBottomNavBar extends StatelessWidget {
         horizontal: 36.w,
       ),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
+        color: Theme.of(context).cardColor,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,7 +47,7 @@ class CustomBottomNavBar extends StatelessWidget {
               }
             },
             child: Iconify(
-              AntDesign.swap_outlined,
+              Ph.swap_bold,
               color: (selectedIndex == 1)
                   ? AppColor.primaryColor
                   : AppColor.grayColor,

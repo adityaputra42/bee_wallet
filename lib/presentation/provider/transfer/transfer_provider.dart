@@ -303,7 +303,7 @@ class TransferChain extends _$TransferChain {
         state = true;
       }
       ref.read(transferLoadingProvider.notifier).setValue(false);
-      context.pop();
+     
       context.goNamed('transaction_progress');
     } catch (e) {
       dev.log("error => $e");

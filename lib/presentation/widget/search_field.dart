@@ -14,6 +14,7 @@ class SearchField extends StatelessWidget {
     this.inputFormatters,
     this.onEditingComplete,
     this.keyboardType,
+    this.color,
     this.textInputAction,
   });
 
@@ -25,6 +26,7 @@ class SearchField extends StatelessWidget {
   final Function()? onEditingComplete;
   final List<TextInputFormatter>? inputFormatters;
   final FocusNode? focusNode;
+  final Color? color;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -43,7 +45,7 @@ class SearchField extends StatelessWidget {
         inputFormatters: inputFormatters,
         focusNode: focusNode,
         decoration: InputDecoration(
-            fillColor: Theme.of(context).cardColor,
+            fillColor: color ?? Theme.of(context).cardColor,
             filled: true,
             prefixIcon: Icon(
               Icons.search,

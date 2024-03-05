@@ -1,6 +1,7 @@
 import 'package:bee_wallet/presentation/screens/auth/pin/confirm_pin_screen.dart';
 import 'package:bee_wallet/presentation/screens/auth/pin/create_pin_screen.dart';
 import 'package:bee_wallet/presentation/screens/auth/succes/success_create_wallet.dart';
+import 'package:bee_wallet/presentation/screens/dashboard/home/transfer/confirm_transfer_chain.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -120,7 +121,6 @@ GoRouter appRoute(AppRouteRef ref) {
                     name: 'detail_activity',
                     builder: (context, state) => DetailActivity(),
                   ),
-                 
                   GoRoute(
                     path: 'receive_token',
                     name: 'receive_token',
@@ -132,16 +132,24 @@ GoRouter appRoute(AppRouteRef ref) {
                       builder: (context, state) => const ChooseReceiverScreen(),
                       routes: [
                         GoRoute(
-                          path: 'custom_gas_fee',
-                          name: 'custom_gas_fee',
-                          builder: (context, state) => const CustomGasFee(),
-                        ),
-                        GoRoute(
-                          path: 'transaction_progress',
-                          name: 'transaction_progress',
-                          builder: (context, state) =>
-                              const TransactionProgressScreen(),
-                        ),
+                            path: 'confirm_transfer_chain',
+                            name: 'confirm_transfer_chain',
+                            builder: (context, state) =>
+                                const ConfirmTransferChain(),
+                            routes: [
+                              GoRoute(
+                                path: 'custom_gas_fee',
+                                name: 'custom_gas_fee',
+                                builder: (context, state) =>
+                                    const CustomGasFee(),
+                              ),
+                              GoRoute(
+                                path: 'transaction_progress',
+                                name: 'transaction_progress',
+                                builder: (context, state) =>
+                                    const TransactionProgressScreen(),
+                              ),
+                            ]),
                       ]),
                 ]),
             GoRoute(

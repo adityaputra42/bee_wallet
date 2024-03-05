@@ -29,70 +29,115 @@ class AddToken extends ConsumerWidget {
       appBar: WidgetHelper.appBar(
         context: context,
         title: 'Add Custom Token',
+        icon: GestureDetector(
+            onTap: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (context) => const SheetNetworkAddToken(),
+                  backgroundColor: Theme.of(context).colorScheme.background,
+                  showDragHandle: true,
+                  isDismissible: false,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(16.r))));
+            },
+            child: Container(
+              height: 36.w,
+              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.r),
+                  border: Border.all(width: 1.w, color: AppColor.grayColor)),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: 20.w,
+                    height: 20.w,
+                    child: ClipPolygon(
+                      sides: 6,
+                      child: Container(
+                        padding: EdgeInsets.all(0.1.h),
+                        color: Theme.of(context).colorScheme.background,
+                        child: (chain.logo != null)
+                            ? Image.asset(chain.logo!)
+                            : Image.asset(AppImage.logo),
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_drop_down_rounded,
+                    color: Theme.of(context).hintColor,
+                    size: 20.w,
+                  ),
+                ],
+              ),
+            )),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(
           children: [
-            Container(
-              padding: EdgeInsets.all(16.w),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  color: Theme.of(context).cardColor),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Network",
-                    style: AppFont.medium14
-                        .copyWith(color: Theme.of(context).hintColor),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (context) => const SheetNetworkAddToken(),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.background,
-                          showDragHandle: true,
-                          isDismissible: false,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(16.r))));
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox(
-                          width: 24.w,
-                          height: 24.w,
-                          child: ClipPolygon(
-                            sides: 6,
-                            child: Container(
-                              padding: EdgeInsets.all(0.5.h),
-                              color: Theme.of(context).colorScheme.background,
-                              child: Image.asset(chain.logo ?? AppImage.logo),
-                            ),
-                          ),
-                        ),
-                        8.0.width,
-                        Text(
-                          "${chain.symbol}",
-                          style: AppFont.medium14
-                              .copyWith(color: Theme.of(context).hintColor),
-                        ),
-                        4.0.width,
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          size: 12.w,
-                          color: Theme.of(context).hintColor,
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
+            // Container(
+            //   padding: EdgeInsets.all(16.w),
+            //   decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(8.r),
+            //       color: Theme.of(context).cardColor),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       Text(
+            //         "Network",
+            //         style: AppFont.medium14
+            //             .copyWith(color: Theme.of(context).hintColor),
+            //       ),
+            //       GestureDetector(
+            //         onTap: () {
+            //           showModalBottomSheet(
+            //               context: context,
+            //               builder: (context) => const SheetNetworkAddToken(),
+            //               backgroundColor:
+            //                   Theme.of(context).colorScheme.background,
+            //               showDragHandle: true,
+            //               isDismissible: false,
+            //               shape: RoundedRectangleBorder(
+            //                   borderRadius: BorderRadius.vertical(
+            //                       top: Radius.circular(16.r))));
+            //         },
+            //         child: Row(
+            //           mainAxisSize: MainAxisSize.min,
+            //           children: [
+            //             SizedBox(
+            //               width: 24.w,
+            //               height: 24.w,
+            //               child: ClipPolygon(
+            //                 sides: 6,
+            //                 child: Container(
+            //                   padding: EdgeInsets.all(0.5.h),
+            //                   color: Theme.of(context).colorScheme.background,
+            //                   child: Image.asset(chain.logo ?? AppImage.logo),
+            //                 ),
+            //               ),
+            //             ),
+            //             8.0.width,
+            //             Text(
+            //               "${chain.symbol}",
+            //               style: AppFont.medium14
+            //                   .copyWith(color: Theme.of(context).hintColor),
+            //             ),
+            //             4.0.width,
+            //             Icon(
+            //               Icons.arrow_forward_ios_rounded,
+            //               size: 12.w,
+            //               color: Theme.of(context).hintColor,
+            //             )
+            //           ],
+            //         ),
+            //       )
+            //     ],
+            //   ),
+            // ),
             16.0.height,
             Expanded(
               child: Container(

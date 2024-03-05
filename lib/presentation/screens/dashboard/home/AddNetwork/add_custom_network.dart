@@ -21,138 +21,149 @@ class AddCustomNetwork extends ConsumerWidget {
         context: context,
         title: 'Add Custom Network',
       ),
-      bottomNavigationBar: PrimaryButton(
-        title: "Add",
-        disable: ref.watch(disableAddTokenProvider),
-        onPressed: () {
-          ref.read(chainOtherProvider.notifier).addTokenChain(TokenChain(
-              name: ref.watch(nameChainControllerProvider).text,
-              contractAddress: null,
-              symbol: ref.watch(symbolChainControllerProvider).text,
-              decimal: 18,
-              balance: 0,
-              baseLogo: AppChainLogo.evm,
-              chainId: ref.watch(chainIdControllerProvider).text,
-              logo: AppChainLogo.evm,
-              explorer: ref.watch(explorerChainControllerProvider).text,
-              explorerApi: ref.watch(explorerChainControllerProvider).text,
-              baseChain: 'eth',
-              rpc: ref.watch(rpcChainControllerProvider).text,
-              isTestnet: false));
-          MethodHelper().showSnack(
-              context: context,
-              content: "Success Add Network",
-              backgorund: AppColor.greenColor);
-          context.pop();
-          context.pop();
-        },
-        margin: EdgeInsets.fromLTRB(16.w, 16.w, 16.w, 32.h),
-      ),
-      body: Padding(
+      body: Container(
+        margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         padding: EdgeInsets.all(16.w),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const Warning(
-                  warning:
-                      "Peta Wallet does not verify custom networks or their security. Only add a network you trust"),
-              16.0.height,
-              Container(
-                padding: EdgeInsets.all(16.w),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.r),
-                    color: Theme.of(context).cardColor),
-                child: Column(
-                  children: [
-                    InputText(
-                      title: "Network name",
-                      controller: ref.watch(nameChainControllerProvider),
-                      hintText: "Input Network Name",
-                      color: Theme.of(context).colorScheme.background,
-                      onChange: (v) {
-                        ref
-                            .read(nameChainControllerProvider.notifier)
-                            .onChange(v);
-                      },
-                      validator: (v) {
-                        return ref
-                            .read(nameChainControllerProvider.notifier)
-                            .onValidate(v);
-                      },
-                    ),
-                    16.0.height,
-                    InputText(
-                      title: "RPC URL",
-                      controller: ref.watch(rpcChainControllerProvider),
-                      hintText: "Input a RPC URL",
-                      color: Theme.of(context).colorScheme.background,
-                      onChange: (v) {
-                        ref
-                            .read(rpcChainControllerProvider.notifier)
-                            .onChange(v);
-                      },
-                      validator: (v) {
-                        return ref
-                            .read(rpcChainControllerProvider.notifier)
-                            .onValidate(v);
-                      },
-                    ),
-                    16.0.height,
-                    InputText(
-                      title: "Chain ID",
-                      controller: ref.watch(chainIdControllerProvider),
-                      hintText: "Input a Chain ID",
-                      keyboardType: TextInputType.number,
-                      color: Theme.of(context).colorScheme.background,
-                      onChange: (v) {
-                        ref
-                            .read(chainIdControllerProvider.notifier)
-                            .onChange(v);
-                      },
-                      validator: (v) {
-                        return ref
-                            .read(chainIdControllerProvider.notifier)
-                            .onValidate(v);
-                      },
-                    ),
-                    16.0.height,
-                    InputText(
-                      title: "Currency symbol",
-                      controller: ref.watch(symbolChainControllerProvider),
-                      hintText: "Input Currency Symbol",
-                      color: Theme.of(context).colorScheme.background,
-                      onChange: (v) {
-                        ref
-                            .read(symbolChainControllerProvider.notifier)
-                            .onChange(v);
-                      },
-                      validator: (v) {
-                        return ref
-                            .read(symbolChainControllerProvider.notifier)
-                            .onValidate(v);
-                      },
-                    ),
-                    16.0.height,
-                    InputText(
-                      title: "Block Explorer URL",
-                      controller: ref.watch(explorerChainControllerProvider),
-                      hintText: "Input Block Explorer URL",
-                      color: Theme.of(context).colorScheme.background,
-                      onChange: (v) {
-                        ref
-                            .read(explorerChainControllerProvider.notifier)
-                            .onChange(v);
-                      },
-                      validator: (v) {
-                        return ref
-                            .read(explorerChainControllerProvider.notifier)
-                            .onValidate(v);
-                      },
-                    ),
-                  ],
-                ),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.r),
+            color: Theme.of(context).cardColor),
+        child: LayoutBuilder(
+          builder: (context, constraints) => SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      const Warning(
+                          warning:
+                              "Crypto Wallet does not verify custom networks or their security. Only add a network you trust"),
+                      16.0.height,
+                      InputText(
+                        title: "Network name",
+                        controller: ref.watch(nameChainControllerProvider),
+                        hintText: "Input Network Name",
+                        color: Theme.of(context).colorScheme.background,
+                        onChange: (v) {
+                          ref
+                              .read(nameChainControllerProvider.notifier)
+                              .onChange(v);
+                        },
+                        validator: (v) {
+                          return ref
+                              .read(nameChainControllerProvider.notifier)
+                              .onValidate(v);
+                        },
+                      ),
+                      16.0.height,
+                      InputText(
+                        title: "RPC URL",
+                        controller: ref.watch(rpcChainControllerProvider),
+                        hintText: "Input a RPC URL",
+                        color: Theme.of(context).colorScheme.background,
+                        onChange: (v) {
+                          ref
+                              .read(rpcChainControllerProvider.notifier)
+                              .onChange(v);
+                        },
+                        validator: (v) {
+                          return ref
+                              .read(rpcChainControllerProvider.notifier)
+                              .onValidate(v);
+                        },
+                      ),
+                      16.0.height,
+                      InputText(
+                        title: "Chain ID",
+                        controller: ref.watch(chainIdControllerProvider),
+                        hintText: "Input a Chain ID",
+                        keyboardType: TextInputType.number,
+                        color: Theme.of(context).colorScheme.background,
+                        onChange: (v) {
+                          ref
+                              .read(chainIdControllerProvider.notifier)
+                              .onChange(v);
+                        },
+                        validator: (v) {
+                          return ref
+                              .read(chainIdControllerProvider.notifier)
+                              .onValidate(v);
+                        },
+                      ),
+                      16.0.height,
+                      InputText(
+                        title: "Currency symbol",
+                        controller: ref.watch(symbolChainControllerProvider),
+                        hintText: "Input Currency Symbol",
+                        color: Theme.of(context).colorScheme.background,
+                        onChange: (v) {
+                          ref
+                              .read(symbolChainControllerProvider.notifier)
+                              .onChange(v);
+                        },
+                        validator: (v) {
+                          return ref
+                              .read(symbolChainControllerProvider.notifier)
+                              .onValidate(v);
+                        },
+                      ),
+                      16.0.height,
+                      InputText(
+                        title: "Block Explorer URL",
+                        controller: ref.watch(explorerChainControllerProvider),
+                        hintText: "Input Block Explorer URL",
+                        color: Theme.of(context).colorScheme.background,
+                        onChange: (v) {
+                          ref
+                              .read(explorerChainControllerProvider.notifier)
+                              .onChange(v);
+                        },
+                        validator: (v) {
+                          return ref
+                              .read(explorerChainControllerProvider.notifier)
+                              .onValidate(v);
+                        },
+                      ),
+                    ],
+                  ),
+                  PrimaryButton(
+                    title: "Add",
+                    disable: ref.watch(disableAddTokenProvider),
+                    onPressed: () {
+                      ref.read(chainOtherProvider.notifier).addTokenChain(
+                          TokenChain(
+                              name: ref.watch(nameChainControllerProvider).text,
+                              contractAddress: null,
+                              symbol:
+                                  ref.watch(symbolChainControllerProvider).text,
+                              decimal: 18,
+                              balance: 0,
+                              baseLogo: AppChainLogo.evm,
+                              chainId:
+                                  ref.watch(chainIdControllerProvider).text,
+                              logo: AppChainLogo.evm,
+                              explorer: ref
+                                  .watch(explorerChainControllerProvider)
+                                  .text,
+                              explorerApi: ref
+                                  .watch(explorerChainControllerProvider)
+                                  .text,
+                              baseChain: 'eth',
+                              rpc: ref.watch(rpcChainControllerProvider).text,
+                              isTestnet: false));
+                      MethodHelper().showSnack(
+                          context: context,
+                          content: "Success Add Network",
+                          backgorund: AppColor.greenColor);
+                      context.pop();
+                      context.pop();
+                    },
+                    margin: EdgeInsets.only(top: 16.h),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

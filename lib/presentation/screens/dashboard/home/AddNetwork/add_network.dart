@@ -1,6 +1,8 @@
 // ignore_for_file: unused_result
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -20,11 +22,34 @@ class AddNetwork extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: WidgetHelper.appBar(
-        context: context,
-        title: 'Add Network',
-      ),
+          context: context,
+          title: 'Add Network',
+          icon: GestureDetector(
+            onTap: () {
+              context.goNamed('add_custom_network');
+            },
+            child: Container(
+              width: 36.w,
+              height: 36.w,
+              padding: EdgeInsets.all(4.w),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.r),
+                  border: Border.all(width: 1.w, color: AppColor.grayColor)),
+              child: Icon(
+                Icons.add_rounded,
+                color: AppColor.primaryColor,
+                size: 24.w,
+              ),
+            ),
+          )),
+      // bottomNavigationBar: PrimaryButton(
+      //     margin: EdgeInsets.fromLTRB(24.w, 0, 24.w, 32.h),
+      //     title: "Add Manually",
+      //     onPressed: () {
+      //       context.goNamed('add_custom_network');
+      //     }),
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         child: Column(
           children: [
             SearchField(
@@ -32,46 +57,41 @@ class AddNetwork extends ConsumerWidget {
                   ref.read(chainOtherSearchProvider.notifier).onSearch(v),
             ),
             16.0.height,
-            PrimaryButton(
-                title: "Add Manually",
-                onPressed: () {
-                  context.goNamed('add_custom_network');
-                }),
-            16.0.height,
             Expanded(
-                child: Container(
-              padding: EdgeInsets.all(16.w),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  color: Theme.of(context).cardColor),
-              child: ref.watch(chainOtherProvider).when(
-                data: (data) {
-                  final listChain = ref.watch(chainOtherSearchProvider);
-                  return listChain.isEmpty
-                      ? const Empty(title: "Network not found")
-                      : ListView.builder(
-                          itemBuilder: (context, index) => Padding(
-                            padding: EdgeInsets.only(bottom: 8.h),
-                            child: cardChain(context, listChain[index], ref),
-                          ),
-                          itemCount: listChain.length,
-                        );
-                },
-                error: (Object error, StackTrace stackTrace) {
-                  return ErrorView(
-                    error: error.toString(),
-                    ontap: () {
-                      ref.refresh(chainOtherProvider);
-                    },
-                  );
-                },
-                loading: () {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
+              child: Container(
+                padding: EdgeInsets.all(16.w),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.r),
+                    color: Theme.of(context).cardColor),
+                child: ref.watch(chainOtherProvider).when(
+                  data: (data) {
+                    final listChain = ref.watch(chainOtherSearchProvider);
+                    return listChain.isEmpty
+                        ? const Empty(title: "Network not found")
+                        : ListView.builder(
+                            itemBuilder: (context, index) => Padding(
+                              padding: EdgeInsets.only(bottom: 8.h),
+                              child: cardChain(context, listChain[index], ref),
+                            ),
+                            itemCount: listChain.length,
+                          );
+                  },
+                  error: (Object error, StackTrace stackTrace) {
+                    return ErrorView(
+                      error: error.toString(),
+                      ontap: () {
+                        ref.refresh(chainOtherProvider);
+                      },
+                    );
+                  },
+                  loading: () {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                ),
               ),
-            ))
+            ),
           ],
         ),
       ),
@@ -103,7 +123,7 @@ class AddNetwork extends ConsumerWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(8.r),
             color: Theme.of(context).colorScheme.background),
         child: Column(
           children: [
@@ -133,10 +153,10 @@ class AddNetwork extends ConsumerWidget {
                   padding: EdgeInsets.all(2.w),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2.r),
-                      gradient: tokenChainOrigin.any(
+                      color: tokenChainOrigin.any(
                               (element) => element.chainId == chain.chainId)
-                          ? AppColor.errorGradient
-                          : AppColor.primaryGradient),
+                          ? AppColor.redColor
+                          : AppColor.primaryColor),
                   child: Icon(
                     tokenChainOrigin
                             .any((element) => element.chainId == chain.chainId)
