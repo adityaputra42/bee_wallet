@@ -1,20 +1,17 @@
 import 'dart:math';
 
-import 'package:bee_wallet/presentation/provider/account/account_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../data/model/model.dart';
 import '../../../../../data/model/token_chain/token_chain.dart';
-import '../../../../../data/src/src.dart';
 import '../../../../../utils/util.dart';
 import '../../../../provider/provider.dart';
-import '../../../../widget/widget.dart';
 
 class DetailNftView extends ConsumerStatefulWidget {
   const DetailNftView({super.key});
@@ -36,32 +33,40 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
     BuildContext context,
   ) {
     final nftView = ref.watch(selectedViewNftProvider);
-    final account = ref.watch(selectedAccountProvider).valueOrNull;
-    final chain = ref.watch(tokenChainNftProvider);
-    final pagingController = ref.watch(nftHistoryProvider);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: WidgetHelper.appBar(context: context, title: "Detail NFT"),
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
               children: [
-                Container(
-                  height: 84.h,
-                  width: 84.h,
-                  padding: EdgeInsets.all(6.h),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Theme.of(context).cardColor,
-                  ),
-                  child: ClipOval(
-                    child: Image.memory(
-                      MethodHelper()
-                          .convertBase64ToUint8List(nftView.image ?? ''),
-                      fit: BoxFit.cover,
+                SizedBox(
+                  width: 84.w,
+                  height: 84.w,
+                  child: ClipPolygon(
+                    sides: 6,
+                    child: Container(
+                      padding: EdgeInsets.all(6.h),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                      ),
+                      child: ClipPolygon(
+                        sides: 6,
+                        child: Container(
+                          padding: EdgeInsets.all(1.h),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).cardColor,
+                          ),
+                          child: Image.memory(
+                            MethodHelper()
+                                .convertBase64ToUint8List(nftView.image ?? ''),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -110,134 +115,27 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
             ),
             16.0.height,
             Expanded(
-                child: DefaultTabController(
-              length: 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
+              child: Container(
+                padding: EdgeInsets.all(16.w),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.r),
+                  color: Theme.of(context).cardColor,
+                ),
+                child: SingleChildScrollView(
+                  child: SizedBox(
                     width: double.infinity,
-                    height: 54.h,
-                    padding: EdgeInsets.all(4.w),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
-                      color: Theme.of(context).cardColor,
-                    ),
-                    child: TabBar(
-                      automaticIndicatorColorAdjustment: false,
-                      indicator: BoxDecoration(
-                          gradient: AppColor.primaryGradient,
-                          borderRadius: BorderRadius.circular(8.r)),
-                      isScrollable: false,
-                      dividerColor: Theme.of(context).cardColor,
-                      indicatorColor: Theme.of(context).cardColor,
-                      labelColor: AppColor.textStrongDark,
-                      labelPadding: EdgeInsets.zero,
-                      labelStyle: AppFont.medium14,
-                      unselectedLabelColor: AppColor.grayColor,
-                      unselectedLabelStyle: AppFont.reguler14,
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      onTap: (index) {},
-                      tabs: const [
-                        Tab(
-                          child: Center(
-                            child: Text(
-                              "Items",
-                            ),
-                          ),
-                        ),
-                        Tab(
-                          child: Center(
-                            child: Text(
-                              "Activity",
-                            ),
-                          ),
-                        ),
-                      ],
+                    child: Wrap(
+                      spacing: 12.h,
+                      runSpacing: 12.h,
+                      children: List.generate(
+                          nftView.listNft!.length,
+                          (index) =>
+                              cardNft(nftView.listNft![index], context, ref)),
                     ),
                   ),
-                  8.0.height,
-                  Expanded(
-                      child: Container(
-                    padding: EdgeInsets.all(16.w),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.r),
-                        color: Theme.of(context).cardColor),
-                    child: TabBarView(children: [
-                      SingleChildScrollView(
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: Wrap(
-                            spacing: 12.h,
-                            runSpacing: 12.h,
-                            children: List.generate(
-                                nftView.listNft!.length,
-                                (index) => cardNft(
-                                    nftView.listNft![index], context, ref)),
-                          ),
-                        ),
-                      ),
-                      RefreshIndicator(
-                        color: AppColor.primaryColor,
-                        backgroundColor: Theme.of(context).indicatorColor,
-                        onRefresh: () async => pagingController.refresh(),
-                        child: PagedListView<int, Activity>(
-                          pagingController: pagingController,
-                          builderDelegate: PagedChildBuilderDelegate<Activity>(
-                            firstPageProgressIndicatorBuilder: (context) =>
-                                const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                            noItemsFoundIndicatorBuilder: (context) =>
-                                const Empty(
-                              title: "No transactions found",
-                            ),
-                            firstPageErrorIndicatorBuilder: (context) => Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Image.asset(
-                                  AppImage.trouble,
-                                  width: 200.w,
-                                ),
-                                16.0.height,
-                                Text(
-                                  "Oops...",
-                                  style: AppFont.semibold24.copyWith(
-                                      color: Theme.of(context).indicatorColor),
-                                  textAlign: TextAlign.center,
-                                ),
-                                .0.height,
-                                Text(
-                                  "Error : ${pagingController.error}",
-                                  style: AppFont.reguler14.copyWith(
-                                      color: Theme.of(context).hintColor),
-                                  textAlign: TextAlign.center,
-                                ),
-                                24.0.height,
-                                PrimaryButton(
-                                  title: "Try Again",
-                                  height: 42,
-                                  onPressed: () {
-                                    pagingController.refresh();
-                                  },
-                                  margin:
-                                      EdgeInsets.symmetric(horizontal: 64.w),
-                                )
-                              ],
-                            ),
-                            itemBuilder: (context, item, index) => cardActivity(
-                                context: context,
-                                activity: item,
-                                address: account?.addressETH ?? "",
-                                chain: chain),
-                          ),
-                        ),
-                      )
-                    ]),
-                  ))
-                ],
+                ),
               ),
-            ))
+            )
           ],
         ),
       ),
@@ -338,10 +236,10 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
           children: [
             Expanded(
                 child: Padding(
-              padding: EdgeInsets.all(6.h),
+              padding: EdgeInsets.all(8.h),
               child: ClipRRect(
                 borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(8.r),
+                  top: Radius.circular(6.r),
                   bottom: Radius.circular(4.r),
                 ),
                 child: Image.memory(

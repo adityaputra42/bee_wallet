@@ -1,4 +1,6 @@
+import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -7,7 +9,6 @@ import '../../../../config/config.dart';
 import '../../../../utils/util.dart';
 import '../../../provider/account/account_provider.dart';
 import '../../../provider/theme/theme_provider.dart';
-import '../../../widget/widget.dart';
 import 'changePin/sheet_password_change_pin.dart';
 
 class SettingScreen extends ConsumerWidget {
@@ -21,14 +22,81 @@ class SettingScreen extends ConsumerWidget {
       appBar: WidgetHelper.appBar(
           context: context, title: "Setting", isCanBack: false),
       body: Container(
-        margin: EdgeInsets.all(16.w),
+        margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(8.r),
             color: Theme.of(context).cardColor),
         child: ListView(
           children: [
-            account?.backup == true ? const SizedBox() : warningBackUp(context),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 54.w,
+                  height: 54.w,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border:
+                          Border.all(width: 1.w, color: AppColor.primaryColor)),
+                  child: Center(
+                    child: Blockies(
+                        size: 0.7,
+                        data: account?.addressETH ?? '-',
+                        shape: BlockiesShape.circle),
+                  ),
+                ),
+                16.0.width,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        account?.name ?? '',
+                        style: AppFont.semibold18.copyWith(
+                          color: Theme.of(context).indicatorColor,
+                        ),
+                      ),
+                      2.0.height,
+                      Text(
+                        'EVM : ${MethodHelper().shortAddress(address: account?.addressETH ?? '', length: 5)}',
+                        style: AppFont.reguler14.copyWith(
+                          color: Theme.of(context).hintColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6.r),
+                    color: account?.backup == true
+                        ? AppColor.greenColor
+                        : AppColor.yellowColor,
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        account?.backup == true
+                            ? Icons.check_circle_outline_rounded
+                            : Icons.error_outline_outlined,
+                        size: 16.w,
+                        color: AppColor.textStrongDark,
+                      ),
+                      4.0.width,
+                      Text(
+                        account?.backup == true ? "Backuped" : "No Backup",
+                        style: AppFont.reguler12
+                            .copyWith(color: AppColor.textStrongDark),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            24.0.height,
             cardSettingSecurity(context, ref),
             16.0.height,
             cardSettingUmum(context, ref),
@@ -80,7 +148,7 @@ class SettingScreen extends ConsumerWidget {
     var isDark = ref.watch(darkThemeProvider);
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(8.r),
           color: Theme.of(context).colorScheme.background),
       child: Column(
         children: [
@@ -171,95 +239,14 @@ class SettingScreen extends ConsumerWidget {
     final account = ref.watch(selectedAccountProvider).valueOrNull;
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(8.r),
           color: Theme.of(context).colorScheme.background),
       child: Column(
         children: [
-          cardMenu(context,
-              title: "Backup this Wallet",
-              widget: account?.backup == true
-                  ? Row(
-                      children: [
-                        Text(
-                          "Backuped",
-                          style: AppFont.reguler10
-                              .copyWith(color: AppColor.primaryColor),
-                        ),
-                        8.0.width,
-                        Container(
-                          width: 20.w,
-                          height: 4.h,
-                          decoration: BoxDecoration(
-                              gradient: AppColor.primaryGradient,
-                              borderRadius: BorderRadius.horizontal(
-                                  left: Radius.circular(2.r))),
-                        ),
-                        2.0.width,
-                        Container(
-                          width: 20.w,
-                          height: 4.h,
-                          decoration: const BoxDecoration(
-                            gradient: AppColor.primaryGradient,
-                          ),
-                        ),
-                        2.0.width,
-                        Container(
-                          width: 20.w,
-                          height: 4.h,
-                          decoration: BoxDecoration(
-                              gradient: AppColor.primaryGradient,
-                              borderRadius: BorderRadius.horizontal(
-                                  right: Radius.circular(2.r))),
-                        ),
-                      ],
-                    )
-                  : GestureDetector(
-                      onTap: () {
-                        context.goNamed('backup_setting');
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            "Backup Now",
-                            style: AppFont.reguler10
-                                .copyWith(color: AppColor.primaryColor),
-                          ),
-                          8.0.width,
-                          Container(
-                            width: 20.w,
-                            height: 4.h,
-                            decoration: BoxDecoration(
-                                gradient: AppColor.primaryGradient,
-                                borderRadius: BorderRadius.horizontal(
-                                    left: Radius.circular(2.r))),
-                          ),
-                          2.0.width,
-                          Container(
-                            width: 20.w,
-                            height: 4.h,
-                            decoration:
-                                const BoxDecoration(color: AppColor.grayColor
-                                    // gradient: AppColor.primaryGradient,
-                                    ),
-                          ),
-                          2.0.width,
-                          Container(
-                            width: 20.w,
-                            height: 4.h,
-                            decoration: BoxDecoration(
-                                color: AppColor.grayColor,
-                                borderRadius: BorderRadius.horizontal(
-                                    right: Radius.circular(2.r))),
-                          ),
-                          8.0.width,
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: Theme.of(context).hintColor,
-                            size: 16.w,
-                          )
-                        ],
-                      ),
-                    )),
+          cardMenu(
+            context,
+            title: "Backup this Wallet",
+          ),
           SizedBox(
             width: double.infinity,
             height: 1.w,
@@ -311,45 +298,6 @@ class SettingScreen extends ConsumerWidget {
                 ),
           ],
         ),
-      ),
-    );
-  }
-
-  Container warningBackUp(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
-      width: double.infinity,
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
-          color: AppColor.yellowColor.withOpacity(0.2)),
-      child: Column(
-        children: [
-          Icon(
-            Icons.error_rounded,
-            color: AppColor.yellowColor,
-            size: 32.w,
-          ),
-          8.0.height,
-          Text(
-            'Your Wallet is not backed up!',
-            style: AppFont.medium14
-                .copyWith(color: Theme.of(context).indicatorColor),
-          ),
-          4.0.height,
-          Text(
-            'Remeber to backup your wallet by a secure seed phrase.',
-            style:
-                AppFont.reguler12.copyWith(color: Theme.of(context).hintColor),
-            textAlign: TextAlign.center,
-          ),
-          16.0.height,
-          PrimaryButton(
-              title: "Backup Wallet",
-              onPressed: () {
-                context.goNamed('backup_setting');
-              })
-        ],
       ),
     );
   }

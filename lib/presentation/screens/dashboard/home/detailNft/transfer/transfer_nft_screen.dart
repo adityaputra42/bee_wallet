@@ -2,15 +2,17 @@
 
 import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
 import 'package:bee_wallet/utils/util.dart';
+import 'package:go_router/go_router.dart';
+import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
+import 'package:iconify_flutter_plus/icons/ant_design.dart';
 
 import '../../../../../../config/config.dart';
-import '../../../../../../data/src/src.dart';
 import '../../../../../widget/widget.dart';
-import 'sheet_confirmation_nft.dart';
 
 class TransferNftScreen extends ConsumerWidget {
   const TransferNftScreen({super.key});
@@ -23,7 +25,7 @@ class TransferNftScreen extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: WidgetHelper.appBar(context: context, title: "Tranfer NFT"),
       body: Container(
-        margin: EdgeInsets.all(16.w),
+        margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
@@ -51,13 +53,31 @@ class TransferNftScreen extends ConsumerWidget {
                             color: Theme.of(context).colorScheme.background),
                         child: Row(
                           children: [
-                            ClipOval(
-                              child: Image.memory(
-                                MethodHelper().convertBase64ToUint8List(
-                                    nft.imageByte ?? ''),
-                                fit: BoxFit.cover,
-                                width: 42.w,
-                                height: 42.w,
+                            SizedBox(
+                              width: 48.w,
+                              height: 48.w,
+                              child: ClipPolygon(
+                                sides: 6,
+                                child: Container(
+                                  padding: EdgeInsets.all(2.h),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).cardColor,
+                                  ),
+                                  child: ClipPolygon(
+                                    sides: 6,
+                                    child: Container(
+                                      padding: EdgeInsets.all(1.h),
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context).cardColor,
+                                      ),
+                                      child: Image.memory(
+                                        MethodHelper().convertBase64ToUint8List(
+                                            nft.imageByte ?? ''),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                             8.0.width,
@@ -137,10 +157,6 @@ class TransferNftScreen extends ConsumerWidget {
                       16.0.height,
                       InputText(
                         title: "To",
-                        crossTitle: Image.asset(
-                          AppIcon.scan,
-                          width: 24.w,
-                        ),
                         onChange: (v) =>
                             ref.read(receiveNftProvider.notifier).onChange(v),
                         validator: (v) =>
@@ -153,13 +169,12 @@ class TransferNftScreen extends ConsumerWidget {
                           children: [
                             8.0.width,
                             GestureDetector(
-                              onTap: () async {},
-                              child: Text(
-                                'Paste',
-                                style: AppFont.reguler12
-                                    .copyWith(color: AppColor.primaryColor),
-                              ),
-                            ),
+                                onTap: () async {},
+                                child: Iconify(
+                                  AntDesign.scan,
+                                  size: 24.w,
+                                  color: AppColor.primaryColor,
+                                )),
                           ],
                         ),
                       ),
@@ -167,7 +182,6 @@ class TransferNftScreen extends ConsumerWidget {
                       Warning(
                         warning:
                             'Please ensure that the receive address supports the ${token.baseChain == 'eth' ? 'ERC-721' : token.baseChain == 'sol' ? 'Solana' : token.baseChain == 'tron' ? 'TRC20' : 'BRC20'}',
-                        color: Theme.of(context).hintColor,
                       ),
                     ],
                   ),
@@ -180,16 +194,7 @@ class TransferNftScreen extends ConsumerWidget {
                             .read(networkFeeNftProvider.notifier)
                             .getNetworkFee();
                         ref.watch(networkFeeNftProvider);
-                        showModalBottomSheet(
-                            context: context,
-                            builder: (context) => const SheetConfirmationNft(),
-                            backgroundColor:
-                                Theme.of(context).colorScheme.background,
-                            showDragHandle: true,
-                            isDismissible: false,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(16.r))));
+                       context.goNamed('confirm_transfer_nft');
                       })
                 ],
               ),

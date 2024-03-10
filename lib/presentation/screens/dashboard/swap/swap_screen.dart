@@ -20,8 +20,11 @@ class SwapScreen extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: WidgetHelper.appBar(
           context: context, title: "Swap", isCanBack: false),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+      body: Container(
+        margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),padding: EdgeInsets.all(16.w),
+        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.r),
+                            color: Theme.of(context).cardColor),
         child: Column(
           children: [
             SizedBox(
@@ -36,7 +39,7 @@ class SwapScreen extends ConsumerWidget {
                         padding: EdgeInsets.fromLTRB(16.w, 16.w, 16.w, 28.w),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.r),
-                            color: Theme.of(context).cardColor),
+                            color: Theme.of(context).colorScheme.background),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -178,7 +181,7 @@ class SwapScreen extends ConsumerWidget {
                         padding: EdgeInsets.fromLTRB(16.w, 24.w, 16.w, 16.w),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.r),
-                            color: Theme.of(context).cardColor),
+                            color: Theme.of(context).colorScheme.background),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -342,7 +345,7 @@ class SwapScreen extends ConsumerWidget {
               padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.r),
-                  color: Theme.of(context).cardColor),
+                  color: Theme.of(context).colorScheme.background),
               child: Column(
                 children: [
                   Row(

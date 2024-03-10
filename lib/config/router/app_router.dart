@@ -1,6 +1,7 @@
 import 'package:bee_wallet/presentation/screens/auth/pin/confirm_pin_screen.dart';
 import 'package:bee_wallet/presentation/screens/auth/pin/create_pin_screen.dart';
 import 'package:bee_wallet/presentation/screens/auth/succes/success_create_wallet.dart';
+import 'package:bee_wallet/presentation/screens/dashboard/home/detailNft/transfer/confirmation_transfer_nft.dart';
 import 'package:bee_wallet/presentation/screens/dashboard/home/transfer/confirm_transfer_chain.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -253,11 +254,18 @@ GoRouter appRoute(AppRouteRef ref) {
                                 const TransferNftScreen(),
                             routes: [
                               GoRoute(
-                                path: 'custom_gas_fee_nft',
-                                name: 'custom_gas_fee_nft',
-                                builder: (context, state) =>
-                                    const CustomGasFeeNFT(),
-                              ),
+                                  path: 'confirm_transfer_nft',
+                                  name: 'confirm_transfer_nft',
+                                  builder: (context, state) =>
+                                      const ConfrimTransferNft(),
+                                  routes: [
+                                    GoRoute(
+                                      path: 'custom_gas_fee_nft',
+                                      name: 'custom_gas_fee_nft',
+                                      builder: (context, state) =>
+                                          const CustomGasFeeNFT(),
+                                    ),
+                                  ]),
                             ]),
                       ]),
                 ]),

@@ -7,10 +7,11 @@ import '../../config/config.dart';
 class Numpadcustom extends StatelessWidget {
   final TextEditingController controller;
   final Function delete;
-
+  final double? height;
   const Numpadcustom({
     super.key,
     required this.controller,
+    this.height,
     required this.delete,
   });
 
@@ -28,16 +29,19 @@ class Numpadcustom extends StatelessWidget {
               NumbButton(
                 number: 1,
                 controller: controller,
+                height: height,
               ),
               12.0.width,
               NumbButton(
                 number: 2,
                 controller: controller,
+                height: height,
               ),
               12.0.width,
               NumbButton(
                 number: 3,
                 controller: controller,
+                height: height,
               ),
             ],
           ),
@@ -47,16 +51,19 @@ class Numpadcustom extends StatelessWidget {
               NumbButton(
                 number: 4,
                 controller: controller,
+                height: height,
               ),
               12.0.width,
               NumbButton(
                 number: 5,
                 controller: controller,
+                height: height,
               ),
               12.0.width,
               NumbButton(
                 number: 6,
                 controller: controller,
+                height: height,
               ),
             ],
           ),
@@ -66,16 +73,19 @@ class Numpadcustom extends StatelessWidget {
               NumbButton(
                 number: 7,
                 controller: controller,
+                height: height,
               ),
               12.0.width,
               NumbButton(
                 number: 8,
                 controller: controller,
+                height: height,
               ),
               12.0.width,
               NumbButton(
                 number: 9,
                 controller: controller,
+                height: height,
               ),
             ],
           ),
@@ -84,7 +94,7 @@ class Numpadcustom extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                    height: 60.h,
+                    height: height ?? 60.h,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.r),
                         color: Theme.of(context).cardColor),
@@ -102,12 +112,13 @@ class Numpadcustom extends StatelessWidget {
               12.0.width,
               NumbButton(
                 number: 0,
+                height: height,
                 controller: controller,
               ),
               12.0.width,
               Expanded(
                 child: Container(
-                    height: 60.h,
+                    height: height ?? 60.h,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.r),
                         color: Theme.of(context).cardColor),
@@ -132,9 +143,11 @@ class Numpadcustom extends StatelessWidget {
 class NumbButton extends StatelessWidget {
   final int number;
   final TextEditingController controller;
+  final double? height;
   const NumbButton({
     super.key,
     required this.number,
+    this.height,
     required this.controller,
   });
 
@@ -142,7 +155,7 @@ class NumbButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        height: 60.h,
+        height: height ?? 60.h,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
             color: Theme.of(context).cardColor),
@@ -153,8 +166,8 @@ class NumbButton extends StatelessWidget {
             child: Center(
               child: Text(
                 number.toString(),
-                style: AppFont.medium24
-                    .copyWith(color: Theme.of(context).indicatorColor),
+                style: AppFont.medium24.copyWith(
+                    color: Theme.of(context).indicatorColor, fontSize: 20.sp),
               ),
             )),
       ),

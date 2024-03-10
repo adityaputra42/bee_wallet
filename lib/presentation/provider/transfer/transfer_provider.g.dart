@@ -197,7 +197,7 @@ final transferLoadingProvider =
 );
 
 typedef _$TransferLoading = AutoDisposeNotifier<bool>;
-String _$transferChainHash() => r'7026155d8688de440cfdbc656b4632613de3f066';
+String _$transferChainHash() => r'55149bf84ca026d478e92c0f7a069bbdf65c40e8';
 
 /// See also [TransferChain].
 @ProviderFor(TransferChain)

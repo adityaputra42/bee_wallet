@@ -7,10 +7,10 @@ class AppColor {
   static const Color yellowColor = Color(0xffF7931A);
   static const Color redColor = Color(0xffF25252);
   static const Color secondRedColor = Color(0xffEE9F91);
-  static const Color greenColor = Color(0xff00A070);
+  static const Color greenColor = Color(0xff33D49D);
 
   // Ligth Mode
-  static const Color bgLight = Color(0xffF3F7FF);
+  static const Color bgLight = Color(0xffF0F0FF);
   static const Color cardLight = Color(0xffFFFFFF);
   static const Color textStrongLight = Color(0xff2A2A42);
   static const Color textSoftLight = Color(0xff596780);

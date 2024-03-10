@@ -18,10 +18,10 @@ class ShowParse extends ConsumerWidget {
       appBar: WidgetHelper.appBar(context: context, title: 'Seed Pharse'),
       body: Container(
         width: double.infinity,
-        margin: EdgeInsets.all(16.w),
+        margin: EdgeInsets.symmetric(horizontal: 24.w,vertical: 16.h),
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(8.r),
             color: Theme.of(context).cardColor),
         child: Column(
           children: [
@@ -34,7 +34,7 @@ class ShowParse extends ConsumerWidget {
             const Spacer(),
             Image.asset(
               AppImage.logo,
-              width: 225.w,
+              width: 160.w,
             ),
             16.0.height,
             Text(

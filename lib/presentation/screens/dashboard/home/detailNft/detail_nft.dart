@@ -20,9 +20,9 @@ class DetailNft extends ConsumerWidget {
       appBar: WidgetHelper.appBar(context: context, title: "Detail NFT"),
       body: Container(
         padding: EdgeInsets.all(16.w),
-        margin: EdgeInsets.all(16.w),
+        margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(8.r),
             color: Theme.of(context).cardColor),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +31,7 @@ class DetailNft extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(8.r),
+                  borderRadius: BorderRadius.circular(6.r),
                   child: Image.memory(
                     MethodHelper()
                         .convertBase64ToUint8List(nft.imageByte ?? ''),

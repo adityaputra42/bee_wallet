@@ -2,9 +2,10 @@ import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
+import 'package:iconify_flutter_plus/icons/mdi.dart';
 
 import '../../../../../config/config.dart';
-import '../../../../../data/src/src.dart';
 import '../../../../widget/widget.dart';
 import 'sheet_password_add_wallet.dart';
 
@@ -14,7 +15,7 @@ class SheetAddWallet extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 24.h),
+      padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 24.h),
       child: Column(
         children: [
           Text(
@@ -42,23 +43,23 @@ class SheetAddWallet extends ConsumerWidget {
             },
             child: Container(
               width: double.infinity,
-              padding: EdgeInsets.all(16.w),
+              padding: EdgeInsets.all(12.w),
               decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
-                  borderRadius: BorderRadius.circular(12.r)),
+                  borderRadius: BorderRadius.circular(8.r)),
               child: Row(
                 children: [
                   Container(
-                    width: 32.w,
-                    height: 32.w,
+                    width: 42.w,
+                    height: 42.w,
                     padding: EdgeInsets.all(8.r),
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: AppColor.primaryGradient),
-                    child: Image.asset(
-                      AppIcon.walletIcon,
-                      width: 16.w,
-                      color: AppColor.textStrongDark,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6.r),
+                        color: Theme.of(context).colorScheme.background),
+                    child: Iconify(
+                      Mdi.wallet_outline,
+                      color: AppColor.primaryColor,
+                      size: 28.w,
                     ),
                   ),
                   16.0.width,
@@ -68,7 +69,7 @@ class SheetAddWallet extends ConsumerWidget {
                       children: [
                         Text(
                           "Create New Wallet",
-                          style: AppFont.medium14
+                          style: AppFont.semibold14
                               .copyWith(color: AppColor.primaryColor),
                         ),
                         4.0.height,
@@ -103,23 +104,23 @@ class SheetAddWallet extends ConsumerWidget {
             },
             child: Container(
               width: double.infinity,
-              padding: EdgeInsets.all(16.w),
+              padding: EdgeInsets.all(12.w),
               decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
-                  borderRadius: BorderRadius.circular(12.r)),
+                  borderRadius: BorderRadius.circular(8.r)),
               child: Row(
                 children: [
-                  Container(
-                    width: 32.w,
-                    height: 32.w,
+                   Container(
+                    width: 42.w,
+                    height: 42.w,
                     padding: EdgeInsets.all(8.r),
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: AppColor.primaryGradient),
-                    child: Image.asset(
-                      AppIcon.walletIcon,
-                      width: 16.w,
-                      color: AppColor.textStrongDark,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6.r),
+                        color: Theme.of(context).colorScheme.background),
+                    child: Iconify(
+                      Mdi.wallet_outline,
+                      color: AppColor.primaryColor,
+                      size: 28.w,
                     ),
                   ),
                   16.0.width,
@@ -129,7 +130,7 @@ class SheetAddWallet extends ConsumerWidget {
                       children: [
                         Text(
                           "Import Wallet",
-                          style: AppFont.medium14
+                          style: AppFont.semibold14
                               .copyWith(color: AppColor.primaryColor),
                         ),
                         4.0.height,

@@ -417,7 +417,7 @@ class TransferNft extends _$TransferNft {
         await DbHelper.instance.deleteNFT(nft.id!);
         ref.read(listNftProvider.notifier).initializeNFt();
         state = true;
-        context.pop();
+       
         context.goNamed('transaction_nft_success');
       } else {
         MethodHelper().showSnack(

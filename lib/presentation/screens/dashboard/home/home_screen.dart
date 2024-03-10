@@ -1,9 +1,11 @@
+import 'package:bee_wallet/presentation/screens/dashboard/home/changeAccount/change_account_screen.dart';
 import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/ant_design.dart';
+import 'package:iconify_flutter_plus/icons/ic.dart';
 import '../../../../config/config.dart';
 import '../../../../utils/util.dart';
 import '../../../provider/account/account_provider.dart';
@@ -46,23 +48,49 @@ class HomeScreen extends ConsumerWidget {
                 ),
                 12.0.width,
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        account?.name ?? '',
-                        style: AppFont.semibold14.copyWith(
-                          color: Theme.of(context).indicatorColor,
+                  child: GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) => const ChangeAccountScreen(),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.background,
+                          showDragHandle: true,
+                          isDismissible: false,
+                          isScrollControlled: true,
+                          useSafeArea: true,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(16.r))));
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              account?.name ?? '',
+                              style: AppFont.semibold14.copyWith(
+                                color: Theme.of(context).indicatorColor,
+                              ),
+                            ),
+                            4.0.width,
+                            Iconify(
+                              Ic.round_expand_more,
+                              size: 24.w,
+                              color: Theme.of(context).indicatorColor,
+                            )
+                          ],
                         ),
-                      ),
-                      2.0.height,
-                      Text(
-                        'EVM : ${MethodHelper().shortAddress(address: account?.addressETH ?? '', length: 5)}',
-                        style: AppFont.reguler12.copyWith(
-                          color: Theme.of(context).hintColor,
+                        2.0.height,
+                        Text(
+                          'EVM : ${MethodHelper().shortAddress(address: account?.addressETH ?? '', length: 5)}',
+                          style: AppFont.reguler12.copyWith(
+                            color: Theme.of(context).hintColor,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 GestureDetector(

@@ -4,11 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bee_wallet/presentation/provider/account/account_provider.dart';
-import 'package:bee_wallet/presentation/provider/backup/backup_provider.dart';
 import 'package:bee_wallet/utils/util.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../data/model/account/account.dart';
+import '../../../../provider/backup/backup_provider.dart';
 import '../../../../widget/widget.dart';
 import '../add_account/sheet_add_wallet.dart';
 
@@ -19,43 +19,46 @@ class ChangeAccountScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final accountList = ref.watch(accountListProvider).valueOrNull ?? [];
     return Padding(
-      padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 24.h),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            "My Wallet",
-            style: AppFont.medium16
-                .copyWith(color: Theme.of(context).indicatorColor),
-            textAlign: TextAlign.center,
-          ),
-          16.0.height,
-          Expanded(
-              child: Padding(
-            padding: EdgeInsets.only(bottom: 16.h),
-            child: ListView.builder(
-              itemBuilder: (context, index) => Padding(
-                padding: EdgeInsets.only(bottom: 16.h),
-                child: cardAccount(
-                    context: context, ref: ref, account: accountList[index]),
-              ),
-              itemCount: accountList.length,
+      padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 24.h),
+      child: SizedBox(
+        height: MediaQuery.sizeOf(context).height * 0.6,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "My Account",
+              style: AppFont.medium16
+                  .copyWith(color: Theme.of(context).indicatorColor),
+              textAlign: TextAlign.center,
             ),
-          )),
-          PrimaryButton(
-              title: "Add Wallet",
-              onPressed: () {
-                Navigator.pop(context);
-                showModalBottomSheet(
-                    context: context,
-                    builder: (context) => const SheetAddWallet(),
-                    backgroundColor: Theme.of(context).colorScheme.background,
-                    showDragHandle: true,
-                    shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(16.r))));
-              })
-        ],
+            16.0.height,
+            Expanded(
+                child: Padding(
+              padding: EdgeInsets.only(bottom: 16.h),
+              child: ListView.builder(
+                itemBuilder: (context, index) => Padding(
+                  padding: EdgeInsets.only(bottom: 16.h),
+                  child: cardAccount(
+                      context: context, ref: ref, account: accountList[index]),
+                ),
+                itemCount: accountList.length,
+              ),
+            )),
+            PrimaryButton(
+                title: "Add Wallet",
+                onPressed: () {
+                  Navigator.pop(context);
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) => const SheetAddWallet(),
+                      backgroundColor: Theme.of(context).colorScheme.background,
+                      showDragHandle: true,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(16.r))));
+                })
+          ],
+        ),
       ),
     );
   }
@@ -72,9 +75,9 @@ class ChangeAccountScreen extends ConsumerWidget {
         context.pop();
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 12.h),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(8.r),
             border: Border.all(
                 width: 1.w,
                 color: account.mnemonic == selectedAccount?.mnemonic
@@ -86,7 +89,6 @@ class ChangeAccountScreen extends ConsumerWidget {
             Container(
               width: 42.w,
               height: 42.w,
-              // padding: EdgeInsets.all(3.h),
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(width: 1.w, color: AppColor.primaryColor)),
@@ -120,49 +122,54 @@ class ChangeAccountScreen extends ConsumerWidget {
             ),
             account.backup == true
                 ? const SizedBox()
-                : GestureDetector(onTap: () {
-                  ref.read(accountBackupProvider.notifier).changeAccount(account);
-                  ref.watch(accountBackupProvider);
-                  context.goNamed('backup_setting');
-                },
-                  child: Container(
+                : GestureDetector(
+                    onTap: () {
+                      ref
+                          .read(accountBackupProvider.notifier)
+                          .changeAccount(account);
+                      ref.watch(accountBackupProvider);
+                      context.goNamed('backup_setting');
+                    },
+                    child: Container(
                       padding:
-                          EdgeInsets.symmetric(vertical: 4.h, horizontal: 8.w),
+                          EdgeInsets.symmetric(vertical: 6.h, horizontal: 8.w),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6.r),
-                          gradient: AppColor.primaryGradient),
+                        borderRadius: BorderRadius.circular(4.r),
+                        border:
+                            Border.all(width: 1.w, color: AppColor.yellowColor),
+                      ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
                             "No Backup",
                             style: AppFont.medium12
-                                .copyWith(color: AppColor.textStrongDark),
+                                .copyWith(color: AppColor.yellowColor),
                           ),
                           4.0.width,
                           Icon(
-                            Icons.error_rounded,
+                            Icons.error_outline_rounded,
                             size: 16.w,
-                            color: AppColor.textStrongDark,
+                            color: AppColor.yellowColor,
                           ),
                         ],
                       ),
                     ),
-                ),
-            4.0.width,
-            GestureDetector(
-              onTap: () {
-                ref
-                    .read(accountSelectedEditProvider.notifier)
-                    .selectEditAccount(account);
-                ref.watch(accountSelectedEditProvider);
+                  ),
+            // 4.0.width,
+            // GestureDetector(
+            //   onTap: () {
+            //     ref
+            //         .read(accountSelectedEditProvider.notifier)
+            //         .selectEditAccount(account);
+            //     ref.watch(accountSelectedEditProvider);
 
-                context.pop();
-                context.goNamed('detail_wallet');
-              },
-              child: Icon(Icons.more_vert_rounded,
-                  size: 24.w, color: AppColor.primaryColor),
-            )
+            //     context.pop();
+            //     context.goNamed('detail_wallet');
+            //   },
+            //   child: Icon(Icons.more_vert_rounded,
+            //       size: 24.w, color: AppColor.primaryColor),
+            // )
           ],
         ),
       ),

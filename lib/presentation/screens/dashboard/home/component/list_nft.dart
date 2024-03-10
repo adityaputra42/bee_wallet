@@ -157,7 +157,7 @@ class ListNft extends ConsumerWidget {
                         width: 120,
                       )
                     : ListView.builder(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                     
                         itemBuilder: (context, index) => Padding(
                           padding: EdgeInsets.only(bottom: 12.h),
                           child: cardNft(context, nftViews[index], ref),
@@ -203,26 +203,41 @@ class ListNft extends ConsumerWidget {
             color: Theme.of(context).colorScheme.background),
         child: Row(
           children: [
+
             SizedBox(
-              width: 36.w,
-              height: 36.w,
-              child: ClipPolygon(
-                sides: 6,
-                child: Container(
-                  padding: EdgeInsets.all(0.5.h),
-                  color: Theme.of(context).colorScheme.background,
-                  child: Image.memory(
-                    MethodHelper().convertBase64ToUint8List(nft.image ?? ''),
-                    fit: BoxFit.cover,
+                  width: 42.w,
+                  height: 42.w,
+                  child: ClipPolygon(
+                    sides: 6,
+                    child: Container(
+                      padding: EdgeInsets.all(2.h),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                      ),
+                      child: ClipPolygon(
+                        sides: 6,
+                        child: Container(
+                          padding: EdgeInsets.all(1.h),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).cardColor,
+                          ),
+                          child: Image.memory(
+                            MethodHelper()
+                                .convertBase64ToUint8List(nft.image ?? ''),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
+         
+            // ),
             8.0.width,
             Expanded(
               child: Text(
                 nft.name ?? "",
-                style: AppFont.medium14
+                style: AppFont.medium16
                     .copyWith(color: Theme.of(context).indicatorColor),
                 overflow: TextOverflow.ellipsis,
               ),
@@ -232,7 +247,7 @@ class ListNft extends ConsumerWidget {
               "${nft.length} Items",
               style: AppFont.medium14.copyWith(
                   fontFamily: "Roboto",
-                  color: Theme.of(context).indicatorColor),
+                  color: Theme.of(context).hintColor),
             )
           ],
         ),
