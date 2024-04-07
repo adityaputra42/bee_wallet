@@ -35,15 +35,15 @@ class SettingScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  width: 54.w,
-                  height: 54.w,
+                  width: 48.w,
+                  height: 48.w,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border:
                           Border.all(width: 1.w, color: AppColor.primaryColor)),
                   child: Center(
                     child: Blockies(
-                        size: 0.76,
+                        size: 0.68,
                         data: account?.addressETH ?? '-',
                         shape: BlockiesShape.circle),
                   ),
@@ -174,7 +174,9 @@ class SettingScreen extends ConsumerWidget {
               widget: FlutterSwitch(
                 width: 42.w,
                 height: 20.h,
-                toggleColor: Theme.of(context).canvasColor,
+                toggleColor: isDark
+                    ? AppColor.textStrongDark
+                    : Theme.of(context).canvasColor,
                 activeColor: AppColor.primaryColor,
                 inactiveColor: Theme.of(context).cardColor,
                 valueFontSize: 20.0,

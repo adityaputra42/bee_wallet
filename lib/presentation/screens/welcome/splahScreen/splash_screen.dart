@@ -42,7 +42,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             duration: const Duration(seconds: 2),
             child: Image.asset(
               AppImage.logo,
-              width: 120.w,
+              height: 120.w,
             ),
           ),
         ),

@@ -122,7 +122,7 @@ class HomeScreen extends ConsumerWidget {
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 24.w),
                 width: double.infinity,
-                height: 54.h,
+                height: 48.h,
                 padding: EdgeInsets.all(3.w),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.r),
@@ -132,11 +132,11 @@ class HomeScreen extends ConsumerWidget {
                   automaticIndicatorColorAdjustment: false,
                   indicator: BoxDecoration(
                       color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(6.r)),
+                      borderRadius: BorderRadius.circular(5.r)),
                   isScrollable: false,
                   dividerColor: Theme.of(context).colorScheme.background,
                   indicatorColor: Theme.of(context).colorScheme.background,
-                  labelColor: AppColor.textStrongDark,
+                  labelColor: AppColor.textStrongLight,
                   labelPadding: EdgeInsets.zero,
                   labelStyle: AppFont.medium16,
                   unselectedLabelColor: AppColor.grayColor,

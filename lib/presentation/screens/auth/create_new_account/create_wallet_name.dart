@@ -20,9 +20,12 @@ class CreateWalletName extends ConsumerWidget {
           disable: ref.watch(disableCreateWalletProvider),
           loading: ref.watch(loadingCreateAccountProvider),
           onPressed: () async {
+            ref.read(loadingCreateAccountProvider.notifier).changeLoading(true);
             await ref.read(generateMnemonicProvider.notifier).generateAccount();
             ref.watch(generateMnemonicProvider);
-           
+            ref
+                .read(loadingCreateAccountProvider.notifier)
+                .changeLoading(false);
           },
           margin: EdgeInsets.fromLTRB(24.w, 8.h, 24.w, 32.h)),
       body: Padding(

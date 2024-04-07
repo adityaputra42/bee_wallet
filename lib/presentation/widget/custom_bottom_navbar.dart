@@ -1,3 +1,4 @@
+import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
@@ -32,12 +33,26 @@ class CustomBottomNavBar extends StatelessWidget {
                 onTap!(0);
               }
             },
-            child: Iconify(
-              Mdi.wallet_outline,
-              color: (selectedIndex == 0)
-                  ? AppColor.primaryColor
-                  : AppColor.grayColor,
-              size: 28.w,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Iconify(
+                  Mdi.wallet_outline,
+                  color: (selectedIndex == 0)
+                      ? AppColor.primaryColor
+                      : AppColor.grayColor,
+                  size: 24.w,
+                ),
+                4.0.height,
+                Text(
+                  'Wallet',
+                  style: AppFont.medium14.copyWith(
+                    color: (selectedIndex == 0)
+                        ? AppColor.primaryColor
+                        : AppColor.grayColor,
+                  ),
+                )
+              ],
             ),
           ),
           GestureDetector(
@@ -46,12 +61,26 @@ class CustomBottomNavBar extends StatelessWidget {
                 onTap!(1);
               }
             },
-            child: Iconify(
-              Ph.swap_bold,
-              color: (selectedIndex == 1)
-                  ? AppColor.primaryColor
-                  : AppColor.grayColor,
-              size: 28.w,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Iconify(
+                  Ph.swap_bold,
+                  color: (selectedIndex == 1)
+                      ? AppColor.primaryColor
+                      : AppColor.grayColor,
+                  size: 24.w,
+                ),
+                4.0.height,
+                Text(
+                  'Swap',
+                  style: AppFont.medium14.copyWith(
+                    color: (selectedIndex == 1)
+                        ? AppColor.primaryColor
+                        : AppColor.grayColor,
+                  ),
+                )
+              ],
             ),
           ),
           GestureDetector(
@@ -60,12 +89,26 @@ class CustomBottomNavBar extends StatelessWidget {
                 onTap!(2);
               }
             },
-            child: Iconify(
-              MaterialSymbols.widgets_outline_rounded,
-              color: (selectedIndex == 2)
-                  ? AppColor.primaryColor
-                  : AppColor.grayColor,
-              size: 28.w,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Iconify(
+                  MaterialSymbols.widgets_outline_rounded,
+                  color: (selectedIndex == 2)
+                      ? AppColor.primaryColor
+                      : AppColor.grayColor,
+                  size: 24.w,
+                ),
+                4.0.height,
+                Text(
+                  "D'App",
+                  style: AppFont.medium14.copyWith(
+                    color: (selectedIndex == 2)
+                        ? AppColor.primaryColor
+                        : AppColor.grayColor,
+                  ),
+                )
+              ],
             ),
           ),
           GestureDetector(
@@ -74,12 +117,26 @@ class CustomBottomNavBar extends StatelessWidget {
                 onTap!(3);
               }
             },
-            child: Icon(
-              Icons.settings_outlined,
-              color: (selectedIndex == 3)
-                  ? AppColor.primaryColor
-                  : AppColor.grayColor,
-              size: 28.w,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.settings_outlined,
+                  color: (selectedIndex == 3)
+                      ? AppColor.primaryColor
+                      : AppColor.grayColor,
+                  size: 24.w,
+                ),
+                4.0.height,
+                Text(
+                  'Setting',
+                  style: AppFont.medium14.copyWith(
+                    color: (selectedIndex == 3)
+                        ? AppColor.primaryColor
+                        : AppColor.grayColor,
+                  ),
+                )
+              ],
             ),
           ),
         ],

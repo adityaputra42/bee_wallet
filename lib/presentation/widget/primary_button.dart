@@ -14,7 +14,7 @@ class PrimaryButton extends StatelessWidget {
     required this.onPressed,
     this.disable = false,
     this.activeColor = AppColor.primaryColor,
-    this.disableColor = AppColor.grayColor,
+    this.disableColor = AppColor.primaryColor,
     this.icon,
     this.loading = false,
   });
@@ -37,7 +37,7 @@ class PrimaryButton extends StatelessWidget {
       margin: margin,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
-          color: disable ? disableColor.withOpacity(0.6) : activeColor),
+          color: disable ? disableColor.withOpacity(0.4) : activeColor),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             elevation: 0,
@@ -50,7 +50,7 @@ class PrimaryButton extends StatelessWidget {
                 padding: EdgeInsets.all(8.h),
                 child: const Center(
                   child: CircularProgressIndicator(
-                    color: AppColor.textStrongDark,
+                    color: AppColor.textStrongLight,
                   ),
                 ),
               )
@@ -63,8 +63,8 @@ class PrimaryButton extends StatelessWidget {
                     title,
                     style: AppFont.medium16.copyWith(
                         color: disable
-                            ? AppColor.textStrongDark
-                            : AppColor.textStrongDark),
+                            ? AppColor.textStrongLight
+                            : AppColor.textStrongLight),
                     textAlign: TextAlign.center,
                   ),
                 ],

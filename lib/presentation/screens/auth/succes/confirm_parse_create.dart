@@ -70,7 +70,7 @@ class ConfirmPharseCreate extends ConsumerWidget {
             child: Center(
               child: Text(text,
                   style: AppFont.medium14.copyWith(
-                    color: AppColor.textStrongDark,
+                    color: AppColor.textStrongLight,
                   )),
             ),
           ),
@@ -110,7 +110,7 @@ class ConfirmPharseCreate extends ConsumerWidget {
             child: Center(
               child: Text(text,
                   style: AppFont.medium14.copyWith(
-                    color: AppColor.textStrongDark,
+                    color: AppColor.textStrongLight,
                   )),
             ),
           ),

@@ -53,7 +53,7 @@ class ListNft extends ConsumerWidget {
                     listChain.length,
                     (index) => Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 12.w, vertical: 10.h),
+                              horizontal: 12.w, vertical: 8.h),
                           margin: EdgeInsets.only(
                               left: listChain[index] == listChain.first
                                   ? 24.w
@@ -89,9 +89,9 @@ class ListNft extends ConsumerWidget {
                               8.0.width,
                               Text(
                                 listChain[index].symbol ?? '',
-                                style: AppFont.medium14.copyWith(
+                                style: AppFont.medium12.copyWith(
                                     color: ref.watch(indexbarNft) == index
-                                        ? AppColor.textStrongDark
+                                        ? AppColor.textStrongLight
                                         : Theme.of(context).hintColor),
                               ),
                             ],
