@@ -30,7 +30,7 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 54.h,
+      height: 48.h,
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         style: AppFont.medium14.copyWith(
@@ -67,7 +67,7 @@ class SearchField extends StatelessWidget {
               borderSide: const BorderSide(color: AppColor.primaryColor),
             ),
             contentPadding:
-                EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w)),
+                EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h)),
       ),
     );
   }

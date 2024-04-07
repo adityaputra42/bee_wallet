@@ -1,4 +1,5 @@
 import 'package:blockies_ethereum/blockies_ethereum.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,12 +18,13 @@ class SettingScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final account = ref.watch(selectedAccountProvider).valueOrNull;
+    var isDark = ref.watch(darkThemeProvider);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: WidgetHelper.appBar(
           context: context, title: "Setting", isCanBack: false),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        margin: EdgeInsets.fromLTRB(24.w, 0, 24.w, 16.h),
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
@@ -41,7 +43,7 @@ class SettingScreen extends ConsumerWidget {
                           Border.all(width: 1.w, color: AppColor.primaryColor)),
                   child: Center(
                     child: Blockies(
-                        size: 0.7,
+                        size: 0.76,
                         data: account?.addressETH ?? '-',
                         shape: BlockiesShape.circle),
                   ),
@@ -67,39 +69,127 @@ class SettingScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
-                Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6.r),
-                    color: account?.backup == true
-                        ? AppColor.greenColor
-                        : AppColor.yellowColor,
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
+              ],
+            ),
+            16.0.height,
+            GestureDetector(
+              onTap: () {
+                if (account?.backup == false) {
+                  context.goNamed("backup_setting");
+                }
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.r),
+                  color: account?.backup == true
+                      ? AppColor.greenColor
+                      : AppColor.yellowColor,
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      account?.backup == true
+                          ? Icons.check_circle_outline_rounded
+                          : Icons.error_outline_outlined,
+                      size: 24.w,
+                      color: AppColor.textStrongDark,
+                    ),
+                    8.0.width,
+                    Expanded(
+                      child: Text(
                         account?.backup == true
-                            ? Icons.check_circle_outline_rounded
-                            : Icons.error_outline_outlined,
-                        size: 16.w,
-                        color: AppColor.textStrongDark,
-                      ),
-                      4.0.width,
-                      Text(
-                        account?.backup == true ? "Backuped" : "No Backup",
+                            ? "Your account has been backed up"
+                            : "Please backup your sheed pharse, to secure your account.",
                         style: AppFont.reguler12
                             .copyWith(color: AppColor.textStrongDark),
                       ),
-                    ],
-                  ),
-                )
-              ],
+                    ),
+                  ],
+                ),
+              ),
             ),
             24.0.height,
-            cardSettingSecurity(context, ref),
+            SizedBox(
+              height: 1.w,
+              child: Divider(
+                thickness: 1.w,
+                color: Theme.of(context).hintColor,
+              ),
+            ),
             16.0.height,
-            cardSettingUmum(context, ref),
+            cardMenu(
+              context,
+              title: "Edit Wallet",
+            ),
+            12.0.height,
+            cardMenu(
+              context,
+              title: 'Show Seed Phrase',
+              onTap: () {
+                context.goNamed('show_parse');
+              },
+            ),
+            12.0.height,
+            cardMenu(context, title: 'Wallet Connect'),
+            12.0.height,
+            cardMenu(
+              context,
+              title: "Change Pin",
+              onTap: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (context) => const SheetPasswordChangePin(),
+                    backgroundColor: Theme.of(context).colorScheme.background,
+                    isScrollControlled: true,
+                    showDragHandle: true,
+                    shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(16.r))));
+              },
+            ),
+            12.0.height,
+            cardMenu(
+              context,
+              title: 'Fingerprint',
+              widget: FlutterSwitch(
+                width: 42.w,
+                height: 20.h,
+                toggleColor: Theme.of(context).canvasColor,
+                activeColor: AppColor.primaryColor,
+                inactiveColor: Theme.of(context).cardColor,
+                valueFontSize: 20.0,
+                toggleSize: 16.h,
+                value: false,
+                borderRadius: 16,
+                padding: 2.h,
+                showOnOff: false,
+                onToggle: (val) {},
+              ),
+            ),
+            12.0.height,
+            cardMenu(
+              context,
+              title: 'Dark Mode',
+              widget: FlutterSwitch(
+                width: 42.w,
+                height: 20.h,
+                toggleColor: Theme.of(context).canvasColor,
+                activeColor: AppColor.primaryColor,
+                inactiveColor: Theme.of(context).cardColor,
+                valueFontSize: 20.0,
+                toggleSize: 16.h,
+                value: isDark,
+                borderRadius: 16,
+                padding: 2.h,
+                showOnOff: false,
+                onToggle: (val) {
+                  ref.read(darkThemeProvider.notifier).changeTheme(val);
+                },
+              ),
+            ),
+            12.0.height,
+            cardMenu(context, title: 'Suport'),
             16.0.height,
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -144,142 +234,13 @@ class SettingScreen extends ConsumerWidget {
     );
   }
 
-  Container cardSettingUmum(BuildContext context, WidgetRef ref) {
-    var isDark = ref.watch(darkThemeProvider);
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.r),
-          color: Theme.of(context).colorScheme.background),
-      child: Column(
-        children: [
-          cardMenu(
-            context,
-            title: "Change Pin",
-            onTap: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (context) => const SheetPasswordChangePin(),
-                  backgroundColor: Theme.of(context).colorScheme.background,
-                  isScrollControlled: true,
-                  showDragHandle: true,
-                  shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(16.r))));
-            },
-          ),
-          SizedBox(
-            width: double.infinity,
-            height: 1.w,
-            child: Divider(
-              thickness: 1.w,
-              color: AppColor.grayColor.withOpacity(0.3),
-            ),
-          ),
-          cardMenu(
-            context,
-            title: 'Fingerprint',
-            widget: FlutterSwitch(
-              width: 42.w,
-              height: 20.h,
-              toggleColor: Theme.of(context).hintColor,
-              activeColor: AppColor.primaryColor,
-              inactiveColor: Theme.of(context).cardColor,
-              valueFontSize: 20.0,
-              toggleSize: 16.h,
-              value: false,
-              borderRadius: 16,
-              padding: 2.h,
-              showOnOff: false,
-              onToggle: (val) {},
-            ),
-          ),
-          SizedBox(
-            width: double.infinity,
-            height: 1.w,
-            child: Divider(
-              thickness: 1.w,
-              color: AppColor.grayColor.withOpacity(0.3),
-            ),
-          ),
-          cardMenu(
-            context,
-            title: 'Dark Mode',
-            widget: FlutterSwitch(
-              width: 42.w,
-              height: 20.h,
-              toggleColor: Theme.of(context).hintColor,
-              activeColor: AppColor.primaryColor,
-              inactiveColor: Theme.of(context).cardColor,
-              valueFontSize: 20.0,
-              toggleSize: 16.h,
-              value: isDark,
-              borderRadius: 16,
-              padding: 2.h,
-              showOnOff: false,
-              onToggle: (val) {
-                ref.read(darkThemeProvider.notifier).changeTheme(val);
-              },
-            ),
-          ),
-          SizedBox(
-            width: double.infinity,
-            height: 1.w,
-            child: Divider(
-              thickness: 1.w,
-              color: AppColor.grayColor.withOpacity(0.3),
-            ),
-          ),
-          cardMenu(context, title: 'Suport')
-        ],
-      ),
-    );
-  }
-
-  Container cardSettingSecurity(BuildContext context, WidgetRef ref) {
-    final account = ref.watch(selectedAccountProvider).valueOrNull;
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.r),
-          color: Theme.of(context).colorScheme.background),
-      child: Column(
-        children: [
-          cardMenu(
-            context,
-            title: "Backup this Wallet",
-          ),
-          SizedBox(
-            width: double.infinity,
-            height: 1.w,
-            child: Divider(
-              thickness: 1.w,
-              color: AppColor.grayColor.withOpacity(0.3),
-            ),
-          ),
-          cardMenu(
-            context,
-            title: 'Show Seed Phrase',
-            onTap: () {
-              context.goNamed('show_parse');
-            },
-          ),
-          SizedBox(
-            width: double.infinity,
-            height: 1.w,
-            child: Divider(
-              thickness: 1.w,
-              color: AppColor.grayColor.withOpacity(0.3),
-            ),
-          ),
-          cardMenu(context, title: 'Wallet Connect'),
-        ],
-      ),
-    );
-  }
-
-  Padding cardMenu(BuildContext context,
+  Widget cardMenu(BuildContext context,
       {required String title, Widget? widget, Function()? onTap}) {
-    return Padding(
+    return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.r),
+          color: Theme.of(context).colorScheme.background),
       child: GestureDetector(
         onTap: onTap,
         child: Row(

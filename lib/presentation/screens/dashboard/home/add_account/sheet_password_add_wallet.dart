@@ -40,11 +40,11 @@ class SheetPasswordAddWallet extends ConsumerWidget {
           ),
           24.0.height,
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 36.w),
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: InputPin(
               keyboardType: TextInputType.none,
               controller: ref.watch(pinController),
-              obsecure: true,
+              obsecure: false,
               onCompleted: (value) async {
                 var pin = await DbHelper.instance.getPassword();
                 if (pin.password == value) {

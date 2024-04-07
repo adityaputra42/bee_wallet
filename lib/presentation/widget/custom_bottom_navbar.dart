@@ -20,7 +20,7 @@ class CustomBottomNavBar extends StatelessWidget {
         horizontal: 36.w,
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(8.r)),
         color: Theme.of(context).cardColor,
       ),
       child: Row(

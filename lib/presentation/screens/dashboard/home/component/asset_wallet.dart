@@ -46,6 +46,7 @@ class AssetWallet extends ConsumerWidget {
           ),
           24.0.height,
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                   child: SearchField(
@@ -69,17 +70,16 @@ class AssetWallet extends ConsumerWidget {
                     child: Row(
                       children: [
                         chainList.length != chain.length && chain.isNotEmpty
-                            ?  SizedBox(
-                              width: 32.w,
-                              height: 32.w,
-                              child: ClipPolygon(
-                                sides: 6,
-                                child:   Image.asset(
-                                chain.first.baseLogo ?? AppChainLogo.evm, fit: BoxFit.cover,)
-                              ),
-                            )
-                            
-                          
+                            ? SizedBox(
+                                width: 32.w,
+                                height: 32.w,
+                                child: ClipPolygon(
+                                    sides: 6,
+                                    child: Image.asset(
+                                      chain.first.baseLogo ?? AppChainLogo.evm,
+                                      fit: BoxFit.cover,
+                                    )),
+                              )
                             : Iconify(
                                 MaterialSymbols.widgets_outline_rounded,
                                 size: 24.w,

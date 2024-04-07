@@ -1,20 +1,6 @@
 [
    
-    {
-        "name" : "Peta Mainnet",
-        "symbol" : "PETA",
-        "RPC" : "https://mainnet.petachain.io",
-        "chainId" : "234",
-        "explorer" : "https://petascan.io",
-        "explorerAPI" : "https://petascan.io",
-        "logo":"assets/logo/peta.png", 
-        "baseLogo":"assets/logo/peta.png", 
-        "baseNetwork":"eth",
-        "decimal":18,
-        "contractAddress":null,
-        "isTestnet": false
-    }
-    ,
+   
     {
        "name" : "Ethereum Mainnet",
        "symbol" : "ETH",
@@ -77,7 +63,7 @@
    {
        "name" : "Goerli Testnet",
        "symbol" : "gETH",
-       "RPC" : "https://ethereum-goerli.publicnode.com",
+       "RPC" : "https://rpc.tornadoeth.cash/goerli",
        "chainId" : "5",
        "explorer" : "https://goerli.etherscan.io",
        "explorerAPI" : "https://api-goerli.etherscan.io",
@@ -88,20 +74,7 @@
        "contractAddress":null,
        "isTestnet": true
    },
-   {
-       "name" : "Base Goerli",
-       "symbol" : "ETH",
-       "RPC" : "https://base-goerli.publicnode.com",
-       "chainId" : "84531",
-       "explorer" : "https://goerli.basescan.org",
-       "explorerAPI" : "https://goerli.basescan.org",
-       "logo":"assets/logo/eth.png", 
-       "baseNetwork":"eth",
-       "baseLogo":"assets/logo/eth.png", 
-       "decimal":18,
-       "contractAddress":null,
-       "isTestnet": false
-   },
+ 
     {
     "name":"Tether USD",
     "symbol":"USDT",

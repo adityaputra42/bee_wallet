@@ -17,7 +17,8 @@ class SelectedAccount extends _$SelectedAccount {
   Future<void> createNewAddress() async {
     var selectedAccount = state.valueOrNull;
     final mnemonic = WalletHelper().generateMnemonic();
-    var account = await MethodHelper().computeMnemonic(mnemonic, "Account");
+    var account = await MethodHelper()
+        .computeMnemonic(mnemonic: mnemonic, name: "Account");
     await DbHelper.instance.addAccount(account);
     ref.read(accountListProvider.notifier).updateListAddress();
     await DbHelper.instance.unSelectWallet(selectedAccount?.id ?? 0);
@@ -35,7 +36,8 @@ class SelectedAccount extends _$SelectedAccount {
   Future<void> importByMnemonic(String mnemonic) async {
     var selectedAccount = state.valueOrNull;
     ref.read(loadingImportMnemonicProvider.notifier).changeLoading(true);
-    var account = await MethodHelper().computeMnemonic(mnemonic, "Account");
+    var account = await MethodHelper()
+        .computeMnemonic(mnemonic: mnemonic, name: "Account", backup: true);
     await DbHelper.instance.addAccount(account);
     ref.read(accountListProvider.notifier).updateListAddress();
     await DbHelper.instance.unSelectWallet(selectedAccount?.id ?? 0);
@@ -48,7 +50,8 @@ class SelectedAccount extends _$SelectedAccount {
     ref.read(loadingImportPrivateKeyProvider.notifier).changeLoading(true);
     var selectedAccount = state.valueOrNull;
     final mnemonic = WalletHelper().generateMnemonicFromPrivateKey(privateKey);
-    var account = await MethodHelper().computeMnemonic(mnemonic, "Account");
+    var account = await MethodHelper()
+        .computeMnemonic(mnemonic: mnemonic, name: "Account", backup: true);
     await DbHelper.instance.addAccount(account);
     ref.read(accountListProvider.notifier).updateListAddress();
     await DbHelper.instance.unSelectWallet(selectedAccount?.id ?? 0);

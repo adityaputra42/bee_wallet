@@ -41,7 +41,7 @@ class HomeScreen extends ConsumerWidget {
                           Border.all(width: 1.w, color: AppColor.primaryColor)),
                   child: Center(
                     child: Blockies(
-                        size: 0.6,
+                        size: 0.66.w,
                         data: account?.addressETH ?? '-',
                         shape: BlockiesShape.circle),
                   ),

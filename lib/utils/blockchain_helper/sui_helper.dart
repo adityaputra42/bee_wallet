@@ -30,9 +30,9 @@ class SuiHelper {
       required bool isTestnet}) async {
     SuiClient client;
     if (isTestnet == true) {
-      client = SuiClient(Constants.testnetAPI);
+      client = SuiClient(SuiUrls.testnet);
     } else {
-      client = SuiClient(Constants.mainnetAPI);
+      client = SuiClient(SuiUrls.mainnet);
     }
 
     BigInt gweiBigInt = (BigInt.from(amount * 10000000) ~/ BigInt.one);
@@ -68,9 +68,9 @@ class SuiHelper {
     final account = SuiAccount.fromPrivateKey(keyPair, SignatureScheme.Ed25519);
     SuiClient client;
     if (isTestnet == true) {
-      client = SuiClient(Constants.testnetAPI);
+      client = SuiClient(SuiUrls.testnet);
     } else {
-      client = SuiClient(Constants.mainnetAPI);
+      client = SuiClient(SuiUrls.mainnet);
     }
     BigInt gweiBigInt = (BigInt.from(amount * 1000000000) ~/ BigInt.one);
     try {
@@ -90,9 +90,9 @@ class SuiHelper {
       {required Account account, required bool isTestnet}) async {
     SuiClient client;
     if (isTestnet == true) {
-      client = SuiClient(Constants.testnetAPI);
+      client = SuiClient(SuiUrls.testnet);
     } else {
-      client = SuiClient(Constants.mainnetAPI);
+      client = SuiClient(SuiUrls.mainnet);
     }
 
     var data = await client.getTransactions(account.addressSui ?? "",

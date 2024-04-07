@@ -153,7 +153,7 @@ class BalanceChain extends _$BalanceChain {
           }
         } else if (chain.baseChain == "sui") {
           if (chain.isTestnet == true) {
-            final clientTestnet = SuiClient(Constants.testnetAPI);
+            final clientTestnet = SuiClient(SuiUrls.testnet);
 
             final suiBalance =
                 await clientTestnet.getBalance(account?.addressSui ?? '');
@@ -163,7 +163,7 @@ class BalanceChain extends _$BalanceChain {
             chain.balance = balanceTestnet;
             await DbHelper.instance.updateNetwork(chain.id!, balanceTestnet);
           } else {
-            final clientTestnet = SuiClient(Constants.mainnetAPI);
+            final clientTestnet = SuiClient(SuiUrls.mainnet);
             final suiBalance =
                 await clientTestnet.getBalance(account?.addressSui ?? '');
             double balanceMainet =

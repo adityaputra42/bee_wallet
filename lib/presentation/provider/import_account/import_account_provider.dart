@@ -83,14 +83,14 @@ class ImportAccount extends _$ImportAccount {
   }
 
   Future<void> import(BuildContext context) async {
-    ref.read(loadingImportProvider.notifier).changeLoading(true);
     Password pass =
         Password(password: ref.watch(createPinRegisterProvider).text);
     if (WalletHelper()
         .validateMnemonic(ref.watch(pharseControllerProvider).text)) {
       var address = await MethodHelper().computeMnemonic(
-          ref.watch(pharseControllerProvider).text,
-          ref.watch(accountNameControllerProvider).text);
+          mnemonic: ref.watch(pharseControllerProvider).text,
+          name: ref.watch(accountNameControllerProvider).text,
+          backup: true);
       await DbHelper.instance.addAccount(address);
       await DbHelper.instance.setPassword(pass);
       ref.watch(appRouteProvider).goNamed('main');
@@ -101,29 +101,5 @@ class ImportAccount extends _$ImportAccount {
           content: "Invalid seed pharse",
           backgorund: AppColor.redColor);
     }
-    ref.read(loadingImportProvider.notifier).changeLoading(false);
   }
-
-  // Future<void> importByPrivateKey(BuildContext context) async {
-  //   ref.read(loadingImportProvider.notifier).changeLoading(true);
-  //   String mnemonic = WalletHelper().generateMnemonicFromPrivateKey(
-  //       ref.watch(privateKeyControllerProvider).text);
-  //   log(" hasil generate => $mnemonic");
-  //   if (WalletHelper().validateMnemonic(mnemonic)) {
-  //     log("valid");
-  //     var address = await MethodHelper().computeMnemonic(
-  //         ref.watch(pharseControllerProvider).text, "my Wallet");
-  //     await DbHelper.instance.addAccount(address);
-  //     log("succes save");
-  //     ref.watch(appRouteProvider).goNamed('main');
-  //     PrefHelper.instance.setLogin(true);
-  //   } else {
-  //     log("invalid");
-  //     MethodHelper().showSnack(
-  //         context: context,
-  //         content: "Invalid seed pharse",
-  //         backgorund: AppColor.redColor);
-  //   }
-  //   ref.read(loadingImportProvider.notifier).changeLoading(false);
-  // }
 }

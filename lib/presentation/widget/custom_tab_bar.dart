@@ -10,12 +10,12 @@ class CustomTabBar extends StatelessWidget {
   final double fonsize;
 
   const CustomTabBar({
-    Key? key,
+    super.key,
     required this.titles,
     this.selectedIndex,
     this.fonsize = 14,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

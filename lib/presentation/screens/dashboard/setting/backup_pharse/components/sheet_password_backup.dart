@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../config/config.dart';
-import '../../../../../../data/src/src.dart';
 import '../../../../../widget/widget.dart';
 
 final pinBackupController =
@@ -25,11 +24,7 @@ class SheetPinBackup extends ConsumerWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset(
-            AppImage.logo,
-            height: 32.w,
-          ),
-          8.0.height,
+         
           Text(
             "Enter Security Password",
             style: AppFont.semibold16
@@ -45,7 +40,7 @@ class SheetPinBackup extends ConsumerWidget {
           ),
           24.0.height,
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 34.w),
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: InputPin(
               keyboardType: TextInputType.none,
               controller: ref.watch(pinBackupController),
@@ -67,7 +62,7 @@ class SheetPinBackup extends ConsumerWidget {
             ),
           ),
           16.0.height,
-          Numpadcustom(
+          Numpadcustom(height: 54.w,
               controller: ref.watch(pinBackupController),
               delete: () {
                 ref.watch(pinBackupController).text =

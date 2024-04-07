@@ -21,27 +21,26 @@ class SwapScreen extends ConsumerWidget {
       appBar: WidgetHelper.appBar(
           context: context, title: "Swap", isCanBack: false),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),padding: EdgeInsets.all(16.w),
+        margin: EdgeInsets.fromLTRB(24.w, 0, 24.w, 16.h),
+        padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.r),
-                            color: Theme.of(context).cardColor),
+            borderRadius: BorderRadius.circular(8.r),
+            color: Theme.of(context).cardColor),
         child: Column(
           children: [
             SizedBox(
-              height: 248.w,
+              height: 260.w,
               child: Stack(
                 children: [
                   Column(
                     children: [
                       Container(
                         width: double.infinity,
-                        height: 120.w,
                         padding: EdgeInsets.fromLTRB(16.w, 16.w, 16.w, 28.w),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.r),
                             color: Theme.of(context).colorScheme.background),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,6 +68,7 @@ class SwapScreen extends ConsumerWidget {
                                 )
                               ],
                             ),
+                            16.0.height,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -177,7 +177,7 @@ class SwapScreen extends ConsumerWidget {
                       8.0.height,
                       Container(
                         width: double.infinity,
-                        height: 120.w,
+                       
                         padding: EdgeInsets.fromLTRB(16.w, 24.w, 16.w, 16.w),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.r),
@@ -210,7 +210,7 @@ class SwapScreen extends ConsumerWidget {
                                   ],
                                 )
                               ],
-                            ),
+                            ),16.0.height,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [

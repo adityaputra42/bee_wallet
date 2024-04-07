@@ -306,7 +306,7 @@ final transferNftLoadingProvider =
 );
 
 typedef _$TransferNftLoading = AutoDisposeNotifier<bool>;
-String _$transferNftHash() => r'8c2b5883bf2c970f30a505d0aae9de59046278d1';
+String _$transferNftHash() => r'648ab1d995aa34d828215726b7651c12d5e3fc75';
 
 /// See also [TransferNft].
 @ProviderFor(TransferNft)

@@ -30,7 +30,7 @@ class MethodHelper {
         context: context, content: "Succes copy", backgorund: Colors.teal);
   }
 
-  Future<Account> computeMnemonic(String mnemonic, String name) async {
+  Future<Account> computeMnemonic({required String mnemonic, required String name, bool backup = false}) async {
     var accountETH = EthHelper().getEthInfo(mnemonic);
     var accountSolana = await SolanaHelper().getAccountInfo(mnemonic);
     var accountSui = SuiHelper().getAccountInfo(mnemonic);
@@ -47,7 +47,7 @@ class MethodHelper {
         name: name,
         mnemonic: mnemonicEncrypted,
         selectedAccount: true,
-        backup: false,
+        backup: backup,
         keyETH: privataKeyEthEncrypted,
         addressETH: accountETH['address'],
         keySolana: privataKeySolanaEncrypted,

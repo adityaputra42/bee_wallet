@@ -26,6 +26,7 @@ class ImportAccountScreen extends ConsumerWidget {
         loading: ref.watch(loadingImportProvider),
         disable: ref.watch(disableImportProvider),
         onPressed: () {
+          ref.read(loadingImportProvider.notifier).changeLoading(true);
           if (WalletHelper()
               .validateMnemonic(ref.watch(pharseControllerProvider).text)) {
             ref.read(importAccountProvider.notifier).import(context);
@@ -35,6 +36,7 @@ class ImportAccountScreen extends ConsumerWidget {
                 content: 'Seed Pharse is a invalid',
                 backgorund: AppColor.redColor);
           }
+          ref.read(loadingImportProvider.notifier).changeLoading(false);
         },
       ),
       body: Padding(

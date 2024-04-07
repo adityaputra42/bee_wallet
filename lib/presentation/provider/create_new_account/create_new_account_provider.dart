@@ -60,8 +60,8 @@ class GenerateMnemonic extends _$GenerateMnemonic {
     if (mnemonic != '') {
       ref.read(loadingCreateAccountProvider.notifier).changeLoading(true);
       ref.watch(loadingCreateAccountProvider);
-      var address = await MethodHelper()
-          .computeMnemonic(mnemonic, ref.watch(nameWalletProvider).text);
+      var address = await MethodHelper().computeMnemonic(
+          mnemonic: mnemonic, name: ref.watch(nameWalletProvider).text);
       await DbHelper.instance.addAccount(address);
       await DbHelper.instance.setPassword(pass);
       ref.watch(appRouteProvider).goNamed('succes_register');
