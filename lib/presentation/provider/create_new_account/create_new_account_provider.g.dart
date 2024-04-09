@@ -55,12 +55,12 @@ final disableCreateWalletProvider =
 );
 
 typedef _$DisableCreateWallet = AutoDisposeNotifier<bool>;
-String _$generateMnemonicHash() => r'5ea0fcf625cba91c42a390859892f924d3ff18f4';
+String _$generateMnemonicHash() => r'6aadd5a3722ef652512927d53685a2d960b95bb2';
 
 /// See also [GenerateMnemonic].
 @ProviderFor(GenerateMnemonic)
 final generateMnemonicProvider =
-    AutoDisposeNotifierProvider<GenerateMnemonic, String>.internal(
+    AutoDisposeAsyncNotifierProvider<GenerateMnemonic, String>.internal(
   GenerateMnemonic.new,
   name: r'generateMnemonicProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -70,6 +70,6 @@ final generateMnemonicProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$GenerateMnemonic = AutoDisposeNotifier<String>;
+typedef _$GenerateMnemonic = AutoDisposeAsyncNotifier<String>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

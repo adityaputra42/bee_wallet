@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../data/model/token_chain/selected_token_chain.dart';
-import '../../../data/src/src.dart';
 part 'dapp_provider.g.dart';
 
 @riverpod
@@ -18,57 +17,57 @@ class NewsDapp extends _$NewsDapp {
   }
 }
 
-@riverpod
-class FavoriteDapp extends _$FavoriteDapp {
-  @override
-  List<Map<String, dynamic>> build() {
-    List<Map<String, dynamic>> favorite = [
-      {
-        "image": AppImage.pancakeSwap,
-        "title": "PancakeSwap",
-        "subtitle":
-            "Trade, earn and win crypto in decentralize app and more oportunity",
-        "link": "https://pancakeswap.finance/"
-      },
-      {
-        "image": AppImage.uniswap,
-        "title": "UniSwap",
-        "subtitle":
-            "Trade, earn and win crypto in decentralize app and more oportunity",
-        "link": "https://app.uniswap.org/"
-      },
-      {
-        "image": AppImage.opensea,
-        "title": "OpenSea",
-        "subtitle":
-            "Trade, earn and win crypto in decentralize app and more oportunity",
-        "link": "https://opensea.io/"
-      },
-      {
-        "image": AppImage.quickswap,
-        "title": "QuickSwap",
-        "subtitle":
-            "Trade, earn and win crypto in decentralize app and more oportunity",
-        "link": "https://quickswap.exchange/#/"
-      },
-      {
-        "image": AppImage.chainlink,
-        "title": "ChainLink",
-        "subtitle":
-            "Trade, earn and win crypto in decentralize app and more oportunity",
-        "link": "https://chain.link/"
-      },
-      {
-        "image": AppImage.ens,
-        "title": "ENS",
-        "subtitle":
-            "Trade, earn and win crypto in decentralize app and more oportunity",
-        "link": "https://ens.domains/"
-      }
-    ];
-    return favorite;
-  }
-}
+// @riverpod
+// class FavoriteDapp extends _$FavoriteDapp {
+//   @override
+//   List<Map<String, dynamic>> build() {
+//     List<Map<String, dynamic>> favorite = [
+//       {
+//         "image": AppImage.pancakeSwap,
+//         "title": "PancakeSwap",
+//         "subtitle":
+//             "Trade, earn and win crypto in decentralize app and more oportunity",
+//         "link": "https://pancakeswap.finance/"
+//       },
+//       {
+//         "image": AppImage.uniswap,
+//         "title": "UniSwap",
+//         "subtitle":
+//             "Trade, earn and win crypto in decentralize app and more oportunity",
+//         "link": "https://app.uniswap.org/"
+//       },
+//       {
+//         "image": AppImage.opensea,
+//         "title": "OpenSea",
+//         "subtitle":
+//             "Trade, earn and win crypto in decentralize app and more oportunity",
+//         "link": "https://opensea.io/"
+//       },
+//       {
+//         "image": AppImage.quickswap,
+//         "title": "QuickSwap",
+//         "subtitle":
+//             "Trade, earn and win crypto in decentralize app and more oportunity",
+//         "link": "https://quickswap.exchange/#/"
+//       },
+//       {
+//         "image": AppImage.chainlink,
+//         "title": "ChainLink",
+//         "subtitle":
+//             "Trade, earn and win crypto in decentralize app and more oportunity",
+//         "link": "https://chain.link/"
+//       },
+//       {
+//         "image": AppImage.ens,
+//         "title": "ENS",
+//         "subtitle":
+//             "Trade, earn and win crypto in decentralize app and more oportunity",
+//         "link": "https://ens.domains/"
+//       }
+//     ];
+//     return favorite;
+//   }
+// }
 
 @riverpod
 class IndexCarousel extends _$IndexCarousel {

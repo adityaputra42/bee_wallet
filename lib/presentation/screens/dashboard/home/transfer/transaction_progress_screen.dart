@@ -18,7 +18,7 @@ class TransactionProgressScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chain = ref.watch(chainTransferProvider);
-    final loading = ref.watch(transferLoadingProvider);
+    final loading = ref.watch(transferChainProvider).isLoading;
     return Scaffold(
       backgroundColor: Theme.of(context).cardColor,
       body: SafeArea(

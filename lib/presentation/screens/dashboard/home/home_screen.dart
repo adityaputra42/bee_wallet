@@ -129,6 +129,7 @@ class HomeScreen extends ConsumerWidget {
                   color: Theme.of(context).cardColor,
                 ),
                 child: TabBar(
+                  physics: const NeverScrollableScrollPhysics(),
                   automaticIndicatorColorAdjustment: false,
                   indicator: BoxDecoration(
                       color: Theme.of(context).primaryColor,

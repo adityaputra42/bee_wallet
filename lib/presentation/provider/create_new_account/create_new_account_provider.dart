@@ -50,22 +50,22 @@ class DisableCreateWallet extends _$DisableCreateWallet {
 @riverpod
 class GenerateMnemonic extends _$GenerateMnemonic {
   @override
-  String build() => '';
+  Future<String> build() async => '';
 
   Future<void> generateAccount() async {
     String mnemonic = WalletHelper().generateMnemonic();
-    state = mnemonic;
+
     Password pass =
         Password(password: ref.watch(createPinRegisterProvider).text);
+    state = const AsyncLoading();
     if (mnemonic != '') {
-     
-      ref.watch(loadingCreateAccountProvider);
+   
       var address = await MethodHelper().computeMnemonic(
           mnemonic: mnemonic, name: ref.watch(nameWalletProvider).text);
       await DbHelper.instance.addAccount(address);
       await DbHelper.instance.setPassword(pass);
       ref.watch(appRouteProvider).goNamed('succes_register');
-    
+      state = AsyncData(mnemonic);
     }
   }
 }

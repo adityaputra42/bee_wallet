@@ -78,28 +78,33 @@ class DisableImport extends _$DisableImport {
 @riverpod
 class ImportAccount extends _$ImportAccount {
   @override
-  void build() {
-    return;
+  Future<String> build() async {
+    return '';
   }
 
   Future<void> import(BuildContext context) async {
     Password pass =
         Password(password: ref.watch(createPinRegisterProvider).text);
+        String mnemonic = ref.watch(pharseControllerProvider).text;
+        state = const AsyncLoading();
     if (WalletHelper()
         .validateMnemonic(ref.watch(pharseControllerProvider).text)) {
       var address = await MethodHelper().computeMnemonic(
-          mnemonic: ref.watch(pharseControllerProvider).text,
+          mnemonic: mnemonic,
           name: ref.watch(accountNameControllerProvider).text,
           backup: true);
       await DbHelper.instance.addAccount(address);
       await DbHelper.instance.setPassword(pass);
       ref.watch(appRouteProvider).goNamed('main');
       PrefHelper.instance.setLogin(true);
+     
     } else {
       MethodHelper().showSnack(
           context: context,
           content: "Invalid seed pharse",
           backgorund: AppColor.redColor);
     }
+      state = AsyncData(mnemonic);
+   
   }
 }

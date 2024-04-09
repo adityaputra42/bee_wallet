@@ -181,28 +181,12 @@ final amountSendProvider =
 );
 
 typedef _$AmountSend = AutoDisposeNotifier<double>;
-String _$transferLoadingHash() => r'a3a328e64dfcc6bdd16b977704550b817861b759';
-
-/// See also [TransferLoading].
-@ProviderFor(TransferLoading)
-final transferLoadingProvider =
-    AutoDisposeNotifierProvider<TransferLoading, bool>.internal(
-  TransferLoading.new,
-  name: r'transferLoadingProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$transferLoadingHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$TransferLoading = AutoDisposeNotifier<bool>;
-String _$transferChainHash() => r'55149bf84ca026d478e92c0f7a069bbdf65c40e8';
+String _$transferChainHash() => r'98f749b5600a5401cc0c392c74b14e8d71c56865';
 
 /// See also [TransferChain].
 @ProviderFor(TransferChain)
 final transferChainProvider =
-    AutoDisposeNotifierProvider<TransferChain, bool>.internal(
+    AutoDisposeAsyncNotifierProvider<TransferChain, bool>.internal(
   TransferChain.new,
   name: r'transferChainProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -212,7 +196,7 @@ final transferChainProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$TransferChain = AutoDisposeNotifier<bool>;
+typedef _$TransferChain = AutoDisposeAsyncNotifier<bool>;
 String _$gasLimitHash() => r'5cd310de73badb196cf9000034651f6bce72859d';
 
 /// See also [GasLimit].

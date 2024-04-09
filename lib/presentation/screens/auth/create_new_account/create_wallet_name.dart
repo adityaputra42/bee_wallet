@@ -18,14 +18,10 @@ class CreateWalletName extends ConsumerWidget {
       bottomNavigationBar: PrimaryButton(
           title: 'Continue',
           disable: ref.watch(disableCreateWalletProvider),
-          loading: ref.watch(loadingCreateAccountProvider),
+          loading: ref.watch(generateMnemonicProvider).isLoading,
           onPressed: () async {
-            ref.read(loadingCreateAccountProvider.notifier).changeLoading(true);
             await ref.read(generateMnemonicProvider.notifier).generateAccount();
             ref.watch(generateMnemonicProvider);
-            ref
-                .read(loadingCreateAccountProvider.notifier)
-                .changeLoading(false);
           },
           margin: EdgeInsets.fromLTRB(24.w, 8.h, 24.w, 32.h)),
       body: Padding(

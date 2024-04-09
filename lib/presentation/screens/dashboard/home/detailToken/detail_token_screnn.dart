@@ -134,7 +134,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                   icon: Iconify(
                     Prime.qrcode,
                     size: 24.w,
-                    color: AppColor.textStrongDark,
+                    color: AppColor.textStrongLight,
                   ),
                   title: "Receive",
                   onPressed: () {
@@ -148,7 +148,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                   icon: Iconify(
                     AntDesign.send_outlined,
                     size: 24.w,
-                    color: AppColor.textStrongDark,
+                    color: AppColor.textStrongLight,
                   ),
                   onPressed: () {
                     ref

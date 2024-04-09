@@ -104,12 +104,12 @@ final disableImportProvider =
 );
 
 typedef _$DisableImport = AutoDisposeNotifier<bool>;
-String _$importAccountHash() => r'510cc1cc80096180768e344c850e9c12201d6aa7';
+String _$importAccountHash() => r'42413b510ba2473698011e81f5a8c5f9a60daa5a';
 
 /// See also [ImportAccount].
 @ProviderFor(ImportAccount)
 final importAccountProvider =
-    AutoDisposeNotifierProvider<ImportAccount, void>.internal(
+    AutoDisposeAsyncNotifierProvider<ImportAccount, String>.internal(
   ImportAccount.new,
   name: r'importAccountProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -119,6 +119,6 @@ final importAccountProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$ImportAccount = AutoDisposeNotifier<void>;
+typedef _$ImportAccount = AutoDisposeAsyncNotifier<String>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

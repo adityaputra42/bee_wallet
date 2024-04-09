@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:bee_wallet/config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -101,8 +102,10 @@ class ConfirmMnemonic extends _$ConfirmMnemonic {
       //         borderRadius: BorderRadius.vertical(top: Radius.circular(16.r))));
       PrefHelper.instance.setLogin(true);
     } else {
-      // showDialog(
-      //     context: context, builder: (context) => const DialogVerifyFailed());
+      MethodHelper().showSnack(
+          context: context,
+          content: "Pharse didn't match",
+          backgorund: AppColor.redColor);
 
       ref.read(confirmMnemonicProvider.notifier).clearConfirm();
       ref

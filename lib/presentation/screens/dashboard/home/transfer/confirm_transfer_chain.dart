@@ -360,7 +360,7 @@ class ConfirmTransferChain extends ConsumerWidget {
             PrimaryButton(
               margin: EdgeInsets.only(top: 16.w),
               title: "Send",
-              loading: ref.watch(transferLoadingProvider),
+              loading: ref.watch(transferChainProvider).isLoading,
               onPressed: () {
                 ref.read(transferChainProvider.notifier).tranfer(context);
               },

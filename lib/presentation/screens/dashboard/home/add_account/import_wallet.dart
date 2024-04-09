@@ -81,7 +81,7 @@ class ImportWallet extends ConsumerWidget {
                 PrimaryButton(
                   title: "Import",
                   disable: ref.watch(disableImportMnemonicProvider),
-                  loading: ref.watch(loadingImportMnemonicProvider),
+                  loading: ref.watch(selectedAccountProvider).isLoading,
                   onPressed: () {
                     if (WalletHelper().validateMnemonic(
                         ref.watch(seedImportController).text)) {

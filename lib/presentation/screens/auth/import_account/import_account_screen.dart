@@ -23,20 +23,10 @@ class ImportAccountScreen extends ConsumerWidget {
       bottomNavigationBar: PrimaryButton(
         margin: EdgeInsets.fromLTRB(24.w, 8.h, 24.w, 32.h),
         title: "Import",
-        loading: ref.watch(loadingImportProvider),
+        loading: ref.watch(importAccountProvider).isLoading,
         disable: ref.watch(disableImportProvider),
         onPressed: () {
-          ref.read(loadingImportProvider.notifier).changeLoading(true);
-          if (WalletHelper()
-              .validateMnemonic(ref.watch(pharseControllerProvider).text)) {
-            ref.read(importAccountProvider.notifier).import(context);
-          } else {
-            MethodHelper().showSnack(
-                context: context,
-                content: 'Seed Pharse is a invalid',
-                backgorund: AppColor.redColor);
-          }
-          ref.read(loadingImportProvider.notifier).changeLoading(false);
+          ref.read(importAccountProvider.notifier).import(context);
         },
       ),
       body: Padding(

@@ -248,28 +248,20 @@ class AmountSend extends _$AmountSend {
   }
 }
 
-@riverpod
-class TransferLoading extends _$TransferLoading {
-  @override
-  bool build() => false;
-
-  setValue(bool value) {
-    state = value;
-  }
-}
 
 @riverpod
 class TransferChain extends _$TransferChain {
   @override
-  bool build() => false;
+  Future<bool> build() async => false;
 
   Future<void> tranfer(BuildContext context) async {
     var chain = ref.watch(chainTransferProvider);
     var amount = ref.watch(amountSendProvider);
     var account = ref.watch(selectedAccountProvider).valueOrNull;
-    ref.read(transferLoadingProvider.notifier).setValue(true);
+
+    state = const AsyncLoading();
     try {
-      ref.watch(transferLoadingProvider);
+    
       if (chain.baseChain == 'eth') {
         if (chain.contractAddress == null) {
           await EthHelper().transferChain(
@@ -278,7 +270,7 @@ class TransferChain extends _$TransferChain {
             chain: chain,
             privateKey: Ecryption().decrypt(account?.keyETH ?? ''),
           );
-          state = true;
+          state = const AsyncData(true);
         } else {
           await EthHelper().transferToken(
             to: ref.watch(receiveAddressProvider).text,
@@ -286,31 +278,29 @@ class TransferChain extends _$TransferChain {
             token: chain,
             privateKey: Ecryption().decrypt(account?.keyETH ?? ''),
           );
-          state = true;
+          state = const AsyncData(true);
         }
       } else if (chain.baseChain == 'sol') {
         await SolanaHelper().sendSolanaTransaction(
             from: account!,
             to: ref.watch(receiveAddressProvider).text,
             amount: amount);
-        state = true;
+        state = const AsyncData(true);
       } else if (chain.baseChain == 'sui') {
         await SuiHelper().transfer(
             to: ref.watch(receiveAddressProvider).text,
             amount: amount,
             from: account!,
             isTestnet: chain.isTestnet!);
-        state = true;
+        state = const AsyncData(true);
       }
-      ref.read(transferLoadingProvider.notifier).setValue(false);
-     
+
       context.goNamed('transaction_progress');
     } catch (e) {
       dev.log("error => $e");
       MethodHelper().showSnack(
           context: context, content: "Error $e", backgorund: AppColor.redColor);
-      state = false;
-      ref.read(transferLoadingProvider.notifier).setValue(false);
+      state = const AsyncData(false);
     }
   }
 }

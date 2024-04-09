@@ -35,17 +35,26 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: SafeArea(
-        child: Center(
-          child: ZoomIn(
-            delay: const Duration(milliseconds: 500),
-            duration: const Duration(seconds: 2),
-            child: Image.asset(
-              AppImage.logo,
-              height: 120.w,
+      body: Stack(
+        children: [
+          // Image.asset(
+          //   AppImage.mask,
+          //   width: double.infinity,
+          //   fit: BoxFit.cover,
+          // ),
+          SafeArea(
+            child: Center(
+              child: ZoomIn(
+                delay: const Duration(milliseconds: 500),
+                duration: const Duration(seconds: 2),
+                child: Image.asset(
+                  AppImage.logo,
+                  height: 160.w,
+                ),
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

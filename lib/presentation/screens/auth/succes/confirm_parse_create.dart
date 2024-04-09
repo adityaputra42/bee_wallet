@@ -205,7 +205,7 @@ class ConfirmPharseCreate extends ConsumerWidget {
       ),
       bottomNavigationBar: PrimaryButton(
         title: 'Verify',
-        disable: true,
+        disable: ref.watch(disableConfirmProvider),
         onPressed: () {
           ref
               .read(confirmMnemonicProvider.notifier)
@@ -217,3 +217,4 @@ class ConfirmPharseCreate extends ConsumerWidget {
     );
   }
 }
+

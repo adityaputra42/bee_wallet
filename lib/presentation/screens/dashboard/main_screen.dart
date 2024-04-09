@@ -60,16 +60,38 @@ class MainScreen extends ConsumerWidget {
       body: Consumer(builder: (context, ref, _) {
         return ref.watch(selectedAccountProvider).when(
           data: (data) {
+            if (ref.watch(selectedAccountProvider).isRefreshing) {
+              return loading();
+            }
             return ref.watch(accountListProvider).when(
               data: (data) {
+                if (ref.watch(accountListProvider).isRefreshing) {
+                  return loading();
+                }
                 return ref.watch(tokenChainOriginProvider).when(
                   data: (data) {
+                    if (ref.watch(tokenChainOriginProvider).isRefreshing) {
+                      return loading();
+                    }
                     return ref.watch(listTokenChainProvider).when(
                       data: (data) {
+                        if (ref.watch(listTokenChainProvider).isRefreshing) {
+                          return loading();
+                        }
                         return ref.watch(selectedChainTokenProvider).when(
                           data: (data) {
+                            if (ref
+                                .watch(selectedChainTokenProvider)
+                                .isRefreshing) {
+                              return loading();
+                            }
                             return ref.watch(balanceChainProvider).when(
                               data: (data) {
+                                if (ref
+                                    .watch(balanceChainProvider)
+                                    .isRefreshing) {
+                                  return loading();
+                                }
                                 ref.watch(balancePeriodicProvider);
 
                                 return body();

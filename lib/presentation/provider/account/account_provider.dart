@@ -16,6 +16,7 @@ class SelectedAccount extends _$SelectedAccount {
 
   Future<void> createNewAddress() async {
     var selectedAccount = state.valueOrNull;
+    state = const AsyncLoading();
     final mnemonic = WalletHelper().generateMnemonic();
     var account = await MethodHelper()
         .computeMnemonic(mnemonic: mnemonic, name: "Account");
@@ -28,6 +29,7 @@ class SelectedAccount extends _$SelectedAccount {
 
   Future<void> changeAccount(Account account) async {
     var selectedAccount = state.valueOrNull;
+    state = const AsyncLoading();
     await DbHelper.instance.unSelectWallet(selectedAccount?.id ?? 0);
     await DbHelper.instance.changeWallet(account.id!);
     state = AsyncData(account);
@@ -35,7 +37,7 @@ class SelectedAccount extends _$SelectedAccount {
 
   Future<void> importByMnemonic(String mnemonic) async {
     var selectedAccount = state.valueOrNull;
-    ref.read(loadingImportMnemonicProvider.notifier).changeLoading(true);
+    state = const AsyncLoading();
     var account = await MethodHelper()
         .computeMnemonic(mnemonic: mnemonic, name: "Account", backup: true);
     await DbHelper.instance.addAccount(account);
@@ -43,12 +45,11 @@ class SelectedAccount extends _$SelectedAccount {
     await DbHelper.instance.unSelectWallet(selectedAccount?.id ?? 0);
     await DbHelper.instance.changeWallet(account.id!);
     state = AsyncData(account);
-    ref.read(loadingImportMnemonicProvider.notifier).changeLoading(false);
   }
 
   Future<void> importByPrivateKey(String privateKey) async {
-    ref.read(loadingImportPrivateKeyProvider.notifier).changeLoading(true);
     var selectedAccount = state.valueOrNull;
+       state = const AsyncLoading();
     final mnemonic = WalletHelper().generateMnemonicFromPrivateKey(privateKey);
     var account = await MethodHelper()
         .computeMnemonic(mnemonic: mnemonic, name: "Account", backup: true);
@@ -57,7 +58,6 @@ class SelectedAccount extends _$SelectedAccount {
     await DbHelper.instance.unSelectWallet(selectedAccount?.id ?? 0);
     await DbHelper.instance.changeWallet(account.id!);
     state = AsyncData(account);
-    ref.read(loadingImportPrivateKeyProvider.notifier).changeLoading(false);
   }
 }
 

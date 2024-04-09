@@ -43,7 +43,7 @@ class SettingScreen extends ConsumerWidget {
                           Border.all(width: 1.w, color: AppColor.primaryColor)),
                   child: Center(
                     child: Blockies(
-                        size: 0.68,
+                        size: 0.6,
                         data: account?.addressETH ?? '-',
                         shape: BlockiesShape.circle),
                   ),
@@ -82,9 +82,15 @@ class SettingScreen extends ConsumerWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.r),
-                  color: account?.backup == true
-                      ? AppColor.greenColor
-                      : AppColor.yellowColor,
+                  border: Border.all(
+                    width: 1.w,
+                    color: account?.backup == true
+                        ? AppColor.greenColor
+                        : AppColor.yellowColor,
+                  ),
+                  // color: account?.backup == true
+                  //     ? AppColor.greenColor
+                  //     : AppColor.yellowColor,
                 ),
                 child: Row(
                   children: [
@@ -93,7 +99,9 @@ class SettingScreen extends ConsumerWidget {
                           ? Icons.check_circle_outline_rounded
                           : Icons.error_outline_outlined,
                       size: 24.w,
-                      color: AppColor.textStrongDark,
+                      color: account?.backup == true
+                          ? AppColor.greenColor
+                          : AppColor.yellowColor,
                     ),
                     8.0.width,
                     Expanded(
@@ -101,8 +109,11 @@ class SettingScreen extends ConsumerWidget {
                         account?.backup == true
                             ? "Your account has been backed up"
                             : "Please backup your sheed pharse, to secure your account.",
-                        style: AppFont.reguler12
-                            .copyWith(color: AppColor.textStrongDark),
+                        style: AppFont.reguler12.copyWith(
+                          color: account?.backup == true
+                              ? AppColor.greenColor
+                              : AppColor.yellowColor,
+                        ),
                       ),
                     ),
                   ],

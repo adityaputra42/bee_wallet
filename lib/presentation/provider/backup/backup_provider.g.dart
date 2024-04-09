@@ -38,7 +38,7 @@ final randomMnemonicProvider = AutoDisposeNotifierProvider<RandomMnemonic,
 );
 
 typedef _$RandomMnemonic = AutoDisposeNotifier<List<Map<String, dynamic>>>;
-String _$confirmMnemonicHash() => r'4f33017cef7a4eaf9f2fd7ec786ee0c26567bbae';
+String _$confirmMnemonicHash() => r'8e08c7365e455b690dd6b0433de3af6d252ecaec';
 
 /// See also [ConfirmMnemonic].
 @ProviderFor(ConfirmMnemonic)

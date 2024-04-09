@@ -12,7 +12,7 @@ class AppImage {
   static const String opensea = 'assets/images/opensea.png';
   static const String uniswap = 'assets/images/uniswap.png';
   static const String quickswap = 'assets/images/quickswap.png';
-  static const String ens = 'assets/images/ens.png';
+  static const String mask = 'assets/images/mask.png';
   static const String chainlink = 'assets/images/chainlink.png';
   static const String warning = 'assets/images/warning.png';
   static const String trouble = 'assets/images/trouble.png';

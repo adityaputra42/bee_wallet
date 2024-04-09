@@ -21,21 +21,6 @@ final newsDappProvider =
 );
 
 typedef _$NewsDapp = AutoDisposeNotifier<List<String>>;
-String _$favoriteDappHash() => r'0c3d88dcd340a05064a477acc3ad7737bc3601d4';
-
-/// See also [FavoriteDapp].
-@ProviderFor(FavoriteDapp)
-final favoriteDappProvider = AutoDisposeNotifierProvider<FavoriteDapp,
-    List<Map<String, dynamic>>>.internal(
-  FavoriteDapp.new,
-  name: r'favoriteDappProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$favoriteDappHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$FavoriteDapp = AutoDisposeNotifier<List<Map<String, dynamic>>>;
 String _$indexCarouselHash() => r'f0ac0f3ff65b5daf523ac892f06c43366b94e896';
 
 /// See also [IndexCarousel].
