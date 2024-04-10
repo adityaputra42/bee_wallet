@@ -384,28 +384,18 @@ class DisableGasFeeNFT extends _$DisableGasFeeNFT {
 }
 
 @riverpod
-class TransferNftLoading extends _$TransferNftLoading {
-  @override
-  bool build() => false;
-
-  setValue(bool value) {
-    state = value;
-  }
-}
-
-@riverpod
 class TransferNft extends _$TransferNft {
   @override
-  bool build() => false;
+  Future<bool> build()async => false;
 
   Future<void> tranfer(BuildContext context) async {
+
+    state = const AsyncLoading();
     var chain = ref.watch(chainNftTransferProvider);
     var nft = ref.watch(selectedNftProvider);
     var account = ref.watch(selectedAccountProvider).valueOrNull;
-    ref.read(transferNftLoadingProvider.notifier).setValue(true);
     try {
-      ref.watch(transferNftLoadingProvider);
-
+     
       var response = await EthHelper().transferNft(
         to: ref.watch(receiveNftProvider).text,
         nft: nft,
@@ -416,7 +406,7 @@ class TransferNft extends _$TransferNft {
       if (response != null) {
         await DbHelper.instance.deleteNFT(nft.id!);
         ref.read(listNftProvider.notifier).initializeNFt();
-        state = true;
+        state =const  AsyncData(true);
        
         context.goNamed('transaction_nft_success');
       } else {
@@ -425,12 +415,11 @@ class TransferNft extends _$TransferNft {
             content: "Transaction Failed",
             backgorund: AppColor.redColor);
       }
-      ref.read(transferNftLoadingProvider.notifier).setValue(false);
     } catch (e) {
       MethodHelper().showSnack(
           context: context, content: "Error $e", backgorund: AppColor.redColor);
-      state = false;
-      ref.read(transferNftLoadingProvider.notifier).setValue(false);
+          state =const  AsyncData(false);
+     
     }
   }
 }

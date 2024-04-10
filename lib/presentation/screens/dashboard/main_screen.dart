@@ -1,4 +1,4 @@
-// ignore_for_file: unused_result
+// ignore_for_file: unused_result, invalid_use_of_visible_for_testing_member
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -100,7 +100,13 @@ class MainScreen extends ConsumerWidget {
                                 return ErrorView(
                                   error: error.toString(),
                                   ontap: () {
+                                    ref
+                                        .read(balanceChainProvider.notifier)
+                                        // ignore: invalid_use_of_protected_member
+                                        .state = const AsyncLoading();
+
                                     ref.refresh(balanceChainProvider);
+
                                     ref.watch(balancePeriodicProvider);
                                   },
                                 );

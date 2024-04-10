@@ -6,7 +6,7 @@ part of 'chain_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chainOtherHash() => r'a0e8f3a5ea5058600857fe3d00bdf911dfefa113';
+String _$chainOtherHash() => r'9dbee44bf44b45e485a37e6402e8ff1c0b29ea45';
 
 /// See also [ChainOther].
 @ProviderFor(ChainOther)

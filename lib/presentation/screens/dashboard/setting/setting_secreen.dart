@@ -11,6 +11,7 @@ import '../../../../utils/util.dart';
 import '../../../provider/account/account_provider.dart';
 import '../../../provider/theme/theme_provider.dart';
 import 'changePin/sheet_password_change_pin.dart';
+import 'show_pharse/sheet_password_show.dart';
 
 class SettingScreen extends ConsumerWidget {
   const SettingScreen({super.key});
@@ -138,7 +139,15 @@ class SettingScreen extends ConsumerWidget {
               context,
               title: 'Show Seed Phrase',
               onTap: () {
-                context.goNamed('show_parse');
+                showModalBottomSheet(
+                    context: context,
+                    builder: (context) => const SheetPasswordShow(),
+                    backgroundColor: Theme.of(context).colorScheme.background,
+                    isScrollControlled: true,
+                    showDragHandle: true,
+                    shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(16.r))));
               },
             ),
             12.0.height,

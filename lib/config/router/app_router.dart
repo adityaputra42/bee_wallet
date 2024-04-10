@@ -36,7 +36,6 @@ import '../../presentation/screens/dashboard/setting/backup_pharse/sheed_pharse_
 import '../../presentation/screens/dashboard/setting/changePin/change_pin.dart';
 import '../../presentation/screens/dashboard/setting/changePin/confirm_pin.dart';
 import '../../presentation/screens/dashboard/setting/show_pharse/seed_pharse_show.dart';
-import '../../presentation/screens/dashboard/setting/show_pharse/show_pharse.dart';
 import '../../presentation/screens/welcome/getstarted/get_started_screen.dart';
 import '../../presentation/screens/welcome/onboarding/onboarding_screen.dart';
 import '../../presentation/screens/welcome/splahScreen/splash_screen.dart';
@@ -210,16 +209,10 @@ GoRouter appRoute(AppRouteRef ref) {
                       ]),
                 ]),
             GoRoute(
-                path: 'show_parse',
-                name: 'show_parse',
-                builder: (context, state) => const ShowParse(),
-                routes: [
-                  GoRoute(
-                    path: 'seed_pharse_show',
-                    name: 'seed_pharse_show',
-                    builder: (context, state) => const SheedPharseShow(),
-                  ),
-                ]),
+              path: 'seed_pharse_show',
+              name: 'seed_pharse_show',
+              builder: (context, state) => const SheedPharseShow(),
+            ),
             GoRoute(
                 path: 'change_pin',
                 name: 'change_pin',

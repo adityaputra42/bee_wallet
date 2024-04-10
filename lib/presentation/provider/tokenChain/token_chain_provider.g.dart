@@ -6,7 +6,7 @@ part of 'token_chain_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tokenChainOriginHash() => r'fb3377052733f2acc9c2cdd76fc8da2c62bccd77';
+String _$tokenChainOriginHash() => r'2aa59cdd7cd45acc789391ae8107ed95c8588fe5';
 
 /// See also [TokenChainOrigin].
 @ProviderFor(TokenChainOrigin)
@@ -23,7 +23,7 @@ final tokenChainOriginProvider = AutoDisposeAsyncNotifierProvider<
 
 typedef _$TokenChainOrigin = AutoDisposeAsyncNotifier<List<TokenChain>>;
 String _$selectedChainTokenHash() =>
-    r'e9d243e740c5b577c549a73abbb8af8544b75637';
+    r'baefcfd51d8cfff0c2ee1e0eaf1e8fad93c2eeac';
 
 /// See also [SelectedChainToken].
 @ProviderFor(SelectedChainToken)

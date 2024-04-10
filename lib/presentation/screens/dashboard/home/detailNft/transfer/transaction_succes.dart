@@ -16,7 +16,7 @@ class TransactionSuccesScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chain = ref.watch(tokenChainNftProvider);
-    final loading = ref.watch(transferNftLoadingProvider);
+    final loading = ref.watch(transferNftProvider).isLoading;
     return Scaffold(
       backgroundColor: Theme.of(context).cardColor,
       body: SafeArea(

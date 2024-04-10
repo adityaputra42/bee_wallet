@@ -339,7 +339,7 @@ class ConfrimTransferNft extends ConsumerWidget {
               ],
             ),
             PrimaryButton(
-              loading: ref.watch(transferNftLoadingProvider),
+              loading: ref.watch(transferNftProvider).isLoading,
               title: "Send",
               onPressed: () {
                 ref.read(transferNftProvider.notifier).tranfer(context);

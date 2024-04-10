@@ -10,6 +10,7 @@ part 'account_provider.g.dart';
 class SelectedAccount extends _$SelectedAccount {
   @override
   Future<Account> build() async {
+    state = const AsyncLoading();
     Account? address = await DbHelper.instance.getSelectedWallet();
     return address ?? Account();
   }
@@ -49,7 +50,7 @@ class SelectedAccount extends _$SelectedAccount {
 
   Future<void> importByPrivateKey(String privateKey) async {
     var selectedAccount = state.valueOrNull;
-       state = const AsyncLoading();
+    state = const AsyncLoading();
     final mnemonic = WalletHelper().generateMnemonicFromPrivateKey(privateKey);
     var account = await MethodHelper()
         .computeMnemonic(mnemonic: mnemonic, name: "Account", backup: true);

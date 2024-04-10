@@ -289,29 +289,12 @@ final disableGasFeeNFTProvider =
 );
 
 typedef _$DisableGasFeeNFT = AutoDisposeNotifier<bool>;
-String _$transferNftLoadingHash() =>
-    r'4cad9c9aa59f9f932a86412ea4e8ace6f7809e04';
-
-/// See also [TransferNftLoading].
-@ProviderFor(TransferNftLoading)
-final transferNftLoadingProvider =
-    AutoDisposeNotifierProvider<TransferNftLoading, bool>.internal(
-  TransferNftLoading.new,
-  name: r'transferNftLoadingProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$transferNftLoadingHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$TransferNftLoading = AutoDisposeNotifier<bool>;
-String _$transferNftHash() => r'648ab1d995aa34d828215726b7651c12d5e3fc75';
+String _$transferNftHash() => r'1caa037a53318c17682119e69ac84cb26d73da46';
 
 /// See also [TransferNft].
 @ProviderFor(TransferNft)
 final transferNftProvider =
-    AutoDisposeNotifierProvider<TransferNft, bool>.internal(
+    AutoDisposeAsyncNotifierProvider<TransferNft, bool>.internal(
   TransferNft.new,
   name: r'transferNftProvider',
   debugGetCreateSourceHash:
@@ -320,6 +303,6 @@ final transferNftProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$TransferNft = AutoDisposeNotifier<bool>;
+typedef _$TransferNft = AutoDisposeAsyncNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

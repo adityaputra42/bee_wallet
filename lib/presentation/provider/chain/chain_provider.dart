@@ -27,6 +27,7 @@ part 'chain_provider.g.dart';
 class ChainOther extends _$ChainOther {
   @override
   Future<List<ChainNetwork>> build() async {
+    state = const AsyncLoading();
     final networkList = await DbHelper.instance.getAllChainNetwork();
     if (networkList.isEmpty) {
       final chainlist =
