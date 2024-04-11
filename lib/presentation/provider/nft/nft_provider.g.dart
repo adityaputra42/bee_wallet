@@ -228,7 +228,7 @@ final selectedFeeNftProvider =
 );
 
 typedef _$SelectedFeeNft = AutoDisposeNotifier<int>;
-String _$receiveNftHash() => r'1535487ac7ebd2467a7f725de1367993ca2b53fd';
+String _$receiveNftHash() => r'b2a55a5b366393efc5756a888846ef6730cc25fd';
 
 /// See also [ReceiveNft].
 @ProviderFor(ReceiveNft)

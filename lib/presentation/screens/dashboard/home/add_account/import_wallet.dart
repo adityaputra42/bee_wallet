@@ -10,6 +10,7 @@ import '../../../../../config/config.dart';
 import '../../../../../utils/util.dart';
 import '../../../../provider/account/account_provider.dart';
 import '../../../../widget/widget.dart';
+import '../../scan/scann_page.dart';
 
 final seedImportController =
     StateProvider<TextEditingController>((ref) => TextEditingController());
@@ -41,7 +42,16 @@ class ImportWallet extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ScanPage(
+                                      onScan: (result) => ref
+                                          .read(seedImportController.notifier)
+                                          .state
+                                          .text = result)));
+                        },
                         child: Iconify(
                           AntDesign.scan,
                           size: 24.w,

@@ -21,6 +21,7 @@ import '../../../../../data/src/src.dart';
 import '../../../../../utils/util.dart';
 import '../../../../provider/provider.dart';
 import '../../../../provider/transfer/transfer_provider.dart';
+import '../../scan/scann_page.dart';
 
 class DetailTokenScreen extends ConsumerStatefulWidget {
   const DetailTokenScreen({super.key});
@@ -51,7 +52,26 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
         context: context,
         title: "${chain.name}",
         icon: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ScanPage(
+                    onScan: (result) {
+                      ref
+                          .read(receiveAddressProvider.notifier)
+                          .setValue(result);
+                      ref.watch(receiveAddressProvider);
+                      ref
+                          .read(chainTransferProvider.notifier)
+                          .setChainTransfer(chain);
+                      ref.watch(chainTransferProvider);
+                      context.goNamed('choose_receiver');
+                    },
+                  ),
+                ),
+              );
+            },
             child: Container(
               width: 36.w,
               height: 36.w,

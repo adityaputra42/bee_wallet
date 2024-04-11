@@ -13,6 +13,7 @@ import 'package:iconify_flutter_plus/icons/ant_design.dart';
 import '../../../../../data/src/src.dart';
 import '../../../../../utils/util.dart';
 import '../../../../provider/transfer/transfer_provider.dart';
+import '../../scan/scann_page.dart';
 import 'sheet_change_chain.dart';
 
 class ChooseReceiverScreen extends ConsumerWidget {
@@ -252,7 +253,16 @@ class ChooseReceiverScreen extends ConsumerWidget {
                             children: [
                               8.0.width,
                               GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ScanPage(
+                                                onScan: (result) => ref
+                                                    .read(receiveAddressProvider
+                                                        .notifier)
+                                                    .setValue(result))));
+                                  },
                                   child: Iconify(
                                     AntDesign.scan,
                                     size: 24.w,

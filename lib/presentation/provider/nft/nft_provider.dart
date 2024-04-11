@@ -352,6 +352,10 @@ class ReceiveNft extends _$ReceiveNft {
     } else {
       return null;
     }
+  } 
+
+  setvalue(String value){
+    state.text = value;
   }
 }
 

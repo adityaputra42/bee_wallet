@@ -13,6 +13,7 @@ import 'package:iconify_flutter_plus/icons/ant_design.dart';
 
 import '../../../../../../config/config.dart';
 import '../../../../../widget/widget.dart';
+import '../../../scan/scann_page.dart';
 
 class TransferNftScreen extends ConsumerWidget {
   const TransferNftScreen({super.key});
@@ -23,7 +24,7 @@ class TransferNftScreen extends ConsumerWidget {
     final token = ref.watch(chainNftTransferProvider);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: WidgetHelper.appBar(context: context, title: "Tranfer NFT"),
+      appBar: WidgetHelper.appBar(context: context, title: "Transfer NFT"),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         padding: EdgeInsets.all(16.w),
@@ -169,7 +170,16 @@ class TransferNftScreen extends ConsumerWidget {
                           children: [
                             8.0.width,
                             GestureDetector(
-                                onTap: () async {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ScanPage(
+                                              onScan: (result) => ref
+                                                  .read(receiveNftProvider
+                                                      .notifier)
+                                                  .setvalue(result))));
+                                },
                                 child: Iconify(
                                   AntDesign.scan,
                                   size: 24.w,
@@ -194,7 +204,7 @@ class TransferNftScreen extends ConsumerWidget {
                             .read(networkFeeNftProvider.notifier)
                             .getNetworkFee();
                         ref.watch(networkFeeNftProvider);
-                       context.goNamed('confirm_transfer_nft');
+                        context.goNamed('confirm_transfer_nft');
                       })
                 ],
               ),
