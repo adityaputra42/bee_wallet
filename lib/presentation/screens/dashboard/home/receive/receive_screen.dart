@@ -186,8 +186,8 @@ class ReceiveScreen extends ConsumerWidget {
                     decoration:
                         BoxDecoration(borderRadius: BorderRadius.circular(8.r)),
                     child: QrImageView(
-                      embeddedImage: AssetImage(
-                        chain.logo ?? '',
+                      embeddedImage: const AssetImage(
+                        AppImage.logo,
                       ),
                       data: chain.baseChain == 'eth'
                           ? (account?.addressETH ?? '')

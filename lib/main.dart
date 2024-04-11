@@ -31,7 +31,7 @@ class MyApp extends ConsumerWidget {
               routerDelegate: appRouter.routerDelegate,
               routeInformationProvider: appRouter.routeInformationProvider,
               debugShowCheckedModeBanner: false,
-              title: 'Base project',
+              title: 'Bee Wallet',
               theme: Styles.themeData(isdark, context),
             );
           });
