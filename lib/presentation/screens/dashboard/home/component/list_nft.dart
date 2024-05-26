@@ -56,10 +56,10 @@ class ListNft extends ConsumerWidget {
                               horizontal: 12.w, vertical: 8.h),
                           margin: EdgeInsets.only(
                               left: listChain[index] == listChain.first
-                                  ? 24.w
+                                  ? 16.w
                                   : 0,
                               right: listChain[index] == listChain.last
-                                  ? 24.w
+                                  ? 16.w
                                   : 12.w),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.r),
@@ -100,7 +100,7 @@ class ListNft extends ConsumerWidget {
           ),
           8.0.height,
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -145,7 +145,7 @@ class ListNft extends ConsumerWidget {
           Expanded(
               child: Container(
             padding: EdgeInsets.all(16.w),
-            margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+            margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: Theme.of(context).cardColor),

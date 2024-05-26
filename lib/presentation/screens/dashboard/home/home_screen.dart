@@ -25,92 +25,87 @@ class HomeScreen extends ConsumerWidget {
           automaticallyImplyLeading: false,
           toolbarHeight: 72.h,
           elevation: 0,
-          title: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 8.w,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: 48.w,
-                  height: 48.w,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border:
-                          Border.all(width: 1.w, color: AppColor.primaryColor)),
-                  child: Center(
-                    child: Blockies(
-                        size: 0.66.w,
-                        data: account?.addressETH ?? '-',
-                        shape: BlockiesShape.circle),
-                  ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 48.w,
+                height: 48.w,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border:
+                        Border.all(width: 1.w, color: AppColor.primaryColor)),
+                child: Center(
+                  child: Blockies(
+                      size: 0.66.w,
+                      data: account?.addressETH ?? '-',
+                      shape: BlockiesShape.circle),
                 ),
-                12.0.width,
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (context) => const ChangeAccountScreen(),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.background,
-                          showDragHandle: true,
-                          isDismissible: false,
-                          isScrollControlled: true,
-                          useSafeArea: true,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(16.r))));
-                    },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              account?.name ?? '',
-                              style: AppFont.semibold14.copyWith(
-                                color: Theme.of(context).indicatorColor,
-                              ),
-                            ),
-                            4.0.width,
-                            Iconify(
-                              Ic.round_expand_more,
-                              size: 24.w,
+              ),
+              12.0.width,
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) => const ChangeAccountScreen(),
+                        backgroundColor:
+                            Theme.of(context).colorScheme.background,
+                        showDragHandle: true,
+                        isDismissible: false,
+                        isScrollControlled: true,
+                        useSafeArea: true,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(16.r))));
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            account?.name ?? '',
+                            style: AppFont.semibold14.copyWith(
                               color: Theme.of(context).indicatorColor,
-                            )
-                          ],
-                        ),
-                        2.0.height,
-                        Text(
-                          'EVM : ${MethodHelper().shortAddress(address: account?.addressETH ?? '', length: 5)}',
-                          style: AppFont.reguler12.copyWith(
-                            color: Theme.of(context).hintColor,
+                            ),
                           ),
+                          4.0.width,
+                          Iconify(
+                            Ic.round_expand_more,
+                            size: 24.w,
+                            color: Theme.of(context).indicatorColor,
+                          )
+                        ],
+                      ),
+                      2.0.height,
+                      Text(
+                        'EVM : ${MethodHelper().shortAddress(address: account?.addressETH ?? '', length: 5)}',
+                        style: AppFont.reguler12.copyWith(
+                          color: Theme.of(context).hintColor,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      width: 36.w,
-                      height: 36.w,
-                      padding: EdgeInsets.all(6.h),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(
-                              width: 1.w, color: AppColor.grayColor)),
-                      child: Iconify(
-                        AntDesign.scan,
-                        color: Theme.of(context).indicatorColor,
-                        size: 20.w,
-                      ),
-                    ))
-              ],
-            ),
+              ),
+              GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: 36.w,
+                    height: 36.w,
+                    padding: EdgeInsets.all(6.h),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        border: Border.all(
+                            width: 1.w, color: AppColor.grayColor)),
+                    child: Iconify(
+                      AntDesign.scan,
+                      color:AppColor.primaryColor,
+                      size: 20.w,
+                    ),
+                  ))
+            ],
           ),
         ),
         body: DefaultTabController(
@@ -120,7 +115,7 @@ class HomeScreen extends ConsumerWidget {
             children: [
               12.0.height,
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 24.w),
+                margin: EdgeInsets.symmetric(horizontal: 16.w),
                 width: double.infinity,
                 height: 48.h,
                 padding: EdgeInsets.all(3.w),
@@ -160,10 +155,12 @@ class HomeScreen extends ConsumerWidget {
               ),
               16.0.height,
               const Expanded(
-                  child: TabBarView(children: [
-                AssetWallet(),
-                ListNft(),
-              ]))
+                  child: TabBarView(
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                    AssetWallet(),
+                    ListNft(),
+                  ]))
             ],
           ),
         ));

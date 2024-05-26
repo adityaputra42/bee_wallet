@@ -19,65 +19,62 @@ class WidgetHelper {
     return AppBar(
       elevation: 0,
       // shadowColor: AppColor.grayColor,
-      title: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.w),
-        child: Row(
-          children: [
-            isCanBack
-                ? GestureDetector(
-                    onTap: onTap ??
-                        () {
-                          context.pop();
-                        },
-                    child: Container(
-                      width: 36.w,
-                      height: 36.w,
-                      padding: EdgeInsets.all(6.h),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(
-                              width: 1.w, color: Theme.of(context).hintColor)),
-                      child: Icon(
-                        Icons.arrow_back_ios_new_rounded,
-                        color: Theme.of(context).indicatorColor,
-                        size: 20.w,
-                      ),
-                    ))
-                : 40.0.width,
-            16.0.width,
-            Expanded(
-              child: GestureDetector(
-                onTap: onTapTitle ?? () {},
-                child: iconTitle != null
-                    ? Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            title,
-                            style: AppFont.medium16.copyWith(
-                                color: Theme.of(context).indicatorColor,
-                                fontSize: fontSize ?? 16),
-                            textAlign: TextAlign.center,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          iconTitle
-                        ],
-                      )
-                    : Text(
-                        title,
-                        style: AppFont.medium16.copyWith(
-                            color: Theme.of(context).indicatorColor,
-                            fontSize: fontSize ?? 16),
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-              ),
+      title: Row(
+        children: [
+          isCanBack
+              ? GestureDetector(
+                  onTap: onTap ??
+                      () {
+                        context.pop();
+                      },
+                  child: Container(
+                    width: 36.w,
+                    height: 36.w,
+                    padding: EdgeInsets.all(6.h),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        border: Border.all(
+                            width: 1.w, color: Theme.of(context).hintColor)),
+                    child: Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      color: Theme.of(context).indicatorColor,
+                      size: 20.w,
+                    ),
+                  ))
+              : 40.0.width,
+          16.0.width,
+          Expanded(
+            child: GestureDetector(
+              onTap: onTapTitle ?? () {},
+              child: iconTitle != null
+                  ? Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          title,
+                          style: AppFont.medium16.copyWith(
+                              color: Theme.of(context).indicatorColor,
+                              fontSize: fontSize ?? 16),
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        iconTitle
+                      ],
+                    )
+                  : Text(
+                      title,
+                      style: AppFont.medium16.copyWith(
+                          color: Theme.of(context).indicatorColor,
+                          fontSize: fontSize ?? 16),
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                    ),
             ),
-            16.0.width,
-            icon ?? 32.0.width,
-          ],
-        ),
+          ),
+          16.0.width,
+          icon ?? 32.0.width,
+        ],
       ),
       automaticallyImplyLeading: false,
       backgroundColor: color ?? Theme.of(context).colorScheme.background,

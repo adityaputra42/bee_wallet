@@ -90,6 +90,8 @@ flutter:
     - assets/images/
     - assets/abi/
     - assets/logo/
+    - assets/imageDapp/
+    
   fonts:
     - family: Poppins
       fonts:

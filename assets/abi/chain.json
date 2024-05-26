@@ -63,7 +63,7 @@
    {
        "name" : "Goerli Testnet",
        "symbol" : "gETH",
-       "RPC" : "https://rpc.tornadoeth.cash/goerli",
+       "RPC" : "https://eth-goerli.public.blastapi.io",
        "chainId" : "5",
        "explorer" : "https://goerli.etherscan.io",
        "explorerAPI" : "https://api-goerli.etherscan.io",
@@ -102,6 +102,48 @@
     "decimal":18,
     "contractAddress":"0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
     "isTestnet": null
+},
+{
+    "name":"Solana",
+    "symbol":"SOL",
+    "RPC" : "https://api.testnet.solana.com/",  
+    "chainId":"1399811149",
+    "explorer" : "https://solscan.io/",
+    "explorerAPI" : "https://solscan.io/",
+    "logo":"assets/logo/solana.png",
+    "baseLogo":"assets/logo/solana.png", 
+    "baseNetwork":"sol",
+    "decimal":18,
+    "contractAddress":null,
+    "isTestnet": false
+},
+{
+    "name":"Sui Mainnet",
+    "symbol":"SUI",
+    "RPC" : "https://mainnet-rpc.sui.chainbase.online/",  
+    "chainId":"101",
+    "explorer" : "https://suiexplorer.com/",
+    "explorerAPI" : "https://suiexplorer.com/",
+    "logo":"assets/logo/sui.png",
+    "baseLogo":"assets/logo/sui.png", 
+    "baseNetwork":"sui",
+    "decimal":18,
+    "contractAddress":null,
+    "isTestnet": false
+},
+{
+    "name":"Sui Testnet",
+    "symbol":"TSUI",
+    "RPC" : "https://fullnode.testnet.sui.io",  
+    "chainId":"103",
+    "explorer" : "https://suiexplorer.com/",
+    "explorerAPI" : "https://suiexplorer.com/",
+    "logo":"assets/logo/sui.png",
+    "baseLogo":"assets/logo/sui.png", 
+    "baseNetwork":"sui",
+    "decimal":18,
+    "contractAddress":null,
+    "isTestnet": true
 }
-   
+
 ]

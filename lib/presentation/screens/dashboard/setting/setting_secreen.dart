@@ -25,7 +25,7 @@ class SettingScreen extends ConsumerWidget {
       appBar: WidgetHelper.appBar(
           context: context, title: "Setting", isCanBack: false),
       body: Container(
-        margin: EdgeInsets.fromLTRB(24.w, 0, 24.w, 16.h),
+        margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 16.h),
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),

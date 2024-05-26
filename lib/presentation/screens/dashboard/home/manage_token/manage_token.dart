@@ -226,7 +226,10 @@ class ManageToken extends ConsumerWidget {
               FlutterSwitch(
                 width: 48.w,
                 height: 24.h,
-                toggleColor: isDark
+                toggleColor: listSelected.any((element) =>
+                        element.chainId == chain.chainId &&
+                        element.symbol == chain.symbol)
+                    
                     ? AppColor.textStrongDark
                     : AppColor.grayColor,
                 activeColor: AppColor.primaryColor,

@@ -21,418 +21,501 @@ class SwapScreen extends ConsumerWidget {
       appBar: WidgetHelper.appBar(
           context: context, title: "Swap", isCanBack: false),
       body: Container(
-        margin: EdgeInsets.fromLTRB(24.w, 0, 24.w, 16.h),
+        margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 16.h),
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
             color: Theme.of(context).cardColor),
-        child: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.sizeOf(context).height*0.295,
-              child: Stack(
+        child: LayoutBuilder(
+          builder: (context, constraints) => SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: Column(
                 children: [
-                  Column(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.fromLTRB(16.w, 16.w, 16.w, 28.w),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.r),
-                            color: Theme.of(context).colorScheme.background),
-                        child: Column(
+                  SizedBox(
+                    height: MediaQuery.sizeOf(context).height * 0.32,
+                    child: Stack(
+                      children: [
+                        Column(
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "From :",
-                                  style: AppFont.reguler12.copyWith(
-                                      color: Theme.of(context).hintColor),
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
+                            Expanded(
+                              child: Container(
+                                width: double.infinity,
+                                padding:
+                                    EdgeInsets.fromLTRB(16.w, 16.w, 16.w, 32.w),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Iconify(
-                                      Mdi.wallet_outline,
-                                      color: Theme.of(context).hintColor,
-                                      size: 16.w,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "From :",
+                                          style: AppFont.reguler12.copyWith(
+                                              color:
+                                                  Theme.of(context).hintColor),
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Iconify(
+                                              Mdi.wallet_outline,
+                                              color:
+                                                  Theme.of(context).hintColor,
+                                              size: 16.w,
+                                            ),
+                                            8.0.width,
+                                            Text(
+                                              "0.00",
+                                              style: AppFont.medium12.copyWith(
+                                                  color: Theme.of(context)
+                                                      .hintColor),
+                                            ),
+                                          ],
+                                        )
+                                      ],
                                     ),
-                                    8.0.width,
-                                    Text(
-                                      "0.00",
-                                      style: AppFont.medium12.copyWith(
-                                          color: Theme.of(context).hintColor),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                            16.0.height,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  width:
-                                      MediaQuery.sizeOf(context).width.w * 0.45,
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 42.w,
-                                        height: 42.w,
-                                        child: ClipPolygon(
-                                          sides: 6,
-                                          child: Container(
-                                            padding: EdgeInsets.all(0.5.h),
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .background,
-                                            child:
-                                                Image.asset(AppChainLogo.bnb),
+                                    16.0.height,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          width: MediaQuery.sizeOf(context)
+                                                  .width
+                                                  .w *
+                                              0.45,
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 40.w,
+                                                height: 40.w,
+                                                child: ClipPolygon(
+                                                  sides: 6,
+                                                  child: Container(
+                                                    padding:
+                                                        EdgeInsets.all(0.5.h),
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .background,
+                                                    child: Image.asset(
+                                                        AppChainLogo.bnb),
+                                                  ),
+                                                ),
+                                              ),
+                                              12.0.width,
+                                              Expanded(
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          "BNB",
+                                                          style: AppFont
+                                                              .medium14
+                                                              .copyWith(
+                                                                  color: Theme.of(
+                                                                          context)
+                                                                      .indicatorColor),
+                                                        ),
+                                                        4.0.width,
+                                                        Iconify(
+                                                          Ic.expand_more,
+                                                          size: 18.w,
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .indicatorColor,
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Text(
+                                                      "Binance Smart chain",
+                                                      style: AppFont.reguler12
+                                                          .copyWith(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .hintColor),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ),
-                                      8.0.width,
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "BNB",
-                                                style: AppFont.semibold14
+                                        Expanded(
+                                          child: TextField(
+                                              style: AppFont.medium24.copyWith(
+                                                  color: Theme.of(context)
+                                                      .indicatorColor),
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              textAlign: TextAlign.end,
+                                              onChanged: (value) {},
+                                              decoration: InputDecoration(
+                                                hintText: '0',
+                                                contentPadding: EdgeInsets.zero,
+                                                hintStyle: AppFont.medium24
                                                     .copyWith(
                                                         color: Theme.of(context)
                                                             .indicatorColor),
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.r),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 0.5),
+                                                ),
+                                                disabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.r),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 0.5),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.r),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 0.5),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.r),
+                                                  borderSide: const BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                              )),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            8.0.height,
+                            Expanded(
+                              child: Container(
+                                width: double.infinity,
+                                padding:
+                                    EdgeInsets.fromLTRB(16.w, 24.w, 16.w, 16.w),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "To :",
+                                          style: AppFont.reguler12.copyWith(
+                                              color:
+                                                  Theme.of(context).hintColor),
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Iconify(
+                                              Mdi.wallet_outline,
+                                              color:
+                                                  Theme.of(context).hintColor,
+                                              size: 16.w,
+                                            ),
+                                            8.0.width,
+                                            Text(
+                                              "0.00",
+                                              style: AppFont.medium12.copyWith(
+                                                  color: Theme.of(context)
+                                                      .hintColor),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    16.0.height,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          width: MediaQuery.sizeOf(context)
+                                                  .width
+                                                  .w *
+                                              0.45,
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 40.w,
+                                                height: 40.w,
+                                                child: ClipPolygon(
+                                                  sides: 6,
+                                                  child: Container(
+                                                    padding:
+                                                        EdgeInsets.all(0.5.h),
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .background,
+                                                    child: Image.asset(
+                                                        AppChainLogo.usdt),
+                                                  ),
+                                                ),
                                               ),
-                                              Iconify(
-                                                Ic.round_arrow_drop_down,
-                                                size: 24.w,
-                                                color: Theme.of(context)
-                                                    .indicatorColor,
-                                              )
+                                              12.0.width,
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          "USDT",
+                                                          style: AppFont
+                                                              .medium14
+                                                              .copyWith(
+                                                                  color: Theme.of(
+                                                                          context)
+                                                                      .indicatorColor),
+                                                        ),
+                                                        4.0.width,
+                                                        Iconify(
+                                                          Ic.expand_more,
+                                                          size: 18.w,
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .indicatorColor,
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Text(
+                                                      "Theter USD",
+                                                      style: AppFont.reguler12
+                                                          .copyWith(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .hintColor),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
                                             ],
                                           ),
-                                          Text(
-                                            "Binance Smart chain",
-                                            style: AppFont.reguler12.copyWith(
-                                                color: Theme.of(context)
-                                                    .hintColor),
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                        ),
+                                        Expanded(
+                                          child: TextField(
+                                              style: AppFont.medium24.copyWith(
+                                                  color: Theme.of(context)
+                                                      .indicatorColor),
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              textAlign: TextAlign.end,
+                                              onChanged: (value) {},
+                                              decoration: InputDecoration(
+                                                hintText: '0',
+                                                contentPadding: EdgeInsets.zero,
+                                                hintStyle: AppFont.medium24
+                                                    .copyWith(
+                                                        color: Theme.of(context)
+                                                            .indicatorColor),
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.r),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 0.5),
+                                                ),
+                                                disabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.r),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 0.5),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.r),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 0.5),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.r),
+                                                  borderSide: const BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                              )),
+                                        ),
+                                      ],
+                                    )
+                                  ],
                                 ),
-                                Expanded(
-                                  child: TextField(
-                                      style: AppFont.medium24.copyWith(
-                                          color:
-                                              Theme.of(context).indicatorColor),
-                                      keyboardType: TextInputType.number,
-                                      textAlign: TextAlign.end,
-                                      onChanged: (value) {},
-                                      decoration: InputDecoration(
-                                        hintText: '0',
-                                        contentPadding: EdgeInsets.zero,
-                                        hintStyle: AppFont.medium24.copyWith(
-                                            color: Theme.of(context)
-                                                .indicatorColor),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent,
-                                              width: 0.5),
-                                        ),
-                                        disabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent,
-                                              width: 0.5),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent,
-                                              width: 0.5),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent),
-                                        ),
-                                      )),
-                                ),
-                              ],
+                              ),
                             )
                           ],
                         ),
-                      ),
-                      8.0.height,
-                      Container(
-                        width: double.infinity,
-                       
-                        padding: EdgeInsets.fromLTRB(16.w, 24.w, 16.w, 16.w),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.r),
-                            color: Theme.of(context).colorScheme.background),
-                        child: Column(
+                        Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                            width: 52.w,
+                            height: 52.w,
+                            padding: EdgeInsets.all(10.w),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppColor.primaryColor,
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 10,
+                                      spreadRadius: 5,
+                                      color: Theme.of(context)
+                                          .indicatorColor
+                                          .withOpacity(0.1))
+                                ]),
+                            child: Iconify(
+                              MaterialSymbols.swap_vert_rounded,
+                              size: 24.w,
+                              color: AppColor.textStrongLight,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  16.0.height,
+                  PrimaryButton(title: "Swap", onPressed: () {}),
+                  16.0.height,
+                  Container(
+                    padding: EdgeInsets.all(16.w),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        color: Theme.of(context).colorScheme.background),
+                    child: Column(
+                      children: [
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            Text(
+                              'Provider',
+                              style: AppFont.reguler12
+                                  .copyWith(color: Theme.of(context).hintColor),
+                            ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "From :",
-                                  style: AppFont.reguler12.copyWith(
-                                      color: Theme.of(context).hintColor),
+                                  '1Inch',
+                                  style: AppFont.medium12.copyWith(
+                                      color: Theme.of(context).indicatorColor),
                                 ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Iconify(
-                                      Mdi.wallet_outline,
-                                      color: Theme.of(context).hintColor,
-                                      size: 16.w,
-                                    ),
-                                    8.0.width,
-                                    Text(
-                                      "0.00",
-                                      style: AppFont.medium12.copyWith(
-                                          color: Theme.of(context).hintColor),
-                                    ),
-                                  ],
+                                4.0.width,
+                                Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  size: 16.w,
+                                  color: Theme.of(context).indicatorColor,
                                 )
-                              ],
-                            ),16.0.height,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  width:
-                                      MediaQuery.sizeOf(context).width.w * 0.45,
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 42.w,
-                                        height: 42.w,
-                                        child: ClipPolygon(
-                                          sides: 6,
-                                          child: Container(
-                                            padding: EdgeInsets.all(0.5.h),
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .background,
-                                            child:
-                                                Image.asset(AppChainLogo.usdt),
-                                          ),
-                                        ),
-                                      ),
-                                      8.0.width,
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "USDT",
-                                                style: AppFont.semibold14
-                                                    .copyWith(
-                                                        color: Theme.of(context)
-                                                            .indicatorColor),
-                                              ),
-                                              Iconify(
-                                                Ic.round_arrow_drop_down,
-                                                size: 24.w,
-                                                color: Theme.of(context)
-                                                    .indicatorColor,
-                                              )
-                                            ],
-                                          ),
-                                          Text(
-                                            "Theter USD",
-                                            style: AppFont.reguler12.copyWith(
-                                                color: Theme.of(context)
-                                                    .hintColor),
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: TextField(
-                                      style: AppFont.medium24.copyWith(
-                                          color:
-                                              Theme.of(context).indicatorColor),
-                                      keyboardType: TextInputType.number,
-                                      textAlign: TextAlign.end,
-                                      onChanged: (value) {},
-                                      decoration: InputDecoration(
-                                        hintText: '0',
-                                        contentPadding: EdgeInsets.zero,
-                                        hintStyle: AppFont.medium24.copyWith(
-                                            color: Theme.of(context)
-                                                .indicatorColor),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent,
-                                              width: 0.5),
-                                        ),
-                                        disabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent,
-                                              width: 0.5),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent,
-                                              width: 0.5),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8.r),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent),
-                                        ),
-                                      )),
-                                ),
                               ],
                             )
                           ],
                         ),
-                      )
-                    ],
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Container(
-                      width: 54.w,
-                      height: 54.w,
-                      padding: EdgeInsets.all(8.w),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColor.primaryColor,
-                      ),
-                      child: Iconify(
-                        MaterialSymbols.swap_vert_rounded,
-                        size: 36.w,
-                        color: AppColor.textStrongDark,
-                      ),
+                        12.0.height,
+                        SizedBox(
+                          height: 1.h,
+                          child: Divider(
+                            thickness: 1.h,
+                            color: AppColor.grayColor,
+                          ),
+                        ),
+                        12.0.height,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Rate',
+                              style: AppFont.reguler12
+                                  .copyWith(color: Theme.of(context).hintColor),
+                            ),
+                            Text(
+                              '1 ETH = 2967.2783 USDT',
+                              style: AppFont.medium12.copyWith(
+                                  color: Theme.of(context).indicatorColor),
+                            ),
+                          ],
+                        ),
+                        8.0.height,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Fee',
+                              style: AppFont.reguler12
+                                  .copyWith(color: Theme.of(context).hintColor),
+                            ),
+                            Text(
+                              '0.25 %',
+                              style: AppFont.medium12.copyWith(
+                                  color: Theme.of(context).indicatorColor),
+                            ),
+                          ],
+                        ),
+                        8.0.height,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Time',
+                              style: AppFont.reguler12
+                                  .copyWith(color: Theme.of(context).hintColor),
+                            ),
+                            Text(
+                              '~ 10 min',
+                              style: AppFont.medium12.copyWith(
+                                  color: Theme.of(context).indicatorColor),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   )
                 ],
               ),
             ),
-            16.0.height,
-            PrimaryButton(title: "Swap", onPressed: () {}),
-            16.0.height,
-            Container(
-              padding: EdgeInsets.all(16.w),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  color: Theme.of(context).colorScheme.background),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Provider',
-                        style: AppFont.reguler12
-                            .copyWith(color: Theme.of(context).hintColor),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            '1Inch',
-                            style: AppFont.medium12.copyWith(
-                                color: Theme.of(context).indicatorColor),
-                          ),
-                          4.0.width,
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 16.w,
-                            color: Theme.of(context).indicatorColor,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                  12.0.height,
-                  SizedBox(
-                    height: 1.h,
-                    child: Divider(
-                      thickness: 1.h,
-                      color: AppColor.grayColor,
-                    ),
-                  ),
-                  12.0.height,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Rate',
-                        style: AppFont.reguler12
-                            .copyWith(color: Theme.of(context).hintColor),
-                      ),
-                      Text(
-                        '1 ETH = 2967.2783 USDT',
-                        style: AppFont.medium12
-                            .copyWith(color: Theme.of(context).indicatorColor),
-                      ),
-                    ],
-                  ),
-                  8.0.height,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Fee',
-                        style: AppFont.reguler12
-                            .copyWith(color: Theme.of(context).hintColor),
-                      ),
-                      Text(
-                        '0.25 %',
-                        style: AppFont.medium12
-                            .copyWith(color: Theme.of(context).indicatorColor),
-                      ),
-                    ],
-                  ),
-                  8.0.height,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Time',
-                        style: AppFont.reguler12
-                            .copyWith(color: Theme.of(context).hintColor),
-                      ),
-                      Text(
-                        '~ 10 min',
-                        style: AppFont.medium12
-                            .copyWith(color: Theme.of(context).indicatorColor),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            )
-          ],
+          ),
         ),
       ),
     );

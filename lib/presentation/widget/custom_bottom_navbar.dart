@@ -1,5 +1,7 @@
 import 'package:bee_wallet/utils/util.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/ph.dart';
@@ -16,127 +18,161 @@ class CustomBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 72.h,
-      padding: EdgeInsets.symmetric(
-        horizontal: 36.w,
-      ),
+      margin: EdgeInsets.fromLTRB(16.w, 0.w, 16.w, 16.h),
+      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 8.h),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(8.r)),
+        borderRadius: BorderRadius.circular(12.r),
         color: Theme.of(context).cardColor,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          GestureDetector(
-            onTap: () {
-              if (onTap != null) {
-                onTap!(0);
-              }
-            },
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Iconify(
-                  Mdi.wallet_outline,
-                  color: (selectedIndex == 0)
-                      ? AppColor.primaryColor
-                      : AppColor.grayColor,
-                  size: 24.w,
-                ),
-                4.0.height,
-                Text(
-                  'Wallet',
-                  style: AppFont.medium14.copyWith(
-                    color: (selectedIndex == 0)
-                        ? AppColor.primaryColor
-                        : AppColor.grayColor,
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                if (onTap != null) {
+                  onTap!(0);
+                }
+              },
+              child: SizedBox(
+                height: 48.h,
+                width: double.infinity,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Iconify(
+                        Mdi.wallet_outline,
+                        color: (selectedIndex == 0)
+                            ? AppColor.primaryColor
+                            : AppColor.grayColor,
+                        size: 24.w,
+                      ),
+                      (selectedIndex == 0)
+                          ? Container(
+                              margin: EdgeInsets.only(top: 1.h),
+                              width: 6.w,
+                              height: 6.w,
+                              decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColor.primaryColor),
+                            )
+                          : const SizedBox()
+                    ],
                   ),
-                )
-              ],
+                ),
+              ),
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              if (onTap != null) {
-                onTap!(1);
-              }
-            },
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Iconify(
-                  Ph.swap_bold,
-                  color: (selectedIndex == 1)
-                      ? AppColor.primaryColor
-                      : AppColor.grayColor,
-                  size: 24.w,
-                ),
-                4.0.height,
-                Text(
-                  'Swap',
-                  style: AppFont.medium14.copyWith(
-                    color: (selectedIndex == 1)
-                        ? AppColor.primaryColor
-                        : AppColor.grayColor,
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                if (onTap != null) {
+                  onTap!(1);
+                }
+              },
+              child: SizedBox(
+                height: 48.h,
+                width: double.infinity,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Iconify(
+                        Ph.swap_bold,
+                        color: (selectedIndex == 1)
+                            ? AppColor.primaryColor
+                            : AppColor.grayColor,
+                        size: 24.w,
+                      ),
+                      (selectedIndex == 1)
+                          ? Container(
+                              margin: EdgeInsets.only(top: 1.h),
+                              width: 6.w,
+                              height: 6.w,
+                              decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColor.primaryColor),
+                            )
+                          : const SizedBox()
+                    ],
                   ),
-                )
-              ],
+                ),
+              ),
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              if (onTap != null) {
-                onTap!(2);
-              }
-            },
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Iconify(
-                  MaterialSymbols.widgets_outline_rounded,
-                  color: (selectedIndex == 2)
-                      ? AppColor.primaryColor
-                      : AppColor.grayColor,
-                  size: 24.w,
-                ),
-                4.0.height,
-                Text(
-                  "D'App",
-                  style: AppFont.medium14.copyWith(
-                    color: (selectedIndex == 2)
-                        ? AppColor.primaryColor
-                        : AppColor.grayColor,
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                if (onTap != null) {
+                  onTap!(2);
+                }
+              },
+              child: SizedBox(
+                height: 48.h,
+                width: double.infinity,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Iconify(
+                        MaterialSymbols.widgets_outline_rounded,
+                        color: (selectedIndex == 2)
+                            ? AppColor.primaryColor
+                            : AppColor.grayColor,
+                        size: 24.w,
+                      ),
+                      (selectedIndex == 2)
+                          ? Container(
+                              margin: EdgeInsets.only(top: 1.h),
+                              width: 6.w,
+                              height: 6.w,
+                              decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColor.primaryColor),
+                            )
+                          : const SizedBox()
+                    ],
                   ),
-                )
-              ],
+                ),
+              ),
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              if (onTap != null) {
-                onTap!(3);
-              }
-            },
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.settings_outlined,
-                  color: (selectedIndex == 3)
-                      ? AppColor.primaryColor
-                      : AppColor.grayColor,
-                  size: 24.w,
-                ),
-                4.0.height,
-                Text(
-                  'Setting',
-                  style: AppFont.medium14.copyWith(
-                    color: (selectedIndex == 3)
-                        ? AppColor.primaryColor
-                        : AppColor.grayColor,
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                if (onTap != null) {
+                  onTap!(3);
+                }
+              },
+              child: SizedBox(
+                height: 48.h,
+                width: double.infinity,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.settings_outlined,
+                        color: (selectedIndex == 3)
+                            ? AppColor.primaryColor
+                            : AppColor.grayColor,
+                        size: 24.w,
+                      ),
+                      (selectedIndex == 3)
+                          ? Container(
+                              margin: EdgeInsets.only(top: 1.h),
+                              width: 6.w,
+                              height: 6.w,
+                              decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColor.primaryColor),
+                            )
+                          : const SizedBox()
+                    ],
                   ),
-                )
-              ],
+                ),
+              ),
             ),
           ),
         ],

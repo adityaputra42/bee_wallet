@@ -39,7 +39,7 @@ class TransactionProgressScreen extends ConsumerWidget {
               ),
               const Spacer(),
               Image.asset(
-                AppImage.ilustrasi2,
+                AppImage.ilustrasi1,
                 width: 284.w,
               ),
               36.0.height,

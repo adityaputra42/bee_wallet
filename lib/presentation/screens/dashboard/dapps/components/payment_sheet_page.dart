@@ -318,7 +318,7 @@ Widget itemCoin(BuildContext context) {
   return Column(
     children: [
       Image.asset(
-        AppImage.chainlink,
+        AppImage.defaultBrowser,
         width: 40.w,
       ),
       8.0.height,

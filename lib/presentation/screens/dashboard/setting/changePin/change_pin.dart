@@ -39,7 +39,7 @@ class ChangePin extends ConsumerWidget {
             ),
             24.0.height,
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 34.w),
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: InputPin(
                 keyboardType: TextInputType.none,
                 controller: ref.watch(pinNewController),
@@ -53,7 +53,7 @@ class ChangePin extends ConsumerWidget {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 24.w),
+        padding: EdgeInsets.only(bottom: 24.h),
         child: Numpadcustom(
             controller: ref.watch(pinNewController),
             delete: () {

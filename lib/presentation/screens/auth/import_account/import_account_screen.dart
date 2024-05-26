@@ -21,7 +21,7 @@ class ImportAccountScreen extends ConsumerWidget {
       appBar: WidgetHelper.appBar(
           context: context, title: "Import an Existing Wallet"),
       bottomNavigationBar: PrimaryButton(
-        margin: EdgeInsets.fromLTRB(24.w, 8.h, 24.w, 32.h),
+        margin: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 32.h),
         title: "Import",
         loading: ref.watch(importAccountProvider).isLoading,
         disable: ref.watch(disableImportProvider),
@@ -30,7 +30,7 @@ class ImportAccountScreen extends ConsumerWidget {
         },
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

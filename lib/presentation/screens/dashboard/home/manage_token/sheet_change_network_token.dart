@@ -67,7 +67,7 @@ class SheetChangeNetworkToken extends ConsumerWidget {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
             border: Border.all(
@@ -85,14 +85,14 @@ class SheetChangeNetworkToken extends ConsumerWidget {
                   size: 32.w,
                   color: Theme.of(context).hintColor,
                 ),
-                12.0.width,
+                8.0.width,
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "All",
-                        style: AppFont.medium16
+                        style: AppFont.medium14
                             .copyWith(color: Theme.of(context).indicatorColor),
                       ),
                       Text(
@@ -127,7 +127,7 @@ class SheetChangeNetworkToken extends ConsumerWidget {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
             border: Border.all(
@@ -156,11 +156,11 @@ class SheetChangeNetworkToken extends ConsumerWidget {
                     ),
                   ),
                 ),
-                12.0.width,
+                8.0.width,
                 Expanded(
                   child: Text(
                     chain.name ?? '',
-                    style: AppFont.medium16
+                    style: AppFont.medium14
                         .copyWith(color: Theme.of(context).indicatorColor),
                   ),
                 ),

@@ -21,7 +21,7 @@ class ConfirmPinScreen extends ConsumerWidget {
       appBar: WidgetHelper.appBar(context: context, title: ''),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -69,7 +69,7 @@ class ConfirmPinScreen extends ConsumerWidget {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: 32.h),
+        padding: EdgeInsets.only(bottom: 24.h),
         child: Numpadcustom(
             controller: ref.watch(confirmPinRegisterProvider),
             delete: () {

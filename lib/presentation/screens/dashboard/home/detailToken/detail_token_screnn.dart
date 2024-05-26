@@ -226,7 +226,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Image.asset(
-                                      AppImage.trouble,
+                                      AppImage.empty,
                                       width: 200.w,
                                     ),
                                     16.0.height,

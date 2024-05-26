@@ -106,7 +106,7 @@ class SelectNetworkScreen extends ConsumerWidget {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
             border: Border.all(
@@ -124,19 +124,19 @@ class SelectNetworkScreen extends ConsumerWidget {
                   size: 32.w,
                   color: AppColor.grayColor,
                 ),
-                12.0.width,
+                8.0.width,
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "All",
-                        style: AppFont.semibold16
+                        style: AppFont.medium14
                             .copyWith(color: Theme.of(context).indicatorColor),
                       ),
                       Text(
                         "Select all added network",
-                        style: AppFont.reguler14
+                        style: AppFont.reguler12
                             .copyWith(color: Theme.of(context).hintColor),
                       )
                     ],
@@ -167,7 +167,7 @@ class SelectNetworkScreen extends ConsumerWidget {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
             border: Border.all(
@@ -183,8 +183,8 @@ class SelectNetworkScreen extends ConsumerWidget {
             Row(
               children: [
                 SizedBox(
-                  width: 36.w,
-                  height: 36.w,
+                  width: 32.w,
+                  height: 32.w,
                   child: ClipPolygon(
                     sides: 6,
                     child: Container(
@@ -199,11 +199,11 @@ class SelectNetworkScreen extends ConsumerWidget {
                     ),
                   ),
                 ),
-                12.0.width,
+                8.0.width,
                 Expanded(
                   child: Text(
                     chain.name ?? '',
-                    style: AppFont.semibold16
+                    style: AppFont.medium14
                         .copyWith(color: Theme.of(context).indicatorColor),
                     overflow: TextOverflow.ellipsis,
                   ),

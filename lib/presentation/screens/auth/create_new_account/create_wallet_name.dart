@@ -23,9 +23,9 @@ class CreateWalletName extends ConsumerWidget {
             await ref.read(generateMnemonicProvider.notifier).generateAccount();
             ref.watch(generateMnemonicProvider);
           },
-          margin: EdgeInsets.fromLTRB(24.w, 8.h, 24.w, 32.h)),
+          margin: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 32.h)),
       body: Padding(
-        padding: EdgeInsets.all(24.w),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
