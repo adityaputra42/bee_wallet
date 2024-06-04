@@ -1,6 +1,4 @@
-import 'package:bee_wallet/presentation/provider/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -145,7 +143,7 @@ class ManageToken extends ConsumerWidget {
   Container cardChain(BuildContext context, WidgetRef ref, TokenChain chain) {
     final listSelected = ref.watch(listTokenChainProvider).valueOrNull ?? [];
     final mnemonic = ref.watch(selectedAccountProvider).valueOrNull?.mnemonic;
-    final isDark = ref.watch(darkThemeProvider);
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
       decoration: BoxDecoration(
@@ -229,7 +227,6 @@ class ManageToken extends ConsumerWidget {
                 toggleColor: listSelected.any((element) =>
                         element.chainId == chain.chainId &&
                         element.symbol == chain.symbol)
-                    
                     ? AppColor.textStrongDark
                     : AppColor.grayColor,
                 activeColor: AppColor.primaryColor,

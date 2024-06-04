@@ -25,7 +25,7 @@ class PaymentDialogText {
 
 class PaymentDialog extends StatefulWidget {
   const PaymentDialog(
-      {Key? key,
+      {super.key,
       required this.datas,
       required this.nextAction,
       required this.amount,
@@ -34,8 +34,7 @@ class PaymentDialog extends StatefulWidget {
       this.isSignMsg = false,
       this.estimateGas,
       this.favicon,
-      this.msg = ""})
-      : super(key: key);
+      this.msg = ""});
 
   final List<PaymentDialogText> datas;
   final VoidCallback nextAction;

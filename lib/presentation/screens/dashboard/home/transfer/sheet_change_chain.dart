@@ -18,7 +18,7 @@ class SheetChangeNetwork extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final chainList = ref.watch(selectedChainTokenProvider).valueOrNull ?? [];
 
-   return Padding(
+    return Padding(
       padding: EdgeInsets.fromLTRB(
           24.w, 0.h, 24.w, MediaQuery.of(context).viewInsets.bottom),
       child: SizedBox(
@@ -31,7 +31,7 @@ class SheetChangeNetwork extends ConsumerWidget {
                   .copyWith(color: Theme.of(context).indicatorColor),
             ),
             16.0.height,
-            SearchField(),
+            const SearchField(),
             16.0.height,
             Expanded(
               child: Container(

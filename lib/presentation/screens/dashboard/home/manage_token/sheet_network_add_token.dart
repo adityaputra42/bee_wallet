@@ -29,7 +29,7 @@ class SheetNetworkAddToken extends ConsumerWidget {
                   .copyWith(color: Theme.of(context).indicatorColor),
             ),
             16.0.height,
-            SearchField(),
+            const SearchField(),
             16.0.height,
             Expanded(
               child: Container(

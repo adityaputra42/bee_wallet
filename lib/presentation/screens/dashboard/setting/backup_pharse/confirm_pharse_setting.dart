@@ -17,17 +17,28 @@ class ConfirmPharseSetting extends ConsumerWidget {
       required int number,
     }) {
       return DragTarget(
-        onAccept: (String value) {
-          if (!confirmList.any((element) => element['id'] == number) ||
+        onAcceptWithDetails: (detail){
+            if (!confirmList.any((element) => element['id'] == number) ||
               confirmList.isEmpty) {
-            ref.read(confirmMnemonicProvider.notifier).add(number, value);
+            ref.read(confirmMnemonicProvider.notifier).add(number, detail.data.toString());
             ref
                 .read(randomMnemonicProvider.notifier)
-                .removeRandomMnemonic(value);
+                .removeRandomMnemonic(detail.data.toString());
 
             ref.read(disableConfirmProvider.notifier).checkButtonConfirm();
           }
         },
+        // onAccept: (String value) {
+        //   if (!confirmList.any((element) => element['id'] == number) ||
+        //       confirmList.isEmpty) {
+        //     ref.read(confirmMnemonicProvider.notifier).add(number, value);
+        //     ref
+        //         .read(randomMnemonicProvider.notifier)
+        //         .removeRandomMnemonic(value);
+
+        //     ref.read(disableConfirmProvider.notifier).checkButtonConfirm();
+        //   }
+        // },
         builder: (
           context,
           accepted,

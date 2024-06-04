@@ -1,7 +1,4 @@
-import 'package:bee_wallet/utils/util.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/ph.dart';
@@ -19,10 +16,10 @@ class CustomBottomNavBar extends StatelessWidget {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.fromLTRB(16.w, 0.w, 16.w, 16.h),
-      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 8.h),
+      padding: EdgeInsets.all(4.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
-        color: Theme.of(context).cardColor,
+        color: Theme.of(context).indicatorColor,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
