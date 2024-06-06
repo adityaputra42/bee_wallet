@@ -1,4 +1,7 @@
+// ignore_for_file: unused_result
+
 import 'package:bee_wallet/data/src/app_image.dart';
+import 'package:bee_wallet/presentation/provider/dapp/browser_provider.dart';
 import 'package:bee_wallet/utils/util.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -65,60 +68,105 @@ class DappScreen extends ConsumerWidget {
           children: [
             16.0.height,
             overview(ref),
-            16.0.height,
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "History",
-                    style: AppFont.medium14
-                        .copyWith(color: Theme.of(context).indicatorColor),
-                  ),
-                  Text(
-                    "See All",
-                    style:
-                        AppFont.medium14.copyWith(color: AppColor.primaryColor),
-                  ),
-                ],
-              ),
-            ),
-            16.0.height,
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: List.generate(
-                    5,
-                    (index) => Padding(
-                          padding: EdgeInsets.only(
-                              left: index == 0 ? 16.w : 0,
-                              right: index == 4 ? 16.w : 12.w),
-                          child: SizedBox(
-                            width: 54.w,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
+            8.0.height,
+            ref.watch(browserHistoryProvider).when(
+              data: (data) {
+                return data.isEmpty
+                    ? const SizedBox()
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SizedBox(
-                                  width: 42.w,
-                                  height: 42.w,
-                                  child: ClipPolygon(
-                                      sides: 6,
-                                      child:
-                                          Image.asset(AppImage.defaultBrowser)),
-                                ),
-                                8.0.height,
                                 Text(
-                                  "Pancake",
-                                  style: AppFont.reguler12.copyWith(
+                                  "History",
+                                  style: AppFont.medium14.copyWith(
                                       color: Theme.of(context).indicatorColor),
-                                  overflow: TextOverflow.ellipsis,
-                                )
+                                ),
+                                Text(
+                                  "See All",
+                                  style: AppFont.medium14
+                                      .copyWith(color: AppColor.primaryColor),
+                                ),
                               ],
                             ),
                           ),
-                        )),
-              ),
+                          16.0.height,
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: List.generate(
+                                  data.length > 10 ? 10 : data.length,
+                                  (index) => Padding(
+                                        padding: EdgeInsets.only(
+                                            left: index == 0 ? 16.w : 0,
+                                            right: index == 4 ? 16.w : 12.w),
+                                        child: InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        DappsWeb3(
+                                                            initialUrl:
+                                                                data[index]
+                                                                        .url ??
+                                                                    '')));
+                                          },
+                                          child: SizedBox(
+                                            width: 54.w,
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                SizedBox(
+                                                  width: 42.w,
+                                                  height: 42.w,
+                                                  child: ClipPolygon(
+                                                      sides: 6,
+                                                      child: Image.asset(
+                                                          AppImage
+                                                              .defaultBrowser)),
+                                                ),
+                                                8.0.height,
+                                                Text(
+                                                  data[index].title ?? "",
+                                                  style: AppFont.reguler12
+                                                      .copyWith(
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .indicatorColor),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      )),
+                            ),
+                          ),
+                        ],
+                      );
+              },
+              error: (Object error, StackTrace stackTrace) {
+                return const SizedBox();
+              },
+              loading: () {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(
+                      6,
+                      (index) => ShimmerLoading(
+                            width: 54.w,
+                            height: 54.w,
+                          )),
+                );
+              },
             ),
             16.0.height,
             Expanded(
@@ -143,7 +191,7 @@ class DappScreen extends ConsumerWidget {
                           onTap: (index) {
                             ref.read(indexbarDapp.notifier).state = index;
                             ref
-                                .read(tokenChainNftProvider.notifier)
+                                .read(tokenDappLinkProvider.notifier)
                                 .onChange(listChain[index]);
                           },
                           tabs: List.generate(
@@ -201,64 +249,108 @@ class DappScreen extends ConsumerWidget {
                     ),
                     Expanded(
                         child: Container(
-                      padding: EdgeInsets.all(16.w),
-                      margin: EdgeInsets.symmetric(
-                          horizontal: 16.w, vertical: 16.h),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Theme.of(context).cardColor),
-                      child: ListView.builder(
-                        itemBuilder: (context, index) => Container(
-                          margin: EdgeInsets.only(bottom: 8.h),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12.w, vertical: 8.h),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.r),
-                              color: Theme.of(context).colorScheme.background),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 36.w,
-                                height: 36.w,
-                                child: ClipPolygon(
-                                  sides: 6,
-                                  child: Container(
-                                    padding: EdgeInsets.all(0.5.h),
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .background,
-                                    child: Image.asset(
-                                      AppImage.logo,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              8.0.width,
-                              Expanded(
-                                  child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Pancake Swap",
-                                    style: AppFont.medium12.copyWith(
-                                        color:
-                                            Theme.of(context).indicatorColor),
-                                  ),
-                                  1.0.height,
-                                  Text(
-                                    "Exchange trading web earn stacking fjasiufg97 er8jashckj",
-                                    style: AppFont.reguler10.copyWith(
-                                        color: Theme.of(context).hintColor),
-                                    overflow: TextOverflow.ellipsis,
-                                  )
-                                ],
-                              ))
-                            ],
-                          ),
-                        ),
-                        itemCount: 6,
-                      ),
-                    ))
+                            padding: EdgeInsets.all(16.w),
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 16.w, vertical: 16.h),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Theme.of(context).cardColor),
+                            child: ref.watch(dappListProvider).when(
+                              data: (data) {
+                                return data.isEmpty
+                                    ? const Empty(title: "No data")
+                                    : ListView.builder(
+                                        itemBuilder: (context, index) =>
+                                            GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        DappsWeb3(
+                                                            initialUrl:
+                                                                data[index]
+                                                                        .url ??
+                                                                    '')));
+                                          },
+                                          child: Container(
+                                            margin:
+                                                EdgeInsets.only(bottom: 8.h),
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 12.w,
+                                                vertical: 8.h),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.r),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .background),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 36.w,
+                                                  height: 36.w,
+                                                  child: ClipPolygon(
+                                                    sides: 6,
+                                                    child: Container(
+                                                      padding:
+                                                          EdgeInsets.all(0.5.h),
+                                                      color: AppColor.cardLight,
+                                                      child: Image.asset(
+                                                          data[index].image ??
+                                                              AppImage.logo),
+                                                    ),
+                                                  ),
+                                                ),
+                                                8.0.width,
+                                                Expanded(
+                                                    child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      data[index].title ?? '',
+                                                      style: AppFont.medium12
+                                                          .copyWith(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .indicatorColor),
+                                                    ),
+                                                    1.0.height,
+                                                    Text(
+                                                      data[index].subtitle ??
+                                                          '',
+                                                      style: AppFont.reguler10
+                                                          .copyWith(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .hintColor),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    )
+                                                  ],
+                                                ))
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        itemCount: data.length,
+                                      );
+                              },
+                              error: (Object error, StackTrace stackTrace) {
+                                return ErrorView(
+                                  error: error.toString(),
+                                  ontap: () {
+                                    ref.refresh(dappListProvider);
+                                  },
+                                );
+                              },
+                              loading: () {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              },
+                            )))
                   ],
                 ),
               ),

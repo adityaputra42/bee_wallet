@@ -49,10 +49,9 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
                   child: ClipPolygon(
                     sides: 6,
                     child: Container(
-                      padding: EdgeInsets.all(6.h),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
-                      ),
+                      padding: EdgeInsets.all(1.h),
+                      decoration:
+                          const BoxDecoration(color: AppColor.primaryColor),
                       child: ClipPolygon(
                         sides: 6,
                         child: Container(

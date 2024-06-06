@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:math' as math;
 
+import 'package:bee_wallet/presentation/provider/dapp/browser_provider.dart';
 import 'package:convert/convert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -268,7 +269,9 @@ class _DappsWeb3State extends ConsumerState<DappsWeb3> {
                 _webViewController = controller;
               },
               onUpdateVisitedHistory: (controller, url, androidIsReload) async {
-                _webViewController = controller;
+                ref
+                    .read(browserHistoryProvider.notifier)
+                    .initWebController(controller);
               },
               onTitleChanged: (controller, title) async {
                 await _webViewController?.getUrl();
@@ -288,6 +291,9 @@ class _DappsWeb3State extends ConsumerState<DappsWeb3> {
               },
               onUpdateVisitedHistory: (controller, url, androidIsReload) async {
                 _webViewController = controller;
+                ref
+                    .read(browserHistoryProvider.notifier)
+                    .initWebController(controller);
               },
               onTitleChanged: (controller, title) async {
                 await _webViewController?.getUrl();

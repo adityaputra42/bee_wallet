@@ -52,7 +52,6 @@ class MainScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: CustomBottomNavBar(
         onTap: (index) => ref.read(indexNavBarProvider.notifier).state = index,
         selectedIndex: ref.watch(indexNavBarProvider),

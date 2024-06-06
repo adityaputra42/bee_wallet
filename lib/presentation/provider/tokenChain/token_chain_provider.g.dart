@@ -121,6 +121,22 @@ final tokenChainNftProvider =
 );
 
 typedef _$TokenChainNft = AutoDisposeNotifier<TokenChain>;
+String _$tokenDappLinkHash() => r'75c7951f1f0bed828889ebd137e9ff3944ec6fec';
+
+/// See also [TokenDappLink].
+@ProviderFor(TokenDappLink)
+final tokenDappLinkProvider =
+    AutoDisposeNotifierProvider<TokenDappLink, TokenChain>.internal(
+  TokenDappLink.new,
+  name: r'tokenDappLinkProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$tokenDappLinkHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$TokenDappLink = AutoDisposeNotifier<TokenChain>;
 String _$chainNftTransferHash() => r'1cf0c160cfc170914c37c78e23708e0f21c0b94d';
 
 /// See also [ChainNftTransfer].

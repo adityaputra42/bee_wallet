@@ -9,9 +9,8 @@ environment:
 dependencies:
   animate_do: ^3.3.4
   base32: ^2.1.3
+  bdk_flutter: ^0.30.0
   bip39: ^1.0.6
-  bitcoin_base: ^3.0.1
-  blockchain_utils: ^1.4.1
   blockies_ethereum: ^0.0.2
   cached_network_image: ^3.3.1
   carousel_slider: ^4.2.1
@@ -58,7 +57,6 @@ dependencies:
   path_provider: ^2.1.1
   percent_indicator: ^4.2.3
   pin_code_fields: ^8.0.1
-  pointycastle: ^3.7.3
   qr_flutter: ^4.1.0
   riverpod_annotation: ^2.3.3
   scaffold_gradient_background: ^1.0.3+1
@@ -66,11 +64,12 @@ dependencies:
   shared_preferences: ^2.2.0
   shimmer: ^3.0.0
   solana_web3: ^0.1.3
-  sui: ^0.1.5
+  sui: ^0.2.1
   top_snackbar_flutter: ^3.1.0
   tron: ^0.0.2
   url_launcher: ^6.1.11
   wallet: ^0.0.13
+  walletconnect_flutter_v2: ^2.1.4
   web3_provider: ^1.1.4
   web3dart: ^2.6.1
   web_socket_channel: ^2.4.0
@@ -91,7 +90,7 @@ flutter:
     - assets/abi/
     - assets/logo/
     - assets/imageDapp/
-    
+
   fonts:
     - family: Poppins
       fonts:

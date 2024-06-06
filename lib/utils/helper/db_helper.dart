@@ -1,3 +1,4 @@
+import 'package:bee_wallet/data/model/dapp_history/dapp_link.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../data/model/account/account.dart';
@@ -20,9 +21,9 @@ class DbHelper {
       [
         AccountSchema,
         PasswordSchema,
-        RecentAddressSchema,
         BrowserTabSchema,
         DappsHistorySchema,
+        DappLinkSchema,
         SelectedChainSchema,
         NftSchema,
         TokenChainSchema,
@@ -308,15 +309,6 @@ class DbHelper {
     return accountList;
   }
 
-  Future<List<RecentAddress>> getRecentAddress() async {
-    List<RecentAddress> list = [];
-    await isar.txn(() async {
-      list = await isar.recentAddress.where().findAll();
-    });
-
-    return list;
-  }
-
   Future<void> setSelectedTokenChain(SelectedTokenChain chains) async {
     await isar.writeTxn(() async {
       await isar.selectedTokenChains.put(chains);
@@ -435,6 +427,45 @@ class DbHelper {
     });
   }
 
+  /// ######################### DappLink #######################
+  Future<List<DappLink>> getAllDappLink(
+      {required String chainId,}) async {
+    List<DappLink> links = [];
+    await isar.txn(() async {
+      links = await isar.dappLinks
+          .where()
+          .filter()
+          .chainIdEqualTo(chainId)
+          
+          .findAll();
+    });
+    return links;
+  }
+
+  Future<void> addAllDappLink(List<DappLink> dappLinks) async {
+    await isar.writeTxn(() async {
+      await isar.dappLinks.putAll(dappLinks);
+    });
+  }
+
+  Future<void> addDappLink(DappLink dappLink) async {
+    await isar.writeTxn(() async {
+      await isar.dappLinks.put(dappLink);
+    });
+  }
+
+  Future<void> deleteDappLink(int id) async {
+    await isar.writeTxn(() async {
+      await isar.dappLinks.delete(id);
+    });
+  }
+
+  Future<void> deleteAllDappLink() async {
+    await isar.writeTxn(() async {
+      await isar.dappLinks.clear();
+    });
+  }
+
   // Dapps History
 
   Future<List<DappsHistory>> getDappsHistory() async {
@@ -518,7 +549,6 @@ class DbHelper {
   Future<void> resetWallet() async {
     await isar.writeTxn(() async {
       await isar.passwords.clear();
-      await isar.recentAddress.clear();
       await isar.dappsHistorys.clear();
       await isar.selectedChains.clear();
       await isar.browserTabs.clear();

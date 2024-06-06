@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bee_wallet/presentation/screens/dashboard/home/changeAccount/change_account_screen.dart';
 import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
@@ -97,11 +99,11 @@ class HomeScreen extends ConsumerWidget {
                     padding: EdgeInsets.all(6.h),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.r),
-                        border: Border.all(
-                            width: 1.w, color: AppColor.grayColor)),
+                        border:
+                            Border.all(width: 1.w, color: AppColor.grayColor)),
                     child: Iconify(
                       AntDesign.scan,
-                      color:AppColor.primaryColor,
+                      color: AppColor.primaryColor,
                       size: 20.w,
                     ),
                   ))

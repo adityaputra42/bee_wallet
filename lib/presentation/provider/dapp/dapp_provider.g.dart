@@ -21,6 +21,21 @@ final newsDappProvider =
 );
 
 typedef _$NewsDapp = AutoDisposeNotifier<List<String>>;
+String _$dappListHash() => r'24c8d50402bcdeebb9e31f3baceec852b87f073e';
+
+/// See also [DappList].
+@ProviderFor(DappList)
+final dappListProvider =
+    AutoDisposeAsyncNotifierProvider<DappList, List<DappLink>>.internal(
+  DappList.new,
+  name: r'dappListProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$dappListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$DappList = AutoDisposeAsyncNotifier<List<DappLink>>;
 String _$indexCarouselHash() => r'f0ac0f3ff65b5daf523ac892f06c43366b94e896';
 
 /// See also [IndexCarousel].

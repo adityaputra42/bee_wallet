@@ -1,3 +1,4 @@
+import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
@@ -16,10 +17,16 @@ class CustomBottomNavBar extends StatelessWidget {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.fromLTRB(16.w, 0.w, 16.w, 16.h),
-      padding: EdgeInsets.all(4.w),
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.r),
-        color: Theme.of(context).indicatorColor,
+        boxShadow: [
+          BoxShadow(
+              spreadRadius: 0.5,
+              blurRadius: 0.3,
+              color: Theme.of(context).indicatorColor.withOpacity(0.15))
+        ],
+        borderRadius: BorderRadius.circular(8.r),
+        color: Theme.of(context).cardColor,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,19 +49,17 @@ class CustomBottomNavBar extends StatelessWidget {
                         Mdi.wallet_outline,
                         color: (selectedIndex == 0)
                             ? AppColor.primaryColor
-                            : AppColor.grayColor,
+                            : Theme.of(context).hintColor,
                         size: 24.w,
                       ),
-                      (selectedIndex == 0)
-                          ? Container(
-                              margin: EdgeInsets.only(top: 1.h),
-                              width: 6.w,
-                              height: 6.w,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColor.primaryColor),
-                            )
-                          : const SizedBox()
+                      2.0.height,
+                      Text(
+                        "Home",
+                        style: AppFont.medium12.copyWith(
+                            color: (selectedIndex == 0)
+                                ? AppColor.primaryColor
+                                : Theme.of(context).hintColor),
+                      ),
                     ],
                   ),
                 ),
@@ -79,19 +84,17 @@ class CustomBottomNavBar extends StatelessWidget {
                         Ph.swap_bold,
                         color: (selectedIndex == 1)
                             ? AppColor.primaryColor
-                            : AppColor.grayColor,
+                            : Theme.of(context).hintColor,
                         size: 24.w,
                       ),
-                      (selectedIndex == 1)
-                          ? Container(
-                              margin: EdgeInsets.only(top: 1.h),
-                              width: 6.w,
-                              height: 6.w,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColor.primaryColor),
-                            )
-                          : const SizedBox()
+                      2.0.height,
+                      Text(
+                        "Swap",
+                        style: AppFont.medium12.copyWith(
+                            color: (selectedIndex == 1)
+                                ? AppColor.primaryColor
+                                : Theme.of(context).hintColor),
+                      ),
                     ],
                   ),
                 ),
@@ -116,19 +119,17 @@ class CustomBottomNavBar extends StatelessWidget {
                         MaterialSymbols.widgets_outline_rounded,
                         color: (selectedIndex == 2)
                             ? AppColor.primaryColor
-                            : AppColor.grayColor,
+                            : Theme.of(context).hintColor,
                         size: 24.w,
                       ),
-                      (selectedIndex == 2)
-                          ? Container(
-                              margin: EdgeInsets.only(top: 1.h),
-                              width: 6.w,
-                              height: 6.w,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColor.primaryColor),
-                            )
-                          : const SizedBox()
+                      2.0.height,
+                      Text(
+                        "D'App",
+                        style: AppFont.medium12.copyWith(
+                            color: (selectedIndex == 2)
+                                ? AppColor.primaryColor
+                                : Theme.of(context).hintColor),
+                      ),
                     ],
                   ),
                 ),
@@ -153,19 +154,17 @@ class CustomBottomNavBar extends StatelessWidget {
                         Icons.settings_outlined,
                         color: (selectedIndex == 3)
                             ? AppColor.primaryColor
-                            : AppColor.grayColor,
+                            : Theme.of(context).hintColor,
                         size: 24.w,
                       ),
-                      (selectedIndex == 3)
-                          ? Container(
-                              margin: EdgeInsets.only(top: 1.h),
-                              width: 6.w,
-                              height: 6.w,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColor.primaryColor),
-                            )
-                          : const SizedBox()
+                      2.0.height,
+                      Text(
+                        "Settings",
+                        style: AppFont.medium12.copyWith(
+                            color: (selectedIndex == 3)
+                                ? AppColor.primaryColor
+                                : Theme.of(context).hintColor),
+                      ),
                     ],
                   ),
                 ),

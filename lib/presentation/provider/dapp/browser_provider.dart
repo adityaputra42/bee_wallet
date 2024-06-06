@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:web3_provider/web3_provider.dart';
 
 import '../../../data/model/model.dart';
 import '../../../utils/util.dart';
@@ -25,5 +26,18 @@ class BrowserHistory extends _$BrowserHistory {
     await DbHelper.instance.deleteDappsHistory(id);
     list.removeWhere((element) => element.id == id);
     state = AsyncData(list);
+  }
+
+  initWebController(InAppWebViewController controller) async {
+    final title = await controller.getTitle();
+    final uri = await controller.getUrl();
+    final image = await controller.requestImageRef();
+    var newimage = image?.url?.path;
+
+    if (title != "") {
+      await addDappsHistory(
+        DappsHistory(title: title, url: uri.toString(), image: newimage),
+      );
+    }
   }
 }

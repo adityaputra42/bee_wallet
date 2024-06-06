@@ -1,25 +1,50 @@
 import 'dart:developer';
-import 'package:bitcoin_base/bitcoin_base.dart';
-import 'package:blockchain_utils/blockchain_utils.dart';
-import 'package:bip39/bip39.dart' as bip39;
+
+import 'package:bdk_flutter/bdk_flutter.dart';
 
 class BtcHelper {
-  Map<String, dynamic> getBtcAccountInfo(String mnemonic) {
-    var seed = bip39.mnemonicToSeedHex(mnemonic);
-    List<int> seedBytes = hex.decode(seed);
-    final bip32 = Bip32Slip10Secp256k1.fromSeed(seedBytes);
-    final sp1 = bip32.derivePath("m/44'/0'/0'/0/0/1");
-    final privateKey = ECPrivate.fromBytes(sp1.privateKey.raw);
-    final publicKey = privateKey.getPublic();
-    final address = publicKey.toAddress();
-    log("address => ${address.toAddress(BitcoinNetwork.mainnet)}");
+  Future<Map<String, dynamic>> getBtcAccountInfo() async {
+    log("init btc++>");
+    final newMnemonic = await Mnemonic.fromString(
+        "bleak manual engine once tip ritual humble owner hip stadium elder seat");
+    final descriptorSecretKey = await DescriptorSecretKey.create(
+        network: Network.Testnet, mnemonic: newMnemonic);
+    log("descriptorSecretKey => $descriptorSecretKey");
+    final externalDescriptor = await Descriptor.newBip44(
+      network: Network.Testnet,
+      keychain: KeychainKind.External,
+      secretKey: descriptorSecretKey,
+    );
+    log("externalDescriptor => ${externalDescriptor.toString()}");
+    final internalDescriptor = await Descriptor.newBip44(
+      network: Network.Testnet,
+      keychain: KeychainKind.Internal,
+      secretKey: descriptorSecretKey,
+    );
+    log("internalDescriptor => ${internalDescriptor.toString()}");
+    final blockchain = await Blockchain.create(
+        config: const BlockchainConfig.electrum(
+            config: ElectrumConfig(
+                stopGap: 10,
+                timeout: 5,
+                retry: 5,
+                url: "ssl://electrum.blockstream.info:60002",
+                validateDomain: true)));
+
+    log("blockchain => ${blockchain.toString()}");
+    final wallet = await Wallet.create(
+        descriptor: externalDescriptor,
+        changeDescriptor: internalDescriptor,
+        network: Network.Testnet,
+        databaseConfig: const DatabaseConfig.memory());
+    log("wallet => $wallet");
+    final resdata = await wallet.sync(blockchain);
+
+    log("resdata => $resdata");
     return {
-      'mnemonic': mnemonic,
-      'private_key': privateKey.prive.toExtended,
-      'address': address.toAddress(BitcoinNetwork.mainnet)
+      'mnemonic': '',
+      'private_key': "",
+      'address': "",
     };
   }
-
-  // select network
-
 }

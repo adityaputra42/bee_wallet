@@ -209,9 +209,9 @@ class ListNft extends ConsumerWidget {
               child: ClipPolygon(
                 sides: 6,
                 child: Container(
-                  padding: EdgeInsets.all(2.h),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).cardColor,
+                  padding: EdgeInsets.all(1.h),
+                  decoration: const BoxDecoration(
+                    color: AppColor.primaryColor,
                   ),
                   child: ClipPolygon(
                     sides: 6,

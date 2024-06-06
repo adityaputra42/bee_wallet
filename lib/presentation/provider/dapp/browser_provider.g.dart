@@ -6,7 +6,7 @@ part of 'browser_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$browserHistoryHash() => r'427f11a9eb12fe0f0a037b1ede04c4344bafa4df';
+String _$browserHistoryHash() => r'87be411c8f4332c41b77ecee95cf6a70bf93ca32';
 
 /// See also [BrowserHistory].
 @ProviderFor(BrowserHistory)

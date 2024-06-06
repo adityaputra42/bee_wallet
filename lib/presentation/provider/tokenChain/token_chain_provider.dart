@@ -335,6 +335,21 @@ class TokenChainNft extends _$TokenChainNft {
 }
 
 @riverpod
+class TokenDappLink extends _$TokenDappLink {
+  @override
+  TokenChain build() {
+    final listChain = (ref.watch(tokenChainOriginProvider).valueOrNull ?? [])
+        .where((element) => element.contractAddress == null)
+        .toList();
+    return listChain.first;
+  }
+
+  onChange(TokenChain value) {
+    state = value;
+  }
+}
+
+@riverpod
 class ChainNftTransfer extends _$ChainNftTransfer {
   @override
   SelectedTokenChain build() {
