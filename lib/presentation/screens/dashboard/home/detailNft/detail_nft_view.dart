@@ -34,7 +34,7 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
   ) {
     final nftView = ref.watch(selectedViewNftProvider);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(context: context, title: "Detail NFT"),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
@@ -154,7 +154,7 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
-            color: Theme.of(context).colorScheme.background),
+            color: Theme.of(context).colorScheme.surface),
         child: Row(
           children: [
             Container(
@@ -229,7 +229,7 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
         width: MediaQuery.of(context).size.width * 0.412,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
-            color: Theme.of(context).colorScheme.background),
+            color: Theme.of(context).colorScheme.surface),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

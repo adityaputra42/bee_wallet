@@ -27,7 +27,7 @@ class ManageToken extends ConsumerWidget {
     final chainList = ref.watch(tokenChainOriginProvider).valueOrNull ?? [];
     final chainSelected = ref.watch(listManageTokenProvider);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
         context: context,
         title: 'Manage Token',
@@ -36,7 +36,7 @@ class ManageToken extends ConsumerWidget {
               showModalBottomSheet(
                   context: context,
                   builder: (context) => const SheetChangeNetworkToken(),
-                  backgroundColor: Theme.of(context).colorScheme.background,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   showDragHandle: true,
                   isDismissible: false,
                   isScrollControlled: true,
@@ -62,7 +62,7 @@ class ManageToken extends ConsumerWidget {
                             sides: 6,
                             child: Container(
                               padding: EdgeInsets.all(0.5.h),
-                              color: Theme.of(context).colorScheme.background,
+                              color: Theme.of(context).colorScheme.surface,
                               child: (chainSelected.first.logo != null)
                                   ? Image.asset(chainSelected.first.logo!)
                                   : Image.asset(AppImage.logo),
@@ -148,7 +148,7 @@ class ManageToken extends ConsumerWidget {
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
-          color: Theme.of(context).colorScheme.background),
+          color: Theme.of(context).colorScheme.surface),
       child: Column(
         children: [
           Row(
@@ -165,7 +165,7 @@ class ManageToken extends ConsumerWidget {
                         sides: 6,
                         child: Container(
                           padding: EdgeInsets.all(0.5.h),
-                          color: Theme.of(context).colorScheme.background,
+                          color: Theme.of(context).colorScheme.surface,
                           child: (chain.logo != null)
                               ? Image.asset(chain.logo!)
                               : Image.asset(AppImage.logo),
@@ -186,7 +186,7 @@ class ManageToken extends ConsumerWidget {
                                     width: 0.3.w,
                                     color: Theme.of(context).cardColor),
                                 color:
-                                    Theme.of(context).colorScheme.background),
+                                    Theme.of(context).colorScheme.surface),
                             child: (chain.baseLogo != null)
                                 ? Image.asset(chain.baseLogo!)
                                 : Image.asset(AppImage.logo),

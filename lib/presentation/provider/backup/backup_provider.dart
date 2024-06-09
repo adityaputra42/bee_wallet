@@ -21,7 +21,7 @@ class ParseMnemonic extends _$ParseMnemonic {
 
   List<Map<String, dynamic>> initMnemnonic() {
     final account = ref.watch(accountBackupProvider);
-    final mnemonic = Ecryption().decrypt(account.mnemonic!);
+    final mnemonic = EcryptionHelper().decrypt(account.mnemonic!);
     final words = mnemonic.replaceAll(" ", ",").split(',');
     List<Map<String, dynamic>> wordList = [];
     for (int i = 0; i < words.length; i++) {
@@ -31,7 +31,7 @@ class ParseMnemonic extends _$ParseMnemonic {
   }
 
   void addPharse(String mnemonicEncryp) {
-    final mnemonic = Ecryption().decrypt(mnemonicEncryp);
+    final mnemonic = EcryptionHelper().decrypt(mnemonicEncryp);
     final words = mnemonic.replaceAll(" ", ",").split(',');
     List<Map<String, dynamic>> wordList = [];
     for (int i = 0; i < words.length; i++) {
@@ -95,7 +95,7 @@ class ConfirmMnemonic extends _$ConfirmMnemonic {
       // showModalBottomSheet(
       //     context: context,
       //     builder: (context) => const SheetSuccesBackup(),
-      //     backgroundColor: Theme.of(context).colorScheme.background,
+      //     backgroundColor: Theme.of(context).colorScheme.surface,
       //     isScrollControlled: true,
       //     showDragHandle: true,
       //     shape: RoundedRectangleBorder(

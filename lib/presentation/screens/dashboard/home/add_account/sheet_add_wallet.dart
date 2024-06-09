@@ -33,7 +33,7 @@ class SheetAddWallet extends ConsumerWidget {
                   builder: (context) => const SheetPasswordAddWallet(
                         typeAddWallet: TypeAddWallet.createNew,
                       ),
-                  backgroundColor: Theme.of(context).colorScheme.background,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   showDragHandle: true,
                   isScrollControlled: true,
                   useSafeArea: true,
@@ -55,7 +55,7 @@ class SheetAddWallet extends ConsumerWidget {
                     padding: EdgeInsets.all(8.r),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.r),
-                        color: Theme.of(context).colorScheme.background),
+                        color: Theme.of(context).colorScheme.surface),
                     child: Iconify(
                       Mdi.wallet_outline,
                       color: AppColor.primaryColor,
@@ -94,7 +94,7 @@ class SheetAddWallet extends ConsumerWidget {
                   builder: (context) => const SheetPasswordAddWallet(
                         typeAddWallet: TypeAddWallet.import,
                       ),
-                  backgroundColor: Theme.of(context).colorScheme.background,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   showDragHandle: true,
                   isScrollControlled: true,
                   useSafeArea: true,
@@ -116,7 +116,7 @@ class SheetAddWallet extends ConsumerWidget {
                     padding: EdgeInsets.all(8.r),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.r),
-                        color: Theme.of(context).colorScheme.background),
+                        color: Theme.of(context).colorScheme.surface),
                     child: Iconify(
                       Mdi.wallet_outline,
                       color: AppColor.primaryColor,

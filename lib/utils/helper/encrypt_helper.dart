@@ -1,6 +1,6 @@
 import 'package:encrypt/encrypt.dart' as en;
 
-class Ecryption {
+class EcryptionHelper {
   String privateKey = "12678675490987575346789788765328";
   String privateIv = "e16ce888a20dadb8";
 

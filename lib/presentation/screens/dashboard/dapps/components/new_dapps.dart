@@ -55,7 +55,7 @@ class _DappsWeb3State extends ConsumerState<DappsWeb3> {
   }) async {
     final account = ref.watch(selectedAccountProvider).valueOrNull;
     final chain = ref.watch(chainDappProvider);
-    String privateKey = Ecryption().decrypt(account?.keyETH ?? '');
+    String privateKey = EcryptionHelper().decrypt(account?.keyETH ?? '');
     final credentials = EthPrivateKey.fromHex(privateKey);
     final sender = EthereumAddress.fromHex(bridge.from ?? '');
     final signto = EthereumAddress.fromHex(bridge.to ?? '');
@@ -173,7 +173,7 @@ class _DappsWeb3State extends ConsumerState<DappsWeb3> {
         });
   }
 
-  _showModalAddChain({
+  showModalAddChain({
     required String from,
     required String to,
     required BigInt value,
@@ -203,7 +203,7 @@ class _DappsWeb3State extends ConsumerState<DappsWeb3> {
         });
   }
 
-  _showModalSignTypedTx({
+  showModalSignTypedTx({
     required String from,
     required String to,
     required BigInt value,
@@ -257,7 +257,7 @@ class _DappsWeb3State extends ConsumerState<DappsWeb3> {
     final chain = ref.watch(chainDappProvider);
     final account = ref.watch(selectedAccountProvider).valueOrNull;
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
         context: context,
         fontSize: 14,
@@ -336,7 +336,7 @@ class _DappsWeb3State extends ConsumerState<DappsWeb3> {
                     Map<String, dynamic> object = params["object"];
                     String data = object["data"];
                     String privateKey =
-                        Ecryption().decrypt(account?.keyETH ?? '');
+                        EcryptionHelper().decrypt(account?.keyETH ?? '');
                     _showModalConfirm(
                         from: account?.addressETH ?? "",
                         to: '',
@@ -361,7 +361,7 @@ class _DappsWeb3State extends ConsumerState<DappsWeb3> {
                     Map<String, dynamic> object = params["object"];
                     final data = object['data'];
                     String privateKey =
-                        Ecryption().decrypt(account?.keyETH ?? '');
+                        EcryptionHelper().decrypt(account?.keyETH ?? '');
                     _showModalConfirm(
                         from: account?.addressETH ?? '',
                         to: '',
@@ -420,7 +420,7 @@ class _DappsWeb3State extends ConsumerState<DappsWeb3> {
   //   return showModalBottomSheet(
   //       context: context,
   //       isScrollControlled: true,
-  //       backgroundColor: Theme.of(context).colorScheme.background,
+  //       backgroundColor: Theme.of(context).colorScheme.surface,
   //       shape: RoundedRectangleBorder(
   //         borderRadius: BorderRadius.vertical(
   //           top: Radius.circular(16.r),

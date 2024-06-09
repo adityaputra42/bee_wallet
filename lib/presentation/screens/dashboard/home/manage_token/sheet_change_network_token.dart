@@ -149,7 +149,7 @@ class SheetChangeNetworkToken extends ConsumerWidget {
                     sides: 6,
                     child: Container(
                       padding: EdgeInsets.all(0.5.h),
-                      color: Theme.of(context).colorScheme.background,
+                      color: Theme.of(context).colorScheme.surface,
                       child: (chain.logo != null)
                           ? Image.asset(chain.logo!)
                           : Image.asset(AppImage.logo),

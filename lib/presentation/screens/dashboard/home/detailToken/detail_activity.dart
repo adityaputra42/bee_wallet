@@ -21,7 +21,7 @@ class DetailActivity extends ConsumerWidget {
     final activity = ref.watch(activityDetailProvider);
     final chain = ref.watch(chainDetailProvider);
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: WidgetHelper.appBar(
           context: context,
           title: "Transaction Details",
@@ -78,7 +78,7 @@ class DetailActivity extends ConsumerWidget {
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
-          color: Theme.of(context).colorScheme.background),
+          color: Theme.of(context).colorScheme.surface),
       child: Column(
         children: [
           Row(
@@ -178,7 +178,7 @@ class DetailActivity extends ConsumerWidget {
             padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.r),
-                color: Theme.of(context).colorScheme.background),
+                color: Theme.of(context).colorScheme.surface),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -223,7 +223,7 @@ class DetailActivity extends ConsumerWidget {
             padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.r),
-                color: Theme.of(context).colorScheme.background),
+                color: Theme.of(context).colorScheme.surface),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -276,7 +276,7 @@ class DetailActivity extends ConsumerWidget {
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
-          color: Theme.of(context).colorScheme.background),
+          color: Theme.of(context).colorScheme.surface),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -347,7 +347,7 @@ class DetailActivity extends ConsumerWidget {
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
-          color: Theme.of(context).colorScheme.background),
+          color: Theme.of(context).colorScheme.surface),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

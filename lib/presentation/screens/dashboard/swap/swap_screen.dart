@@ -17,7 +17,7 @@ class SwapScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
           context: context, title: "Swap", isCanBack: false),
       body: Container(
@@ -47,7 +47,7 @@ class SwapScreen extends ConsumerWidget {
                                     borderRadius: BorderRadius.circular(8.r),
                                     color: Theme.of(context)
                                         .colorScheme
-                                        .background),
+                                        .surface),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -104,7 +104,7 @@ class SwapScreen extends ConsumerWidget {
                                                         EdgeInsets.all(0.5.h),
                                                     color: Theme.of(context)
                                                         .colorScheme
-                                                        .background,
+                                                        .surface,
                                                     child: Image.asset(
                                                         AppChainLogo.bnb),
                                                   ),
@@ -224,7 +224,7 @@ class SwapScreen extends ConsumerWidget {
                                     borderRadius: BorderRadius.circular(8.r),
                                     color: Theme.of(context)
                                         .colorScheme
-                                        .background),
+                                        .surface),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -281,7 +281,7 @@ class SwapScreen extends ConsumerWidget {
                                                         EdgeInsets.all(0.5.h),
                                                     color: Theme.of(context)
                                                         .colorScheme
-                                                        .background,
+                                                        .surface,
                                                     child: Image.asset(
                                                         AppChainLogo.usdt),
                                                   ),
@@ -425,7 +425,7 @@ class SwapScreen extends ConsumerWidget {
                     padding: EdgeInsets.all(16.w),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.r),
-                        color: Theme.of(context).colorScheme.background),
+                        color: Theme.of(context).colorScheme.surface),
                     child: Column(
                       children: [
                         Row(

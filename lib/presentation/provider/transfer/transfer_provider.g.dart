@@ -88,7 +88,7 @@ final disableNextTransferProvider =
 );
 
 typedef _$DisableNextTransfer = AutoDisposeNotifier<bool>;
-String _$networkFeeHash() => r'0c7483e220a902c7244f4e37d9434cab27fb8f97';
+String _$networkFeeHash() => r'2e329bc823e20c1fb01bffd7d95f982e7b5650e9';
 
 /// See also [NetworkFee].
 @ProviderFor(NetworkFee)
@@ -181,7 +181,7 @@ final amountSendProvider =
 );
 
 typedef _$AmountSend = AutoDisposeNotifier<double>;
-String _$transferChainHash() => r'98f749b5600a5401cc0c392c74b14e8d71c56865';
+String _$transferChainHash() => r'729570eca4fa66f59c1e8e6dc294f56ddcdf7114';
 
 /// See also [TransferChain].
 @ProviderFor(TransferChain)

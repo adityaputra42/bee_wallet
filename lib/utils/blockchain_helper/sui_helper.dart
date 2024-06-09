@@ -11,7 +11,7 @@ class SuiHelper {
 
     final address = account.getAddress();
 
-    final privateKeyHex = account.privateKeyHex();
+    final privateKeyHex = account.privateKey();
 
     log("Address SUI => $address");
     log("Private Key Hex SUI => $privateKeyHex");
@@ -36,7 +36,7 @@ class SuiHelper {
     }
 
     BigInt gweiBigInt = (BigInt.from(amount * 10000000) ~/ BigInt.one);
-    var keyPair = Ecryption().decrypt(from.keySui ?? '');
+    var keyPair = EcryptionHelper().decrypt(from.keySui ?? '');
     final account = SuiAccount.fromPrivateKey(keyPair, SignatureScheme.Ed25519);
     final obj = await client.getOwnedObjects(account.getAddress(),
         options: SuiObjectDataOptions(showContent: true));
@@ -64,7 +64,7 @@ class SuiHelper {
       double? gasPrice,
       required Account from,
       required bool isTestnet}) async {
-    var keyPair = Ecryption().decrypt(from.keySui ?? '');
+    var keyPair = EcryptionHelper().decrypt(from.keySui ?? '');
     final account = SuiAccount.fromPrivateKey(keyPair, SignatureScheme.Ed25519);
     SuiClient client;
     if (isTestnet == true) {

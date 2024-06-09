@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:bee_wallet/presentation/screens/dashboard/home/changeAccount/change_account_screen.dart';
 import 'package:blockies_ethereum/blockies_ethereum.dart';
@@ -21,7 +20,7 @@ class HomeScreen extends ConsumerWidget {
     final account = ref.watch(selectedAccountProvider).valueOrNull;
 
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -52,7 +51,7 @@ class HomeScreen extends ConsumerWidget {
                         context: context,
                         builder: (context) => const ChangeAccountScreen(),
                         backgroundColor:
-                            Theme.of(context).colorScheme.background,
+                            Theme.of(context).colorScheme.surface,
                         showDragHandle: true,
                         isDismissible: false,
                         isScrollControlled: true,
@@ -92,7 +91,9 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ),
               GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                   
+                  },
                   child: Container(
                     width: 36.w,
                     height: 36.w,
@@ -132,8 +133,8 @@ class HomeScreen extends ConsumerWidget {
                       color: Theme.of(context).primaryColor,
                       borderRadius: BorderRadius.circular(5.r)),
                   isScrollable: false,
-                  dividerColor: Theme.of(context).colorScheme.background,
-                  indicatorColor: Theme.of(context).colorScheme.background,
+                  dividerColor: Theme.of(context).colorScheme.surface,
+                  indicatorColor: Theme.of(context).colorScheme.surface,
                   labelColor: AppColor.textStrongLight,
                   labelPadding: EdgeInsets.zero,
                   labelStyle: AppFont.medium16,

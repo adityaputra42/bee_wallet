@@ -48,7 +48,7 @@ class DialogVerifyFailed extends StatelessWidget {
     }
 
     return AlertDialog(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       titlePadding: EdgeInsets.zero,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
       content: content(),

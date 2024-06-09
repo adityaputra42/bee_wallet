@@ -16,7 +16,7 @@ class SheedPharseCreate extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final mnemonic = ref.watch(parseMnemonicProvider);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
         context: context,
         title: "Back Up Pharse",

@@ -23,7 +23,7 @@ class ReceiveScreen extends ConsumerWidget {
     final chain = ref.watch(chainDetailProvider);
     final account = ref.watch(selectedAccountProvider).valueOrNull;
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
         context: context,
         title: 'Receive',
@@ -32,7 +32,7 @@ class ReceiveScreen extends ConsumerWidget {
               showModalBottomSheet(
                   context: context,
                   builder: (context) => const SheetChangeReceive(),
-                  backgroundColor: Theme.of(context).colorScheme.background,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   showDragHandle: true,
                   isDismissible: false,
                   isScrollControlled: true,
@@ -57,7 +57,7 @@ class ReceiveScreen extends ConsumerWidget {
                       sides: 6,
                       child: Container(
                         padding: EdgeInsets.all(0.1.h),
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         child: (chain.logo != null)
                             ? Image.asset(chain.logo!)
                             : Image.asset(AppImage.logo),
@@ -127,7 +127,7 @@ class ReceiveScreen extends ConsumerWidget {
                       sides: 6,
                       child: Container(
                         padding: EdgeInsets.all(0.5.h),
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         child: (chain.logo != null)
                             ? Image.asset(chain.logo!)
                             : Image.asset(AppImage.logo),
@@ -147,7 +147,7 @@ class ReceiveScreen extends ConsumerWidget {
                               border: Border.all(
                                   width: 0.1.w,
                                   color: Theme.of(context).cardColor),
-                              color: Theme.of(context).colorScheme.background),
+                              color: Theme.of(context).colorScheme.surface),
                           child: (chain.baseLogo != null)
                               ? Image.asset(chain.baseLogo!)
                               : Image.asset(AppImage.logo),
@@ -207,7 +207,7 @@ class ReceiveScreen extends ConsumerWidget {
                     padding: EdgeInsets.all(16.w),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.r),
-                        color: Theme.of(context).colorScheme.background),
+                        color: Theme.of(context).colorScheme.surface),
                     child: Text(
                       MethodHelper().shortAddress(
                           address: chain.baseChain == 'eth'

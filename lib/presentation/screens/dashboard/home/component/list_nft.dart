@@ -79,7 +79,7 @@ class ListNft extends ConsumerWidget {
                                     padding: EdgeInsets.all(0.5.h),
                                     color: Theme.of(context)
                                         .colorScheme
-                                        .background,
+                                        .surface,
                                     child: Image.asset(
                                       listChain[index].logo ?? '',
                                     ),
@@ -117,7 +117,7 @@ class ListNft extends ConsumerWidget {
                         context: context,
                         builder: (context) => const SheetAddNft(),
                         backgroundColor:
-                            Theme.of(context).colorScheme.background,
+                            Theme.of(context).colorScheme.surface,
                         isScrollControlled: true,
                         showDragHandle: true,
                         useSafeArea: true,
@@ -200,7 +200,7 @@ class ListNft extends ConsumerWidget {
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
-            color: Theme.of(context).colorScheme.background),
+            color: Theme.of(context).colorScheme.surface),
         child: Row(
           children: [
             SizedBox(

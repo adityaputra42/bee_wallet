@@ -36,13 +36,13 @@ class AssetWallet extends ConsumerWidget {
             style: AppFont.semibold30.copyWith(
                 fontSize: 32, color: Theme.of(context).indicatorColor),
           ),
-          4.0.height,
+          2.0.height,
           Text(
             "Estimate Balance in USD",
             style:
                 AppFont.medium12.copyWith(color: Theme.of(context).hintColor),
           ),
-          24.0.height,
+          16.0.height,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -148,7 +148,7 @@ class AssetWallet extends ConsumerWidget {
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
-            color: Theme.of(context).colorScheme.background),
+            color: Theme.of(context).colorScheme.surface),
         child: Row(
           children: [
             SizedBox(
@@ -163,7 +163,7 @@ class AssetWallet extends ConsumerWidget {
                       sides: 6,
                       child: Container(
                         padding: EdgeInsets.all(0.5.h),
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         child: (chain.logo != null)
                             ? Image.asset(chain.logo!)
                             : Image.asset(AppImage.logo),
@@ -184,7 +184,7 @@ class AssetWallet extends ConsumerWidget {
                                     width: 0.3.w,
                                     color: Theme.of(context).cardColor),
                                 color:
-                                    Theme.of(context).colorScheme.background),
+                                    Theme.of(context).colorScheme.surface),
                             child:
                                 Image.asset(chain.baseLogo ?? AppImage.logo)),
                       ),

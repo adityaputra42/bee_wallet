@@ -17,53 +17,63 @@ const AccountSchema = CollectionSchema(
   name: r'Account',
   id: -6646797162501847804,
   properties: {
-    r'addressETH': PropertySchema(
+    r'addressBTC': PropertySchema(
       id: 0,
+      name: r'addressBTC',
+      type: IsarType.string,
+    ),
+    r'addressETH': PropertySchema(
+      id: 1,
       name: r'addressETH',
       type: IsarType.string,
     ),
     r'addressSolana': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'addressSolana',
       type: IsarType.string,
     ),
     r'addressSui': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'addressSui',
       type: IsarType.string,
     ),
     r'backup': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'backup',
       type: IsarType.bool,
     ),
+    r'keyBTC': PropertySchema(
+      id: 5,
+      name: r'keyBTC',
+      type: IsarType.string,
+    ),
     r'keyETH': PropertySchema(
-      id: 4,
+      id: 6,
       name: r'keyETH',
       type: IsarType.string,
     ),
     r'keySolana': PropertySchema(
-      id: 5,
+      id: 7,
       name: r'keySolana',
       type: IsarType.string,
     ),
     r'keySui': PropertySchema(
-      id: 6,
+      id: 8,
       name: r'keySui',
       type: IsarType.string,
     ),
     r'mnemonic': PropertySchema(
-      id: 7,
+      id: 9,
       name: r'mnemonic',
       type: IsarType.string,
     ),
     r'name': PropertySchema(
-      id: 8,
+      id: 10,
       name: r'name',
       type: IsarType.string,
     ),
     r'selectedAccount': PropertySchema(
-      id: 9,
+      id: 11,
       name: r'selectedAccount',
       type: IsarType.bool,
     )
@@ -89,6 +99,12 @@ int _accountEstimateSize(
 ) {
   var bytesCount = offsets.last;
   {
+    final value = object.addressBTC;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.addressETH;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -102,6 +118,12 @@ int _accountEstimateSize(
   }
   {
     final value = object.addressSui;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.keyBTC;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -145,16 +167,18 @@ void _accountSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.addressETH);
-  writer.writeString(offsets[1], object.addressSolana);
-  writer.writeString(offsets[2], object.addressSui);
-  writer.writeBool(offsets[3], object.backup);
-  writer.writeString(offsets[4], object.keyETH);
-  writer.writeString(offsets[5], object.keySolana);
-  writer.writeString(offsets[6], object.keySui);
-  writer.writeString(offsets[7], object.mnemonic);
-  writer.writeString(offsets[8], object.name);
-  writer.writeBool(offsets[9], object.selectedAccount);
+  writer.writeString(offsets[0], object.addressBTC);
+  writer.writeString(offsets[1], object.addressETH);
+  writer.writeString(offsets[2], object.addressSolana);
+  writer.writeString(offsets[3], object.addressSui);
+  writer.writeBool(offsets[4], object.backup);
+  writer.writeString(offsets[5], object.keyBTC);
+  writer.writeString(offsets[6], object.keyETH);
+  writer.writeString(offsets[7], object.keySolana);
+  writer.writeString(offsets[8], object.keySui);
+  writer.writeString(offsets[9], object.mnemonic);
+  writer.writeString(offsets[10], object.name);
+  writer.writeBool(offsets[11], object.selectedAccount);
 }
 
 Account _accountDeserialize(
@@ -164,17 +188,19 @@ Account _accountDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Account(
-    addressETH: reader.readStringOrNull(offsets[0]),
-    addressSolana: reader.readStringOrNull(offsets[1]),
-    addressSui: reader.readStringOrNull(offsets[2]),
-    backup: reader.readBoolOrNull(offsets[3]),
+    addressBTC: reader.readStringOrNull(offsets[0]),
+    addressETH: reader.readStringOrNull(offsets[1]),
+    addressSolana: reader.readStringOrNull(offsets[2]),
+    addressSui: reader.readStringOrNull(offsets[3]),
+    backup: reader.readBoolOrNull(offsets[4]),
     id: id,
-    keyETH: reader.readStringOrNull(offsets[4]),
-    keySolana: reader.readStringOrNull(offsets[5]),
-    keySui: reader.readStringOrNull(offsets[6]),
-    mnemonic: reader.readStringOrNull(offsets[7]),
-    name: reader.readStringOrNull(offsets[8]),
-    selectedAccount: reader.readBoolOrNull(offsets[9]),
+    keyBTC: reader.readStringOrNull(offsets[5]),
+    keyETH: reader.readStringOrNull(offsets[6]),
+    keySolana: reader.readStringOrNull(offsets[7]),
+    keySui: reader.readStringOrNull(offsets[8]),
+    mnemonic: reader.readStringOrNull(offsets[9]),
+    name: reader.readStringOrNull(offsets[10]),
+    selectedAccount: reader.readBoolOrNull(offsets[11]),
   );
   return object;
 }
@@ -193,9 +219,9 @@ P _accountDeserializeProp<P>(
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
-      return (reader.readBoolOrNull(offset)) as P;
-    case 4:
       return (reader.readStringOrNull(offset)) as P;
+    case 4:
+      return (reader.readBoolOrNull(offset)) as P;
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     case 6:
@@ -205,6 +231,10 @@ P _accountDeserializeProp<P>(
     case 8:
       return (reader.readStringOrNull(offset)) as P;
     case 9:
+      return (reader.readStringOrNull(offset)) as P;
+    case 10:
+      return (reader.readStringOrNull(offset)) as P;
+    case 11:
       return (reader.readBoolOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -300,6 +330,152 @@ extension AccountQueryWhere on QueryBuilder<Account, Account, QWhereClause> {
 
 extension AccountQueryFilter
     on QueryBuilder<Account, Account, QFilterCondition> {
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressBTCIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'addressBTC',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressBTCIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'addressBTC',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressBTCEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'addressBTC',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressBTCGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'addressBTC',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressBTCLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'addressBTC',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressBTCBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'addressBTC',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressBTCStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'addressBTC',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressBTCEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'addressBTC',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressBTCContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'addressBTC',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressBTCMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'addressBTC',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressBTCIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'addressBTC',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressBTCIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'addressBTC',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<Account, Account, QAfterFilterCondition> addressETHIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -831,6 +1007,152 @@ extension AccountQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyBTCIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'keyBTC',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyBTCIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'keyBTC',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyBTCEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'keyBTC',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyBTCGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'keyBTC',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyBTCLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'keyBTC',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyBTCBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'keyBTC',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyBTCStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'keyBTC',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyBTCEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'keyBTC',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyBTCContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'keyBTC',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyBTCMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'keyBTC',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyBTCIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'keyBTC',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyBTCIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'keyBTC',
+        value: '',
       ));
     });
   }
@@ -1601,6 +1923,18 @@ extension AccountQueryLinks
     on QueryBuilder<Account, Account, QFilterCondition> {}
 
 extension AccountQuerySortBy on QueryBuilder<Account, Account, QSortBy> {
+  QueryBuilder<Account, Account, QAfterSortBy> sortByAddressBTC() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'addressBTC', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> sortByAddressBTCDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'addressBTC', Sort.desc);
+    });
+  }
+
   QueryBuilder<Account, Account, QAfterSortBy> sortByAddressETH() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'addressETH', Sort.asc);
@@ -1646,6 +1980,18 @@ extension AccountQuerySortBy on QueryBuilder<Account, Account, QSortBy> {
   QueryBuilder<Account, Account, QAfterSortBy> sortByBackupDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'backup', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> sortByKeyBTC() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'keyBTC', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> sortByKeyBTCDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'keyBTC', Sort.desc);
     });
   }
 
@@ -1724,6 +2070,18 @@ extension AccountQuerySortBy on QueryBuilder<Account, Account, QSortBy> {
 
 extension AccountQuerySortThenBy
     on QueryBuilder<Account, Account, QSortThenBy> {
+  QueryBuilder<Account, Account, QAfterSortBy> thenByAddressBTC() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'addressBTC', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> thenByAddressBTCDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'addressBTC', Sort.desc);
+    });
+  }
+
   QueryBuilder<Account, Account, QAfterSortBy> thenByAddressETH() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'addressETH', Sort.asc);
@@ -1781,6 +2139,18 @@ extension AccountQuerySortThenBy
   QueryBuilder<Account, Account, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> thenByKeyBTC() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'keyBTC', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> thenByKeyBTCDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'keyBTC', Sort.desc);
     });
   }
 
@@ -1859,6 +2229,13 @@ extension AccountQuerySortThenBy
 
 extension AccountQueryWhereDistinct
     on QueryBuilder<Account, Account, QDistinct> {
+  QueryBuilder<Account, Account, QDistinct> distinctByAddressBTC(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'addressBTC', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<Account, Account, QDistinct> distinctByAddressETH(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1884,6 +2261,13 @@ extension AccountQueryWhereDistinct
   QueryBuilder<Account, Account, QDistinct> distinctByBackup() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'backup');
+    });
+  }
+
+  QueryBuilder<Account, Account, QDistinct> distinctByKeyBTC(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'keyBTC', caseSensitive: caseSensitive);
     });
   }
 
@@ -1937,6 +2321,12 @@ extension AccountQueryProperty
     });
   }
 
+  QueryBuilder<Account, String?, QQueryOperations> addressBTCProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'addressBTC');
+    });
+  }
+
   QueryBuilder<Account, String?, QQueryOperations> addressETHProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'addressETH');
@@ -1958,6 +2348,12 @@ extension AccountQueryProperty
   QueryBuilder<Account, bool?, QQueryOperations> backupProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'backup');
+    });
+  }
+
+  QueryBuilder<Account, String?, QQueryOperations> keyBTCProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'keyBTC');
     });
   }
 

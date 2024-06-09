@@ -17,7 +17,7 @@ class DetailAccount extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final account = ref.watch(accountSelectedEditProvider);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(context: context, title: "Wallet Details"),
       body: Padding(
         padding: EdgeInsets.all(16.w),
@@ -106,7 +106,7 @@ class DetailAccount extends ConsumerWidget {
                               context: context,
                               builder: (context) => const SheetEditWallet(),
                               backgroundColor:
-                                  Theme.of(context).colorScheme.background,
+                                  Theme.of(context).colorScheme.surface,
                               isScrollControlled: true,
                               showDragHandle: true,
                               shape: RoundedRectangleBorder(

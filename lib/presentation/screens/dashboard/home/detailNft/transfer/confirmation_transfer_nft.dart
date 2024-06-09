@@ -35,7 +35,7 @@ class ConfrimTransferNft extends ConsumerWidget {
                   padding: EdgeInsets.all(16.w),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
-                      color: Theme.of(context).colorScheme.background),
+                      color: Theme.of(context).colorScheme.surface),
                   child: Row(
                     children: [
                       SizedBox(
@@ -92,7 +92,7 @@ class ConfrimTransferNft extends ConsumerWidget {
                   padding: EdgeInsets.all(16.w),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
-                      color: Theme.of(context).colorScheme.background),
+                      color: Theme.of(context).colorScheme.surface),
                   child: Column(
                     children: [
                       Row(
@@ -137,7 +137,7 @@ class ConfrimTransferNft extends ConsumerWidget {
                   padding: EdgeInsets.all(16.w),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
-                      color: Theme.of(context).colorScheme.background),
+                      color: Theme.of(context).colorScheme.surface),
                   child: Column(
                     children: [
                       Row(

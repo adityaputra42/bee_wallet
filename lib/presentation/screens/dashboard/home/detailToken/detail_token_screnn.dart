@@ -47,7 +47,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
     final pagingController = ref.watch(chainHistoryProvider);
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
         context: context,
         title: "${chain.name}",
@@ -102,7 +102,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                       sides: 6,
                       child: Container(
                         padding: EdgeInsets.all(0.5.h),
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         child: (chain.logo != null)
                             ? Image.asset(chain.logo!)
                             : Image.asset(AppImage.logo),
@@ -122,7 +122,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                               border: Border.all(
                                   width: 0.3.w,
                                   color: Theme.of(context).cardColor),
-                              color: Theme.of(context).colorScheme.background),
+                              color: Theme.of(context).colorScheme.surface),
                           child: (chain.baseLogo != null)
                               ? Image.asset(chain.baseLogo!)
                               : Image.asset(AppImage.logo),
@@ -293,7 +293,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: Theme.of(context).colorScheme.background),
+            color: Theme.of(context).colorScheme.surface),
         child: Row(
           children: [
             Container(
@@ -376,7 +376,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                 height: 44.h,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.r),
-                    color: Theme.of(context).colorScheme.background),
+                    color: Theme.of(context).colorScheme.surface),
                 child: Row(
                   children: [
                     Container(
@@ -422,7 +422,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                 height: 44.h,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.r),
-                    color: Theme.of(context).colorScheme.background),
+                    color: Theme.of(context).colorScheme.surface),
                 child: Row(
                   children: [
                     Text(

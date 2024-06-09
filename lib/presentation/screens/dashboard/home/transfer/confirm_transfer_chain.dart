@@ -37,7 +37,7 @@ class ConfirmTransferChain extends ConsumerWidget {
                   padding: EdgeInsets.all(16.w),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
-                      color: Theme.of(context).colorScheme.background),
+                      color: Theme.of(context).colorScheme.surface),
                   child: Row(
                     children: [
                       SizedBox(
@@ -53,7 +53,7 @@ class ConfirmTransferChain extends ConsumerWidget {
                                 child: Container(
                                   padding: EdgeInsets.all(0.5.h),
                                   color:
-                                      Theme.of(context).colorScheme.background,
+                                      Theme.of(context).colorScheme.surface,
                                   child: (chain.logo != null)
                                       ? Image.asset(chain.logo!)
                                       : Image.asset(AppImage.logo),
@@ -75,7 +75,7 @@ class ConfirmTransferChain extends ConsumerWidget {
                                             color: Theme.of(context).cardColor),
                                         color: Theme.of(context)
                                             .colorScheme
-                                            .background),
+                                            .surface),
                                     child: (chain.baseLogo != null)
                                         ? Image.asset(chain.baseLogo!)
                                         : Image.asset(AppImage.logo),
@@ -110,7 +110,7 @@ class ConfirmTransferChain extends ConsumerWidget {
                   padding: EdgeInsets.all(16.w),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
-                      color: Theme.of(context).colorScheme.background),
+                      color: Theme.of(context).colorScheme.surface),
                   child: Column(
                     children: [
                       Row(
@@ -162,7 +162,7 @@ class ConfirmTransferChain extends ConsumerWidget {
                   padding: EdgeInsets.all(16.w),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.r),
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                   child: Column(
                     children: [

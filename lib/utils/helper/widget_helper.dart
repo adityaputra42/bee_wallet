@@ -77,7 +77,7 @@ class WidgetHelper {
         ],
       ),
       automaticallyImplyLeading: false,
-      backgroundColor: color ?? Theme.of(context).colorScheme.background,
+      backgroundColor: color ?? Theme.of(context).colorScheme.surface,
       toolbarHeight: 60.h,
     );
   }

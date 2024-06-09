@@ -23,7 +23,7 @@ class ChooseReceiverScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var chain = ref.watch(chainTransferProvider);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
         context: context,
         title: "Transfer",
@@ -32,7 +32,7 @@ class ChooseReceiverScreen extends ConsumerWidget {
               showModalBottomSheet(
                   context: context,
                   builder: (context) => const SheetChangeNetwork(),
-                  backgroundColor: Theme.of(context).colorScheme.background,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   showDragHandle: true,
                   isDismissible: false,
                   isScrollControlled: true,
@@ -57,7 +57,7 @@ class ChooseReceiverScreen extends ConsumerWidget {
                       sides: 6,
                       child: Container(
                         padding: EdgeInsets.all(0.1.h),
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         child: (chain.logo != null)
                             ? Image.asset(chain.logo!)
                             : Image.asset(AppImage.logo),
@@ -123,7 +123,7 @@ class ChooseReceiverScreen extends ConsumerWidget {
                               horizontal: 16.w, vertical: 12.h),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.r),
-                              color: Theme.of(context).colorScheme.background),
+                              color: Theme.of(context).colorScheme.surface),
                           child: Row(
                             children: [
                               Expanded(
@@ -143,7 +143,7 @@ class ChooseReceiverScreen extends ConsumerWidget {
                                                 padding: EdgeInsets.all(0.5.h),
                                                 color: Theme.of(context)
                                                     .colorScheme
-                                                    .background,
+                                                    .surface,
                                                 child: (chain.logo != null)
                                                     ? Image.asset(chain.logo!)
                                                     : Image.asset(
@@ -169,7 +169,7 @@ class ChooseReceiverScreen extends ConsumerWidget {
                                                                   .cardColor),
                                                       color: Theme.of(context)
                                                           .colorScheme
-                                                          .background),
+                                                          .surface),
                                                   child:
                                                       (chain.baseLogo != null)
                                                           ? Image.asset(
@@ -216,7 +216,7 @@ class ChooseReceiverScreen extends ConsumerWidget {
                                 .onAmountChange(value);
                           },
                           hintText: "0.000",
-                          color: Theme.of(context).colorScheme.background,
+                          color: Theme.of(context).colorScheme.surface,
                           icon: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -247,7 +247,7 @@ class ChooseReceiverScreen extends ConsumerWidget {
                                 .onAddressChange(value);
                           },
                           hintText: "Please enter address",
-                          color: Theme.of(context).colorScheme.background,
+                          color: Theme.of(context).colorScheme.surface,
                           icon: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [

@@ -59,7 +59,7 @@ class SheetConfirmationBackup extends ConsumerWidget {
                 showModalBottomSheet(
                     context: context,
                     builder: (context) => const SheetPinBackup(),
-                    backgroundColor: Theme.of(context).colorScheme.background,
+                    backgroundColor: Theme.of(context).colorScheme.surface,
                     isScrollControlled: true,
                     showDragHandle: true,
                     shape: RoundedRectangleBorder(

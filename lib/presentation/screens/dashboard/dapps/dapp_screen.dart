@@ -24,7 +24,7 @@ class DappScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final listChain = ref.watch(listChainSearchProvider);
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
           elevation: 0,
           shadowColor: AppColor.grayColor,
@@ -49,7 +49,7 @@ class DappScreen extends ConsumerWidget {
                                 url: ref.watch(searchWebProvider).text,
                               ),
                           backgroundColor:
-                              Theme.of(context).colorScheme.background,
+                              Theme.of(context).colorScheme.surface,
                           showDragHandle: true,
                           isDismissible: false,
                           shape: RoundedRectangleBorder(
@@ -60,7 +60,7 @@ class DappScreen extends ConsumerWidget {
                 },
               )),
           automaticallyImplyLeading: false,
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           toolbarHeight: 76.h,
         ),
         body: Column(
@@ -226,7 +226,7 @@ class DappScreen extends ConsumerWidget {
                                               padding: EdgeInsets.all(0.5.h),
                                               color: Theme.of(context)
                                                   .colorScheme
-                                                  .background,
+                                                  .surface,
                                               child: Image.asset(
                                                 listChain[index].logo ?? '',
                                               ),
@@ -284,7 +284,7 @@ class DappScreen extends ConsumerWidget {
                                                     BorderRadius.circular(8.r),
                                                 color: Theme.of(context)
                                                     .colorScheme
-                                                    .background),
+                                                    .surface),
                                             child: Row(
                                               children: [
                                                 SizedBox(

@@ -72,7 +72,7 @@ class SolanaHelper {
       required double amount}) async {
     final cluster = sol.Cluster.mainnet;
     final connect = sol.Connection(cluster);
-    final seckeyDec = Ecryption().decrypt(from.keySolana ?? "");
+    final seckeyDec = EcryptionHelper().decrypt(from.keySolana ?? "");
     var account = sol.Keypair.fromSeckeySync(sol.base58Decode(seckeyDec));
     var last = await connect.getLatestBlockhash();
     var transaction = sol.Transaction.v0(

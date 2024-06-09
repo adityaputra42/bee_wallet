@@ -261,7 +261,7 @@ class NetworkFeeNft extends _$NetworkFeeNft {
       var data = await EthHelper().getEstimateGasNFTTransfer(
           to: ref.watch(receiveNftProvider).text,
           nft: nft,
-          privateKey: Ecryption().decrypt(account?.keyETH ?? ''),
+          privateKey: EcryptionHelper().decrypt(account?.keyETH ?? ''),
           chain: chain);
 
       fee = data['txFee'];
@@ -404,7 +404,7 @@ class TransferNft extends _$TransferNft {
         to: ref.watch(receiveNftProvider).text,
         nft: nft,
         chain: chain,
-        privateKey: Ecryption().decrypt(account?.keyETH ?? ''),
+        privateKey: EcryptionHelper().decrypt(account?.keyETH ?? ''),
       );
 
       if (response != null) {

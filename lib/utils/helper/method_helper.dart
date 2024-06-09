@@ -30,30 +30,39 @@ class MethodHelper {
         context: context, content: "Succes copy", backgorund: Colors.teal);
   }
 
-  Future<Account> computeMnemonic({required String mnemonic, required String name, bool backup = false}) async {
+  Future<Account> computeMnemonic(
+      {required String mnemonic,
+      required String name,
+      bool backup = false}) async {
     var accountETH = EthHelper().getEthInfo(mnemonic);
     var accountSolana = await SolanaHelper().getAccountInfo(mnemonic);
     var accountSui = SuiHelper().getAccountInfo(mnemonic);
+    var accountBtc = await BtcHelper().getBtcAccountInfo(mnemonic);
 
-    final mnemonicEncrypted = Ecryption().encrypt(mnemonic);
+    final mnemonicEncrypted = EcryptionHelper().encrypt(mnemonic);
     final privataKeyEthEncrypted =
-        Ecryption().encrypt(accountETH['private_key']!);
+        EcryptionHelper().encrypt(accountETH['private_key']!);
     final privataKeySolanaEncrypted =
-        Ecryption().encrypt(accountSolana['private_key']!);
+        EcryptionHelper().encrypt(accountSolana['private_key']!);
     final privataKeySuiEncrypted =
-        Ecryption().encrypt(accountSui['private_key']!);
+        EcryptionHelper().encrypt(accountSui['private_key']!);
+    final privateKeyBtcEncrypted =
+        EcryptionHelper().encrypt(accountBtc['private_key']!);
 
     Account account = Account(
-        name: name,
-        mnemonic: mnemonicEncrypted,
-        selectedAccount: true,
-        backup: backup,
-        keyETH: privataKeyEthEncrypted,
-        addressETH: accountETH['address'],
-        keySolana: privataKeySolanaEncrypted,
-        addressSolana: accountSolana['address'],
-        keySui: privataKeySuiEncrypted,
-        addressSui: accountSui['address']);
+      name: name,
+      mnemonic: mnemonicEncrypted,
+      selectedAccount: true,
+      backup: backup,
+      keyETH: privataKeyEthEncrypted,
+      addressETH: accountETH['address'],
+      keySolana: privataKeySolanaEncrypted,
+      addressSolana: accountSolana['address'],
+      keySui: privataKeySuiEncrypted,
+      addressSui: accountSui['address'],
+      keyBTC: privateKeyBtcEncrypted,
+      addressBTC: accountBtc['address'],
+    );
     return account;
   }
 

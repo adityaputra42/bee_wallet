@@ -121,7 +121,7 @@ class NetworkFee extends _$NetworkFee {
         var data = await EthHelper().getEstimateGasFee(
             to: ref.watch(receiveAddressProvider).text,
             amount: 0,
-            privateKey: Ecryption().decrypt(account?.keyETH ?? ''),
+            privateKey: EcryptionHelper().decrypt(account?.keyETH ?? ''),
             chain: chain);
         fee = data['txFee'];
         ref
@@ -135,7 +135,7 @@ class NetworkFee extends _$NetworkFee {
         var data = await EthHelper().getEstimateGasTokenTransfer(
             to: ref.watch(receiveAddressProvider).text,
             amount: 0,
-            privateKey: Ecryption().decrypt(account?.keyETH ?? ''),
+            privateKey: EcryptionHelper().decrypt(account?.keyETH ?? ''),
             chainToken: chain);
         fee = data['txFee'];
         ref
@@ -268,7 +268,7 @@ class TransferChain extends _$TransferChain {
             to: ref.watch(receiveAddressProvider).text,
             amount: amount,
             chain: chain,
-            privateKey: Ecryption().decrypt(account?.keyETH ?? ''),
+            privateKey: EcryptionHelper().decrypt(account?.keyETH ?? ''),
           );
           state = const AsyncData(true);
         } else {
@@ -276,7 +276,7 @@ class TransferChain extends _$TransferChain {
             to: ref.watch(receiveAddressProvider).text,
             amount: amount,
             token: chain,
-            privateKey: Ecryption().decrypt(account?.keyETH ?? ''),
+            privateKey: EcryptionHelper().decrypt(account?.keyETH ?? ''),
           );
           state = const AsyncData(true);
         }

@@ -12,8 +12,8 @@ class Account {
   String? addressETH;
   String? keySolana;
   String? addressSolana;
-  // String? keyBTC;
-  // String? addressBTC;
+  String? keyBTC;
+  String? addressBTC;
   // String? keyTron;
   // String? addressTron;
   String? keySui;
@@ -29,8 +29,8 @@ class Account {
       this.addressETH,
       this.keySolana,
       this.addressSolana,
-      // this.keyBTC,
-      // this.addressBTC,
+      this.keyBTC,
+      this.addressBTC,
       // this.keyTron,
       // this.addressTron,
       this.keySui,
@@ -44,8 +44,8 @@ class Account {
     String? addressETH,
     String? keySolana,
     String? addressSolana,
-    // String? keyBTC,
-    // String? addressBTC,
+    String? keyBTC,
+    String? addressBTC,
     // String? keyTron,
     // String? addressTron,
     String? keySui,
@@ -60,8 +60,8 @@ class Account {
         addressETH: addressETH ?? this.addressETH,
         keySolana: keySolana ?? this.keySolana,
         addressSolana: addressSolana ?? this.addressSolana,
-        // keyBTC: keyBTC ?? this.keyBTC,
-        // addressBTC: addressBTC ?? this.addressBTC,
+        keyBTC: keyBTC ?? this.keyBTC,
+        addressBTC: addressBTC ?? this.addressBTC,
         // keyTron: keyTron ?? this.keyTron,
         // addressTron: addressTron ?? this.addressTron,
         keySui: keySui ?? this.keySui,
@@ -77,8 +77,8 @@ class Account {
         addressETH: json['addressETH'],
         keySolana: json['keySolana'],
         addressSolana: json['addressSolana'],
-        // keyBTC: json['keyBTC'],
-        // addressBTC: json['addressBTC'],
+        keyBTC: json['keyBTC'],
+        addressBTC: json['addressBTC'],
         // keyTron: json['keyTron'],
         // addressTron: json['addressTron'],
         keySui: json['keySui'],
@@ -94,8 +94,8 @@ class Account {
         "addressETH": addressETH,
         "keySolana": keySolana,
         "addressSolana": addressSolana,
-        // "keyBTC": keyBTC,
-        // "addressBTC": addressBTC,
+        "keyBTC": keyBTC,
+        "addressBTC": addressBTC,
         // "keyTron": keyTron,
         // "addressTron": addressTron,
         "keySui": keySui,

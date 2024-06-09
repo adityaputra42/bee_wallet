@@ -36,7 +36,7 @@ class SheetAddNft extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 InputText(
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).colorScheme.surface,
                     controller: ref.watch(contractNftControllerProvider),
                     onChange: (v) => ref
                         .read(contractNftControllerProvider.notifier)
@@ -48,7 +48,7 @@ class SheetAddNft extends ConsumerWidget {
                     hintText: "Enter your contract address"),
                 16.0.height,
                 InputText(
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).colorScheme.surface,
                     controller: ref.watch(tokenIdControllerProvider),
                     onChange: (v) => ref
                         .read(tokenIdControllerProvider.notifier)

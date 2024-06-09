@@ -13,7 +13,7 @@ class BackupSettingScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar:
           WidgetHelper.appBar(context: context, title: 'Backup Your Wallet'),
       body: Container(
@@ -49,7 +49,7 @@ class BackupSettingScreen extends ConsumerWidget {
                   showModalBottomSheet(
                       context: context,
                       builder: (context) => const SheetConfirmationBackup(),
-                      backgroundColor: Theme.of(context).colorScheme.background,
+                      backgroundColor: Theme.of(context).colorScheme.surface,
                       isScrollControlled: true,
                       showDragHandle: true,
                       shape: RoundedRectangleBorder(

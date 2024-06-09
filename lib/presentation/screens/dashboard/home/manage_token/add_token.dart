@@ -34,7 +34,7 @@ class AddToken extends ConsumerWidget {
               showModalBottomSheet(
                   context: context,
                   builder: (context) => const SheetNetworkAddToken(),
-                  backgroundColor: Theme.of(context).colorScheme.background,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   showDragHandle: true,
                   isDismissible: false,
                   isScrollControlled: true,
@@ -59,7 +59,7 @@ class AddToken extends ConsumerWidget {
                       sides: 6,
                       child: Container(
                         padding: EdgeInsets.all(0.1.h),
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         child: (chain.logo != null)
                             ? Image.asset(chain.logo!)
                             : Image.asset(AppImage.logo),
@@ -98,7 +98,7 @@ class AddToken extends ConsumerWidget {
             //               context: context,
             //               builder: (context) => const SheetNetworkAddToken(),
             //               backgroundColor:
-            //                   Theme.of(context).colorScheme.background,
+            //                   Theme.of(context).colorScheme.surface,
             //               showDragHandle: true,
             //               isDismissible: false,
             //               shape: RoundedRectangleBorder(
@@ -115,7 +115,7 @@ class AddToken extends ConsumerWidget {
             //                 sides: 6,
             //                 child: Container(
             //                   padding: EdgeInsets.all(0.5.h),
-            //                   color: Theme.of(context).colorScheme.background,
+            //                   color: Theme.of(context).colorScheme.surface,
             //                   child: Image.asset(chain.logo ?? AppImage.logo),
             //                 ),
             //               ),
@@ -171,7 +171,7 @@ class AddToken extends ConsumerWidget {
                         });
                       },
                       hintText: "Add Contract Address",
-                      color: Theme.of(context).colorScheme.background,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                     16.0.height,
                     InputText(
@@ -179,7 +179,7 @@ class AddToken extends ConsumerWidget {
                       hintText: "Add Name",
                       enable: false,
                       controller: ref.watch(nameTokenProvider),
-                      color: Theme.of(context).colorScheme.background,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                     16.0.height,
                     InputText(
@@ -187,7 +187,7 @@ class AddToken extends ConsumerWidget {
                       hintText: "Add Symbol",
                       controller: ref.watch(symbolTokenProvider),
                       enable: false,
-                      color: Theme.of(context).colorScheme.background,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                     16.0.height,
                     InputText(
@@ -195,7 +195,7 @@ class AddToken extends ConsumerWidget {
                       hintText: "Add Decimals",
                       controller: ref.watch(decimalTokenProvider),
                       enable: false,
-                      color: Theme.of(context).colorScheme.background,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                     const Spacer(),
                     PrimaryButton(

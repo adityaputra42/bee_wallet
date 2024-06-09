@@ -15,7 +15,7 @@ class CustomGasFee extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: WidgetHelper.appBar(context: context, title: "Advance"),
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Container(
         width: double.infinity,
         margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
@@ -38,7 +38,7 @@ class CustomGasFee extends ConsumerWidget {
                         hintText: "Enter gas price",
                         controller: ref.watch(gasPriceProvider),
                         title: 'Gas Price',
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         icon: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           mainAxisSize: MainAxisSize.min,
@@ -64,7 +64,7 @@ class CustomGasFee extends ConsumerWidget {
                         hintText: "Enter gas limit",
                         title: 'Gas Limit',
                         controller: ref.watch(gasLimitProvider),
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         icon: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           mainAxisSize: MainAxisSize.min,

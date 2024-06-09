@@ -23,7 +23,7 @@ class TransferNftScreen extends ConsumerWidget {
     final nft = ref.watch(selectedNftProvider);
     final token = ref.watch(chainNftTransferProvider);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(context: context, title: "Transfer NFT"),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
@@ -51,7 +51,7 @@ class TransferNftScreen extends ConsumerWidget {
                         padding: EdgeInsets.all(16.w),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.r),
-                            color: Theme.of(context).colorScheme.background),
+                            color: Theme.of(context).colorScheme.surface),
                         child: Row(
                           children: [
                             SizedBox(
@@ -116,7 +116,7 @@ class TransferNftScreen extends ConsumerWidget {
                         padding: EdgeInsets.all(12.w),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.r),
-                            color: Theme.of(context).colorScheme.background),
+                            color: Theme.of(context).colorScheme.surface),
                         child: Row(
                           children: [
                             Container(
@@ -163,7 +163,7 @@ class TransferNftScreen extends ConsumerWidget {
                         validator: (v) =>
                             ref.read(receiveNftProvider.notifier).onValidate(v),
                         hintText: "Please enter address",
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         controller: ref.watch(receiveNftProvider),
                         icon: Row(
                           mainAxisSize: MainAxisSize.min,

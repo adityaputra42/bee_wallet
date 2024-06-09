@@ -16,7 +16,7 @@ class SheedPharseSetting extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final mnemonic = ref.watch(parseMnemonicProvider);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
         context: context,
         title: "Backup",
@@ -43,7 +43,7 @@ class SheedPharseSetting extends ConsumerWidget {
               padding: EdgeInsets.all(12.w),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.r),
-                  color: Theme.of(context).colorScheme.background),
+                  color: Theme.of(context).colorScheme.surface),
               child: Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
                   runAlignment: WrapAlignment.center,

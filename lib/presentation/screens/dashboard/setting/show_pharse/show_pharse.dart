@@ -14,7 +14,7 @@ class ShowParse extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(context: context, title: 'Seed Pharse'),
       body: Container(
         width: double.infinity,
@@ -50,7 +50,7 @@ class ShowParse extends ConsumerWidget {
                   showModalBottomSheet(
                       context: context,
                       builder: (context) => const SheetPasswordShow(),
-                      backgroundColor: Theme.of(context).colorScheme.background,
+                      backgroundColor: Theme.of(context).colorScheme.surface,
                       isScrollControlled: true,
                       showDragHandle: true,
                       shape: RoundedRectangleBorder(

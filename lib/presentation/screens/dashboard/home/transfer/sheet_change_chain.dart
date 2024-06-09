@@ -73,8 +73,8 @@ class SheetChangeNetwork extends ConsumerWidget {
                 color: chainTransfer.chainId == chain.chainId &&
                         chainTransfer.symbol == chain.symbol
                     ? AppColor.primaryColor
-                    : Theme.of(context).colorScheme.background),
-            color: Theme.of(context).colorScheme.background),
+                    : Theme.of(context).colorScheme.surface),
+            color: Theme.of(context).colorScheme.surface),
         child: Column(
           children: [
             Row(
@@ -91,7 +91,7 @@ class SheetChangeNetwork extends ConsumerWidget {
                           sides: 6,
                           child: Container(
                             padding: EdgeInsets.all(0.5.h),
-                            color: Theme.of(context).colorScheme.background,
+                            color: Theme.of(context).colorScheme.surface,
                             child: (chain.logo != null)
                                 ? Image.asset(chain.logo!)
                                 : Image.asset(AppImage.logo),
@@ -112,7 +112,7 @@ class SheetChangeNetwork extends ConsumerWidget {
                                       width: 0.1.w,
                                       color: Theme.of(context).cardColor),
                                   color:
-                                      Theme.of(context).colorScheme.background),
+                                      Theme.of(context).colorScheme.surface),
                               child: (chain.baseLogo != null)
                                   ? Image.asset(chain.baseLogo!)
                                   : Image.asset(AppImage.logo),

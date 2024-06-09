@@ -69,8 +69,8 @@ class SheetNetworkAddToken extends ConsumerWidget {
                 width: 1.w,
                 color: selectedChain.chainId == chain.chainId
                     ? AppColor.primaryColor
-                    : Theme.of(context).colorScheme.background),
-            color: Theme.of(context).colorScheme.background),
+                    : Theme.of(context).colorScheme.surface),
+            color: Theme.of(context).colorScheme.surface),
         child: Column(
           children: [
             Row(
@@ -82,7 +82,7 @@ class SheetNetworkAddToken extends ConsumerWidget {
                     sides: 6,
                     child: Container(
                       padding: EdgeInsets.all(0.5.h),
-                      color: Theme.of(context).colorScheme.background,
+                      color: Theme.of(context).colorScheme.surface,
                       child: Image.asset(chain.logo ?? AppImage.logo),
                     ),
                   ),

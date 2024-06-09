@@ -21,7 +21,7 @@ class ImportWallet extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: WidgetHelper.appBar(context: context, title: "Import Wallet"),
         body: Container(
             width: double.infinity,
@@ -36,7 +36,7 @@ class ImportWallet extends ConsumerWidget {
                 InputText(
                   title: "Seed Phrase",
                   hintText: "Type your recovery phrase",
-                  color: Theme.of(context).colorScheme.background,
+                  color: Theme.of(context).colorScheme.surface,
                   controller: ref.watch(seedImportController),
                   icon: Row(
                     mainAxisSize: MainAxisSize.min,

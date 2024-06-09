@@ -51,7 +51,7 @@ class ChangeAccountScreen extends ConsumerWidget {
                   showModalBottomSheet(
                       context: context,
                       builder: (context) => const SheetAddWallet(),
-                      backgroundColor: Theme.of(context).colorScheme.background,
+                      backgroundColor: Theme.of(context).colorScheme.surface,
                       showDragHandle: true,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.vertical(

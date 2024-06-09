@@ -16,15 +16,10 @@ class Styles {
         error: AppColor.redColor,
         onError:
             isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,
-        background: isDarkTheme ? AppColor.bgDark : AppColor.bgLight,
-        onBackground:
-            isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,
-        surface: isDarkTheme ? AppColor.cardDark : AppColor.cardLight,
+        surface: isDarkTheme ? AppColor.bgDark : AppColor.bgLight,
         onSurface:
             isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,
         onSurfaceVariant:
-            isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,
-        surfaceVariant:
             isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,
         surfaceTint:
             isDarkTheme ? AppColor.textStrongDark : AppColor.textStrongLight,

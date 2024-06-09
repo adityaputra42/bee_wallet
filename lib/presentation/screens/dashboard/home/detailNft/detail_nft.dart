@@ -16,7 +16,7 @@ class DetailNft extends ConsumerWidget {
     final nft = ref.watch(selectedNftProvider);
     final chain = ref.watch(tokenChainNftProvider);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(context: context, title: "Detail NFT"),
       body: Container(
         padding: EdgeInsets.all(16.w),

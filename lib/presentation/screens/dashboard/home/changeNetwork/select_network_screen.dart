@@ -24,7 +24,7 @@ class SelectNetworkScreen extends ConsumerWidget {
     final listChain = ref.watch(listChainSearchProvider);
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(context: context, title: "Change Network"),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -113,8 +113,8 @@ class SelectNetworkScreen extends ConsumerWidget {
                 width: 1.w,
                 color: selectedChain.length == listchain.length
                     ? AppColor.primaryColor
-                    : Theme.of(context).colorScheme.background),
-            color: Theme.of(context).colorScheme.background),
+                    : Theme.of(context).colorScheme.surface),
+            color: Theme.of(context).colorScheme.surface),
         child: Column(
           children: [
             Row(
@@ -176,8 +176,8 @@ class SelectNetworkScreen extends ConsumerWidget {
                         selectedChain
                             .any((element) => element.chainId == chain.chainId)
                     ? AppColor.primaryColor
-                    : Theme.of(context).colorScheme.background),
-            color: Theme.of(context).colorScheme.background),
+                    : Theme.of(context).colorScheme.surface),
+            color: Theme.of(context).colorScheme.surface),
         child: Column(
           children: [
             Row(
@@ -189,7 +189,7 @@ class SelectNetworkScreen extends ConsumerWidget {
                     sides: 6,
                     child: Container(
                       padding: EdgeInsets.all(0.5.h),
-                      color: Theme.of(context).colorScheme.background,
+                      color: Theme.of(context).colorScheme.surface,
                       child: (chain.logo != null)
                           ? Image.asset(
                               chain.logo!,

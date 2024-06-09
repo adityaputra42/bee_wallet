@@ -21,7 +21,7 @@ class GetStartedScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
           child: Padding(
         padding: EdgeInsets.symmetric(
@@ -69,7 +69,7 @@ class GetStartedScreen extends ConsumerWidget {
                         padding: EdgeInsets.all(8.r),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.r),
-                            color: Theme.of(context).colorScheme.background),
+                            color: Theme.of(context).colorScheme.surface),
                         child: Iconify(
                           Mdi.wallet_outline,
                           size: 32.w,
@@ -119,7 +119,7 @@ class GetStartedScreen extends ConsumerWidget {
                         padding: EdgeInsets.all(8.r),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.r),
-                            color: Theme.of(context).colorScheme.background),
+                            color: Theme.of(context).colorScheme.surface),
                         child: Iconify(
                           Mdi.wallet_outline,
                           size: 32.w,

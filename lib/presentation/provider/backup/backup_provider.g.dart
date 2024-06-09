@@ -6,7 +6,7 @@ part of 'backup_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$parseMnemonicHash() => r'2ee1680d1e9fa0ef2584a4097f8ec74e79abb865';
+String _$parseMnemonicHash() => r'956c9b1a8871fa66c6ff8a5e85f7d4f217a98b2c';
 
 /// See also [ParseMnemonic].
 @ProviderFor(ParseMnemonic)

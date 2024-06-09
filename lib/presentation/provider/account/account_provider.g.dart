@@ -6,7 +6,7 @@ part of 'account_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$selectedAccountHash() => r'a9a6c50f22f614ac7623fc6510baccd36616db9a';
+String _$selectedAccountHash() => r'7de4a2d012870b690cb4fd88033de95214726119';
 
 /// See also [SelectedAccount].
 @ProviderFor(SelectedAccount)
@@ -22,7 +22,7 @@ final selectedAccountProvider =
 );
 
 typedef _$SelectedAccount = AutoDisposeAsyncNotifier<Account>;
-String _$selectedMnemonicHash() => r'7135d58ab742a513439dcc3bc5bf7074d6760cc6';
+String _$selectedMnemonicHash() => r'ba26f88dcc271f445a716f646186fd784d5ae3b4';
 
 /// See also [SelectedMnemonic].
 @ProviderFor(SelectedMnemonic)

@@ -16,7 +16,7 @@ class SheedPharseShow extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final mnemonic = ref.watch(selectedMnemonicProvider);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
         context: context,
         title: "Backup",
@@ -176,7 +176,7 @@ class SheedPharseShow extends ConsumerWidget {
                 color: AppColor.grayColor.withOpacity(0.15))
           ],
           borderRadius: BorderRadius.circular(8.r),
-          color: Theme.of(context).colorScheme.background),
+          color: Theme.of(context).colorScheme.surface),
       child: Text("$number. $text",
           style: AppFont.medium12.copyWith(
             color: Theme.of(context).indicatorColor,

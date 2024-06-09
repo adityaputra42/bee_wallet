@@ -147,7 +147,7 @@ final nftHistoryProvider = AutoDisposeNotifierProvider<NftHistory,
 );
 
 typedef _$NftHistory = AutoDisposeNotifier<PagingController<int, Activity>>;
-String _$networkFeeNftHash() => r'2d51e73e6fd182526c9cc923c7aec44a60afcb93';
+String _$networkFeeNftHash() => r'd87cdc1569bcf6b3b1837421d22c67a5fb8106d1';
 
 /// See also [NetworkFeeNft].
 @ProviderFor(NetworkFeeNft)
@@ -289,7 +289,7 @@ final disableGasFeeNFTProvider =
 );
 
 typedef _$DisableGasFeeNFT = AutoDisposeNotifier<bool>;
-String _$transferNftHash() => r'1caa037a53318c17682119e69ac84cb26d73da46';
+String _$transferNftHash() => r'1cb212d9f03b7dbffa2a92bf1468263fd679e444';
 
 /// See also [TransferNft].
 @ProviderFor(TransferNft)

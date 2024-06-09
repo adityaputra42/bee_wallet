@@ -17,7 +17,7 @@ class ConfirmPinScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final password = ref.watch(passwordCreateProvider);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(context: context, title: ''),
       body: SafeArea(
         child: Padding(

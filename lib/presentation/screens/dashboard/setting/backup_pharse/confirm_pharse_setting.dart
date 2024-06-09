@@ -138,7 +138,7 @@ class ConfirmPharseSetting extends ConsumerWidget {
     }
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
         context: context,
         title: "Backup",
@@ -170,7 +170,7 @@ class ConfirmPharseSetting extends ConsumerWidget {
                         color: AppColor.grayColor.withOpacity(0.25))
                   ],
                   borderRadius: BorderRadius.circular(12.r),
-                  color: Theme.of(context).colorScheme.background),
+                  color: Theme.of(context).colorScheme.surface),
               child: Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
                   runAlignment: WrapAlignment.center,
@@ -231,7 +231,7 @@ class ConfirmPharseSetting extends ConsumerWidget {
                               color: AppColor.grayColor.withOpacity(0.25))
                         ],
                         borderRadius: BorderRadius.circular(12.r),
-                        color: Theme.of(context).colorScheme.background),
+                        color: Theme.of(context).colorScheme.surface),
                     child: Wrap(
                         crossAxisAlignment: WrapCrossAlignment.center,
                         runAlignment: WrapAlignment.center,

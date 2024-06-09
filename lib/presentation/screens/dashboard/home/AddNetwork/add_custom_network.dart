@@ -16,7 +16,7 @@ class AddCustomNetwork extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
         context: context,
         title: 'Add Custom Network',
@@ -44,7 +44,7 @@ class AddCustomNetwork extends ConsumerWidget {
                         title: "Network name",
                         controller: ref.watch(nameChainControllerProvider),
                         hintText: "Input Network Name",
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         onChange: (v) {
                           ref
                               .read(nameChainControllerProvider.notifier)
@@ -61,7 +61,7 @@ class AddCustomNetwork extends ConsumerWidget {
                         title: "RPC URL",
                         controller: ref.watch(rpcChainControllerProvider),
                         hintText: "Input a RPC URL",
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         onChange: (v) {
                           ref
                               .read(rpcChainControllerProvider.notifier)
@@ -79,7 +79,7 @@ class AddCustomNetwork extends ConsumerWidget {
                         controller: ref.watch(chainIdControllerProvider),
                         hintText: "Input a Chain ID",
                         keyboardType: TextInputType.number,
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         onChange: (v) {
                           ref
                               .read(chainIdControllerProvider.notifier)
@@ -96,7 +96,7 @@ class AddCustomNetwork extends ConsumerWidget {
                         title: "Currency symbol",
                         controller: ref.watch(symbolChainControllerProvider),
                         hintText: "Input Currency Symbol",
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         onChange: (v) {
                           ref
                               .read(symbolChainControllerProvider.notifier)
@@ -113,7 +113,7 @@ class AddCustomNetwork extends ConsumerWidget {
                         title: "Block Explorer URL",
                         controller: ref.watch(explorerChainControllerProvider),
                         hintText: "Input Block Explorer URL",
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         onChange: (v) {
                           ref
                               .read(explorerChainControllerProvider.notifier)

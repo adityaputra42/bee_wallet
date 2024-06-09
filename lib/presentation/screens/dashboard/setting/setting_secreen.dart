@@ -19,7 +19,7 @@ class SettingScreen extends ConsumerWidget {
     final account = ref.watch(selectedAccountProvider).valueOrNull;
     var isDark = ref.watch(darkThemeProvider);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
           context: context, title: "Setting", isCanBack: false),
       body: Container(
@@ -131,6 +131,9 @@ class SettingScreen extends ConsumerWidget {
             cardMenu(
               context,
               title: "Edit Wallet",
+              onTap: () {
+               
+              },
             ),
             12.0.height,
             cardMenu(
@@ -140,7 +143,7 @@ class SettingScreen extends ConsumerWidget {
                 showModalBottomSheet(
                     context: context,
                     builder: (context) => const SheetPasswordShow(),
-                    backgroundColor: Theme.of(context).colorScheme.background,
+                    backgroundColor: Theme.of(context).colorScheme.surface,
                     isScrollControlled: true,
                     showDragHandle: true,
                     shape: RoundedRectangleBorder(
@@ -158,7 +161,7 @@ class SettingScreen extends ConsumerWidget {
                 showModalBottomSheet(
                     context: context,
                     builder: (context) => const SheetPasswordChangePin(),
-                    backgroundColor: Theme.of(context).colorScheme.background,
+                    backgroundColor: Theme.of(context).colorScheme.surface,
                     isScrollControlled: true,
                     showDragHandle: true,
                     shape: RoundedRectangleBorder(
@@ -260,7 +263,7 @@ class SettingScreen extends ConsumerWidget {
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
-          color: Theme.of(context).colorScheme.background),
+          color: Theme.of(context).colorScheme.surface),
       child: GestureDetector(
         onTap: onTap,
         child: Row(

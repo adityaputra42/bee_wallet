@@ -27,7 +27,7 @@ class TransactionProgressScreen extends ConsumerWidget {
           padding: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.r),
-              color: Theme.of(context).colorScheme.background),
+              color: Theme.of(context).colorScheme.surface),
           child: Column(
             children: [
               Text(

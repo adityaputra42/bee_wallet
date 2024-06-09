@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:math' as math;
 
+import 'package:bdk_flutter/bdk_flutter.dart';
 import 'package:connectivity_checker/connectivity_checker.dart';
 import 'package:erc20/erc20.dart';
 import 'package:flutter/material.dart';
@@ -173,6 +174,15 @@ class BalanceChain extends _$BalanceChain {
             chain.balance = balanceMainet;
             await DbHelper.instance.updateNetwork(chain.id!, balanceMainet);
           }
+        } else if (chain.baseChain == "btc") {
+          var walletBtc = await BtcHelper().createOrRestoreWallet(
+              EcryptionHelper().decrypt(account?.keyBTC ?? ''),
+              Network.Bitcoin);
+          final balance = await walletBtc.getBalance();
+            log("new Balance BTC => ${balance.total}");
+          chain.balance = balance.total.toDouble();
+          await DbHelper.instance
+              .updateNetwork(chain.id!, balance.total.toDouble());
         }
       } catch (error) {
         log("error get balance => $error");

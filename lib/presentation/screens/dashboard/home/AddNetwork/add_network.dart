@@ -17,7 +17,7 @@ class AddNetwork extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
           context: context,
           title: 'Add Network',
@@ -109,7 +109,7 @@ class AddNetwork extends ConsumerWidget {
               builder: (context) => SheetPasswordAddNetwork(
                     chain: chain,
                   ),
-              backgroundColor: Theme.of(context).colorScheme.background,
+              backgroundColor: Theme.of(context).colorScheme.surface,
               isScrollControlled: true,
               showDragHandle: true,
               shape: RoundedRectangleBorder(
@@ -121,7 +121,7 @@ class AddNetwork extends ConsumerWidget {
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
-            color: Theme.of(context).colorScheme.background),
+            color: Theme.of(context).colorScheme.surface),
         child: Column(
           children: [
             Row(
