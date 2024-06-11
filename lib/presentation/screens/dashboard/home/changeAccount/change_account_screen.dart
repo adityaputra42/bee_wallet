@@ -19,7 +19,7 @@ class ChangeAccountScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final accountList = ref.watch(accountListProvider).valueOrNull ?? [];
     return Padding(
-      padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 24.h),
+      padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 24.h),
       child: SizedBox(
         height: MediaQuery.sizeOf(context).height * 0.6,
         child: Column(

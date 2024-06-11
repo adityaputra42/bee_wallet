@@ -43,7 +43,7 @@ class ReceiveScreen extends ConsumerWidget {
             },
             child: Container(
               height: 36.w,
-              padding: EdgeInsets.symmetric(horizontal: 8.w,vertical: 4.h),
+              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.r),
                   border: Border.all(width: 1.w, color: AppColor.grayColor)),
@@ -74,7 +74,7 @@ class ReceiveScreen extends ConsumerWidget {
             )),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.fromLTRB(24.w, 8.h, 24.w, 36.h),
+        padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 32.h),
         child: Row(
           children: [
             Expanded(
@@ -112,7 +112,7 @@ class ReceiveScreen extends ConsumerWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           children: [
             SizedBox(
@@ -184,14 +184,18 @@ class ReceiveScreen extends ConsumerWidget {
                     decoration:
                         BoxDecoration(borderRadius: BorderRadius.circular(8.r)),
                     child: QrImageView(
-                      embeddedImage: const AssetImage(
-                        AppImage.logo,
+                      embeddedImage: AssetImage(
+                        chain.baseLogo ?? AppImage.logo,
                       ),
                       data: chain.baseChain == 'eth'
                           ? (account?.addressETH ?? '')
                           : chain.baseChain == 'sol'
                               ? (account?.addressSolana ?? "")
-                              : '',
+                              : chain.baseChain == 'sui'
+                                  ? (account?.addressSui ?? '')
+                                  : chain.baseChain == 'btc'
+                                      ? (account?.addressBTC ?? '')
+                                      : "",
                       version: QrVersions.auto,
                       backgroundColor: Theme.of(context).cardColor,
                       foregroundColor: Theme.of(context).indicatorColor,
@@ -215,8 +219,10 @@ class ReceiveScreen extends ConsumerWidget {
                               : chain.baseChain == 'sol'
                                   ? (account?.addressSolana ?? "")
                                   : chain.baseChain == 'sui'
-                                      ? (account?.addressSui ?? "")
-                                      : '',
+                                      ? (account?.addressSui ?? '')
+                                      : chain.baseChain == 'btc'
+                                          ? (account?.addressBTC ?? '')
+                                          : "",
                           length: 12),
                       style: AppFont.semibold16
                           .copyWith(color: Theme.of(context).hintColor),

@@ -198,7 +198,7 @@ class DappScreen extends ConsumerWidget {
                               listChain.length,
                               (index) => Container(
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 12.w, vertical: 8.h),
+                                        horizontal: 8.w, vertical:6.h),
                                     margin: EdgeInsets.only(
                                         left:
                                             listChain[index] == listChain.first
@@ -207,7 +207,7 @@ class DappScreen extends ConsumerWidget {
                                         right:
                                             listChain[index] == listChain.last
                                                 ? 16.w
-                                                : 12.w),
+                                                : 8.w),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(6.r),
                                       color: ref.watch(indexbarDapp) == index

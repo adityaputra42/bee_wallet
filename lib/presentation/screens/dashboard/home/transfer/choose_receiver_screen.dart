@@ -75,7 +75,7 @@ class ChooseReceiverScreen extends ConsumerWidget {
             )),
       ),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        margin: EdgeInsets.all(16.w),
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
@@ -108,11 +108,11 @@ class ChooseReceiverScreen extends ConsumerWidget {
                                     ? 'ERC-20'
                                     : chain.baseChain == 'sol'
                                         ? 'Solana'
-                                        : chain.baseChain == 'tron'
-                                            ? 'TRC-20'
-                                            : 'BRC-20',
+                                        : chain.baseChain == 'btc'
+                                            ? 'Bitcoin'
+                                            : 'Sui',
                                 style: AppFont.reguler12
-                                    .copyWith(color: AppColor.textStrongDark),
+                                    .copyWith(color: AppColor.textStrongLight),
                               ),
                             )
                           ],
@@ -257,11 +257,22 @@ class ChooseReceiverScreen extends ConsumerWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => ScanPage(
-                                                onScan: (result) => ref
-                                                    .read(receiveAddressProvider
-                                                        .notifier)
-                                                    .setValue(result))));
+                                            builder: (context) =>
+                                                ScanPage(onScan: (result) {
+                                                  ref
+                                                      .read(
+                                                          receiveAddressProvider
+                                                              .notifier)
+                                                      .setValue(result);
+                                                  ref
+                                                      .read(
+                                                          receiveAddressProvider
+                                                              .notifier)
+                                                      .onAddressChange(ref
+                                                          .watch(
+                                                              receiveAddressProvider)
+                                                          .text);
+                                                })));
                                   },
                                   child: Iconify(
                                     AntDesign.scan,

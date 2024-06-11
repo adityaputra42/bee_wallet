@@ -181,7 +181,7 @@ final amountSendProvider =
 );
 
 typedef _$AmountSend = AutoDisposeNotifier<double>;
-String _$transferChainHash() => r'729570eca4fa66f59c1e8e6dc294f56ddcdf7114';
+String _$transferChainHash() => r'2d4f0759a3b34626e9868bc48dfa83c12f69a0e3';
 
 /// See also [TransferChain].
 @ProviderFor(TransferChain)

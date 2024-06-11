@@ -46,7 +46,7 @@ class AddNetwork extends ConsumerWidget {
       //       context.goNamed('add_custom_network');
       //     }),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           children: [
             SearchField(

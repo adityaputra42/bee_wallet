@@ -19,7 +19,7 @@ class SuccesCreateAccount extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -45,10 +45,6 @@ class SuccesCreateAccount extends ConsumerWidget {
                     title: "Back Up Now",
                     onPressed: () {
                       if (account?.mnemonic != null) {
-                        // ref
-                        //     .read(parseMnemonicProvider.notifier)
-                        //     .addPharse(account?.mnemonic ?? '');
-                        // ref.watch(parseMnemonicProvider);
                         context.goNamed('sheed_parse_create');
                       } else {
                         MethodHelper().showSnack(

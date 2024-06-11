@@ -34,7 +34,7 @@ class SheedPharseCreate extends ConsumerWidget {
         margin: EdgeInsets.only(bottom: 36.w, left: 16.w, right: 16.w),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,116 +52,22 @@ class SheedPharseCreate extends ConsumerWidget {
                     .copyWith(color: Theme.of(context).hintColor),
               ),
               16.0.height,
-              Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  runAlignment: WrapAlignment.center,
-                  alignment: WrapAlignment.center,
-                  spacing: 16.h,
-                  runSpacing: 8.h,
-                  direction: Axis.horizontal,
-                  children: mnemonic
-                      .map(
-                        (e) => cardPniomoni(context,
-                            number: e['id'], text: e['data']),
-                      )
-                      .toList()),
+              Center(
+                child: Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    runAlignment: WrapAlignment.center,
+                    alignment: WrapAlignment.center,
+                    spacing: 8.h,
+                    runSpacing: 8.h,
+                    direction: Axis.horizontal,
+                    children: mnemonic
+                        .map(
+                          (e) => cardPniomoni(context,
+                              number: e['id'], text: e['data']),
+                        )
+                        .toList()),
+              ),
               16.0.height,
-              // Row(
-              //   children: [
-              //     Icon(
-              //       Icons.check_rounded,
-              //       color: Colors.green,
-              //       size: 14.w,
-              //     ),
-              //     4.0.width,
-              //     Text(
-              //       'Recomend :',
-              //       style: AppFont.medium12
-              //           .copyWith(color: Theme.of(context).indicatorColor),
-              //     )
-              //   ],
-              // ),
-              // 8.0.height,
-              // Text(
-              //   'Write down on a piece of paper and store\nsomewhere secure.',
-              //   style: AppFont.medium12
-              //       .copyWith(color: Theme.of(context).hintColor),
-              // ),
-              // 16.0.height,
-              // Row(
-              //   children: [
-              //     Icon(
-              //       Icons.close_rounded,
-              //       color: Colors.red,
-              //       size: 14.w,
-              //     ),
-              //     4.0.width,
-              //     Text(
-              //       'Avoid :',
-              //       style: AppFont.medium12
-              //           .copyWith(color: Theme.of(context).indicatorColor),
-              //     )
-              //   ],
-              // ),
-              // 8.0.height,
-              // Row(
-              //   children: [
-              //     Container(
-              //       width: 6.w,
-              //       height: 6.w,
-              //       decoration: BoxDecoration(
-              //           shape: BoxShape.circle,
-              //           color: Theme.of(context).hintColor),
-              //     ),
-              //     4.0.width,
-              //     Text(
-              //       'Do not screenshot or copy it to the clipboard',
-              //       style: AppFont.medium12
-              //           .copyWith(color: Theme.of(context).hintColor),
-              //     )
-              //   ],
-              // ),
-              // 2.0.height,
-              // Row(
-              //   children: [
-              //     Container(
-              //       width: 6.w,
-              //       height: 6.w,
-              //       decoration: BoxDecoration(
-              //           shape: BoxShape.circle,
-              //           color: Theme.of(context).hintColor),
-              //     ),
-              //     4.0.width,
-              //     Text(
-              //       'Do not store the Seed Phrase online',
-              //       style: AppFont.medium12
-              //           .copyWith(color: Theme.of(context).hintColor),
-              //     )
-              //   ],
-              // ),
-              // 2.0.height,
-              // Row(
-              //   children: [
-              //     Container(
-              //       width: 6.w,
-              //       height: 6.w,
-              //       decoration: BoxDecoration(
-              //           shape: BoxShape.circle,
-              //           color: Theme.of(context).hintColor),
-              //     ),
-              //     4.0.width,
-              //     Text(
-              //       'Do not send the Seed Phrase to anyone.',
-              //       style: AppFont.medium12
-              //           .copyWith(color: Theme.of(context).hintColor),
-              //     )
-              //   ],
-              // ),
-              // 16.0.height,
-              // Text(
-              //   "Learn more about Seed Phrase Code.",
-              //   style: AppFont.medium12.copyWith(color: AppColor.primaryColor),
-              // )
             ],
           ),
         ),
@@ -173,7 +79,7 @@ class SheedPharseCreate extends ConsumerWidget {
       {required int number, required String text}) {
     return Container(
       height: 42.h,
-      width: MediaQuery.of(context).size.width * 0.42,
+      width: MediaQuery.of(context).size.width * 0.45,
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       decoration: BoxDecoration(
           boxShadow: [

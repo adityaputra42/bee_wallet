@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -27,7 +29,7 @@ class ScanPage extends ConsumerWidget {
               final List<Barcode> barcodes = capture.barcodes;
 
               if (barcodes.isEmpty) {
-                debugPrint('Failed to scan Barcode');
+                log('Failed to scan Barcode');
               } else {
                 final String code = barcodes.first.rawValue!;
                 onResult(code);

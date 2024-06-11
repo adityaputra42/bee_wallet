@@ -84,7 +84,7 @@ class ManageToken extends ConsumerWidget {
             )),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           children: [
             Row(

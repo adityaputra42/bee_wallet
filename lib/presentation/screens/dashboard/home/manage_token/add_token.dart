@@ -75,158 +75,89 @@ class AddToken extends ConsumerWidget {
               ),
             )),
       ),
-      body: Padding(
+      body: Container(margin: EdgeInsets.all(16.w),
         padding: EdgeInsets.all(16.w),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.r),
+            color: Theme.of(context).cardColor),
         child: Column(
           children: [
-            // Container(
-            //   padding: EdgeInsets.all(16.w),
-            //   decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(8.r),
-            //       color: Theme.of(context).cardColor),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       Text(
-            //         "Network",
-            //         style: AppFont.medium14
-            //             .copyWith(color: Theme.of(context).hintColor),
-            //       ),
-            //       GestureDetector(
-            //         onTap: () {
-            //           showModalBottomSheet(
-            //               context: context,
-            //               builder: (context) => const SheetNetworkAddToken(),
-            //               backgroundColor:
-            //                   Theme.of(context).colorScheme.surface,
-            //               showDragHandle: true,
-            //               isDismissible: false,
-            //               shape: RoundedRectangleBorder(
-            //                   borderRadius: BorderRadius.vertical(
-            //                       top: Radius.circular(16.r))));
-            //         },
-            //         child: Row(
-            //           mainAxisSize: MainAxisSize.min,
-            //           children: [
-            //             SizedBox(
-            //               width: 24.w,
-            //               height: 24.w,
-            //               child: ClipPolygon(
-            //                 sides: 6,
-            //                 child: Container(
-            //                   padding: EdgeInsets.all(0.5.h),
-            //                   color: Theme.of(context).colorScheme.surface,
-            //                   child: Image.asset(chain.logo ?? AppImage.logo),
-            //                 ),
-            //               ),
-            //             ),
-            //             8.0.width,
-            //             Text(
-            //               "${chain.symbol}",
-            //               style: AppFont.medium14
-            //                   .copyWith(color: Theme.of(context).hintColor),
-            //             ),
-            //             4.0.width,
-            //             Icon(
-            //               Icons.arrow_forward_ios_rounded,
-            //               size: 12.w,
-            //               color: Theme.of(context).hintColor,
-            //             )
-            //           ],
-            //         ),
-            //       )
-            //     ],
-            //   ),
-            // ),
-            16.0.height,
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(16.w),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.r),
-                    color: Theme.of(context).cardColor),
-                child: Column(
-                  children: [
-                    InputText(
-                      title: "Contact Address",
-                      icon: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Iconify(
-                            AntDesign.scan,
-                            size: 24.w,
-                            color: Theme.of(context).indicatorColor,
-                          ),
-                        ],
-                      ),
-                      controller: ref.watch(contractAddressProvider),
-                      onChange: (value) {
-                        debouncer.run(() {
-                          ref
-                              .read(contractAddressProvider.notifier)
-                              .getTokenInfo(
-                                  context: context,
-                                  contractAddress: value,
-                                  rpc: chain.rpc ?? '');
-                        });
-                      },
-                      hintText: "Add Contract Address",
-                      color: Theme.of(context).colorScheme.surface,
-                    ),
-                    16.0.height,
-                    InputText(
-                      title: "Name",
-                      hintText: "Add Name",
-                      enable: false,
-                      controller: ref.watch(nameTokenProvider),
-                      color: Theme.of(context).colorScheme.surface,
-                    ),
-                    16.0.height,
-                    InputText(
-                      title: "Symbol",
-                      hintText: "Add Symbol",
-                      controller: ref.watch(symbolTokenProvider),
-                      enable: false,
-                      color: Theme.of(context).colorScheme.surface,
-                    ),
-                    16.0.height,
-                    InputText(
-                      title: "Decimals",
-                      hintText: "Add Decimals",
-                      controller: ref.watch(decimalTokenProvider),
-                      enable: false,
-                      color: Theme.of(context).colorScheme.surface,
-                    ),
-                    const Spacer(),
-                    PrimaryButton(
-                        title: "Add",
-                        onPressed: () {
-                          ref.read(listManageTokenProvider.notifier).addToken(
-                              context,
-                              TokenChain(
-                                  name: ref.watch(nameTokenProvider).text,
-                                  contractAddress:
-                                      ref.watch(contractAddressProvider).text,
-                                  symbol: ref.watch(symbolTokenProvider).text,
-                                  decimal: int.parse(
-                                      ref.watch(decimalTokenProvider).text),
-                                  balance: 0,
-                                  baseLogo: chain.baseLogo,
-                                  chainId: chain.chainId,
-                                  logo: chain.chainId == '234'
-                                      ? AppChainLogo.petaDefault
-                                      : AppChainLogo.evm,
-                                  explorer: chain.explorer,
-                                  explorerApi: chain.explorerApi,
-                                  baseChain: chain.baseChain,
-                                  rpc: chain.rpc,
-                                  isTestnet: null));
-                        },
-                        margin: EdgeInsets.only(top: 16.h)),
-                  ],
-                ),
+            InputText(
+              title: "Contact Address",
+              icon: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Iconify(
+                    AntDesign.scan,
+                    size: 24.w,
+                    color: Theme.of(context).indicatorColor,
+                  ),
+                ],
               ),
+              controller: ref.watch(contractAddressProvider),
+              onChange: (value) {
+                debouncer.run(() {
+                  ref
+                      .read(contractAddressProvider.notifier)
+                      .getTokenInfo(
+                          context: context,
+                          contractAddress: value,
+                          rpc: chain.rpc ?? '');
+                });
+              },
+              hintText: "Add Contract Address",
+              color: Theme.of(context).colorScheme.surface,
             ),
+            16.0.height,
+            InputText(
+              title: "Name",
+              hintText: "Add Name",
+              enable: false,
+              controller: ref.watch(nameTokenProvider),
+              color: Theme.of(context).colorScheme.surface,
+            ),
+            16.0.height,
+            InputText(
+              title: "Symbol",
+              hintText: "Add Symbol",
+              controller: ref.watch(symbolTokenProvider),
+              enable: false,
+              color: Theme.of(context).colorScheme.surface,
+            ),
+            16.0.height,
+            InputText(
+              title: "Decimals",
+              hintText: "Add Decimals",
+              controller: ref.watch(decimalTokenProvider),
+              enable: false,
+              color: Theme.of(context).colorScheme.surface,
+            ),
+            const Spacer(),
+            PrimaryButton(
+                title: "Add",
+                onPressed: () {
+                  ref.read(listManageTokenProvider.notifier).addToken(
+                      context,
+                      TokenChain(
+                          name: ref.watch(nameTokenProvider).text,
+                          contractAddress:
+                              ref.watch(contractAddressProvider).text,
+                          symbol: ref.watch(symbolTokenProvider).text,
+                          decimal: int.parse(
+                              ref.watch(decimalTokenProvider).text),
+                          balance: 0,
+                          baseLogo: chain.baseLogo,
+                          chainId: chain.chainId,
+                          logo: chain.chainId == '234'
+                              ? AppChainLogo.petaDefault
+                              : AppChainLogo.evm,
+                          explorer: chain.explorer,
+                          explorerApi: chain.explorerApi,
+                          baseChain: chain.baseChain,
+                          rpc: chain.rpc,
+                          isTestnet: null));
+                },
+                margin: EdgeInsets.only(top: 16.h)),
           ],
         ),
       ),

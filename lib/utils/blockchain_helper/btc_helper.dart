@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:bdk_flutter/bdk_flutter.dart';
 
 class BtcHelper {
   Future<Map<String, dynamic>> getBtcAccountInfo(String mnemonic) async {
+    log("mnemonic => $mnemonic");
     var secretKey =
         await getSecrectkey(mnemonicStr: mnemonic, network: Network.Bitcoin);
     final wallet =
@@ -34,6 +37,7 @@ class BtcHelper {
       {required String mnemonicStr, required Network network}) async {
     try {
       final mnemonic = await Mnemonic.fromString(mnemonicStr);
+      log("mnemonic => ${mnemonic.asString()}");
       final descriptorSecretKey = await DescriptorSecretKey.create(
         network: network,
         mnemonic: mnemonic,
@@ -78,12 +82,6 @@ class BtcHelper {
     }
   }
 
-  // getBalance() async {
-  //   final balanceObj = await wallet.getBalance();
-  //   final res = "Total Balance: ${balanceObj.total.toString()}";
-
-  // }
-
 
   sendTx(
       {required String addressStr,
@@ -94,6 +92,7 @@ class BtcHelper {
       var blockchain = await blockchainInit();
       Wallet wallet =
           await createOrRestoreWallet(secretKey, network ?? Network.Bitcoin);
+        
       final txBuilder = TxBuilder();
       final address = await Address.create(address: addressStr);
       final script = await address.scriptPubKey();

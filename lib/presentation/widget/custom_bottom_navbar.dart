@@ -1,4 +1,4 @@
-import 'package:bee_wallet/utils/util.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
@@ -17,14 +17,8 @@ class CustomBottomNavBar extends StatelessWidget {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.fromLTRB(16.w, 0.w, 16.w, 16.h),
-      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
+      padding: EdgeInsets.symmetric(vertical: 6.h),
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-              spreadRadius: 0.5,
-              blurRadius: 0.3,
-              color: Theme.of(context).indicatorColor.withOpacity(0.15))
-        ],
         borderRadius: BorderRadius.circular(8.r),
         color: Theme.of(context).cardColor,
       ),
@@ -50,9 +44,8 @@ class CustomBottomNavBar extends StatelessWidget {
                         color: (selectedIndex == 0)
                             ? AppColor.primaryColor
                             : Theme.of(context).hintColor,
-                        size: 24.w,
+                        size: 22.w,
                       ),
-                      2.0.height,
                       Text(
                         "Home",
                         style: AppFont.medium12.copyWith(
@@ -85,9 +78,8 @@ class CustomBottomNavBar extends StatelessWidget {
                         color: (selectedIndex == 1)
                             ? AppColor.primaryColor
                             : Theme.of(context).hintColor,
-                        size: 24.w,
+                        size: 22.w,
                       ),
-                      2.0.height,
                       Text(
                         "Swap",
                         style: AppFont.medium12.copyWith(
@@ -120,9 +112,8 @@ class CustomBottomNavBar extends StatelessWidget {
                         color: (selectedIndex == 2)
                             ? AppColor.primaryColor
                             : Theme.of(context).hintColor,
-                        size: 24.w,
+                        size: 22.w,
                       ),
-                      2.0.height,
                       Text(
                         "D'App",
                         style: AppFont.medium12.copyWith(
@@ -155,9 +146,8 @@ class CustomBottomNavBar extends StatelessWidget {
                         color: (selectedIndex == 3)
                             ? AppColor.primaryColor
                             : Theme.of(context).hintColor,
-                        size: 24.w,
+                        size: 22.w,
                       ),
-                      2.0.height,
                       Text(
                         "Settings",
                         style: AppFont.medium12.copyWith(

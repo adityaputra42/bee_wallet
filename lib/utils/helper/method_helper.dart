@@ -87,7 +87,7 @@ class MethodHelper {
 
   shortAddress({required String address, int length = 8}) {
     if (address != '') {
-      return "${address.substring(0, length)}...${address.substring(address.length - length)}";
+      return "${address.substring(0, length)}....${address.substring(address.length - length)}";
     } else {
       return '';
     }

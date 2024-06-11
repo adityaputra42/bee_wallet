@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer' as dev;
+import 'dart:nativewrappers/_internal/vm/lib/developer.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -248,7 +249,6 @@ class AmountSend extends _$AmountSend {
   }
 }
 
-
 @riverpod
 class TransferChain extends _$TransferChain {
   @override
@@ -261,7 +261,6 @@ class TransferChain extends _$TransferChain {
 
     state = const AsyncLoading();
     try {
-    
       if (chain.baseChain == 'eth') {
         if (chain.contractAddress == null) {
           await EthHelper().transferChain(
@@ -292,6 +291,12 @@ class TransferChain extends _$TransferChain {
             amount: amount,
             from: account!,
             isTestnet: chain.isTestnet!);
+        state = const AsyncData(true);
+      } else if (chain.baseChain == 'btc') {
+        await BtcHelper().sendTx(
+            amount: amount.toInt(),
+            addressStr: ref.watch(receiveAddressProvider).text,
+            secretKey: EcryptionHelper().decrypt(account?.keyBTC ?? ''));
         state = const AsyncData(true);
       }
 

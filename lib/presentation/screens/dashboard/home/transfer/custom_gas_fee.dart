@@ -18,7 +18,7 @@ class CustomGasFee extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Container(
         width: double.infinity,
-        margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        margin: EdgeInsets.all(16.w),
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),

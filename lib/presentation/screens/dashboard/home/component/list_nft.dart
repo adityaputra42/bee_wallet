@@ -53,14 +53,14 @@ class ListNft extends ConsumerWidget {
                     listChain.length,
                     (index) => Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 12.w, vertical: 8.h),
+                              horizontal: 8.w, vertical: 6.h),
                           margin: EdgeInsets.only(
                               left: listChain[index] == listChain.first
                                   ? 16.w
                                   : 0,
                               right: listChain[index] == listChain.last
                                   ? 16.w
-                                  : 12.w),
+                                  : 8.w),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.r),
                             color: ref.watch(indexbarNft) == index
@@ -77,9 +77,8 @@ class ListNft extends ConsumerWidget {
                                   sides: 6,
                                   child: Container(
                                     padding: EdgeInsets.all(0.5.h),
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .surface,
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
                                     child: Image.asset(
                                       listChain[index].logo ?? '',
                                     ),
@@ -116,8 +115,7 @@ class ListNft extends ConsumerWidget {
                     showModalBottomSheet(
                         context: context,
                         builder: (context) => const SheetAddNft(),
-                        backgroundColor:
-                            Theme.of(context).colorScheme.surface,
+                        backgroundColor: Theme.of(context).colorScheme.surface,
                         isScrollControlled: true,
                         showDragHandle: true,
                         useSafeArea: true,

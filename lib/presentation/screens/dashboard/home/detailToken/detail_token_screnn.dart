@@ -87,7 +87,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
             )),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           children: [
             SizedBox(
@@ -142,7 +142,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
             ),
             4.0.height,
             Text(
-              "~\$ ${2.73.toStringAsFixed(2)}",
+              "~\$ ${0.toStringAsFixed(2)}",
               style: AppFont.reguler16
                   .copyWith(color: Theme.of(context).hintColor),
             ),

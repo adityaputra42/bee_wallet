@@ -39,14 +39,14 @@ class ConfirmPharseCreate extends ConsumerWidget {
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
             height: 42.h,
-            width: MediaQuery.of(context).size.width * 0.43,
+            width: MediaQuery.of(context).size.width * 0.45,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.r),
                 color: Theme.of(context).cardColor),
             child: Text(
                 "$number. ${confirmList.singleWhere((element) => element['id'] == number, orElse: () => <String, dynamic>{})['data'] ?? ''}",
                 style: AppFont.medium14.copyWith(
-                  color: Theme.of(context).hintColor,
+                  color: Theme.of(context).indicatorColor,
                 )),
           );
         },
@@ -63,7 +63,7 @@ class ConfirmPharseCreate extends ConsumerWidget {
           feedback: Container(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
             height: 42.h,
-            width: MediaQuery.of(context).size.width * 0.282,
+            width: MediaQuery.of(context).size.width * 0.292,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.r),
                 color: Theme.of(context).primaryColor),
@@ -77,7 +77,7 @@ class ConfirmPharseCreate extends ConsumerWidget {
           childWhenDragging: Container(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
             height: 42.h,
-            width: MediaQuery.of(context).size.width * 0.282,
+            width: MediaQuery.of(context).size.width * 0.292,
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -97,7 +97,7 @@ class ConfirmPharseCreate extends ConsumerWidget {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
             height: 42.h,
-            width: MediaQuery.of(context).size.width * 0.282,
+            width: MediaQuery.of(context).size.width * 0.292,
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -125,7 +125,7 @@ class ConfirmPharseCreate extends ConsumerWidget {
         title: "Back Up Pharse",
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -142,64 +142,68 @@ class ConfirmPharseCreate extends ConsumerWidget {
                   .copyWith(color: Theme.of(context).hintColor),
             ),
             16.0.height,
-            Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                runAlignment: WrapAlignment.center,
-                alignment: WrapAlignment.center,
-                spacing: 8.h,
-                runSpacing: 8.h,
-                direction: Axis.horizontal,
-                children: [
-                  cardPniomoni(
-                    number: 1,
-                  ),
-                  cardPniomoni(
-                    number: 2,
-                  ),
-                  cardPniomoni(
-                    number: 3,
-                  ),
-                  cardPniomoni(
-                    number: 4,
-                  ),
-                  cardPniomoni(
-                    number: 5,
-                  ),
-                  cardPniomoni(
-                    number: 6,
-                  ),
-                  cardPniomoni(
-                    number: 7,
-                  ),
-                  cardPniomoni(
-                    number: 8,
-                  ),
-                  cardPniomoni(
-                    number: 9,
-                  ),
-                  cardPniomoni(
-                    number: 10,
-                  ),
-                  cardPniomoni(
-                    number: 11,
-                  ),
-                  cardPniomoni(
-                    number: 12,
-                  ),
-                ]),
+            Center(
+              child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  runAlignment: WrapAlignment.center,
+                  alignment: WrapAlignment.center,
+                  spacing: 8.h,
+                  runSpacing: 8.h,
+                  direction: Axis.horizontal,
+                  children: [
+                    cardPniomoni(
+                      number: 1,
+                    ),
+                    cardPniomoni(
+                      number: 2,
+                    ),
+                    cardPniomoni(
+                      number: 3,
+                    ),
+                    cardPniomoni(
+                      number: 4,
+                    ),
+                    cardPniomoni(
+                      number: 5,
+                    ),
+                    cardPniomoni(
+                      number: 6,
+                    ),
+                    cardPniomoni(
+                      number: 7,
+                    ),
+                    cardPniomoni(
+                      number: 8,
+                    ),
+                    cardPniomoni(
+                      number: 9,
+                    ),
+                    cardPniomoni(
+                      number: 10,
+                    ),
+                    cardPniomoni(
+                      number: 11,
+                    ),
+                    cardPniomoni(
+                      number: 12,
+                    ),
+                  ]),
+            ),
             24.0.height,
             random.isEmpty
                 ? const SizedBox()
-                : Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    runAlignment: WrapAlignment.center,
-                    alignment: WrapAlignment.center,
-                    spacing: 8.h,
-                    runSpacing: 8.h,
-                    direction: Axis.horizontal,
-                    children: random
-                        .map((element) => cardPilihan(text: element['data']))
-                        .toList()),
+                : Center(
+                  child: Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      runAlignment: WrapAlignment.center,
+                      alignment: WrapAlignment.center,
+                      spacing: 8.h,
+                      runSpacing: 8.h,
+                      direction: Axis.horizontal,
+                      children: random
+                          .map((element) => cardPilihan(text: element['data']))
+                          .toList()),
+                ),
           ],
         ),
       ),

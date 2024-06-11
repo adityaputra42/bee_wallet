@@ -22,7 +22,7 @@ class ConfirmTransferChain extends ConsumerWidget {
     return Scaffold(
       appBar: WidgetHelper.appBar(context: context, title: "Confirm Transfer"),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        margin: EdgeInsets.all(16.w),
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
