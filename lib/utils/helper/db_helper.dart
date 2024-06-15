@@ -251,6 +251,17 @@ class DbHelper {
       await isar.tokenChains.put(item);
     });
   }
+  Future<void> editSelectedChainNetwork(SelectedTokenChain network) async {
+    await isar.writeTxn(() async {
+      final item = await isar.selectedTokenChains.get(network.id!);
+      item!.chainId = network.chainId;
+      item.name = network.name;
+      item.rpc = network.rpc;
+      item.symbol = network.symbol;
+      item.explorer = network.explorer;
+      await isar.selectedTokenChains.put(item);
+    });
+  }
 
   Future<void> deleteTokenChain(String chainId) async {
     var chain = await isar.tokenChains
@@ -266,9 +277,9 @@ class DbHelper {
     }
   }
 
-  Future<void> deleteAllTokenChain(List<int> id) async {
+  Future<void> deleteAllTokenChain() async {
     await isar.writeTxn(() async {
-      await isar.tokenChains.deleteAll(id);
+      await isar.tokenChains.clear();
     });
   }
 
@@ -283,9 +294,9 @@ class DbHelper {
     });
   }
 
-  Future<void> deleteAllSelectedTokenChain(List<int> id) async {
+  Future<void> deleteAllSelectedTokenChain() async {
     await isar.writeTxn(() async {
-      await isar.selectedTokenChains.deleteAll(id);
+      await isar.selectedTokenChains.clear();
     });
   }
 

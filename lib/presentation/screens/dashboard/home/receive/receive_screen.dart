@@ -87,8 +87,10 @@ class ReceiveScreen extends ConsumerWidget {
                           : chain.baseChain == 'sol'
                               ? (account?.addressSolana ?? "")
                               : chain.baseChain == 'sui'
-                                  ? (account?.addressSui ?? "")
-                                  : '',
+                                  ? (account?.addressSui ?? '')
+                                  : chain.baseChain == 'btc'
+                                      ? (account?.addressBTC ?? '')
+                                      : "",
                       context: context);
                 },
               ),
@@ -99,11 +101,15 @@ class ReceiveScreen extends ConsumerWidget {
                 title: "Share",
                 onPressed: () {
                   Share.share(
-                    chain.baseChain == 'eth'
-                        ? (account?.addressETH ?? '')
-                        : chain.baseChain == 'sol'
-                            ? (account?.addressSolana ?? "")
-                            : '',
+                   chain.baseChain == 'eth'
+                          ? (account?.addressETH ?? '')
+                          : chain.baseChain == 'sol'
+                              ? (account?.addressSolana ?? "")
+                              : chain.baseChain == 'sui'
+                                  ? (account?.addressSui ?? '')
+                                  : chain.baseChain == 'btc'
+                                      ? (account?.addressBTC ?? '')
+                                      : "",
                   );
                 },
               ),

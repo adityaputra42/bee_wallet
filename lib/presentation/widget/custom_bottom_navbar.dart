@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
@@ -16,153 +15,100 @@ class CustomBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.fromLTRB(16.w, 0.w, 16.w, 16.h),
-      padding: EdgeInsets.symmetric(vertical: 6.h),
+      margin: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
         color: Theme.of(context).cardColor,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                if (onTap != null) {
-                  onTap!(0);
-                }
-              },
-              child: SizedBox(
-                height: 48.h,
-                width: double.infinity,
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Iconify(
-                        Mdi.wallet_outline,
-                        color: (selectedIndex == 0)
-                            ? AppColor.primaryColor
-                            : Theme.of(context).hintColor,
-                        size: 22.w,
-                      ),
-                      Text(
-                        "Home",
-                        style: AppFont.medium12.copyWith(
-                            color: (selectedIndex == 0)
-                                ? AppColor.primaryColor
-                                : Theme.of(context).hintColor),
-                      ),
-                    ],
-                  ),
+      child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.all(2.h),
+                child: Iconify(
+                  Mdi.wallet_outline,
+                  color: Theme.of(context).hintColor,
+                  size: 22.w,
                 ),
               ),
-            ),
-          ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                if (onTap != null) {
-                  onTap!(1);
-                }
-              },
-              child: SizedBox(
-                height: 48.h,
-                width: double.infinity,
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Iconify(
-                        Ph.swap_bold,
-                        color: (selectedIndex == 1)
-                            ? AppColor.primaryColor
-                            : Theme.of(context).hintColor,
-                        size: 22.w,
-                      ),
-                      Text(
-                        "Swap",
-                        style: AppFont.medium12.copyWith(
-                            color: (selectedIndex == 1)
-                                ? AppColor.primaryColor
-                                : Theme.of(context).hintColor),
-                      ),
-                    ],
-                  ),
+              activeIcon: Padding(
+                padding: EdgeInsets.all(2.h),
+                child: Iconify(
+                  Mdi.wallet_outline,
+                  color: AppColor.primaryColor,
+                  size: 22.w,
                 ),
               ),
+              label: 'Home',
             ),
-          ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                if (onTap != null) {
-                  onTap!(2);
-                }
-              },
-              child: SizedBox(
-                height: 48.h,
-                width: double.infinity,
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Iconify(
-                        MaterialSymbols.widgets_outline_rounded,
-                        color: (selectedIndex == 2)
-                            ? AppColor.primaryColor
-                            : Theme.of(context).hintColor,
-                        size: 22.w,
-                      ),
-                      Text(
-                        "D'App",
-                        style: AppFont.medium12.copyWith(
-                            color: (selectedIndex == 2)
-                                ? AppColor.primaryColor
-                                : Theme.of(context).hintColor),
-                      ),
-                    ],
-                  ),
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.all(2.h),
+                child: Iconify(
+                  Ph.swap_bold,
+                  color: Theme.of(context).hintColor,
+                  size: 22.w,
                 ),
               ),
-            ),
-          ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                if (onTap != null) {
-                  onTap!(3);
-                }
-              },
-              child: SizedBox(
-                height: 48.h,
-                width: double.infinity,
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.settings_outlined,
-                        color: (selectedIndex == 3)
-                            ? AppColor.primaryColor
-                            : Theme.of(context).hintColor,
-                        size: 22.w,
-                      ),
-                      Text(
-                        "Settings",
-                        style: AppFont.medium12.copyWith(
-                            color: (selectedIndex == 3)
-                                ? AppColor.primaryColor
-                                : Theme.of(context).hintColor),
-                      ),
-                    ],
-                  ),
+              activeIcon: Padding(
+                padding: EdgeInsets.all(2.h),
+                child: Iconify(
+                  Ph.swap_bold,
+                  color: AppColor.primaryColor,
+                  size: 22.w,
                 ),
               ),
+              label: 'Swap',
             ),
-          ),
-        ],
-      ),
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.all(2.h),
+                child: Iconify(
+                  MaterialSymbols.widgets_outline_rounded,
+                  color: Theme.of(context).hintColor,
+                  size: 22.w,
+                ),
+              ),
+              activeIcon: Padding(
+                padding: EdgeInsets.all(2.h),
+                child: Iconify(
+                  MaterialSymbols.widgets_outline_rounded,
+                  color: AppColor.primaryColor,
+                  size: 22.w,
+                ),
+              ),
+              label: 'DApp',
+            ),
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.all(2.h),
+                child: Icon(
+                  Icons.settings_outlined,
+                  color: Theme.of(context).hintColor,
+                  size: 22.w,
+                ),
+              ),
+              activeIcon: Padding(
+                padding: EdgeInsets.all(2.h),
+                child: Icon(
+                  Icons.settings_outlined,
+                  color: AppColor.primaryColor,
+                  size: 22.w,
+                ),
+              ),
+              label: 'Settings',
+            ),
+          ],
+          elevation: 0,
+          currentIndex: selectedIndex ?? 0,
+          onTap: onTap,
+          backgroundColor: Colors.transparent,
+          selectedItemColor: AppColor.primaryColor,
+          selectedLabelStyle: AppFont.medium12,
+          unselectedItemColor: Theme.of(context).hintColor,
+          showUnselectedLabels: true,
+          unselectedLabelStyle: AppFont.reguler12),
     );
   }
 }

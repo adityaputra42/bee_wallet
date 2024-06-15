@@ -198,7 +198,7 @@ class DappScreen extends ConsumerWidget {
                               listChain.length,
                               (index) => Container(
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 8.w, vertical:6.h),
+                                        horizontal: 8.w, vertical: 6.h),
                                     margin: EdgeInsets.only(
                                         left:
                                             listChain[index] == listChain.first
@@ -247,11 +247,11 @@ class DappScreen extends ConsumerWidget {
                                     ),
                                   ))),
                     ),
+                    8.0.height,
                     Expanded(
                         child: Container(
                             padding: EdgeInsets.all(16.w),
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 16.w, vertical: 16.h),
+                            margin: EdgeInsets.symmetric(horizontal: 16.w),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: Theme.of(context).cardColor),
@@ -293,8 +293,7 @@ class DappScreen extends ConsumerWidget {
                                                   child: ClipPolygon(
                                                     sides: 6,
                                                     child: Container(
-                                                      padding:
-                                                          EdgeInsets.all(0.5.h),
+                                                     
                                                       color: AppColor.cardLight,
                                                       child: Image.asset(
                                                           data[index].image ??

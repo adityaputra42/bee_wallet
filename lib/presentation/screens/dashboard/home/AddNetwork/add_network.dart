@@ -153,7 +153,7 @@ class AddNetwork extends ConsumerWidget {
                       color: tokenChainOrigin.any(
                               (element) => element.chainId == chain.chainId)
                           ? AppColor.redColor
-                          : AppColor.primaryColor),
+                          : AppColor.greenColor),
                   child: Icon(
                     tokenChainOrigin
                             .any((element) => element.chainId == chain.chainId)

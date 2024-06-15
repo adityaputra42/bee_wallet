@@ -3,6 +3,9 @@ import 'package:bee_wallet/presentation/screens/auth/pin/create_pin_screen.dart'
 import 'package:bee_wallet/presentation/screens/auth/succes/success_create_wallet.dart';
 import 'package:bee_wallet/presentation/screens/dashboard/home/detailNft/transfer/confirmation_transfer_nft.dart';
 import 'package:bee_wallet/presentation/screens/dashboard/home/transfer/confirm_transfer_chain.dart';
+import 'package:bee_wallet/presentation/screens/dashboard/setting/editwallet/edit_wallet.dart';
+import 'package:bee_wallet/presentation/screens/dashboard/setting/networkSetting/edit_rpc_network.dart';
+import 'package:bee_wallet/presentation/screens/dashboard/setting/networkSetting/network_setting.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -112,6 +115,22 @@ GoRouter appRoute(AppRouteRef ref) {
               builder: (context, state) => const ImportWallet(),
             ),
             GoRoute(
+              path: 'edit_wallet',
+              name: 'edit_wallet',
+              builder: (context, state) => const EditWalletScreen(),
+            ),
+            GoRoute(
+                path: 'network_setting',
+                name: 'network_setting',
+                builder: (context, state) => const NetworkSetting(),
+                routes: [
+                  GoRoute(
+                    path: 'edit_rpc_network',
+                    name: 'edit_rpc_network',
+                    builder: (context, state) => const EditRpcNetwork(),
+                  ),
+                ]),
+            GoRoute(
                 path: 'detail_token',
                 name: 'detail_token',
                 builder: (context, state) => const DetailTokenScreen(),
@@ -152,11 +171,7 @@ GoRouter appRoute(AppRouteRef ref) {
                             ]),
                       ]),
                 ]),
-            GoRoute(
-              path: 'detail_wallet',
-              name: 'detail_wallet',
-              builder: (context, state) => const DetailAccount(),
-            ),
+           
             GoRoute(
               path: 'select_asset',
               name: 'select_asset',

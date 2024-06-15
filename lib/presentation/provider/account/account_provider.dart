@@ -1,9 +1,13 @@
 // ignore_for_file: unused_result
 
+import 'package:bee_wallet/config/config.dart';
+import 'package:go_router/go_router.dart';
+import 'package:isar/isar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../data/model/account/account.dart';
 import '../../../utils/util.dart';
+import '../editWallet/edit_wallet_provider.dart';
 part 'account_provider.g.dart';
 
 @riverpod
@@ -143,24 +147,5 @@ class AnotherAccount extends _$AnotherAccount {
             ref.watch(selectedAccountProvider).valueOrNull?.mnemonic)
         .toList();
     state = [...value];
-  }
-}
-
-@riverpod
-class AccountSelectedEdit extends _$AccountSelectedEdit {
-  @override
-  Account build() {
-    return Account();
-  }
-
-  selectEditAccount(Account account) {
-    state = account;
-  }
-
-  changeEditAccount(int id, String name) async {
-    final account = await DbHelper.instance.changeAccountName(id, name);
-    ref.refresh(selectedAccountProvider);
-    ref.refresh(accountListProvider);
-    state = account;
   }
 }

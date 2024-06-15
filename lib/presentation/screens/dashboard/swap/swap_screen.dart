@@ -21,7 +21,7 @@ class SwapScreen extends ConsumerWidget {
       appBar: WidgetHelper.appBar(
           context: context, title: "Swap", isCanBack: false),
       body: Container(
-        margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 16.h),
+        margin: EdgeInsets.symmetric(horizontal: 16.w),
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),

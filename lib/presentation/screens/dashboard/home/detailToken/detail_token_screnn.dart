@@ -135,7 +135,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
             ),
             8.0.height,
             Text(
-              "${chain.balance} ${chain.symbol}",
+              "${roundDouble((chain.balance ?? 0), 5)} ${chain.symbol}",
               style: AppFont.medium32.copyWith(
                 color: Theme.of(context).indicatorColor,
               ),
@@ -290,23 +290,23 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
         context.goNamed('detail_activity');
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        padding: EdgeInsets.all(10.w),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(6.r),
             color: Theme.of(context).colorScheme.surface),
         child: Row(
           children: [
             Container(
-              width: 42.w,
-              height: 42.w,
+              width: 40.w,
+              height: 40.w,
               padding: EdgeInsets.all(6.h),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(4.r),
                 color: Theme.of(context).cardColor,
               ),
               child: Icon(
                 state == "Transfer" ? Icons.arrow_upward : Icons.arrow_downward,
-                size: 24.w,
+                size: 20.w,
                 color: Theme.of(context).indicatorColor,
               ),
             ),
@@ -319,12 +319,12 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                   children: [
                     Text(
                       state,
-                      style: AppFont.semibold16
+                      style: AppFont.medium14
                           .copyWith(color: Theme.of(context).indicatorColor),
                     ),
                     Text(
-                      "${state == "Transfer" ? "-" : "+"}${(BigInt.parse(activity.value!).toDouble() / pow(10, 18)).toStringAsFixed(5)} ${activity.symbol == "" ? chain?.symbol : activity.symbol}",
-                      style: AppFont.medium16.copyWith(
+                      "${roundDouble((BigInt.parse(activity.value!).toDouble() / pow(10, 18)),5)} ${activity.symbol == "" ? chain?.symbol : activity.symbol}",
+                      style: AppFont.medium14.copyWith(
                           color: state == "Transfer"
                               ? AppColor.redColor
                               : AppColor.greenColor),
@@ -337,7 +337,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                   children: [
                     Text(
                       "to : ${activity.to != null ? MethodHelper().shortAddress(address: activity.to ?? "~", length: 5) : "~"}",
-                      style: AppFont.reguler14
+                      style: AppFont.reguler12
                           .copyWith(color: Theme.of(context).hintColor),
                     ),
                     Text(
@@ -345,7 +345,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                           DateTime.fromMillisecondsSinceEpoch(
                                   int.parse(activity.timeStamp!) * 1000)
                               .toLocal()),
-                      style: AppFont.medium14
+                      style: AppFont.reguler12
                           .copyWith(color: Theme.of(context).hintColor),
                     )
                   ],

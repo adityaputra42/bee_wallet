@@ -20,31 +20,20 @@ class TokenChainOrigin extends _$TokenChainOrigin {
   @override
   Future<List<TokenChain>> build() async {
     state = const AsyncLoading();
-    final networkList = await DbHelper.instance.getAllTokenChain();
+
     final chainlist = await rootBundle.loadString('assets/abi/chain.json');
     final listChain = tokenChainFromJson(chainlist);
-    List<int> ids = [];
-    for (var value in networkList) {
-      if (listChain.any((element) => element.chainId == value.chainId)) {
-        ids.add(value.id!);
-      }
-    }
-    await DbHelper.instance.deleteAllTokenChain(ids);
+
+    await DbHelper.instance.deleteAllTokenChain();
     await DbHelper.instance.setAllTokenChain(listChain);
     return listChain;
   }
 
   Future<void> initChainOrigin() async {
-    final networkList = await DbHelper.instance.getAllTokenChain();
     final chainlist = await rootBundle.loadString('assets/abi/chain.json');
     final listChain = tokenChainFromJson(chainlist);
-    List<int> ids = [];
-    for (var value in networkList) {
-      if (listChain.any((element) => element.chainId == value.chainId)) {
-        ids.add(value.id!);
-      }
-    }
-    await DbHelper.instance.deleteAllTokenChain(ids);
+
+    await DbHelper.instance.deleteAllTokenChain();
     await DbHelper.instance.setAllTokenChain(listChain);
     state = AsyncData(listChain);
   }
@@ -156,7 +145,7 @@ class ListTokenChain extends _$ListTokenChain {
     final listChainWallet =
         await DbHelper.instance.getTokenChainWallet(mnemonicAccount: mnemonic);
     List<TokenChain> listChain =
-        chain.where((element) => element.logo != null).toList();
+        chain.where((element) => element.contractAddress == null).toList();
     if (listChainWallet.isEmpty) {
       for (var value in listChain) {
         var selectChain = SelectedTokenChain(

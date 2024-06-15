@@ -1,3 +1,4 @@
+import 'package:bee_wallet/data/model/account/account.dart';
 import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../config/config.dart';
 import '../../../../utils/util.dart';
 import '../../../provider/account/account_provider.dart';
+import '../../../provider/editWallet/edit_wallet_provider.dart';
 import '../../../provider/theme/theme_provider.dart';
 import 'changePin/sheet_password_change_pin.dart';
 import 'show_pharse/sheet_password_show.dart';
@@ -23,7 +25,7 @@ class SettingScreen extends ConsumerWidget {
       appBar: WidgetHelper.appBar(
           context: context, title: "Setting", isCanBack: false),
       body: Container(
-        margin: EdgeInsets.fromLTRB(16.w, 0, 16.w, 16.h),
+        margin: EdgeInsets.symmetric(horizontal: 16.w),
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
@@ -132,7 +134,11 @@ class SettingScreen extends ConsumerWidget {
               context,
               title: "Edit Wallet",
               onTap: () {
-               
+                ref
+                    .read(accountSelectedEditProvider.notifier)
+                    .selectEditAccount(account ?? Account());
+                ref.watch(accountSelectedEditProvider);
+                context.goNamed('edit_wallet');
               },
             ),
             12.0.height,
@@ -152,7 +158,13 @@ class SettingScreen extends ConsumerWidget {
               },
             ),
             12.0.height,
-            cardMenu(context, title: 'Wallet Connect'),
+            cardMenu(
+              context,
+              title: 'Network Setting',
+              onTap: () {
+                context.goNamed('network_setting');
+              },
+            ),
             12.0.height,
             cardMenu(
               context,
@@ -259,13 +271,13 @@ class SettingScreen extends ConsumerWidget {
 
   Widget cardMenu(BuildContext context,
       {required String title, Widget? widget, Function()? onTap}) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.r),
-          color: Theme.of(context).colorScheme.surface),
-      child: GestureDetector(
-        onTap: onTap,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.r),
+            color: Theme.of(context).colorScheme.surface),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

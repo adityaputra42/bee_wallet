@@ -137,22 +137,5 @@ final anotherAccountProvider =
 );
 
 typedef _$AnotherAccount = AutoDisposeNotifier<List<Account>>;
-String _$accountSelectedEditHash() =>
-    r'2e7d5d2ab7b7d6ab959ef9e0da79cd74178f6108';
-
-/// See also [AccountSelectedEdit].
-@ProviderFor(AccountSelectedEdit)
-final accountSelectedEditProvider =
-    AutoDisposeNotifierProvider<AccountSelectedEdit, Account>.internal(
-  AccountSelectedEdit.new,
-  name: r'accountSelectedEditProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$accountSelectedEditHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$AccountSelectedEdit = AutoDisposeNotifier<Account>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

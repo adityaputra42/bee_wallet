@@ -6,9 +6,9 @@ class BtcHelper {
   Future<Map<String, dynamic>> getBtcAccountInfo(String mnemonic) async {
     log("mnemonic => $mnemonic");
     var secretKey =
-        await getSecrectkey(mnemonicStr: mnemonic, network: Network.Bitcoin);
+        await getSecrectkey(mnemonicStr: mnemonic, network: Network.Testnet);
     final wallet =
-        await createOrRestoreWallet(secretKey.asString(), Network.Bitcoin);
+        await createOrRestoreWallet(secretKey.asString(), Network.Testnet);
     var account = await wallet.getAddress(addressIndex: const AddressIndex());
     return {
       'mnemonic': mnemonic,
@@ -81,6 +81,30 @@ class BtcHelper {
       throw Exception(e.toString());
     }
   }
+
+
+  Future<Map<String, dynamic>> getEstimateFee(
+      {required String from, required String to}) async {
+    // final cluster = sol.Cluster.mainnet;
+    // final connect = sol.Connection(cluster);
+    // var last = await connect.getLatestBlockhash();
+    // var messasge = sol.Message.v0(
+    //     payer: sol.Pubkey.fromString(from),
+    //     recentBlockhash: last.blockhash,
+    //     instructions: [
+    //       SystemProgram.transfer(
+    //         fromPubkey: sol.Pubkey.fromString(from),
+    //         toPubkey: sol.Pubkey.fromString(to),
+    //         lamports: sol.solToLamports(0),
+    //       ),
+    //     ]);
+    // final solFee = await connect.getFeeForMessage(messasge);
+    // log("sol fee => $solFee");
+    // var fee = solFee / sol.lamportsPerSol;
+
+    return {"txFee": 0, "gasLimit": 0, "gasPrice": 0};
+  }
+
 
 
   sendTx(

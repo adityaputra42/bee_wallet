@@ -37,7 +37,7 @@ final chainOtherSearchProvider =
 );
 
 typedef _$ChainOtherSearch = AutoDisposeNotifier<List<ChainNetwork>>;
-String _$balanceChainHash() => r'93a9ec47602f2c01f2cff9e5e0d09be66149606a';
+String _$balanceChainHash() => r'fe1b8a68aeec454c43e2e88b49a18b07e7265fa2';
 
 /// See also [BalanceChain].
 @ProviderFor(BalanceChain)

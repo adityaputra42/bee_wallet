@@ -177,7 +177,7 @@ class BalanceChain extends _$BalanceChain {
         } else if (chain.baseChain == "btc") {
           var walletBtc = await BtcHelper().createOrRestoreWallet(
               EcryptionHelper().decrypt(account?.keyBTC ?? ''),
-              Network.Bitcoin);
+              Network.Testnet);
           final balance = await walletBtc.getBalance();
             log("new Balance BTC => ${balance.total}");
           chain.balance = balance.total.toDouble();

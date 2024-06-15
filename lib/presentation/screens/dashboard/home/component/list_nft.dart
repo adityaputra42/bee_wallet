@@ -143,7 +143,7 @@ class ListNft extends ConsumerWidget {
           Expanded(
               child: Container(
             padding: EdgeInsets.all(16.w),
-            margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+            margin: EdgeInsets.fromLTRB(16.w, 16.w, 16.w, 0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: Theme.of(context).cardColor),

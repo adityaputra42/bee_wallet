@@ -1,5 +1,12 @@
 [
   {
+    "title": "Unisat",
+    "subtitle": "Open Source Chrome Extension for Bitcoin Ordinary",
+    "image": "assets/imageDapp/unisat.png",
+    "chainId": "1000",
+    "url": "https://unisat.io/"
+  },
+  {
     "title": "PancakeSwap",
     "subtitle": "Trade, earn and win crypto in decentralize app and more oportunity",
     "image": "assets/imageDapp/pancake.png",
