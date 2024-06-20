@@ -209,19 +209,51 @@ class DbHelper {
     return listChain;
   }
 
+  Future<List<SelectedTokenChain>> getSelectedTokenChainFromChainId(
+    String chainId,
+  ) async {
+    List<SelectedTokenChain> listChain = [];
+    await isar.txn(() async {
+      listChain = await isar.selectedTokenChains
+          .where()
+          .filter()
+          .chainIdEqualTo(chainId)
+          .findAll();
+    });
+    return listChain;
+  }
+
+  Future<List<TokenChain>> getTokenChainFromChainId(
+    String chainId,
+  ) async {
+    List<TokenChain> listChain = [];
+    await isar.txn(() async {
+      listChain = await isar.tokenChains
+          .where()
+          .filter()
+          .chainIdEqualTo(chainId)
+          .findAll();
+    });
+    return listChain;
+  }
+
   Future<void> updateRPC({required String chainId, required String rpc}) async {
     await isar.writeTxn(() async {
-      final chain =
-          await isar.tokenChains.filter().chainIdEqualTo(chainId).findFirst();
+      final tokenchain =
+          await isar.tokenChains.filter().chainIdEqualTo(chainId).findAll();
       final selectedChain = await isar.selectedTokenChains
           .filter()
           .chainIdEqualTo(chainId)
-          .findFirst();
-      chain!.rpc = rpc;
-      await isar.tokenChains.put(chain);
-      if (selectedChain?.id != null) {
-        selectedChain!.rpc = rpc;
-        await isar.selectedTokenChains.put(selectedChain);
+          .findAll();
+      for (var value in tokenchain) {
+        value.rpc = rpc;
+        await isar.tokenChains.put(value);
+      }
+      if (selectedChain.isNotEmpty) {
+        for (var element in selectedChain) {
+          element.rpc = rpc;
+          await isar.selectedTokenChains.put(element);
+        }
       }
     });
   }
@@ -251,6 +283,7 @@ class DbHelper {
       await isar.tokenChains.put(item);
     });
   }
+
   Future<void> editSelectedChainNetwork(SelectedTokenChain network) async {
     await isar.writeTxn(() async {
       final item = await isar.selectedTokenChains.get(network.id!);
@@ -439,15 +472,15 @@ class DbHelper {
   }
 
   /// ######################### DappLink #######################
-  Future<List<DappLink>> getAllDappLink(
-      {required String chainId,}) async {
+  Future<List<DappLink>> getAllDappLink({
+    required String chainId,
+  }) async {
     List<DappLink> links = [];
     await isar.txn(() async {
       links = await isar.dappLinks
           .where()
           .filter()
           .chainIdEqualTo(chainId)
-          
           .findAll();
     });
     return links;

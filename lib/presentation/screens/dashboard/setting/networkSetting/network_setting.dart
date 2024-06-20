@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../data/model/token_chain/token_chain.dart';
@@ -58,20 +59,11 @@ class NetworkSetting extends ConsumerWidget {
   }
 
   Widget cardChain(BuildContext context, TokenChain chain, WidgetRef ref) {
-    // final selectedChain =
-    //     (ref.watch(selectedChainTokenProvider).valueOrNull ?? []);
-    // final listTokenChain =
-    //     (ref.watch(listTokenChainProvider).valueOrNull ?? []);
-
     return GestureDetector(
       onTap: () {
-        // ref.read(selectedChainTokenProvider.notifier).changeNework(
-        //     isAll: false,
-        //     network: listTokenChain
-        //         .where((element) => element.chainId == chain.chainId)
-        //         .toList()
-        //         .first);
-        Navigator.pop(context);
+        ref.read(selectedNetworkSettingProvider.notifier).setToken(chain);
+        ref.watch(selectedNetworkSettingProvider);
+        context.goNamed('edit_rpc_network');
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),

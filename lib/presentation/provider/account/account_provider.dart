@@ -1,13 +1,9 @@
 // ignore_for_file: unused_result
 
-import 'package:bee_wallet/config/config.dart';
-import 'package:go_router/go_router.dart';
-import 'package:isar/isar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../data/model/account/account.dart';
 import '../../../utils/util.dart';
-import '../editWallet/edit_wallet_provider.dart';
 part 'account_provider.g.dart';
 
 @riverpod

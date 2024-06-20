@@ -8,7 +8,6 @@ import 'package:bee_wallet/presentation/screens/dashboard/setting/networkSetting
 import 'package:bee_wallet/presentation/screens/dashboard/setting/networkSetting/network_setting.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
 import '../../presentation/screens/auth/succes/confirm_parse_create.dart';
 import '../../presentation/screens/auth/create_new_account/create_wallet_name.dart';
 import '../../presentation/screens/auth/succes/sheed_parse_create.dart';
@@ -16,7 +15,6 @@ import '../../presentation/screens/auth/import_account/import_account_screen.dar
 import '../../presentation/screens/dashboard/home/AddNetwork/add_custom_network.dart';
 import '../../presentation/screens/dashboard/home/AddNetwork/add_network.dart';
 import '../../presentation/screens/dashboard/home/add_account/import_wallet.dart';
-import '../../presentation/screens/dashboard/home/changeAccount/detail_accunt.dart';
 import '../../presentation/screens/dashboard/home/changeNetwork/select_network_screen.dart';
 import '../../presentation/screens/dashboard/home/detailNft/detail_nft.dart';
 import '../../presentation/screens/dashboard/home/detailNft/detail_nft_view.dart';

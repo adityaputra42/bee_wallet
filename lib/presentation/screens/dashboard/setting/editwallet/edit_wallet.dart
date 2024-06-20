@@ -61,7 +61,7 @@ class EditWalletScreen extends ConsumerWidget {
               16.0.height,
               GestureDetector(
                 onTap: () {
-                  if (account?.backup == false) {
+                  if (account.backup == false) {
                     context.goNamed("backup_setting");
                   }
                 },
@@ -72,7 +72,7 @@ class EditWalletScreen extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(8.r),
                     border: Border.all(
                       width: 1.w,
-                      color: account?.backup == true
+                      color: account.backup == true
                           ? AppColor.greenColor
                           : AppColor.yellowColor,
                     ),
@@ -83,22 +83,22 @@ class EditWalletScreen extends ConsumerWidget {
                   child: Row(
                     children: [
                       Icon(
-                        account?.backup == true
+                        account.backup == true
                             ? Icons.check_circle_outline_rounded
                             : Icons.error_outline_outlined,
                         size: 24.w,
-                        color: account?.backup == true
+                        color: account.backup == true
                             ? AppColor.greenColor
                             : AppColor.yellowColor,
                       ),
                       8.0.width,
                       Expanded(
                         child: Text(
-                          account?.backup == true
+                          account.backup == true
                               ? "Your account has been backed up"
                               : "Please backup your sheed pharse, to secure your account.",
                           style: AppFont.reguler12.copyWith(
-                            color: account?.backup == true
+                            color: account.backup == true
                                 ? AppColor.greenColor
                                 : AppColor.yellowColor,
                           ),
