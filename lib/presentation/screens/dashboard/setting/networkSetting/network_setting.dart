@@ -9,7 +9,6 @@ import '../../../../../config/config.dart';
 import '../../../../../data/model/token_chain/token_chain.dart';
 import '../../../../../data/src/src.dart';
 import '../../../../../utils/util.dart';
-import '../../../../provider/provider.dart';
 import '../../../../widget/widget.dart';
 
 final searchNetworkSetting = StateProvider.autoDispose<TextEditingController>(
@@ -32,7 +31,7 @@ class NetworkSetting extends ConsumerWidget {
             SearchField(
                 controller: ref.watch(searchNetworkSetting),
                 onChange: (v) => ref
-                    .read(listChainSearchProvider.notifier)
+                    .read(listNetworkSettingProvider.notifier)
                     .onSearch(ref.watch(searchNetworkSetting).text)),
             16.0.height,
             Expanded(

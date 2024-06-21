@@ -125,7 +125,7 @@ class EditWalletScreen extends ConsumerWidget {
                       ref
                           .read(accountSelectedEditProvider.notifier)
                           .changeEditAccount(
-                              ref.watch(accountNameProvider).text);
+                              context, ref.watch(accountNameProvider).text);
                     } else {
                       ref
                           .read(enableEditWalletProvider.notifier)

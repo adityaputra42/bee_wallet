@@ -83,7 +83,7 @@ class InputText extends StatelessWidget {
               filled: true,
               fillColor: color ?? Theme.of(context).cardColor,
               contentPadding:
-                  EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                  EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
               suffixIcon: icon,
               hintText: hintText,
               hintStyle: AppFont.reguler14.copyWith(

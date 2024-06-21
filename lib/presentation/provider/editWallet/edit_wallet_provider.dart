@@ -1,4 +1,4 @@
-// ignore_for_file: unused_result
+// ignore_for_file: unused_result, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -21,14 +21,17 @@ class AccountSelectedEdit extends _$AccountSelectedEdit {
     state = account;
   }
 
-  changeEditAccount(String name) async {
+  changeEditAccount(BuildContext context, String name) async {
     var selectedAccount = state;
     final account = await DbHelper.instance
         .changeAccountName(selectedAccount.id ?? 0, name);
+    MethodHelper().showSnack(
+        context: context,
+        content: "Succes Account Name",
+        backgorund: AppColor.greenColor);
     ref.refresh(selectedAccountProvider);
     ref.refresh(accountListProvider);
     ref.read(enableEditWalletProvider.notifier).changeState(false);
-    ref.watch(appRouteProvider).pop();
     state = account;
   }
 }

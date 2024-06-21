@@ -7,7 +7,7 @@ part of 'edit_wallet_provider.dart';
 // **************************************************************************
 
 String _$accountSelectedEditHash() =>
-    r'3710a377a829e095c126a2a089522c28f490a6b5';
+    r'670fd27dd7a7046c082a976b982c0b7a2cc3c252';
 
 /// See also [AccountSelectedEdit].
 @ProviderFor(AccountSelectedEdit)
