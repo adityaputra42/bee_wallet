@@ -290,13 +290,15 @@ class TransferChain extends _$TransferChain {
             from: account!,
             isTestnet: chain.isTestnet!);
         state = const AsyncData(true);
-      } else if (chain.baseChain == 'btc') {
-        await BtcHelper().sendTx(
-            amount: amount.toInt(),
-            addressStr: ref.watch(receiveAddressProvider).text,
-            secretKey: EcryptionHelper().decrypt(account?.keyBTC ?? ''));
-        state = const AsyncData(true);
       }
+      
+      //  else if (chain.baseChain == 'btc') {
+      //   await BtcHelper().sendTx(
+      //       amount: amount.toInt(),
+      //       addressStr: ref.watch(receiveAddressProvider).text,
+      //       secretKey: EcryptionHelper().decrypt(account?.keyBTC ?? ''));
+      //   state = const AsyncData(true);
+      // }
 
       context.goNamed('transaction_progress');
     } catch (e) {

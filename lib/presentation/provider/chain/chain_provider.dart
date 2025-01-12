@@ -174,16 +174,18 @@ class BalanceChain extends _$BalanceChain {
             chain.balance = balanceMainet;
             await DbHelper.instance.updateNetwork(chain.id!, balanceMainet);
           }
-        } else if (chain.baseChain == "btc") {
-          var walletBtc = await BtcHelper().createOrRestoreWallet(
-              EcryptionHelper().decrypt(account?.keyBTC ?? ''),
-              Network.Testnet);
-          final balance = await walletBtc.getBalance();
-            log("new Balance BTC => ${balance.total}");
-          chain.balance = balance.total.toDouble();
-          await DbHelper.instance
-              .updateNetwork(chain.id!, balance.total.toDouble());
         }
+        
+        //  else if (chain.baseChain == "btc") {
+        //   var walletBtc = await BtcHelper().createOrRestoreWallet(
+        //       EcryptionHelper().decrypt(account?.keyBTC ?? ''),
+        //       Network.Testnet);
+        //   final balance = await walletBtc.getBalance();
+        //     log("new Balance BTC => ${balance.total}");
+        //   chain.balance = balance.total.toDouble();
+        //   await DbHelper.instance
+        //       .updateNetwork(chain.id!, balance.total.toDouble());
+        // }
       } catch (error) {
         log("error get balance => $error");
         throw Exception(error);

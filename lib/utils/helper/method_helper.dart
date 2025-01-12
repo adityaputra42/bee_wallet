@@ -38,7 +38,7 @@ class MethodHelper {
     var accountETH = EthHelper().getEthInfo(mnemonic);
     var accountSolana = await SolanaHelper().getAccountInfo(mnemonic);
     var accountSui = SuiHelper().getAccountInfo(mnemonic);
-    var accountBtc = await BtcHelper().getBtcAccountInfo(mnemonic);
+    // var accountBtc = await BtcHelper().getBtcAccountInfo(mnemonic);
 
     final mnemonicEncrypted = EcryptionHelper().encrypt(mnemonic);
     final privataKeyEthEncrypted =
@@ -47,8 +47,8 @@ class MethodHelper {
         EcryptionHelper().encrypt(accountSolana['private_key']!);
     final privataKeySuiEncrypted =
         EcryptionHelper().encrypt(accountSui['private_key']!);
-    final privateKeyBtcEncrypted =
-        EcryptionHelper().encrypt(accountBtc['private_key']!);
+    // final privateKeyBtcEncrypted =
+    //     EcryptionHelper().encrypt(accountBtc['private_key']!);
 
     Account account = Account(
       name: name,
@@ -61,8 +61,8 @@ class MethodHelper {
       addressSolana: accountSolana['address'],
       keySui: privataKeySuiEncrypted,
       addressSui: accountSui['address'],
-      keyBTC: privateKeyBtcEncrypted,
-      addressBTC: accountBtc['address'],
+      // keyBTC: privateKeyBtcEncrypted,
+      // addressBTC: accountBtc['address'],
     );
     return account;
   }

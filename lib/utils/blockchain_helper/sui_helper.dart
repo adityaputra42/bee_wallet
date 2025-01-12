@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:sui/builder/transaction.dart';
 import 'package:sui/sui.dart';
 
 import '../../data/model/account/account.dart';
@@ -74,7 +75,7 @@ class SuiHelper {
     }
     BigInt gweiBigInt = (BigInt.from(amount * 1000000000) ~/ BigInt.one);
     try {
-      final tx = TransactionBlock();
+      final tx = Transaction();
 
       final coin = tx.splitCoins(tx.gas, [tx.pureInt(gweiBigInt.toInt())]);
       tx.transferObjects([coin], tx.pureAddress(account.getAddress()));
