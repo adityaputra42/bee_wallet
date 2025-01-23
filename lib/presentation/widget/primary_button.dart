@@ -51,9 +51,9 @@ class PrimaryButton extends ConsumerWidget {
       margin: margin,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          gradient: disable ? null : AppColor.primaryGradient,
-          color:
-              !disable ? null : (disableColor ?? Theme.of(context).cardColor)),
+          color: !disable
+              ? AppColor.primaryColor
+              : (disableColor ?? Theme.of(context).cardColor)),
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               elevation: 0,
@@ -68,7 +68,7 @@ class PrimaryButton extends ConsumerWidget {
                     AppFont.medium14.copyWith(
                       color: disable
                           ? Theme.of(context).hintColor
-                          : (textColor ?? AppColor.darkText1),
+                          : (textColor ?? AppColor.lightText1),
                     ),
                 textAlign: TextAlign.center,
                 maxLines: 1,
