@@ -1,24 +1,27 @@
+import 'package:flutter_web3_webview/flutter_web3_webview.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:web3_provider/web3_provider.dart';
 
 import '../../../data/model/model.dart';
 import '../../../utils/util.dart';
+
 part 'browser_provider.g.dart';
 
 @riverpod
 class BrowserHistory extends _$BrowserHistory {
   @override
   Future<List<DappsHistory>> build() async {
-    state = const AsyncLoading();
+    state = const AsyncValue.loading();
     List<DappsHistory> list = await DbHelper.instance.getDappsHistory();
     return list;
   }
 
   Future<void> addDappsHistory(DappsHistory history) async {
     List<DappsHistory> list = state.valueOrNull ?? [];
-    await DbHelper.instance.addHistoryDapps(history);
-    list.add(history);
-    state = AsyncData(list);
+    if (!list.any((e) => e.title == history.title)) {
+      await DbHelper.instance.addHistoryDapps(history);
+      list.add(history);
+      state = AsyncData(list);
+    }
   }
 
   Future<void> deleteDappsHistory(int id) async {

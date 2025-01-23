@@ -3,13 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../data/model/model.dart';
-import '../../../../../data/model/token_chain/token_chain.dart';
 import '../../../../../utils/util.dart';
 import '../../../../provider/provider.dart';
 
@@ -37,25 +35,25 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(context: context, title: "Detail NFT"),
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
               children: [
                 SizedBox(
-                  width: 84.w,
-                  height: 84.w,
+                  width: 84,
+                  height: 84,
                   child: ClipPolygon(
                     sides: 6,
                     child: Container(
-                      padding: EdgeInsets.all(1.h),
+                      padding: EdgeInsets.all(1),
                       decoration:
                           const BoxDecoration(color: AppColor.primaryColor),
                       child: ClipPolygon(
                         sides: 6,
                         child: Container(
-                          padding: EdgeInsets.all(1.h),
+                          padding: EdgeInsets.all(1),
                           decoration: BoxDecoration(
                             color: Theme.of(context).cardColor,
                           ),
@@ -69,7 +67,7 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
                     ),
                   ),
                 ),
-                8.0.width,
+                widget.width(8),
                 Expanded(
                     child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,13 +77,13 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
                       style: AppFont.medium16
                           .copyWith(color: Theme.of(context).indicatorColor),
                     ),
-                    4.0.width,
+                    widget.width(4),
                     Text(
                       "Owned : ${nftView.length}",
                       style:
                           AppFont.medium14.copyWith(color: AppColor.grayColor),
                     ),
-                    4.0.width,
+                    widget.width(4),
                     Row(
                       children: [
                         Text(
@@ -94,7 +92,7 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
                           style: AppFont.medium14
                               .copyWith(color: AppColor.grayColor),
                         ),
-                        8.0.width,
+                        widget.width(8),
                         GestureDetector(
                           onTap: () {
                             MethodHelper().handleCopy(
@@ -103,7 +101,7 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
                           child: Icon(
                             Icons.copy_rounded,
                             color: AppColor.primaryColor,
-                            size: 16.w,
+                            size: 16,
                           ),
                         )
                       ],
@@ -112,20 +110,20 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
                 ))
               ],
             ),
-            16.0.height,
+            widget.height(16),
             Expanded(
               child: Container(
-                padding: EdgeInsets.all(16.w),
+                padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
+                  borderRadius: BorderRadius.circular(8),
                   color: Theme.of(context).cardColor,
                 ),
                 child: SingleChildScrollView(
                   child: SizedBox(
                     width: double.infinity,
                     child: Wrap(
-                      spacing: 12.h,
-                      runSpacing: 12.h,
+                      spacing: 12,
+                      runSpacing: 12,
                       children: List.generate(
                           nftView.listNft!.length,
                           (index) =>
@@ -150,28 +148,28 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        margin: EdgeInsets.only(bottom: 16.h),
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        margin: EdgeInsets.only(bottom: 16),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             color: Theme.of(context).colorScheme.surface),
         child: Row(
           children: [
             Container(
-              width: 36.w,
-              height: 36.w,
-              padding: EdgeInsets.all(6.h),
+              width: 36,
+              height: 36,
+              padding: EdgeInsets.all(6),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Theme.of(context).cardColor,
               ),
               child: Icon(
                 state == "Transfer" ? Icons.arrow_upward : Icons.arrow_downward,
-                size: 16.w,
+                size: 16,
                 color: AppColor.primaryColor,
               ),
             ),
-            8.0.width,
+            widget.width(8),
             Expanded(
                 child: Column(
               children: [
@@ -190,7 +188,7 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
                               .toLocal())
                           .toLowerCase(),
                       style: AppFont.medium12
-                          .copyWith(color: Theme.of(context).hintColor),
+                          .copyWith(color: Theme.of(context).indicatorColor),
                     )
                   ],
                 ),
@@ -200,7 +198,7 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
                     Text(
                       "to : ${activity.to != null ? MethodHelper().shortAddress(address: activity.to ?? "~", length: 5) : "~"}",
                       style: AppFont.reguler12
-                          .copyWith(color: Theme.of(context).hintColor),
+                          .copyWith(color: Theme.of(context).indicatorColor),
                     ),
                     Text(
                       "${(BigInt.parse(activity.value!).toDouble() / pow(10, 18)).toStringAsFixed(5)} ${activity.symbol == "" ? chain?.symbol : activity.symbol}",
@@ -225,21 +223,21 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
         context.goNamed('detail_nft');
       },
       child: Container(
-        height: 220.h,
+        height: 220,
         width: MediaQuery.of(context).size.width * 0.412,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             color: Theme.of(context).colorScheme.surface),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
                 child: Padding(
-              padding: EdgeInsets.all(8.h),
+              padding: EdgeInsets.all(8),
               child: ClipRRect(
                 borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(6.r),
-                  bottom: Radius.circular(4.r),
+                  top: Radius.circular(6),
+                  bottom: Radius.circular(4),
                 ),
                 child: Image.memory(
                   MethodHelper().convertBase64ToUint8List(
@@ -251,7 +249,7 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
               ),
             )),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              padding: EdgeInsets.symmetric(horizontal: 12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -266,7 +264,7 @@ class _DetailNftViewState extends ConsumerState<DetailNftView> {
                     style: AppFont.reguler12
                         .copyWith(color: Theme.of(context).indicatorColor),
                   ),
-                  8.0.height,
+                  widget.height(8),
                 ],
               ),
             )

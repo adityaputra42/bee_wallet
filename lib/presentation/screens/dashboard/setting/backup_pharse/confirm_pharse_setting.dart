@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../config/config.dart';
 import '../../../../../utils/util.dart';
 import '../../../../provider/backup/backup_provider.dart';
@@ -17,10 +16,12 @@ class ConfirmPharseSetting extends ConsumerWidget {
       required int number,
     }) {
       return DragTarget(
-        onAcceptWithDetails: (detail){
-            if (!confirmList.any((element) => element['id'] == number) ||
+        onAcceptWithDetails: (detail) {
+          if (!confirmList.any((element) => element['id'] == number) ||
               confirmList.isEmpty) {
-            ref.read(confirmMnemonicProvider.notifier).add(number, detail.data.toString());
+            ref
+                .read(confirmMnemonicProvider.notifier)
+                .add(number, detail.data.toString());
             ref
                 .read(randomMnemonicProvider.notifier)
                 .removeRandomMnemonic(detail.data.toString());
@@ -45,17 +46,17 @@ class ConfirmPharseSetting extends ConsumerWidget {
           rejected,
         ) {
           return Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
-            height: 36.h,
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            height: 36,
             width: MediaQuery.of(context).size.width * 0.247,
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                      blurRadius: 0.5.h,
-                      spreadRadius: 0.5.h,
-                      color: AppColor.grayColor.withOpacity(0.15))
+                      blurRadius: 0.5,
+                      spreadRadius: 0.5,
+                      color: AppColor.grayColor.withValues(alpha: 0.15))
                 ],
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(8),
                 color: Theme.of(context).cardColor),
             child: Text(
                 "$number. ${confirmList.singleWhere((element) => element['id'] == number, orElse: () => <String, dynamic>{})['data'] ?? ''}",
@@ -75,17 +76,15 @@ class ConfirmPharseSetting extends ConsumerWidget {
         child: Draggable(
           data: text,
           feedback: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
-            height: 36.h,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            height: 36,
             width: MediaQuery.of(context).size.width * 0.247,
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                      blurRadius: 0.1.h,
-                      spreadRadius: 0.1.h,
-                      color: Colors.black12)
+                      blurRadius: 0.1, spreadRadius: 0.1, color: Colors.black12)
                 ],
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(8),
                 color: Theme.of(context).cardColor),
             child: Center(
               child: Text(text,
@@ -95,17 +94,15 @@ class ConfirmPharseSetting extends ConsumerWidget {
             ),
           ),
           childWhenDragging: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-            height: 36.h,
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            height: 36,
             width: MediaQuery.of(context).size.width * 0.247,
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                      blurRadius: 0.1.h,
-                      spreadRadius: 0.1.h,
-                      color: Colors.black12)
+                      blurRadius: 0.1, spreadRadius: 0.1, color: Colors.black12)
                 ],
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(8),
                 color: Theme.of(context).cardColor),
             child: Center(
               child: Text(text,
@@ -115,17 +112,17 @@ class ConfirmPharseSetting extends ConsumerWidget {
             ),
           ),
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
-            height: 36.h,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            height: 36,
             width: MediaQuery.of(context).size.width * 0.247,
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                      blurRadius: 0.1.h,
-                      spreadRadius: 0.1.h,
-                      color: AppColor.grayColor.withOpacity(0.25))
+                      blurRadius: 0.1,
+                      spreadRadius: 0.1,
+                      color: AppColor.grayColor.withValues(alpha: 0.25))
                 ],
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(8),
                 color: Theme.of(context).cardColor),
             child: Center(
               child: Text(text,
@@ -145,10 +142,10 @@ class ConfirmPharseSetting extends ConsumerWidget {
       ),
       body: Container(
         width: double.infinity,
-        margin: EdgeInsets.all(16.w),
-        padding: EdgeInsets.all(16.w),
+        margin: EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(12),
             color: Theme.of(context).cardColor),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,25 +155,25 @@ class ConfirmPharseSetting extends ConsumerWidget {
               style: AppFont.medium16
                   .copyWith(color: Theme.of(context).indicatorColor),
             ),
-            16.0.height,
+            height(16),
             Container(
               width: double.infinity,
-              padding: EdgeInsets.all(12.h),
+              padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
                         blurRadius: 0.5,
                         spreadRadius: 0.5,
-                        color: AppColor.grayColor.withOpacity(0.25))
+                        color: AppColor.grayColor.withValues(alpha: 0.25))
                   ],
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: BorderRadius.circular(12),
                   color: Theme.of(context).colorScheme.surface),
               child: Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
                   runAlignment: WrapAlignment.center,
                   alignment: WrapAlignment.center,
-                  spacing: 12.h,
-                  runSpacing: 12.h,
+                  spacing: 12,
+                  runSpacing: 12,
                   direction: Axis.horizontal,
                   children: [
                     cardPniomoni(
@@ -221,23 +218,23 @@ class ConfirmPharseSetting extends ConsumerWidget {
                 ? const SizedBox()
                 : Container(
                     width: double.infinity,
-                    margin: EdgeInsets.only(top: 16.h),
-                    padding: EdgeInsets.all(12.h),
+                    margin: EdgeInsets.only(top: 16),
+                    padding: EdgeInsets.all(12),
                     decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
                               blurRadius: 0.5,
                               spreadRadius: 0.5,
-                              color: AppColor.grayColor.withOpacity(0.25))
+                              color: AppColor.grayColor.withValues(alpha: 0.25))
                         ],
-                        borderRadius: BorderRadius.circular(12.r),
+                        borderRadius: BorderRadius.circular(12),
                         color: Theme.of(context).colorScheme.surface),
                     child: Wrap(
                         crossAxisAlignment: WrapCrossAlignment.center,
                         runAlignment: WrapAlignment.center,
                         alignment: WrapAlignment.center,
-                        spacing: 12.h,
-                        runSpacing: 12.h,
+                        spacing: 12,
+                        runSpacing: 12,
                         direction: Axis.horizontal,
                         children: random
                             .map(

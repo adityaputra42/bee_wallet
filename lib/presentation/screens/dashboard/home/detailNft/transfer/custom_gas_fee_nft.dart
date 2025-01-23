@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bee_wallet/config/theme/theme.dart';
 import 'package:bee_wallet/presentation/widget/widget.dart';
@@ -18,10 +17,10 @@ class CustomGasFeeNFT extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Container(
         width: double.infinity,
-        margin: EdgeInsets.all(16.w),
-        padding: EdgeInsets.all(16.w),
+        margin: EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             color: Theme.of(context).cardColor),
         child: LayoutBuilder(
           builder: (context, constraints) => SingleChildScrollView(
@@ -45,21 +44,21 @@ class CustomGasFeeNFT extends ConsumerWidget {
                           children: [
                             Icon(
                               Icons.cancel,
-                              size: 16.w,
+                              size: 16,
                               color: Theme.of(context).hintColor,
                             ),
-                            8.0.width,
+                            width(8),
                             Text(
                               "Gwei",
                               style: AppFont.reguler12.copyWith(
                                 color: Theme.of(context).hintColor,
                               ),
                             ),
-                            16.0.width,
+                            width(16)
                           ],
                         ),
                       ),
-                      16.0.height,
+                      height(16),
                       InputText(
                         hintText: "Enter gas limit",
                         title: 'Gas Limit',
@@ -71,10 +70,10 @@ class CustomGasFeeNFT extends ConsumerWidget {
                           children: [
                             Icon(
                               Icons.cancel,
-                              size: 16.w,
+                              size: 16,
                               color: Theme.of(context).hintColor,
                             ),
-                            16.0.width,
+                            width(16)
                           ],
                         ),
                       ),
@@ -91,7 +90,7 @@ class CustomGasFeeNFT extends ConsumerWidget {
                           .setSelectedFee(3);
                       context.pop();
                     },
-                    margin: EdgeInsets.only(top: 32.h),
+                    margin: EdgeInsets.only(top: 32),
                   )
                 ],
               ),

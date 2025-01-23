@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bee_wallet/presentation/provider/tokenChain/token_chain_provider.dart';
 
@@ -23,7 +22,7 @@ class SelectAsset extends ConsumerWidget {
       appBar: WidgetHelper.appBar(context: context, title: "Select Asset"),
       body: ListView.builder(
         itemBuilder: (context, index) => Padding(
-          padding: EdgeInsets.only(bottom: 8.h, top: index == 0 ? 16.h : 0),
+          padding: EdgeInsets.only(bottom: 8, top: index == 0 ? 16 : 0),
           child: cardChain(context, chainList[index], ref),
         ),
         itemCount: chainList.length,
@@ -41,9 +40,9 @@ class SelectAsset extends ConsumerWidget {
         context.goNamed('choose_receiver');
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(12),
             color: Theme.of(context).cardColor),
         child: Column(
           children: [
@@ -51,9 +50,9 @@ class SelectAsset extends ConsumerWidget {
               children: [
                 Image.asset(
                   chain.logo ?? '',
-                  height: 32.w,
+                  height: 32,
                 ),
-                12.0.width,
+                width(12),
                 Expanded(
                   child: Text(
                     chain.name ?? '',
@@ -62,15 +61,15 @@ class SelectAsset extends ConsumerWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 16.w,
-                  height: 16.w,
+                  width: 16,
+                  height: 16,
                   child: Checkbox(
                     value:
                         chainTransfer.chainId == chain.chainId ? true : false,
                     onChanged: (v) {},
                     activeColor: AppColor.primaryColor,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(2.r)),
+                        borderRadius: BorderRadius.circular(2)),
                   ),
                 )
               ],

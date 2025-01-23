@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bee_wallet/config/config.dart';
 import 'package:bee_wallet/data/src/src.dart';
 import 'package:bee_wallet/presentation/provider/tokenChain/token_chain_provider.dart';
@@ -41,24 +39,24 @@ class AddToken extends ConsumerWidget {
                   useSafeArea: true,
                   shape: RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(16.r))));
+                          BorderRadius.vertical(top: Radius.circular(16))));
             },
             child: Container(
-              height: 36.w,
-              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+              height: 36,
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  border: Border.all(width: 1.w, color: AppColor.grayColor)),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(width: 1, color: AppColor.grayColor)),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
-                    width: 20.w,
-                    height: 20.w,
+                    width: 20,
+                    height: 20,
                     child: ClipPolygon(
                       sides: 6,
                       child: Container(
-                        padding: EdgeInsets.all(0.1.h),
+                        padding: EdgeInsets.all(0.1),
                         color: Theme.of(context).colorScheme.surface,
                         child: (chain.logo != null)
                             ? Image.asset(chain.logo!)
@@ -69,16 +67,17 @@ class AddToken extends ConsumerWidget {
                   Icon(
                     Icons.arrow_drop_down_rounded,
                     color: Theme.of(context).hintColor,
-                    size: 20.w,
+                    size: 20,
                   ),
                 ],
               ),
             )),
       ),
-      body: Container(margin: EdgeInsets.all(16.w),
-        padding: EdgeInsets.all(16.w),
+      body: Container(
+        margin: EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(12),
             color: Theme.of(context).cardColor),
         child: Column(
           children: [
@@ -89,7 +88,7 @@ class AddToken extends ConsumerWidget {
                 children: [
                   Iconify(
                     AntDesign.scan,
-                    size: 24.w,
+                    size: 24,
                     color: Theme.of(context).indicatorColor,
                   ),
                 ],
@@ -97,18 +96,16 @@ class AddToken extends ConsumerWidget {
               controller: ref.watch(contractAddressProvider),
               onChange: (value) {
                 debouncer.run(() {
-                  ref
-                      .read(contractAddressProvider.notifier)
-                      .getTokenInfo(
-                          context: context,
-                          contractAddress: value,
-                          rpc: chain.rpc ?? '');
+                  ref.read(contractAddressProvider.notifier).getTokenInfo(
+                      context: context,
+                      contractAddress: value,
+                      rpc: chain.rpc ?? '');
                 });
               },
               hintText: "Add Contract Address",
               color: Theme.of(context).colorScheme.surface,
             ),
-            16.0.height,
+            height(16),
             InputText(
               title: "Name",
               hintText: "Add Name",
@@ -116,7 +113,7 @@ class AddToken extends ConsumerWidget {
               controller: ref.watch(nameTokenProvider),
               color: Theme.of(context).colorScheme.surface,
             ),
-            16.0.height,
+            height(16),
             InputText(
               title: "Symbol",
               hintText: "Add Symbol",
@@ -124,7 +121,7 @@ class AddToken extends ConsumerWidget {
               enable: false,
               color: Theme.of(context).colorScheme.surface,
             ),
-            16.0.height,
+            height(16),
             InputText(
               title: "Decimals",
               hintText: "Add Decimals",
@@ -143,8 +140,8 @@ class AddToken extends ConsumerWidget {
                           contractAddress:
                               ref.watch(contractAddressProvider).text,
                           symbol: ref.watch(symbolTokenProvider).text,
-                          decimal: int.parse(
-                              ref.watch(decimalTokenProvider).text),
+                          decimal:
+                              int.parse(ref.watch(decimalTokenProvider).text),
                           balance: 0,
                           baseLogo: chain.baseLogo,
                           chainId: chain.chainId,
@@ -157,7 +154,7 @@ class AddToken extends ConsumerWidget {
                           rpc: chain.rpc,
                           isTestnet: null));
                 },
-                margin: EdgeInsets.only(top: 16.h)),
+                margin: EdgeInsets.only(top: 16)),
           ],
         ),
       ),

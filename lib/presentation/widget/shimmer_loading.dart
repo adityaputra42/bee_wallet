@@ -22,7 +22,7 @@ class ShimmerLoading extends StatelessWidget {
       margin: margin,
       child: Shimmer.fromColors(
         baseColor: AppColor.grayColor,
-        highlightColor: AppColor.textStrongDark,
+        highlightColor: AppColor.lightText1,
         child: Container(
           width: width,
           height: height,
@@ -53,7 +53,7 @@ class ShimmerLoadingCircle extends StatelessWidget {
       margin: margin,
       child: Shimmer.fromColors(
         baseColor: AppColor.grayColor,
-        highlightColor: AppColor.textStrongDark,
+        highlightColor: AppColor.lightText1,
         child: Container(
           width: width,
           height: height,

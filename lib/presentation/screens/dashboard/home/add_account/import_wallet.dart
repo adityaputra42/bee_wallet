@@ -1,6 +1,7 @@
+import 'package:bee_wallet/presentation/widget/button_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/ant_design.dart';
@@ -10,7 +11,7 @@ import '../../../../../config/config.dart';
 import '../../../../../utils/util.dart';
 import '../../../../provider/account/account_provider.dart';
 import '../../../../widget/widget.dart';
-import '../../scan/scann_page.dart';
+import '../../../scan/scann_page.dart';
 
 final seedImportController =
     StateProvider<TextEditingController>((ref) => TextEditingController());
@@ -25,11 +26,11 @@ class ImportWallet extends ConsumerWidget {
         appBar: WidgetHelper.appBar(context: context, title: "Import Wallet"),
         body: Container(
             width: double.infinity,
-            height: ScreenUtil().screenHeight,
-            margin: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-            padding: EdgeInsets.all(16.w),
+            height: context.h(1),
+            margin: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(8),
                 color: Theme.of(context).cardColor),
             child: Column(
               children: [
@@ -41,7 +42,7 @@ class ImportWallet extends ConsumerWidget {
                   icon: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           Navigator.push(
                               context,
@@ -54,11 +55,11 @@ class ImportWallet extends ConsumerWidget {
                         },
                         child: Iconify(
                           AntDesign.scan,
-                          size: 24.w,
+                          size: 24,
                           color: Theme.of(context).indicatorColor,
                         ),
                       ),
-                      8.0.width,
+                      width(8),
                       GestureDetector(
                         onTap: () {
                           MethodHelper().pasteFromClipboard(
@@ -66,11 +67,11 @@ class ImportWallet extends ConsumerWidget {
                         },
                         child: Iconify(
                           Mdi.content_paste,
-                          size: 24.w,
+                          size: 24,
                           color: Theme.of(context).indicatorColor,
                         ),
                       ),
-                      16.0.width,
+                      width(16),
                     ],
                   ),
                   onChange: (value) {
@@ -87,28 +88,29 @@ class ImportWallet extends ConsumerWidget {
                       .copyWith(color: Theme.of(context).hintColor),
                   textAlign: TextAlign.center,
                 ),
-                16.0.height,
-                PrimaryButton(
-                  title: "Import",
-                  disable: ref.watch(disableImportMnemonicProvider),
-                  loading: ref.watch(selectedAccountProvider).isLoading,
-                  onPressed: () {
-                    if (WalletHelper().validateMnemonic(
-                        ref.watch(seedImportController).text)) {
-                      ref
-                          .read(selectedAccountProvider.notifier)
-                          .importByMnemonic(
-                              ref.watch(seedImportController).text);
-                      context.pop();
-                    } else {
-                      ref.watch(seedImportController).clear();
-                      MethodHelper().showSnack(
-                          context: context,
-                          content: 'Seed pharse is a invalid',
-                          backgorund: AppColor.redColor);
-                    }
-                  },
-                )
+                height(16),
+                ref.watch(selectedAccountProvider).isLoading
+                    ? ButtonLoading()
+                    : PrimaryButton(
+                        title: "Import",
+                        disable: ref.watch(disableImportMnemonicProvider),
+                        onPressed: () {
+                          if (WalletHelper().validateMnemonic(
+                              ref.watch(seedImportController).text)) {
+                            ref
+                                .read(selectedAccountProvider.notifier)
+                                .importByMnemonic(
+                                    ref.watch(seedImportController).text);
+                            context.pop();
+                          } else {
+                            ref.watch(seedImportController).clear();
+                            MethodHelper().showSnack(
+                                context: context,
+                                content: 'Seed pharse is a invalid',
+                                backgorund: AppColor.redColor);
+                          }
+                        },
+                      )
               ],
             )));
   }

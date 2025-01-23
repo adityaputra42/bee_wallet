@@ -1,7 +1,6 @@
 // ignore_for_file: unused_result
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bee_wallet/data/model/chain_network/chain_network.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
@@ -26,39 +25,39 @@ class AddNetwork extends ConsumerWidget {
               context.goNamed('add_custom_network');
             },
             child: Container(
-              width: 36.w,
-              height: 36.w,
-              padding: EdgeInsets.all(4.w),
+              width: 36,
+              height: 36,
+              padding: EdgeInsets.all(4),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  border: Border.all(width: 1.w, color: AppColor.grayColor)),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(width: 1, color: AppColor.grayColor)),
               child: Icon(
                 Icons.add_rounded,
                 color: AppColor.primaryColor,
-                size: 24.w,
+                size: 24,
               ),
             ),
           )),
       // bottomNavigationBar: PrimaryButton(
-      //     margin: EdgeInsets.fromLTRB(24.w, 0, 24.w, 32.h),
+      //     margin: EdgeInsets.fromLTRB(24, 0, 24, 32.h),
       //     title: "Add Manually",
       //     onPressed: () {
       //       context.goNamed('add_custom_network');
       //     }),
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.all(16),
         child: Column(
           children: [
             SearchField(
               onChange: (v) =>
                   ref.read(chainOtherSearchProvider.notifier).onSearch(v),
             ),
-            16.0.height,
+            height(16),
             Expanded(
               child: Container(
-                padding: EdgeInsets.all(16.w),
+                padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.r),
+                    borderRadius: BorderRadius.circular(8),
                     color: Theme.of(context).cardColor),
                 child: ref.watch(chainOtherProvider).when(
                   data: (data) {
@@ -67,7 +66,7 @@ class AddNetwork extends ConsumerWidget {
                         ? const Empty(title: "Network not found")
                         : ListView.builder(
                             itemBuilder: (context, index) => Padding(
-                              padding: EdgeInsets.only(bottom: 8.h),
+                              padding: EdgeInsets.only(bottom: 8),
                               child: cardChain(context, listChain[index], ref),
                             ),
                             itemCount: listChain.length,
@@ -114,13 +113,13 @@ class AddNetwork extends ConsumerWidget {
               showDragHandle: true,
               shape: RoundedRectangleBorder(
                   borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(16.r))));
+                      BorderRadius.vertical(top: Radius.circular(16))));
         }
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             color: Theme.of(context).colorScheme.surface),
         child: Column(
           children: [
@@ -135,7 +134,7 @@ class AddNetwork extends ConsumerWidget {
                         style: AppFont.medium14
                             .copyWith(color: Theme.of(context).indicatorColor),
                       ),
-                      2.0.height,
+                      height(2),
                       Text(
                         "Default Token: ${chain.symbol} | Chain ID: ${chain.chainId}",
                         style: AppFont.reguler12
@@ -145,11 +144,11 @@ class AddNetwork extends ConsumerWidget {
                   ),
                 ),
                 Container(
-                  width: 18.w,
-                  height: 18.w,
-                  padding: EdgeInsets.all(2.w),
+                  width: 18,
+                  height: 18,
+                  padding: EdgeInsets.all(2),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2.r),
+                      borderRadius: BorderRadius.circular(2),
                       color: tokenChainOrigin.any(
                               (element) => element.chainId == chain.chainId)
                           ? AppColor.redColor
@@ -159,8 +158,8 @@ class AddNetwork extends ConsumerWidget {
                             .any((element) => element.chainId == chain.chainId)
                         ? Icons.remove_rounded
                         : Icons.add_rounded,
-                    color: AppColor.textStrongDark,
-                    size: 14.w,
+                    color: AppColor.darkText1,
+                    size: 14,
                   ),
                 )
               ],

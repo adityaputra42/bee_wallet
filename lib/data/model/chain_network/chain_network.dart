@@ -14,6 +14,8 @@ class ChainNetwork {
   String? name;
   String? symbol;
   String? chainId;
+  String? chainType;
+  String? apiKey;
   String? rpc;
   String? explorer;
   String? explorerApi;
@@ -24,6 +26,8 @@ class ChainNetwork {
     this.name,
     this.symbol,
     this.chainId,
+    this.chainType,
+    this.apiKey,
     this.rpc,
     this.explorer,
     this.explorerApi,
@@ -34,6 +38,8 @@ class ChainNetwork {
     String? name,
     String? symbol,
     String? chainId,
+    String? chainType,
+    String? apiKey,
     String? rpc,
     String? explorer,
     String? explorerApi,
@@ -43,6 +49,8 @@ class ChainNetwork {
         name: name ?? this.name,
         symbol: symbol ?? this.symbol,
         chainId: chainId ?? this.chainId,
+        chainType: chainType ?? this.chainType,
+        apiKey: apiKey ?? this.apiKey,
         rpc: rpc ?? this.rpc,
         explorer: explorer ?? this.explorer,
         explorerApi: explorerApi ?? this.explorerApi,
@@ -53,6 +61,8 @@ class ChainNetwork {
         name: json["name"],
         symbol: json["symbol"],
         chainId: json["chainId"],
+        chainType: json["chainType"],
+        apiKey: json["apiKey"],
         rpc: json["RPC"],
         explorer: json["explorer"],
         explorerApi: json["explorerAPI"],
@@ -63,6 +73,8 @@ class ChainNetwork {
         "name": name,
         "symbol": symbol,
         "chainId": chainId,
+        "chainType": chainType,
+        "apiKey": apiKey,
         "RPC": rpc,
         "explorer": explorer,
         "explorerAPI": explorerApi,

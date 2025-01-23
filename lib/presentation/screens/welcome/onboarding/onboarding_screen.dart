@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../config/config.dart';
@@ -17,20 +16,20 @@ class OnBoardingScreen extends ConsumerWidget {
 
     Widget indicator(int index) {
       return Container(
-        width: indexOnboarding == index ? 48.w : 16.w,
-        height: 16.w,
-        margin: EdgeInsets.symmetric(horizontal: 6.w),
+        width: indexOnboarding == index ? 48 : 16,
+        height: 16,
+        margin: EdgeInsets.symmetric(horizontal: 6),
         decoration: BoxDecoration(
             color: indexOnboarding == index
                 ? AppColor.primaryColor
                 : AppColor.grayColor,
-            borderRadius: BorderRadius.circular(8.w)),
+            borderRadius: BorderRadius.circular(8)),
       );
     }
 
     return Scaffold(
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 32.h),
+        padding: EdgeInsets.fromLTRB(24, 16, 24, 32),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -42,9 +41,9 @@ class OnBoardingScreen extends ConsumerWidget {
                   index++;
                   return indicator(index);
                 })),
-            8.0.width,
+            width(8),
             PrimaryButton(
-                width: ScreenUtil().screenWidth * 0.425,
+                width: context.w(0.425),
                 title: indexOnboarding <
                         (ref.watch(contentOnboardingProvider).length - 1)
                     ? "Next"
@@ -76,16 +75,16 @@ class OnBoardingScreen extends ConsumerWidget {
           children: ref
               .watch(contentOnboardingProvider)
               .map((e) => Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    padding: EdgeInsets.symmetric(horizontal: 24),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        200.0.height,
+                        height(200),
                         Image.asset(
                           e['image'],
-                          width: 334.w,
+                          width: 334,
                         ),
-                        64.0.height,
+                        height(64),
                         Text(
                           e['text'],
                           style: AppFont.medium16.copyWith(

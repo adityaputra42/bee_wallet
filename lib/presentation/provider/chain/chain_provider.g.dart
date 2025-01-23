@@ -6,7 +6,7 @@ part of 'chain_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chainOtherHash() => r'9dbee44bf44b45e485a37e6402e8ff1c0b29ea45';
+String _$chainOtherHash() => r'ef4695bfd7288bd4039a2d90ac9a3f64484dec45';
 
 /// See also [ChainOther].
 @ProviderFor(ChainOther)
@@ -37,7 +37,7 @@ final chainOtherSearchProvider =
 );
 
 typedef _$ChainOtherSearch = AutoDisposeNotifier<List<ChainNetwork>>;
-String _$balanceChainHash() => r'6093d8758e9bf1969dd15a439d2a1a489e8ba319';
+String _$balanceChainHash() => r'9bbfc9630727a37627e799944b3d61b6b7d22119';
 
 /// See also [BalanceChain].
 @ProviderFor(BalanceChain)
@@ -99,7 +99,7 @@ final activityDetailProvider =
 );
 
 typedef _$ActivityDetail = AutoDisposeNotifier<Activity>;
-String _$chainHistoryHash() => r'aaca1c81db391647dc1f7950b8f2b7677a8a8012';
+String _$chainHistoryHash() => r'98700f4a2992c45f24c254ea676635b7a1cfb99f';
 
 /// See also [ChainHistory].
 @ProviderFor(ChainHistory)
@@ -215,4 +215,4 @@ final disbaleAddNetworkProvider =
 
 typedef _$DisbaleAddNetwork = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

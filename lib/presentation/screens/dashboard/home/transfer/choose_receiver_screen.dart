@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bee_wallet/config/theme/theme.dart';
 import 'package:bee_wallet/presentation/widget/widget.dart';
 import 'package:go_router/go_router.dart';
@@ -13,7 +12,7 @@ import 'package:iconify_flutter_plus/icons/ant_design.dart';
 import '../../../../../data/src/src.dart';
 import '../../../../../utils/util.dart';
 import '../../../../provider/transfer/transfer_provider.dart';
-import '../../scan/scann_page.dart';
+import '../../../scan/scann_page.dart';
 import 'sheet_change_chain.dart';
 
 class ChooseReceiverScreen extends ConsumerWidget {
@@ -39,24 +38,24 @@ class ChooseReceiverScreen extends ConsumerWidget {
                   useSafeArea: true,
                   shape: RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(16.r))));
+                          BorderRadius.vertical(top: Radius.circular(16))));
             },
             child: Container(
-              height: 36.w,
-              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+              height: 36,
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  border: Border.all(width: 1.w, color: AppColor.grayColor)),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(width: 1, color: AppColor.grayColor)),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
-                    width: 20.w,
-                    height: 20.w,
+                    width: 20,
+                    height: 20,
                     child: ClipPolygon(
                       sides: 6,
                       child: Container(
-                        padding: EdgeInsets.all(0.1.h),
+                        padding: EdgeInsets.all(0.1),
                         color: Theme.of(context).colorScheme.surface,
                         child: (chain.logo != null)
                             ? Image.asset(chain.logo!)
@@ -68,17 +67,17 @@ class ChooseReceiverScreen extends ConsumerWidget {
                   Icon(
                     Icons.arrow_drop_down_rounded,
                     color: Theme.of(context).hintColor,
-                    size: 20.w,
+                    size: 20,
                   ),
                 ],
               ),
             )),
       ),
       body: Container(
-        margin: EdgeInsets.all(16.w),
-        padding: EdgeInsets.all(16.w),
+        margin: EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(12),
             color: Theme.of(context).cardColor),
         child: LayoutBuilder(
           builder: (context, constraints) => SingleChildScrollView(
@@ -99,9 +98,9 @@ class ChooseReceiverScreen extends ConsumerWidget {
                             ),
                             Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 8.w, vertical: 4.h),
+                                  horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4.r),
+                                  borderRadius: BorderRadius.circular(4),
                                   color: AppColor.primaryColor),
                               child: Text(
                                 chain.baseChain == 'eth'
@@ -112,17 +111,17 @@ class ChooseReceiverScreen extends ConsumerWidget {
                                             ? 'Bitcoin'
                                             : 'Sui',
                                 style: AppFont.reguler12
-                                    .copyWith(color: AppColor.textStrongLight),
+                                    .copyWith(color: AppColor.lightText1),
                               ),
                             )
                           ],
                         ),
-                        16.0.height,
+                        height(16),
                         Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 16.w, vertical: 12.h),
+                              horizontal: 16, vertical: 12),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.r),
+                              borderRadius: BorderRadius.circular(8),
                               color: Theme.of(context).colorScheme.surface),
                           child: Row(
                             children: [
@@ -130,17 +129,17 @@ class ChooseReceiverScreen extends ConsumerWidget {
                                 child: Row(
                                   children: [
                                     SizedBox(
-                                      width: 34.w,
-                                      height: 34.w,
+                                      width: 34,
+                                      height: 34,
                                       child: Stack(
                                         children: [
                                           SizedBox(
-                                            width: 32.w,
-                                            height: 32.w,
+                                            width: 32,
+                                            height: 32,
                                             child: ClipPolygon(
                                               sides: 6,
                                               child: Container(
-                                                padding: EdgeInsets.all(0.5.h),
+                                                padding: EdgeInsets.all(0.5),
                                                 color: Theme.of(context)
                                                     .colorScheme
                                                     .surface,
@@ -154,16 +153,15 @@ class ChooseReceiverScreen extends ConsumerWidget {
                                           Align(
                                             alignment: Alignment.bottomRight,
                                             child: SizedBox(
-                                              width: 16.w,
-                                              height: 16.w,
+                                              width: 16,
+                                              height: 16,
                                               child: ClipPolygon(
                                                 sides: 6,
                                                 child: Container(
-                                                  padding:
-                                                      EdgeInsets.all(0.1.h),
+                                                  padding: EdgeInsets.all(0.1),
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
-                                                          width: 0.1.w,
+                                                          width: 0.1,
                                                           color:
                                                               Theme.of(context)
                                                                   .cardColor),
@@ -183,7 +181,7 @@ class ChooseReceiverScreen extends ConsumerWidget {
                                         ],
                                       ),
                                     ),
-                                    8.0.width,
+                                    width(8),
                                     Expanded(
                                       child: Text(
                                         chain.name ?? '',
@@ -196,7 +194,7 @@ class ChooseReceiverScreen extends ConsumerWidget {
                                   ],
                                 ),
                               ),
-                              16.0.width,
+                              width(16),
                               Text(
                                 '${chain.balance} ${chain.symbol}',
                                 style: AppFont.medium14.copyWith(
@@ -205,22 +203,22 @@ class ChooseReceiverScreen extends ConsumerWidget {
                             ],
                           ),
                         ),
-                        16.0.height,
+                        height(16),
                         InputText(
                           title: "Amount",
                           controller: ref.watch(amountTransferProvider),
                           keyboardType: TextInputType.number,
                           onChange: (value) {
-                            ref
-                                .read(amountTransferProvider.notifier)
-                                .onAmountChange(value);
+                            // ref
+                            //     .read(amountTransferProvider.notifier)
+                            //     .onAmountChange(value);
                           },
                           hintText: "0.000",
                           color: Theme.of(context).colorScheme.surface,
                           icon: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              8.0.width,
+                              width(8),
                               GestureDetector(
                                 onTap: () {
                                   ref
@@ -233,11 +231,11 @@ class ChooseReceiverScreen extends ConsumerWidget {
                                       .copyWith(color: AppColor.primaryColor),
                                 ),
                               ),
-                              16.0.width
+                              width(16)
                             ],
                           ),
                         ),
-                        16.0.height,
+                        height(16),
                         InputText(
                           title: "To",
                           controller: ref.watch(receiveAddressProvider),
@@ -251,7 +249,7 @@ class ChooseReceiverScreen extends ConsumerWidget {
                           icon: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              8.0.width,
+                              width(8),
                               GestureDetector(
                                   onTap: () {
                                     Navigator.push(
@@ -276,13 +274,13 @@ class ChooseReceiverScreen extends ConsumerWidget {
                                   },
                                   child: Iconify(
                                     AntDesign.scan,
-                                    size: 24.w,
+                                    size: 24,
                                     color: Theme.of(context).indicatorColor,
                                   )),
                             ],
                           ),
                         ),
-                        16.0.height,
+                        height(16),
                         Warning(
                           warning:
                               'Please ensure that the receive address supports the ${chain.baseChain == 'eth' ? 'ERC20' : chain.baseChain == 'sol' ? 'Solana' : chain.baseChain == 'tron' ? 'TRC20' : 'BRC20'}',

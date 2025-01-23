@@ -4,11 +4,9 @@ import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/ant_design.dart';
-import 'package:iconify_flutter_plus/icons/prime.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:bee_wallet/data/model/model.dart';
 import 'package:bee_wallet/presentation/provider/account/account_provider.dart';
@@ -16,12 +14,11 @@ import 'package:bee_wallet/presentation/widget/widget.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../config/config.dart';
-import '../../../../../data/model/token_chain/selected_token_chain.dart';
 import '../../../../../data/src/src.dart';
 import '../../../../../utils/util.dart';
 import '../../../../provider/provider.dart';
 import '../../../../provider/transfer/transfer_provider.dart';
-import '../../scan/scann_page.dart';
+import '../../../scan/scann_page.dart';
 
 class DetailTokenScreen extends ConsumerStatefulWidget {
   const DetailTokenScreen({super.key});
@@ -73,35 +70,35 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
               );
             },
             child: Container(
-              width: 36.w,
-              height: 36.w,
-              padding: EdgeInsets.all(8.h),
+              width: 36,
+              height: 36,
+              padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  border: Border.all(width: 1.w, color: AppColor.grayColor)),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(width: 1, color: AppColor.grayColor)),
               child: Iconify(
                 AntDesign.scan,
                 color: Theme.of(context).indicatorColor,
-                size: 20.w,
+                size: 20,
               ),
             )),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.all(16),
         child: Column(
           children: [
             SizedBox(
-              width: 50.w,
-              height: 50.w,
+              width: 50,
+              height: 50,
               child: Stack(
                 children: [
                   SizedBox(
-                    width: 48.w,
-                    height: 48.w,
+                    width: 48,
+                    height: 48,
                     child: ClipPolygon(
                       sides: 6,
                       child: Container(
-                        padding: EdgeInsets.all(0.5.h),
+                        padding: EdgeInsets.all(0.5),
                         color: Theme.of(context).colorScheme.surface,
                         child: (chain.logo != null)
                             ? Image.asset(chain.logo!)
@@ -112,15 +109,15 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: SizedBox(
-                      width: 20.w,
-                      height: 20.w,
+                      width: 20,
+                      height: 20,
                       child: ClipPolygon(
                         sides: 6,
                         child: Container(
-                          padding: EdgeInsets.all(0.1.h),
+                          padding: EdgeInsets.all(0.1),
                           decoration: BoxDecoration(
                               border: Border.all(
-                                  width: 0.3.w,
+                                  width: 0.3,
                                   color: Theme.of(context).cardColor),
                               color: Theme.of(context).colorScheme.surface),
                           child: (chain.baseLogo != null)
@@ -133,43 +130,33 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                 ],
               ),
             ),
-            8.0.height,
+            widget.height(8),
             Text(
               "${roundDouble((chain.balance ?? 0), 5)} ${chain.symbol}",
               style: AppFont.medium32.copyWith(
                 color: Theme.of(context).indicatorColor,
               ),
             ),
-            4.0.height,
+            widget.height(4),
             Text(
               "~\$ ${0.toStringAsFixed(2)}",
               style: AppFont.reguler16
                   .copyWith(color: Theme.of(context).hintColor),
             ),
-            16.0.height,
+            widget.height(16),
             Row(
               children: [
                 Expanded(
                     child: PrimaryButton(
-                  icon: Iconify(
-                    Prime.qrcode,
-                    size: 24.w,
-                    color: AppColor.textStrongLight,
-                  ),
                   title: "Receive",
                   onPressed: () {
                     context.goNamed('receive_token');
                   },
                 )),
-                12.0.width,
+                widget.width(12),
                 Expanded(
                     child: PrimaryButton(
                   title: "Transfer",
-                  icon: Iconify(
-                    AntDesign.send_outlined,
-                    size: 24.w,
-                    color: AppColor.textStrongLight,
-                  ),
                   onPressed: () {
                     ref
                         .read(chainTransferProvider.notifier)
@@ -180,12 +167,12 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                 )),
               ],
             ),
-            16.0.height,
+            widget.height(16),
             Expanded(
                 child: Container(
-                    padding: EdgeInsets.all(16.w),
+                    padding: EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.r),
+                        borderRadius: BorderRadius.circular(12),
                         color: Theme.of(context).cardColor),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,15 +182,15 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                           style: AppFont.medium14.copyWith(
                               color: Theme.of(context).indicatorColor),
                         ),
-                        8.0.height,
+                        widget.height(8),
                         SizedBox(
-                          height: 1.w,
+                          height: 1,
                           child: Divider(
-                            thickness: 1.w,
+                            thickness: 1,
                             color: AppColor.grayColor,
                           ),
                         ),
-                        8.0.height,
+                        widget.height(8),
                         Expanded(
                           child: RefreshIndicator(
                             color: AppColor.primaryColor,
@@ -227,9 +214,9 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                                   children: [
                                     Image.asset(
                                       AppImage.empty,
-                                      width: 200.w,
+                                      width: 200,
                                     ),
-                                    16.0.height,
+                                    widget.height(16),
                                     Text(
                                       "Oops...",
                                       style: AppFont.semibold24.copyWith(
@@ -237,27 +224,27 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                                               Theme.of(context).indicatorColor),
                                       textAlign: TextAlign.center,
                                     ),
-                                    .0.height,
+                                    widget.height(12),
                                     Text(
                                       "Error : ${pagingController.error}",
                                       style: AppFont.reguler14.copyWith(
                                           color: Theme.of(context).hintColor),
                                       textAlign: TextAlign.center,
                                     ),
-                                    24.0.height,
+                                    widget.height(4),
                                     PrimaryButton(
                                       title: "Try Again",
                                       height: 42,
                                       onPressed: () {
                                         pagingController.refresh();
                                       },
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: 64.w),
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 64),
                                     )
                                   ],
                                 ),
                                 itemBuilder: (context, item, index) => Padding(
-                                  padding: EdgeInsets.only(bottom: 8.h),
+                                  padding: EdgeInsets.only(bottom: 8),
                                   child: cardActivity(
                                       context: context,
                                       activity: item,
@@ -270,7 +257,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                         ),
                       ],
                     ))),
-            8.0.height,
+            widget.height(8),
           ],
         ),
       ),
@@ -290,27 +277,27 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
         context.goNamed('detail_activity');
       },
       child: Container(
-        padding: EdgeInsets.all(10.w),
+        padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6.r),
+            borderRadius: BorderRadius.circular(6),
             color: Theme.of(context).colorScheme.surface),
         child: Row(
           children: [
             Container(
-              width: 40.w,
-              height: 40.w,
-              padding: EdgeInsets.all(6.h),
+              width: 40,
+              height: 40,
+              padding: EdgeInsets.all(6),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4.r),
+                borderRadius: BorderRadius.circular(4),
                 color: Theme.of(context).cardColor,
               ),
               child: Icon(
                 state == "Transfer" ? Icons.arrow_upward : Icons.arrow_downward,
-                size: 20.w,
+                size: 20,
                 color: Theme.of(context).indicatorColor,
               ),
             ),
-            12.0.width,
+            widget.width(12),
             Expanded(
                 child: Column(
               children: [
@@ -323,7 +310,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                           .copyWith(color: Theme.of(context).indicatorColor),
                     ),
                     Text(
-                      "${roundDouble((BigInt.parse(activity.value!).toDouble() / pow(10, 18)),5)} ${activity.symbol == "" ? chain?.symbol : activity.symbol}",
+                      "${roundDouble((BigInt.parse(activity.value!).toDouble() / pow(10, 18)), 5)} ${activity.symbol == "" ? chain?.symbol : activity.symbol}",
                       style: AppFont.medium14.copyWith(
                           color: state == "Transfer"
                               ? AppColor.redColor
@@ -331,7 +318,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                     ),
                   ],
                 ),
-                2.0.height,
+                widget.height(2),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -364,29 +351,29 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
       final chain = ref.watch(chainDetailProvider);
       return Container(
         width: double.infinity,
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(12),
             color: Theme.of(context).cardColor),
         child: Row(
           children: [
             Expanded(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-                height: 44.h,
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                height: 44,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.r),
+                    borderRadius: BorderRadius.circular(8),
                     color: Theme.of(context).colorScheme.surface),
                 child: Row(
                   children: [
                     Container(
-                      width: 28.w,
-                      height: 28.w,
+                      width: 28,
+                      height: 28,
                       // padding: EdgeInsets.all(3.h),
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                              width: 1.w, color: AppColor.primaryColor)),
+                              width: 1, color: AppColor.primaryColor)),
                       child: Center(
                         child: Blockies(
                             size: 0.34,
@@ -394,7 +381,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                             shape: BlockiesShape.circle),
                       ),
                     ),
-                    8.0.width,
+                    widget.width(8),
                     Text(
                       "${account?.name}-${account?.id}",
                       style: AppFont.medium14
@@ -404,7 +391,7 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                 ),
               ),
             ),
-            8.0.width,
+            widget.width(8),
             GestureDetector(
               onTap: () {
                 MethodHelper().handleCopy(
@@ -418,10 +405,10 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                     context: context);
               },
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-                height: 44.h,
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                height: 44,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.r),
+                    borderRadius: BorderRadius.circular(8),
                     color: Theme.of(context).colorScheme.surface),
                 child: Row(
                   children: [
@@ -438,20 +425,20 @@ class _DetailTokenScreenState extends ConsumerState<DetailTokenScreen> {
                       style: AppFont.medium14
                           .copyWith(color: Theme.of(context).indicatorColor),
                     ),
-                    8.0.width,
+                    widget.width(8),
                     Icon(
                       Icons.copy_rounded,
                       color: AppColor.primaryColor,
-                      size: 16.w,
+                      size: 16,
                     )
                   ],
                 ),
               ),
             ),
-            8.0.width,
+            widget.width(8),
             Icon(
               Icons.more_vert_rounded,
-              size: 24.w,
+              size: 24,
               color: AppColor.primaryColor,
             )
           ],

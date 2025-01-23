@@ -37,43 +37,53 @@ const AccountSchema = CollectionSchema(
       name: r'addressSui',
       type: IsarType.string,
     ),
-    r'backup': PropertySchema(
+    r'addressTron': PropertySchema(
       id: 4,
+      name: r'addressTron',
+      type: IsarType.string,
+    ),
+    r'backup': PropertySchema(
+      id: 5,
       name: r'backup',
       type: IsarType.bool,
     ),
     r'keyBTC': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'keyBTC',
       type: IsarType.string,
     ),
     r'keyETH': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'keyETH',
       type: IsarType.string,
     ),
     r'keySolana': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'keySolana',
       type: IsarType.string,
     ),
     r'keySui': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'keySui',
       type: IsarType.string,
     ),
+    r'keyTron': PropertySchema(
+      id: 10,
+      name: r'keyTron',
+      type: IsarType.string,
+    ),
     r'mnemonic': PropertySchema(
-      id: 9,
+      id: 11,
       name: r'mnemonic',
       type: IsarType.string,
     ),
     r'name': PropertySchema(
-      id: 10,
+      id: 12,
       name: r'name',
       type: IsarType.string,
     ),
     r'selectedAccount': PropertySchema(
-      id: 11,
+      id: 13,
       name: r'selectedAccount',
       type: IsarType.bool,
     )
@@ -89,7 +99,7 @@ const AccountSchema = CollectionSchema(
   getId: _accountGetId,
   getLinks: _accountGetLinks,
   attach: _accountAttach,
-  version: '3.1.0+1',
+  version: '3.1.8',
 );
 
 int _accountEstimateSize(
@@ -123,6 +133,12 @@ int _accountEstimateSize(
     }
   }
   {
+    final value = object.addressTron;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.keyBTC;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -142,6 +158,12 @@ int _accountEstimateSize(
   }
   {
     final value = object.keySui;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.keyTron;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -171,14 +193,16 @@ void _accountSerialize(
   writer.writeString(offsets[1], object.addressETH);
   writer.writeString(offsets[2], object.addressSolana);
   writer.writeString(offsets[3], object.addressSui);
-  writer.writeBool(offsets[4], object.backup);
-  writer.writeString(offsets[5], object.keyBTC);
-  writer.writeString(offsets[6], object.keyETH);
-  writer.writeString(offsets[7], object.keySolana);
-  writer.writeString(offsets[8], object.keySui);
-  writer.writeString(offsets[9], object.mnemonic);
-  writer.writeString(offsets[10], object.name);
-  writer.writeBool(offsets[11], object.selectedAccount);
+  writer.writeString(offsets[4], object.addressTron);
+  writer.writeBool(offsets[5], object.backup);
+  writer.writeString(offsets[6], object.keyBTC);
+  writer.writeString(offsets[7], object.keyETH);
+  writer.writeString(offsets[8], object.keySolana);
+  writer.writeString(offsets[9], object.keySui);
+  writer.writeString(offsets[10], object.keyTron);
+  writer.writeString(offsets[11], object.mnemonic);
+  writer.writeString(offsets[12], object.name);
+  writer.writeBool(offsets[13], object.selectedAccount);
 }
 
 Account _accountDeserialize(
@@ -192,15 +216,17 @@ Account _accountDeserialize(
     addressETH: reader.readStringOrNull(offsets[1]),
     addressSolana: reader.readStringOrNull(offsets[2]),
     addressSui: reader.readStringOrNull(offsets[3]),
-    backup: reader.readBoolOrNull(offsets[4]),
+    addressTron: reader.readStringOrNull(offsets[4]),
+    backup: reader.readBoolOrNull(offsets[5]),
     id: id,
-    keyBTC: reader.readStringOrNull(offsets[5]),
-    keyETH: reader.readStringOrNull(offsets[6]),
-    keySolana: reader.readStringOrNull(offsets[7]),
-    keySui: reader.readStringOrNull(offsets[8]),
-    mnemonic: reader.readStringOrNull(offsets[9]),
-    name: reader.readStringOrNull(offsets[10]),
-    selectedAccount: reader.readBoolOrNull(offsets[11]),
+    keyBTC: reader.readStringOrNull(offsets[6]),
+    keyETH: reader.readStringOrNull(offsets[7]),
+    keySolana: reader.readStringOrNull(offsets[8]),
+    keySui: reader.readStringOrNull(offsets[9]),
+    keyTron: reader.readStringOrNull(offsets[10]),
+    mnemonic: reader.readStringOrNull(offsets[11]),
+    name: reader.readStringOrNull(offsets[12]),
+    selectedAccount: reader.readBoolOrNull(offsets[13]),
   );
   return object;
 }
@@ -221,9 +247,9 @@ P _accountDeserializeProp<P>(
     case 3:
       return (reader.readStringOrNull(offset)) as P;
     case 4:
-      return (reader.readBoolOrNull(offset)) as P;
-    case 5:
       return (reader.readStringOrNull(offset)) as P;
+    case 5:
+      return (reader.readBoolOrNull(offset)) as P;
     case 6:
       return (reader.readStringOrNull(offset)) as P;
     case 7:
@@ -235,6 +261,10 @@ P _accountDeserializeProp<P>(
     case 10:
       return (reader.readStringOrNull(offset)) as P;
     case 11:
+      return (reader.readStringOrNull(offset)) as P;
+    case 12:
+      return (reader.readStringOrNull(offset)) as P;
+    case 13:
       return (reader.readBoolOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -912,6 +942,153 @@ extension AccountQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'addressSui',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressTronIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'addressTron',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressTronIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'addressTron',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressTronEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'addressTron',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressTronGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'addressTron',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressTronLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'addressTron',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressTronBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'addressTron',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressTronStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'addressTron',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressTronEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'addressTron',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressTronContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'addressTron',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressTronMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'addressTron',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> addressTronIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'addressTron',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition>
+      addressTronIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'addressTron',
         value: '',
       ));
     });
@@ -1595,6 +1772,152 @@ extension AccountQueryFilter
     });
   }
 
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyTronIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'keyTron',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyTronIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'keyTron',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyTronEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'keyTron',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyTronGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'keyTron',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyTronLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'keyTron',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyTronBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'keyTron',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyTronStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'keyTron',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyTronEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'keyTron',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyTronContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'keyTron',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyTronMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'keyTron',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyTronIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'keyTron',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterFilterCondition> keyTronIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'keyTron',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<Account, Account, QAfterFilterCondition> mnemonicIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1971,6 +2294,18 @@ extension AccountQuerySortBy on QueryBuilder<Account, Account, QSortBy> {
     });
   }
 
+  QueryBuilder<Account, Account, QAfterSortBy> sortByAddressTron() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'addressTron', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> sortByAddressTronDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'addressTron', Sort.desc);
+    });
+  }
+
   QueryBuilder<Account, Account, QAfterSortBy> sortByBackup() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'backup', Sort.asc);
@@ -2028,6 +2363,18 @@ extension AccountQuerySortBy on QueryBuilder<Account, Account, QSortBy> {
   QueryBuilder<Account, Account, QAfterSortBy> sortByKeySuiDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'keySui', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> sortByKeyTron() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'keyTron', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> sortByKeyTronDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'keyTron', Sort.desc);
     });
   }
 
@@ -2118,6 +2465,18 @@ extension AccountQuerySortThenBy
     });
   }
 
+  QueryBuilder<Account, Account, QAfterSortBy> thenByAddressTron() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'addressTron', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> thenByAddressTronDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'addressTron', Sort.desc);
+    });
+  }
+
   QueryBuilder<Account, Account, QAfterSortBy> thenByBackup() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'backup', Sort.asc);
@@ -2190,6 +2549,18 @@ extension AccountQuerySortThenBy
     });
   }
 
+  QueryBuilder<Account, Account, QAfterSortBy> thenByKeyTron() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'keyTron', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Account, Account, QAfterSortBy> thenByKeyTronDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'keyTron', Sort.desc);
+    });
+  }
+
   QueryBuilder<Account, Account, QAfterSortBy> thenByMnemonic() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'mnemonic', Sort.asc);
@@ -2258,6 +2629,13 @@ extension AccountQueryWhereDistinct
     });
   }
 
+  QueryBuilder<Account, Account, QDistinct> distinctByAddressTron(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'addressTron', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<Account, Account, QDistinct> distinctByBackup() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'backup');
@@ -2289,6 +2667,13 @@ extension AccountQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'keySui', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Account, Account, QDistinct> distinctByKeyTron(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'keyTron', caseSensitive: caseSensitive);
     });
   }
 
@@ -2345,6 +2730,12 @@ extension AccountQueryProperty
     });
   }
 
+  QueryBuilder<Account, String?, QQueryOperations> addressTronProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'addressTron');
+    });
+  }
+
   QueryBuilder<Account, bool?, QQueryOperations> backupProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'backup');
@@ -2372,6 +2763,12 @@ extension AccountQueryProperty
   QueryBuilder<Account, String?, QQueryOperations> keySuiProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'keySui');
+    });
+  }
+
+  QueryBuilder<Account, String?, QQueryOperations> keyTronProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'keyTron');
     });
   }
 

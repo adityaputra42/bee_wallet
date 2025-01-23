@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../data/src/src.dart';
@@ -18,10 +17,10 @@ class ShowParse extends ConsumerWidget {
       appBar: WidgetHelper.appBar(context: context, title: 'Seed Pharse'),
       body: Container(
         width: double.infinity,
-        margin: EdgeInsets.symmetric(horizontal: 24.w,vertical: 16.h),
-        padding: EdgeInsets.all(16.w),
+        margin: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             color: Theme.of(context).cardColor),
         child: Column(
           children: [
@@ -34,9 +33,9 @@ class ShowParse extends ConsumerWidget {
             const Spacer(),
             Image.asset(
               AppImage.logo,
-              width: 160.w,
+              width: 160,
             ),
-            16.0.height,
+            height(16),
             Text(
               'Peta Wallet will NEVER ask about your seed phrase (especially on Telegram)',
               style: AppFont.reguler12
@@ -54,8 +53,8 @@ class ShowParse extends ConsumerWidget {
                       isScrollControlled: true,
                       showDragHandle: true,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(16.r))));
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(16))));
                 })
           ],
         ),

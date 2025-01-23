@@ -1,6 +1,4 @@
-import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../config/config.dart';
@@ -18,31 +16,34 @@ class WidgetHelper {
       bool isCanBack = true}) {
     return AppBar(
       elevation: 0,
-      // shadowColor: AppColor.grayColor,
       title: Row(
         children: [
           isCanBack
-              ? GestureDetector(
+              ? InkWell(
                   onTap: onTap ??
                       () {
                         context.pop();
                       },
                   child: Container(
-                    width: 36.w,
-                    height: 36.w,
-                    padding: EdgeInsets.all(6.h),
+                    width: 36,
+                    height: 36,
+                    padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.r),
+                        borderRadius: BorderRadius.circular(8),
                         border: Border.all(
-                            width: 1.w, color: Theme.of(context).hintColor)),
+                            width: 1, color: Theme.of(context).hintColor)),
                     child: Icon(
                       Icons.arrow_back_ios_new_rounded,
                       color: Theme.of(context).indicatorColor,
-                      size: 20.w,
+                      size: 20,
                     ),
                   ))
-              : 40.0.width,
-          16.0.width,
+              : const SizedBox(
+                  width: 40,
+                ),
+          const SizedBox(
+            width: 16,
+          ),
           Expanded(
             child: GestureDetector(
               onTap: onTapTitle ?? () {},
@@ -72,13 +73,18 @@ class WidgetHelper {
                     ),
             ),
           ),
-          16.0.width,
-          icon ?? 32.0.width,
+          const SizedBox(
+            width: 16,
+          ),
+          icon ??
+              const SizedBox(
+                width: 32,
+              ),
         ],
       ),
       automaticallyImplyLeading: false,
       backgroundColor: color ?? Theme.of(context).colorScheme.surface,
-      toolbarHeight: 60.h,
+      toolbarHeight: 60,
     );
   }
 }

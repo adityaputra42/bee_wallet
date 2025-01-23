@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bee_wallet/data/model/token_chain/token_chain.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
 import 'package:bee_wallet/presentation/widget/widget.dart';
@@ -27,10 +26,10 @@ class SelectNetworkScreen extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(context: context, title: "Change Network"),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            16.0.height,
+            height(16),
             Row(
               children: [
                 Expanded(
@@ -40,30 +39,30 @@ class SelectNetworkScreen extends ConsumerWidget {
                           .read(listChainSearchProvider.notifier)
                           .onSearch(ref.watch(searchListChain).text)),
                 ),
-                12.0.width,
+                width(12),
                 GestureDetector(
                   onTap: () {
                     context.goNamed("add_network");
                   },
                   child: Container(
-                    width: 48.w,
-                    height: 48.w,
+                    width: 48,
+                    height: 48,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.r),
+                        borderRadius: BorderRadius.circular(8),
                         color: Theme.of(context).cardColor),
                     child: Icon(
                       Icons.add_rounded,
-                      size: 32.w,
+                      size: 32,
                       color: Theme.of(context).indicatorColor,
                     ),
                   ),
                 )
               ],
             ),
-            16.0.height,
+            height(16),
             Expanded(
                 child: Container(
-              padding: EdgeInsets.all(16.w),
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Theme.of(context).cardColor),
@@ -72,12 +71,12 @@ class SelectNetworkScreen extends ConsumerWidget {
                   : ListView(
                       children: [
                         cardSelectAll(context, ref),
-                        8.0.height,
+                        height(8),
                         Column(
                           children: List.generate(
                               listChain.length,
                               (index) => Padding(
-                                    padding: EdgeInsets.only(bottom: 8.h),
+                                    padding: EdgeInsets.only(bottom: 8),
                                     child: cardChain(
                                         context, listChain[index], ref),
                                   )),
@@ -85,7 +84,7 @@ class SelectNetworkScreen extends ConsumerWidget {
                       ],
                     ),
             )),
-            16.0.height,
+            height(16),
           ],
         ),
       ),
@@ -106,11 +105,11 @@ class SelectNetworkScreen extends ConsumerWidget {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             border: Border.all(
-                width: 1.w,
+                width: 1,
                 color: selectedChain.length == listchain.length
                     ? AppColor.primaryColor
                     : Theme.of(context).colorScheme.surface),
@@ -121,10 +120,10 @@ class SelectNetworkScreen extends ConsumerWidget {
               children: [
                 Iconify(
                   MaterialSymbols.widgets_outline_rounded,
-                  size: 32.w,
+                  size: 32,
                   color: AppColor.grayColor,
                 ),
-                8.0.width,
+                width(8),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,11 +166,11 @@ class SelectNetworkScreen extends ConsumerWidget {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             border: Border.all(
-                width: 1.w,
+                width: 1,
                 color: listTokenChain.length != selectedChain.length &&
                         selectedChain
                             .any((element) => element.chainId == chain.chainId)
@@ -183,12 +182,12 @@ class SelectNetworkScreen extends ConsumerWidget {
             Row(
               children: [
                 SizedBox(
-                  width: 32.w,
-                  height: 32.w,
+                  width: 32,
+                  height: 32,
                   child: ClipPolygon(
                     sides: 6,
                     child: Container(
-                      padding: EdgeInsets.all(0.5.h),
+                      padding: EdgeInsets.all(0.5),
                       color: Theme.of(context).colorScheme.surface,
                       child: (chain.logo != null)
                           ? Image.asset(
@@ -199,7 +198,7 @@ class SelectNetworkScreen extends ConsumerWidget {
                     ),
                   ),
                 ),
-                8.0.width,
+                width(8),
                 Expanded(
                   child: Text(
                     chain.name ?? '',
@@ -208,7 +207,7 @@ class SelectNetworkScreen extends ConsumerWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                8.0.width,
+                width(8),
                 Text(
                   chain.symbol ?? '',
                   style: AppFont.medium14

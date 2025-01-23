@@ -1,26 +1,30 @@
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../config/config.dart';
+import '../../config/theme/theme.dart';
 
 class Numpadcustom extends StatelessWidget {
   final TextEditingController controller;
   final Function delete;
-  final double? height;
+  final double? heightWidget;
+  final EdgeInsets? margin;
+  final Color? color;
   const Numpadcustom({
     super.key,
     required this.controller,
-    this.height,
+    this.heightWidget,
     required this.delete,
+    this.color,
+    this.margin,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 24.w,
-      ),
+      margin: margin ??
+          const EdgeInsets.symmetric(
+            horizontal: 24,
+          ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -28,76 +32,85 @@ class Numpadcustom extends StatelessWidget {
             children: [
               NumbButton(
                 number: 1,
+                color: color,
                 controller: controller,
-                height: height,
+                heightWidget: heightWidget,
               ),
-              12.0.width,
+              width(12),
               NumbButton(
                 number: 2,
+                color: color,
                 controller: controller,
-                height: height,
+                heightWidget: heightWidget,
               ),
-              12.0.width,
+              width(12),
               NumbButton(
                 number: 3,
+                color: color,
                 controller: controller,
-                height: height,
+                heightWidget: heightWidget,
               ),
             ],
           ),
-          12.0.height,
+          height(12),
           Row(
             children: [
               NumbButton(
                 number: 4,
+                color: color,
                 controller: controller,
-                height: height,
+                heightWidget: heightWidget,
               ),
-              12.0.width,
+              width(12),
               NumbButton(
                 number: 5,
+                color: color,
                 controller: controller,
-                height: height,
+                heightWidget: heightWidget,
               ),
-              12.0.width,
+              width(12),
               NumbButton(
                 number: 6,
+                color: color,
                 controller: controller,
-                height: height,
+                heightWidget: heightWidget,
               ),
             ],
           ),
-          12.0.height,
+          height(12),
           Row(
             children: [
               NumbButton(
                 number: 7,
+                color: color,
                 controller: controller,
-                height: height,
+                heightWidget: heightWidget,
               ),
-              12.0.width,
+              width(12),
               NumbButton(
                 number: 8,
+                color: color,
                 controller: controller,
-                height: height,
+                heightWidget: heightWidget,
               ),
-              12.0.width,
+              width(12),
               NumbButton(
                 number: 9,
+                color: color,
                 controller: controller,
-                height: height,
+                heightWidget: heightWidget,
               ),
             ],
           ),
-          12.0.height,
+          height(12),
           Row(
             children: [
               Expanded(
                 child: Container(
-                    height: height ?? 60.h,
+                    height: heightWidget ?? 60,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.r),
-                        color: Theme.of(context).cardColor),
+                        borderRadius: BorderRadius.circular(8),
+                        color: color ?? Theme.of(context).cardColor),
                     child: TextButton(
                       onPressed: () {},
                       child: Center(
@@ -109,26 +122,27 @@ class Numpadcustom extends StatelessWidget {
                       ),
                     )),
               ),
-              12.0.width,
+              width(12),
               NumbButton(
                 number: 0,
-                height: height,
+                color: color,
+                heightWidget: heightWidget,
                 controller: controller,
               ),
-              12.0.width,
+              width(12),
               Expanded(
                 child: Container(
-                    height: height ?? 60.h,
+                    height: heightWidget ?? 60,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.r),
-                        color: Theme.of(context).cardColor),
+                        borderRadius: BorderRadius.circular(8),
+                        color: color ?? Theme.of(context).cardColor),
                     child: TextButton(
                       onPressed: () => delete(),
                       child: Center(
                           child: Icon(
                         Icons.backspace_outlined,
                         color: Theme.of(context).indicatorColor,
-                        size: 32.w,
+                        size: 28,
                       )),
                     )),
               )
@@ -143,11 +157,13 @@ class Numpadcustom extends StatelessWidget {
 class NumbButton extends StatelessWidget {
   final int number;
   final TextEditingController controller;
-  final double? height;
+  final double? heightWidget;
+  final Color? color;
   const NumbButton({
     super.key,
     required this.number,
-    this.height,
+    this.heightWidget,
+    this.color,
     required this.controller,
   });
 
@@ -155,10 +171,10 @@ class NumbButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        height: height ?? 60.h,
+        height: heightWidget ?? 60,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
-            color: Theme.of(context).cardColor),
+            borderRadius: BorderRadius.circular(8),
+            color: color ?? Theme.of(context).cardColor),
         child: TextButton(
             onPressed: () {
               controller.text += number.toString();
@@ -167,7 +183,8 @@ class NumbButton extends StatelessWidget {
               child: Text(
                 number.toString(),
                 style: AppFont.medium24.copyWith(
-                    color: Theme.of(context).indicatorColor, fontSize: 20.sp),
+                  color: Theme.of(context).indicatorColor,
+                ),
               ),
             )),
       ),

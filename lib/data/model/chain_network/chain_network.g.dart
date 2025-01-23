@@ -17,38 +17,48 @@ const ChainNetworkSchema = CollectionSchema(
   name: r'ChainNetwork',
   id: -5240540234564865694,
   properties: {
-    r'chainId': PropertySchema(
+    r'apiKey': PropertySchema(
       id: 0,
+      name: r'apiKey',
+      type: IsarType.string,
+    ),
+    r'chainId': PropertySchema(
+      id: 1,
       name: r'chainId',
       type: IsarType.string,
     ),
+    r'chainType': PropertySchema(
+      id: 2,
+      name: r'chainType',
+      type: IsarType.string,
+    ),
     r'explorer': PropertySchema(
-      id: 1,
+      id: 3,
       name: r'explorer',
       type: IsarType.string,
     ),
     r'explorerApi': PropertySchema(
-      id: 2,
+      id: 4,
       name: r'explorerApi',
       type: IsarType.string,
     ),
     r'isTestnet': PropertySchema(
-      id: 3,
+      id: 5,
       name: r'isTestnet',
       type: IsarType.bool,
     ),
     r'name': PropertySchema(
-      id: 4,
+      id: 6,
       name: r'name',
       type: IsarType.string,
     ),
     r'rpc': PropertySchema(
-      id: 5,
+      id: 7,
       name: r'rpc',
       type: IsarType.string,
     ),
     r'symbol': PropertySchema(
-      id: 6,
+      id: 8,
       name: r'symbol',
       type: IsarType.string,
     )
@@ -64,7 +74,7 @@ const ChainNetworkSchema = CollectionSchema(
   getId: _chainNetworkGetId,
   getLinks: _chainNetworkGetLinks,
   attach: _chainNetworkAttach,
-  version: '3.1.0+1',
+  version: '3.1.8',
 );
 
 int _chainNetworkEstimateSize(
@@ -74,7 +84,19 @@ int _chainNetworkEstimateSize(
 ) {
   var bytesCount = offsets.last;
   {
+    final value = object.apiKey;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.chainId;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.chainType;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -118,13 +140,15 @@ void _chainNetworkSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.chainId);
-  writer.writeString(offsets[1], object.explorer);
-  writer.writeString(offsets[2], object.explorerApi);
-  writer.writeBool(offsets[3], object.isTestnet);
-  writer.writeString(offsets[4], object.name);
-  writer.writeString(offsets[5], object.rpc);
-  writer.writeString(offsets[6], object.symbol);
+  writer.writeString(offsets[0], object.apiKey);
+  writer.writeString(offsets[1], object.chainId);
+  writer.writeString(offsets[2], object.chainType);
+  writer.writeString(offsets[3], object.explorer);
+  writer.writeString(offsets[4], object.explorerApi);
+  writer.writeBool(offsets[5], object.isTestnet);
+  writer.writeString(offsets[6], object.name);
+  writer.writeString(offsets[7], object.rpc);
+  writer.writeString(offsets[8], object.symbol);
 }
 
 ChainNetwork _chainNetworkDeserialize(
@@ -134,14 +158,16 @@ ChainNetwork _chainNetworkDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = ChainNetwork(
-    chainId: reader.readStringOrNull(offsets[0]),
-    explorer: reader.readStringOrNull(offsets[1]),
-    explorerApi: reader.readStringOrNull(offsets[2]),
+    apiKey: reader.readStringOrNull(offsets[0]),
+    chainId: reader.readStringOrNull(offsets[1]),
+    chainType: reader.readStringOrNull(offsets[2]),
+    explorer: reader.readStringOrNull(offsets[3]),
+    explorerApi: reader.readStringOrNull(offsets[4]),
     id: id,
-    isTestnet: reader.readBoolOrNull(offsets[3]),
-    name: reader.readStringOrNull(offsets[4]),
-    rpc: reader.readStringOrNull(offsets[5]),
-    symbol: reader.readStringOrNull(offsets[6]),
+    isTestnet: reader.readBoolOrNull(offsets[5]),
+    name: reader.readStringOrNull(offsets[6]),
+    rpc: reader.readStringOrNull(offsets[7]),
+    symbol: reader.readStringOrNull(offsets[8]),
   );
   return object;
 }
@@ -160,12 +186,16 @@ P _chainNetworkDeserializeProp<P>(
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 4:
       return (reader.readStringOrNull(offset)) as P;
     case 5:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 6:
+      return (reader.readStringOrNull(offset)) as P;
+    case 7:
+      return (reader.readStringOrNull(offset)) as P;
+    case 8:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -266,6 +296,159 @@ extension ChainNetworkQueryWhere
 
 extension ChainNetworkQueryFilter
     on QueryBuilder<ChainNetwork, ChainNetwork, QFilterCondition> {
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      apiKeyIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'apiKey',
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      apiKeyIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'apiKey',
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> apiKeyEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'apiKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      apiKeyGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'apiKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      apiKeyLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'apiKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> apiKeyBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'apiKey',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      apiKeyStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'apiKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      apiKeyEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'apiKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      apiKeyContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'apiKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition> apiKeyMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'apiKey',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      apiKeyIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'apiKey',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      apiKeyIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'apiKey',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
       chainIdIsNull() {
     return QueryBuilder.apply(this, (query) {
@@ -415,6 +598,160 @@ extension ChainNetworkQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'chainId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      chainTypeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'chainType',
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      chainTypeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'chainType',
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      chainTypeEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'chainType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      chainTypeGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'chainType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      chainTypeLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'chainType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      chainTypeBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'chainType',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      chainTypeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'chainType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      chainTypeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'chainType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      chainTypeContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'chainType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      chainTypeMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'chainType',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      chainTypeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'chainType',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterFilterCondition>
+      chainTypeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'chainType',
         value: '',
       ));
     });
@@ -1288,6 +1625,18 @@ extension ChainNetworkQueryLinks
 
 extension ChainNetworkQuerySortBy
     on QueryBuilder<ChainNetwork, ChainNetwork, QSortBy> {
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByApiKey() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'apiKey', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByApiKeyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'apiKey', Sort.desc);
+    });
+  }
+
   QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByChainId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'chainId', Sort.asc);
@@ -1297,6 +1646,18 @@ extension ChainNetworkQuerySortBy
   QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByChainIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'chainId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByChainType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'chainType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> sortByChainTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'chainType', Sort.desc);
     });
   }
 
@@ -1376,6 +1737,18 @@ extension ChainNetworkQuerySortBy
 
 extension ChainNetworkQuerySortThenBy
     on QueryBuilder<ChainNetwork, ChainNetwork, QSortThenBy> {
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByApiKey() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'apiKey', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByApiKeyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'apiKey', Sort.desc);
+    });
+  }
+
   QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByChainId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'chainId', Sort.asc);
@@ -1385,6 +1758,18 @@ extension ChainNetworkQuerySortThenBy
   QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByChainIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'chainId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByChainType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'chainType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QAfterSortBy> thenByChainTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'chainType', Sort.desc);
     });
   }
 
@@ -1476,10 +1861,24 @@ extension ChainNetworkQuerySortThenBy
 
 extension ChainNetworkQueryWhereDistinct
     on QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> {
+  QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> distinctByApiKey(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'apiKey', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> distinctByChainId(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'chainId', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<ChainNetwork, ChainNetwork, QDistinct> distinctByChainType(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'chainType', caseSensitive: caseSensitive);
     });
   }
 
@@ -1533,9 +1932,21 @@ extension ChainNetworkQueryProperty
     });
   }
 
+  QueryBuilder<ChainNetwork, String?, QQueryOperations> apiKeyProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'apiKey');
+    });
+  }
+
   QueryBuilder<ChainNetwork, String?, QQueryOperations> chainIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'chainId');
+    });
+  }
+
+  QueryBuilder<ChainNetwork, String?, QQueryOperations> chainTypeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'chainType');
     });
   }
 

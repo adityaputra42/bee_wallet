@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -6,11 +7,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:web3dart/web3dart.dart';
 import '../../../config/config.dart';
 import '../../../data/model/model.dart';
-import '../../../data/model/token_chain/selected_token_chain.dart';
-import '../../../data/model/token_chain/token_chain.dart';
+import '../../../utils/helper/websocket.dart';
 import '../../../utils/util.dart';
 import '../account/account_provider.dart';
-import '../swap/swap_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:erc20/erc20.dart';
 part 'token_chain_provider.g.dart';
@@ -19,23 +18,57 @@ part 'token_chain_provider.g.dart';
 class TokenChainOrigin extends _$TokenChainOrigin {
   @override
   Future<List<TokenChain>> build() async {
-    state = const AsyncLoading();
+    state = const AsyncValue.loading();
 
-    final chainlist = await rootBundle.loadString('assets/abi/chain.json');
-    final listChain = tokenChainFromJson(chainlist);
+    final databaseTokens = await DbHelper.instance.getAllTokenChain();
 
-    await DbHelper.instance.deleteAllTokenChain();
-    await DbHelper.instance.setAllTokenChain(listChain);
-    return listChain;
+    final chainJsonString =
+        await rootBundle.loadString('assets/abi/chain.json');
+    final assetTokens = tokenChainFromJson(chainJsonString);
+
+    if (databaseTokens.isEmpty) {
+      await DbHelper.instance.setAllTokenChain(assetTokens);
+      return assetTokens;
+    } else {
+      final newTokens = assetTokens
+          .where((assetToken) => !databaseTokens.any((dbToken) =>
+              dbToken.chainId == assetToken.chainId &&
+              dbToken.symbol == assetToken.symbol))
+          .toList();
+
+      if (newTokens.isNotEmpty) {
+        await DbHelper.instance.setAllTokenChain(newTokens);
+      }
+      final updatedDatabaseTokens = await DbHelper.instance.getAllTokenChain();
+      return updatedDatabaseTokens;
+    }
   }
 
   Future<void> initChainOrigin() async {
-    final chainlist = await rootBundle.loadString('assets/abi/chain.json');
-    final listChain = tokenChainFromJson(chainlist);
+    state = const AsyncValue.loading();
 
-    await DbHelper.instance.deleteAllTokenChain();
-    await DbHelper.instance.setAllTokenChain(listChain);
-    state = AsyncData(listChain);
+    final databaseTokens = await DbHelper.instance.getAllTokenChain();
+
+    final chainJsonString =
+        await rootBundle.loadString('assets/abi/chain.json');
+    final assetTokens = tokenChainFromJson(chainJsonString);
+
+    if (databaseTokens.isEmpty) {
+      await DbHelper.instance.setAllTokenChain(assetTokens);
+      state = AsyncData(assetTokens);
+    } else {
+      final newTokens = assetTokens
+          .where((assetToken) => !databaseTokens.any((dbToken) =>
+              dbToken.chainId == assetToken.chainId &&
+              dbToken.symbol == assetToken.symbol))
+          .toList();
+
+      if (newTokens.isNotEmpty) {
+        await DbHelper.instance.setAllTokenChain(newTokens);
+      }
+      final updatedDatabaseTokens = await DbHelper.instance.getAllTokenChain();
+      state = AsyncData(updatedDatabaseTokens);
+    }
   }
 }
 
@@ -43,10 +76,10 @@ class TokenChainOrigin extends _$TokenChainOrigin {
 class SelectedChainToken extends _$SelectedChainToken {
   @override
   Future<List<SelectedTokenChain>> build() async {
-    state = const AsyncLoading();
     var account = ref.watch(selectedAccountProvider).valueOrNull;
     var chain = ref.watch(listTokenChainProvider).valueOrNull ?? [];
     final chainSelected = await DbHelper.instance.getSelectedChain();
+
     List<SelectedTokenChain> listChain = chain
         .where((element) => element.mnemonicAccount == account?.mnemonic)
         .toList();
@@ -61,14 +94,16 @@ class SelectedChainToken extends _$SelectedChainToken {
       }
       final selected = SelectedChain(chainId: chainId);
       await DbHelper.instance.setSelectedChain(selected);
-      ref.read(chainSwapProvider.notifier).setChain(listChain.first);
-      ref.watch(chainSwapProvider);
+      // ref.read(chainSwapProvider.notifier).setChain(
+      //       listChain.first,
+      //     );
+      // ref.watch(chainSwapProvider);
       return listChain;
     } else {
       var tokenChainSelected = await DbHelper.instance
           .getSelectedTokenChain(account?.mnemonic ?? '');
-      ref.read(chainSwapProvider.notifier).setChain(listChain.first);
-      ref.watch(chainSwapProvider);
+      // ref.read(chainSwapProvider.notifier).setChain(listChain.first);
+      // ref.watch(chainSwapProvider);
       return tokenChainSelected;
     }
   }
@@ -104,6 +139,28 @@ class SelectedChainToken extends _$SelectedChainToken {
           .getTokenFromChainId(network.chainId ?? "", account?.mnemonic ?? '');
       state = AsyncData(listTokenChain);
     }
+  }
+
+  onWsUpdate() {
+    List<SelectedTokenChain> chainList = state.valueOrNull ?? [];
+    Websocket.instance.streamController.stream.listen((message) {
+      var data = json.decode(message);
+      log(message);
+      if (data.containsKey('!ticker@arr')) {
+        for (var element in chainList) {
+          if (data['s'].toString().contains("${element.symbol}USDT")) {
+            element.changePercent = data['P'];
+            element.estimateUsd =
+                (element.balance ?? 0) * double.parse(data['c'] ?? '0');
+          }
+        }
+        log("data ticker => $data");
+      }
+    }, onDone: () {
+      log("Task Done1");
+    }, onError: (error) {
+      log("Some Error1");
+    });
   }
 }
 
@@ -145,7 +202,7 @@ class ListTokenChain extends _$ListTokenChain {
     final listChainWallet =
         await DbHelper.instance.getTokenChainWallet(mnemonicAccount: mnemonic);
     List<TokenChain> listChain =
-        chain.where((element) => element.contractAddress == null).toList();
+        chain.where((element) => element.logo != null).toList();
     if (listChainWallet.isEmpty) {
       for (var value in listChain) {
         var selectChain = SelectedTokenChain(
@@ -158,6 +215,8 @@ class ListTokenChain extends _$ListTokenChain {
             logo: value.logo,
             baseLogo: value.baseLogo,
             chainId: value.chainId,
+            chainType: value.chainType,
+            apiKey: value.apiKey,
             rpc: value.rpc,
             explorer: value.explorer,
             explorerApi: value.explorerApi,
@@ -177,28 +236,47 @@ class ListTokenChain extends _$ListTokenChain {
   void setTokenChain(TokenChain chain) async {
     final mnemonic = ref.watch(selectedAccountProvider).valueOrNull?.mnemonic;
     final listChain = state.valueOrNull ?? [];
-    var selectedChain = SelectedTokenChain(
-        name: chain.name,
-        contractAddress: chain.contractAddress,
-        symbol: chain.symbol,
-        decimal: chain.decimal,
-        balance: chain.balance,
-        mnemonicAccount: mnemonic ?? '',
-        logo: chain.logo,
-        baseLogo: chain.baseLogo,
-        chainId: chain.chainId,
-        rpc: chain.rpc,
-        explorer: chain.explorer,
-        explorerApi: chain.explorerApi,
-        baseChain: chain.baseChain,
-        isTestnet: chain.isTestnet);
-    await DbHelper.instance.setSelectedTokenChain(selectedChain);
-    ref
-        .read(selectedChainTokenProvider.notifier)
-        .updtateSelected(selectedChain);
+    if (listChain.any((e) =>
+        e.chainId == chain.chainId &&
+        e.symbol == chain.symbol &&
+        e.contractAddress == chain.contractAddress)) {
+      log('selected chain already exist');
+      state = AsyncData(listChain);
+    } else {
+      var selectedChain = SelectedTokenChain(
+          name: chain.name,
+          contractAddress: chain.contractAddress,
+          symbol: chain.symbol,
+          decimal: chain.decimal,
+          balance: chain.balance,
+          mnemonicAccount: mnemonic ?? '',
+          logo: chain.logo,
+          baseLogo: chain.baseLogo,
+          chainId: chain.chainId,
+          chainType: chain.chainType,
+          apiKey: chain.apiKey,
+          rpc: chain.rpc,
+          explorer: chain.explorer,
+          explorerApi: chain.explorerApi,
+          baseChain: chain.baseChain,
+          isTestnet: chain.isTestnet);
+      await DbHelper.instance.setSelectedTokenChain(selectedChain);
+      ref
+          .read(selectedChainTokenProvider.notifier)
+          .updtateSelected(selectedChain);
 
-    listChain.add(selectedChain);
-    state = AsyncData(listChain);
+      listChain.add(selectedChain);
+      state = AsyncData(listChain);
+    }
+  }
+
+  void unSetChainSelected(TokenChain token) async {
+    var tokenSelected = await DbHelper.instance
+        .getSelectedChainbyChainIdSymbolContractAddress(token.chainId ?? '',
+            token.symbol ?? '', token.contractAddress ?? "");
+    await DbHelper.instance.deleteSelectedChainWallet(tokenSelected);
+    final newList = await initListChainSelected();
+    state = AsyncData(newList);
   }
 
   void setChain(SelectedTokenChain chain) async {
@@ -264,6 +342,30 @@ class ListManageToken extends _$ListManageToken {
     }
   }
 
+  void setTokenFromContract(TokenChain token) async {
+    List<TokenChain> listToken = state;
+    if (listToken.any((element) =>
+        element.contractAddress == token.contractAddress &&
+        element.symbol == token.symbol &&
+        element.chainId == token.chainId)) {
+      ref.read(listTokenChainProvider.notifier).unSetChainSelected(token);
+      await DbHelper.instance.deleteToken(token);
+      ref.watch(tokenChainOriginProvider).valueOrNull;
+      listToken.removeWhere((e) =>
+          e.contractAddress == token.contractAddress &&
+          e.symbol == token.symbol &&
+          e.chainId == token.chainId);
+      state = listToken;
+      ref.watch(appRouteProvider).pop();
+    } else {
+      await DbHelper.instance.addTokenChain(token);
+      ref.read(listTokenChainProvider.notifier).setTokenChain(token);
+      listToken.add(token);
+      state = listToken;
+      ref.watch(appRouteProvider).pop();
+    }
+  }
+
   onSearch(String value) {
     var newList = ref.watch(tokenChainOriginProvider).valueOrNull ?? [];
     List<TokenChain> result = [];
@@ -310,21 +412,6 @@ class ListChainSearch extends _$ListChainSearch {
 
 @riverpod
 class TokenChainNft extends _$TokenChainNft {
-  @override
-  TokenChain build() {
-    final listChain = (ref.watch(tokenChainOriginProvider).valueOrNull ?? [])
-        .where((element) => element.contractAddress == null)
-        .toList();
-    return listChain.first;
-  }
-
-  onChange(TokenChain value) {
-    state = value;
-  }
-}
-
-@riverpod
-class TokenDappLink extends _$TokenDappLink {
   @override
   TokenChain build() {
     final listChain = (ref.watch(tokenChainOriginProvider).valueOrNull ?? [])
@@ -388,15 +475,23 @@ class ContractAddress extends _$ContractAddress {
       final token = ERC20(
           address: EthereumAddress.fromHex(contractAddress),
           client: web3client);
+      log("token name ${token.chainId}");
       try {
         final name = await token.name();
         final decimal = await token.decimals();
         final symbol = await token.symbol();
+        log("token name $name");
+        log("token symbol $symbol");
+        log("token decimal $decimal");
 
         ref.read(nameTokenProvider.notifier).changeValue(name);
         ref.read(symbolTokenProvider.notifier).changeValue(symbol);
         ref.read(decimalTokenProvider.notifier).changeValue(decimal.toString());
         ref.read(disableAddTokenProvider.notifier).changeValue(false);
+        ref.watch(symbolTokenProvider);
+        ref.watch(decimalTokenProvider);
+        ref.watch(nameTokenProvider);
+        ref.watch(disableAddTokenProvider);
       } catch (e) {
         ref.read(disableAddTokenProvider.notifier).changeValue(true);
         Exception(e.toString());
@@ -444,6 +539,48 @@ class DisableAddToken extends _$DisableAddToken {
   @override
   bool build() => true;
   void changeValue(bool value) {
+    state = value;
+  }
+}
+
+@riverpod
+class TokenFromContract extends _$TokenFromContract {
+  @override
+  Future<List<TokenChain>> build() async {
+    final chain = ref.watch(networkAddTokenProvider);
+    var tokenList = await EthHelper().getTokenFromContract(chain);
+    return tokenList ?? [];
+  }
+
+  onSearch(String value) async {
+    final chain = ref.watch(networkAddTokenProvider);
+    var tokenList = await EthHelper().getTokenFromContract(chain);
+    var newList = tokenList ?? [];
+    List<TokenChain> result = [];
+    if (value == '') {
+      result = newList;
+    } else {
+      result = newList
+          .where((element) =>
+              element.name!.toLowerCase().contains(value.toLowerCase()) ||
+              element.symbol!.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    }
+    state = AsyncData(result);
+  }
+}
+
+@riverpod
+class TokenDappLink extends _$TokenDappLink {
+  @override
+  TokenChain build() {
+    final listChain = (ref.watch(tokenChainOriginProvider).valueOrNull ?? [])
+        .where((element) => element.contractAddress == null)
+        .toList();
+    return listChain.first;
+  }
+
+  onChange(TokenChain value) {
     state = value;
   }
 }

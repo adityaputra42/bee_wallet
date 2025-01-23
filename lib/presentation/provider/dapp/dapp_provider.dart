@@ -1,9 +1,8 @@
-import 'package:bee_wallet/data/model/dapp_history/dapp_link.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../data/model/token_chain/selected_token_chain.dart';
+import '../../../data/model/dapp_history/dapp_link.dart';
 import '../../../utils/util.dart';
 import '../provider.dart';
 part 'dapp_provider.g.dart';
@@ -25,7 +24,7 @@ class NewsDapp extends _$NewsDapp {
 class DappList extends _$DappList {
   @override
   Future<List<DappLink>> build() async {
-    state = const AsyncLoading();
+    state = const AsyncValue.loading();
     final chain = ref.watch(tokenDappLinkProvider);
 
     final initLink = await rootBundle.loadString('assets/abi/dapp_link.json');
@@ -35,6 +34,58 @@ class DappList extends _$DappList {
     final newlinks =
         await DbHelper.instance.getAllDappLink(chainId: chain.chainId!);
     return newlinks;
+  }
+}
+
+@riverpod
+class FavoriteDapp extends _$FavoriteDapp {
+  @override
+  List<Map<String, dynamic>> build() {
+    List<Map<String, dynamic>> favorite = [
+      {
+        // "image": AppImage.pancakeSwap,
+        "title": "PancakeSwap",
+        "subtitle":
+            "Trade, earn and win crypto in decentralize app and more oportunity",
+        "link": "https://pancakeswap.finance/"
+      },
+      {
+        // "image": AppImage.uniswap,
+        "title": "UniSwap",
+        "subtitle":
+            "Trade, earn and win crypto in decentralize app and more oportunity",
+        "link": "https://app.uniswap.org/"
+      },
+      {
+        // "image": AppImage.opensea,
+        "title": "OpenSea",
+        "subtitle":
+            "Trade, earn and win crypto in decentralize app and more oportunity",
+        "link": "https://opensea.io/"
+      },
+      {
+        // "image": AppImage.quickswap,
+        "title": "QuickSwap",
+        "subtitle":
+            "Trade, earn and win crypto in decentralize app and more oportunity",
+        "link": "https://quickswap.exchange/#/"
+      },
+      {
+        // "image": AppImage.chainlink,
+        "title": "ChainLink",
+        "subtitle":
+            "Trade, earn and win crypto in decentralize app and more oportunity",
+        "link": "https://chain.link/"
+      },
+      {
+        // "image": AppImage.ens,
+        "title": "ENS",
+        "subtitle":
+            "Trade, earn and win crypto in decentralize app and more oportunity",
+        "link": "https://ens.domains/"
+      }
+    ];
+    return favorite;
   }
 }
 
@@ -68,14 +119,14 @@ class SearchWeb extends _$SearchWeb {
   TextEditingController build() => TextEditingController();
 }
 
-@riverpod
-class ChainDapp extends _$ChainDapp {
-  @override
-  SelectedTokenChain build() {
-    return SelectedTokenChain();
-  }
+// @riverpod
+// class ChainDapp extends _$ChainDapp {
+//   @override
+//   SelectedTokenChain build() {
+//     return SelectedTokenChain();
+//   }
 
-  setChainTransfer(SelectedTokenChain chain) {
-    state = chain;
-  }
-}
+//   setChainTransfer(SelectedTokenChain chain) {
+//     state = chain;
+//   }
+// }

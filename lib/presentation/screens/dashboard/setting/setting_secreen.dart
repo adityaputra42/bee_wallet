@@ -1,14 +1,12 @@
-import 'package:bee_wallet/data/model/account/account.dart';
 import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../config/config.dart';
 import '../../../../utils/util.dart';
 import '../../../provider/account/account_provider.dart';
-import '../../../provider/editWallet/edit_wallet_provider.dart';
+
 import '../../../provider/theme/theme_provider.dart';
 import 'changePin/sheet_password_change_pin.dart';
 import 'show_pharse/sheet_password_show.dart';
@@ -25,10 +23,10 @@ class SettingScreen extends ConsumerWidget {
       appBar: WidgetHelper.appBar(
           context: context, title: "Setting", isCanBack: false),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16.w),
-        padding: EdgeInsets.all(16.w),
+        margin: EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             color: Theme.of(context).cardColor),
         child: ListView(
           children: [
@@ -36,12 +34,12 @@ class SettingScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  width: 48.w,
-                  height: 48.w,
+                  width: 48,
+                  height: 48,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border:
-                          Border.all(width: 1.w, color: AppColor.primaryColor)),
+                          Border.all(width: 1, color: AppColor.primaryColor)),
                   child: Center(
                     child: Blockies(
                         size: 0.6,
@@ -49,7 +47,7 @@ class SettingScreen extends ConsumerWidget {
                         shape: BlockiesShape.circle),
                   ),
                 ),
-                16.0.width,
+                width(16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +58,7 @@ class SettingScreen extends ConsumerWidget {
                           color: Theme.of(context).indicatorColor,
                         ),
                       ),
-                      2.0.height,
+                      height(2),
                       Text(
                         'EVM : ${MethodHelper().shortAddress(address: account?.addressETH ?? '', length: 5)}',
                         style: AppFont.reguler14.copyWith(
@@ -72,7 +70,7 @@ class SettingScreen extends ConsumerWidget {
                 ),
               ],
             ),
-            16.0.height,
+            height(16),
             GestureDetector(
               onTap: () {
                 if (account?.backup == false) {
@@ -80,11 +78,11 @@ class SettingScreen extends ConsumerWidget {
                 }
               },
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
+                  borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    width: 1.w,
+                    width: 1,
                     color: account?.backup == true
                         ? AppColor.greenColor
                         : AppColor.yellowColor,
@@ -99,12 +97,12 @@ class SettingScreen extends ConsumerWidget {
                       account?.backup == true
                           ? Icons.check_circle_outline_rounded
                           : Icons.error_outline_outlined,
-                      size: 24.w,
+                      size: 24,
                       color: account?.backup == true
                           ? AppColor.greenColor
                           : AppColor.yellowColor,
                     ),
-                    8.0.width,
+                    width(8),
                     Expanded(
                       child: Text(
                         account?.backup == true
@@ -121,27 +119,23 @@ class SettingScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            24.0.height,
+            height(24),
             SizedBox(
-              height: 1.w,
+              height: 1,
               child: Divider(
-                thickness: 1.w,
+                thickness: 1,
                 color: Theme.of(context).hintColor,
               ),
             ),
-            16.0.height,
+            height(16),
             cardMenu(
               context,
               title: "Edit Wallet",
               onTap: () {
-                ref
-                    .read(accountSelectedEditProvider.notifier)
-                    .selectEditAccount(account ?? Account());
-                ref.watch(accountSelectedEditProvider);
                 context.goNamed('edit_wallet');
               },
             ),
-            12.0.height,
+            height(12),
             cardMenu(
               context,
               title: 'Show Seed Phrase',
@@ -154,10 +148,10 @@ class SettingScreen extends ConsumerWidget {
                     showDragHandle: true,
                     shape: RoundedRectangleBorder(
                         borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(16.r))));
+                            BorderRadius.vertical(top: Radius.circular(16))));
               },
             ),
-            12.0.height,
+            height(12),
             cardMenu(
               context,
               title: 'Network Setting',
@@ -165,7 +159,7 @@ class SettingScreen extends ConsumerWidget {
                 context.goNamed('network_setting');
               },
             ),
-            12.0.height,
+            height(12),
             cardMenu(
               context,
               title: "Change Pin",
@@ -178,56 +172,55 @@ class SettingScreen extends ConsumerWidget {
                     showDragHandle: true,
                     shape: RoundedRectangleBorder(
                         borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(16.r))));
+                            BorderRadius.vertical(top: Radius.circular(16))));
               },
             ),
-            12.0.height,
+            height(12),
             cardMenu(
               context,
               title: 'Fingerprint',
               widget: FlutterSwitch(
-                width: 42.w,
-                height: 20.h,
+                width: 42,
+                height: 20,
                 toggleColor: Theme.of(context).canvasColor,
                 activeColor: AppColor.primaryColor,
                 inactiveColor: Theme.of(context).cardColor,
                 valueFontSize: 20.0,
-                toggleSize: 16.h,
+                toggleSize: 16,
                 value: false,
                 borderRadius: 16,
-                padding: 2.h,
+                padding: 2,
                 showOnOff: false,
                 onToggle: (val) {},
               ),
             ),
-            12.0.height,
+            height(12),
             cardMenu(
               context,
               title: 'Dark Mode',
               widget: FlutterSwitch(
-                width: 42.w,
-                height: 20.h,
-                toggleColor: isDark
-                    ? AppColor.textStrongDark
-                    : Theme.of(context).canvasColor,
+                width: 42,
+                height: 20,
+                toggleColor:
+                    isDark ? AppColor.darkText1 : Theme.of(context).canvasColor,
                 activeColor: AppColor.primaryColor,
                 inactiveColor: Theme.of(context).cardColor,
                 valueFontSize: 20.0,
-                toggleSize: 16.h,
+                toggleSize: 16,
                 value: isDark,
                 borderRadius: 16,
-                padding: 2.h,
+                padding: 2,
                 showOnOff: false,
                 onToggle: (val) {
                   ref.read(darkThemeProvider.notifier).changeTheme(val);
                 },
               ),
             ),
-            12.0.height,
+            height(12),
             cardMenu(context, title: 'Suport'),
-            16.0.height,
+            height(16),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              padding: EdgeInsets.symmetric(horizontal: 12),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -244,9 +237,9 @@ class SettingScreen extends ConsumerWidget {
                 ],
               ),
             ),
-            16.0.height,
+            height(16),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              padding: EdgeInsets.symmetric(horizontal: 12),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -274,9 +267,9 @@ class SettingScreen extends ConsumerWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             color: Theme.of(context).colorScheme.surface),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -290,7 +283,7 @@ class SettingScreen extends ConsumerWidget {
                 Icon(
                   Icons.arrow_forward_ios_rounded,
                   color: Theme.of(context).hintColor,
-                  size: 16.w,
+                  size: 16,
                 ),
           ],
         ),

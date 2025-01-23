@@ -49,7 +49,7 @@ const BrowserTabSchema = CollectionSchema(
   getId: _browserTabGetId,
   getLinks: _browserTabGetLinks,
   attach: _browserTabAttach,
-  version: '3.1.0+1',
+  version: '3.1.8',
 );
 
 int _browserTabEstimateSize(

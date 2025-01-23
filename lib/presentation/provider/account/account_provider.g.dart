@@ -6,7 +6,7 @@ part of 'account_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$selectedAccountHash() => r'7de4a2d012870b690cb4fd88033de95214726119';
+String _$selectedAccountHash() => r'623efd7daa7a8ec69a6d15cc2b8efb284ab2b831';
 
 /// See also [SelectedAccount].
 @ProviderFor(SelectedAccount)
@@ -138,4 +138,4 @@ final anotherAccountProvider =
 
 typedef _$AnotherAccount = AutoDisposeNotifier<List<Account>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

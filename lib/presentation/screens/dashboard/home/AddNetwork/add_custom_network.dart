@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bee_wallet/config/config.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
@@ -22,10 +21,10 @@ class AddCustomNetwork extends ConsumerWidget {
         title: 'Add Custom Network',
       ),
       body: Container(
-        margin: EdgeInsets.all(16.w),
-        padding: EdgeInsets.all(16.w),
+        margin: EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             color: Theme.of(context).cardColor),
         child: LayoutBuilder(
           builder: (context, constraints) => SingleChildScrollView(
@@ -39,7 +38,7 @@ class AddCustomNetwork extends ConsumerWidget {
                       const Warning(
                           warning:
                               "Crypto Wallet does not verify custom networks or their security. Only add a network you trust"),
-                      16.0.height,
+                      height(16),
                       InputText(
                         title: "Network name",
                         controller: ref.watch(nameChainControllerProvider),
@@ -56,7 +55,7 @@ class AddCustomNetwork extends ConsumerWidget {
                               .onValidate(v);
                         },
                       ),
-                      16.0.height,
+                      height(16),
                       InputText(
                         title: "RPC URL",
                         controller: ref.watch(rpcChainControllerProvider),
@@ -73,7 +72,7 @@ class AddCustomNetwork extends ConsumerWidget {
                               .onValidate(v);
                         },
                       ),
-                      16.0.height,
+                      height(16),
                       InputText(
                         title: "Chain ID",
                         controller: ref.watch(chainIdControllerProvider),
@@ -91,7 +90,7 @@ class AddCustomNetwork extends ConsumerWidget {
                               .onValidate(v);
                         },
                       ),
-                      16.0.height,
+                      height(16),
                       InputText(
                         title: "Currency symbol",
                         controller: ref.watch(symbolChainControllerProvider),
@@ -108,7 +107,7 @@ class AddCustomNetwork extends ConsumerWidget {
                               .onValidate(v);
                         },
                       ),
-                      16.0.height,
+                      height(16),
                       InputText(
                         title: "Block Explorer URL",
                         controller: ref.watch(explorerChainControllerProvider),
@@ -159,7 +158,7 @@ class AddCustomNetwork extends ConsumerWidget {
                       context.pop();
                       context.pop();
                     },
-                    margin: EdgeInsets.only(top: 16.h),
+                    margin: EdgeInsets.only(top: 16),
                   ),
                 ],
               ),

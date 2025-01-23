@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bee_wallet/data/model/token_chain/selected_token_chain.dart';
 import 'package:bee_wallet/utils/util.dart';
 
@@ -19,7 +18,7 @@ class SheetChangeReceive extends ConsumerWidget {
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
-          24.w, 0.h, 24.w, MediaQuery.of(context).viewInsets.bottom),
+          24, 0, 24, MediaQuery.of(context).viewInsets.bottom),
       child: SizedBox(
         height: MediaQuery.sizeOf(context).height * 0.7,
         child: Column(
@@ -29,25 +28,25 @@ class SheetChangeReceive extends ConsumerWidget {
               style: AppFont.semibold16
                   .copyWith(color: Theme.of(context).indicatorColor),
             ),
-            16.0.height,
+            height(16),
             const SearchField(),
-            16.0.height,
+            height(16),
             Expanded(
               child: Container(
-                padding: EdgeInsets.all(16.w),
+                padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.r),
+                    borderRadius: BorderRadius.circular(8),
                     color: Theme.of(context).cardColor),
                 child: ListView.builder(
                   itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.only(bottom: 8.h),
+                    padding: EdgeInsets.only(bottom: 8),
                     child: cardChain(context, chainList[index], ref),
                   ),
                   itemCount: chainList.length,
                 ),
               ),
             ),
-            24.0.height,
+            height(24)
           ],
         ),
       ),
@@ -63,11 +62,11 @@ class SheetChangeReceive extends ConsumerWidget {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             border: Border.all(
-                width: 1.w,
+                width: 1,
                 color: chainDetail.chainId == chain.chainId &&
                         chainDetail.symbol == chain.symbol
                     ? AppColor.primaryColor
@@ -78,17 +77,17 @@ class SheetChangeReceive extends ConsumerWidget {
             Row(
               children: [
                 SizedBox(
-                  width: 34.w,
-                  height: 34.w,
+                  width: 34,
+                  height: 34,
                   child: Stack(
                     children: [
                       SizedBox(
-                        width: 32.w,
-                        height: 32.w,
+                        width: 32,
+                        height: 32,
                         child: ClipPolygon(
                           sides: 6,
                           child: Container(
-                            padding: EdgeInsets.all(0.5.h),
+                            padding: EdgeInsets.all(0.5),
                             color: Theme.of(context).colorScheme.surface,
                             child: (chain.logo != null)
                                 ? Image.asset(chain.logo!)
@@ -99,18 +98,17 @@ class SheetChangeReceive extends ConsumerWidget {
                       Align(
                         alignment: Alignment.bottomRight,
                         child: SizedBox(
-                          width: 16.w,
-                          height: 16.w,
+                          width: 16,
+                          height: 16,
                           child: ClipPolygon(
                             sides: 6,
                             child: Container(
-                              padding: EdgeInsets.all(0.1.h),
+                              padding: EdgeInsets.all(0.1),
                               decoration: BoxDecoration(
                                   border: Border.all(
-                                      width: 0.1.w,
+                                      width: 0.1,
                                       color: Theme.of(context).cardColor),
-                                  color:
-                                      Theme.of(context).colorScheme.surface),
+                                  color: Theme.of(context).colorScheme.surface),
                               child: (chain.baseLogo != null)
                                   ? Image.asset(chain.baseLogo!)
                                   : Image.asset(AppImage.logo),
@@ -121,7 +119,7 @@ class SheetChangeReceive extends ConsumerWidget {
                     ],
                   ),
                 ),
-                12.0.width,
+                width(12),
                 Expanded(
                   child: Text(
                     chain.name ?? '',
@@ -130,8 +128,8 @@ class SheetChangeReceive extends ConsumerWidget {
                   ),
                 ),
                 // SizedBox(
-                //   width: 16.w,
-                //   height: 16.w,
+                //   width: 16,
+                //   height: 16,
                 //   child: Checkbox(
                 //     value: chainDetail.chainId == chain.chainId ? true : false,
                 //     onChanged: (v) {},

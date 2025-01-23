@@ -4,12 +4,12 @@ import 'package:bee_wallet/utils/util.dart';
 import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../provider/account/account_provider.dart';
 import '../../../../provider/editWallet/edit_wallet_provider.dart';
+import '../../../../widget/button_loading.dart';
 
 class EditWalletScreen extends ConsumerWidget {
   const EditWalletScreen({super.key});
@@ -23,20 +23,19 @@ class EditWalletScreen extends ConsumerWidget {
       appBar: WidgetHelper.appBar(context: context, title: "Edit Wallet"),
       body: Container(
           width: double.infinity,
-          margin: EdgeInsets.all(16.w),
-          padding: EdgeInsets.all(16.w),
+          margin: EdgeInsets.all(16),
+          padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.r),
+              borderRadius: BorderRadius.circular(8),
               color: Theme.of(context).cardColor),
           child: Column(
             children: [
               Container(
-                width: 80.w,
-                height: 80.w,
+                width: 80,
+                height: 80,
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border:
-                        Border.all(width: 1.w, color: AppColor.primaryColor)),
+                    border: Border.all(width: 1, color: AppColor.primaryColor)),
                 child: Center(
                   child: Blockies(
                       size: 1.03,
@@ -44,21 +43,21 @@ class EditWalletScreen extends ConsumerWidget {
                       shape: BlockiesShape.circle),
                 ),
               ),
-              12.0.height,
+              height(12),
               Text(
                 account.name ?? '',
                 style: AppFont.semibold20.copyWith(
                   color: Theme.of(context).indicatorColor,
                 ),
               ),
-              4.0.height,
+              height(4),
               Text(
                 'EVM : ${MethodHelper().shortAddress(address: account.addressETH ?? '', length: 6)}',
                 style: AppFont.reguler16.copyWith(
                   color: Theme.of(context).hintColor,
                 ),
               ),
-              16.0.height,
+              height(16),
               GestureDetector(
                 onTap: () {
                   if (account.backup == false) {
@@ -66,12 +65,11 @@ class EditWalletScreen extends ConsumerWidget {
                   }
                 },
                 child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.r),
+                    borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      width: 1.w,
+                      width: 1,
                       color: account.backup == true
                           ? AppColor.greenColor
                           : AppColor.yellowColor,
@@ -86,12 +84,12 @@ class EditWalletScreen extends ConsumerWidget {
                         account.backup == true
                             ? Icons.check_circle_outline_rounded
                             : Icons.error_outline_outlined,
-                        size: 24.w,
+                        size: 24,
                         color: account.backup == true
                             ? AppColor.greenColor
                             : AppColor.yellowColor,
                       ),
-                      8.0.width,
+                      width(8),
                       Expanded(
                         child: Text(
                           account.backup == true
@@ -108,7 +106,7 @@ class EditWalletScreen extends ConsumerWidget {
                   ),
                 ),
               ),
-              24.0.height,
+              height(16),
               InputText(
                 title: "Account Name",
                 hintText: "Entry Account Name",
@@ -117,8 +115,8 @@ class EditWalletScreen extends ConsumerWidget {
                 color: Theme.of(context).colorScheme.surface,
               ),
               const Spacer(),
-              PrimaryButton(
-                  loading: ref.watch(selectedAccountProvider).isLoading,
+              ref.watch(selectedAccountProvider).isLoading ? ButtonLoading(): PrimaryButton(
+                  
                   title: enableEdit == true ? "Save" : "Edit",
                   onPressed: () {
                     if (enableEdit == true) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bee_wallet/data/model/token_chain/token_chain.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
 import 'package:bee_wallet/utils/util.dart';
@@ -18,7 +17,7 @@ class SheetNetworkAddToken extends ConsumerWidget {
         .toList();
     return Padding(
       padding: EdgeInsets.fromLTRB(
-          24.w, 0.h, 24.w, MediaQuery.of(context).viewInsets.bottom),
+          24, 0, 24, MediaQuery.of(context).viewInsets.bottom),
       child: SizedBox(
         height: MediaQuery.sizeOf(context).height * 0.7,
         child: Column(
@@ -28,25 +27,25 @@ class SheetNetworkAddToken extends ConsumerWidget {
               style: AppFont.semibold16
                   .copyWith(color: Theme.of(context).indicatorColor),
             ),
-            16.0.height,
+            height(16),
             const SearchField(),
-            16.0.height,
+            height(16),
             Expanded(
               child: Container(
-                padding: EdgeInsets.all(16.w),
+                padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.r),
+                    borderRadius: BorderRadius.circular(8),
                     color: Theme.of(context).cardColor),
                 child: ListView.builder(
                   itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.only(bottom: 8.h),
+                    padding: EdgeInsets.only(bottom: 8),
                     child: cardChain(context, chainList[index], ref),
                   ),
                   itemCount: chainList.length,
                 ),
               ),
             ),
-            24.0.height,
+            height(24)
           ],
         ),
       ),
@@ -62,11 +61,11 @@ class SheetNetworkAddToken extends ConsumerWidget {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             border: Border.all(
-                width: 1.w,
+                width: 1,
                 color: selectedChain.chainId == chain.chainId
                     ? AppColor.primaryColor
                     : Theme.of(context).colorScheme.surface),
@@ -76,18 +75,18 @@ class SheetNetworkAddToken extends ConsumerWidget {
             Row(
               children: [
                 SizedBox(
-                  width: 32.w,
-                  height: 32.w,
+                  width: 32,
+                  height: 32,
                   child: ClipPolygon(
                     sides: 6,
                     child: Container(
-                      padding: EdgeInsets.all(0.5.h),
+                      padding: EdgeInsets.all(0.5),
                       color: Theme.of(context).colorScheme.surface,
                       child: Image.asset(chain.logo ?? AppImage.logo),
                     ),
                   ),
                 ),
-                12.0.width,
+                width(12),
                 Expanded(
                   child: Text(
                     chain.name ?? '',

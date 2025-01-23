@@ -1,8 +1,7 @@
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../../../config/config.dart';
+import '../../../../config/theme/theme.dart';
 
 class QRScannerOverlay extends StatelessWidget {
   const QRScannerOverlay({super.key, required this.overlayColour});
@@ -13,19 +12,17 @@ class QRScannerOverlay extends StatelessWidget {
   Widget build(BuildContext context) {
     double scanArea = (MediaQuery.of(context).size.width < 430 ||
             MediaQuery.of(context).size.height < 932)
-        ? 248.w
-        : 334.w;
+        ? 248
+        : 334;
     return Stack(children: [
       ColorFiltered(
-        colorFilter: ColorFilter.mode(
-            overlayColour, BlendMode.srcOut), // This one will create the magic
+        colorFilter: ColorFilter.mode(overlayColour, BlendMode.srcOut),
         child: Stack(
           children: [
             Container(
               decoration: const BoxDecoration(
-                  color: AppColor.primaryColor,
-                  backgroundBlendMode: BlendMode
-                      .dstOut), // This one will handle background + difference out
+                  gradient: AppColor.primaryGradient,
+                  backgroundBlendMode: BlendMode.dstOut),
             ),
             Align(
               alignment: Alignment.center,
@@ -33,7 +30,7 @@ class QRScannerOverlay extends StatelessWidget {
                 height: scanArea,
                 width: scanArea,
                 decoration: BoxDecoration(
-                  color: AppColor.primaryColor,
+                  gradient: AppColor.primaryGradient,
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
@@ -52,10 +49,10 @@ class QRScannerOverlay extends StatelessWidget {
         ),
       ),
       Container(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         width: double.infinity,
-        margin: EdgeInsets.only(top: 36.h),
-        height: 60.h,
+        margin: const EdgeInsets.only(top: 36),
+        height: 60,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -64,29 +61,28 @@ class QRScannerOverlay extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 child: Container(
-                  width: 36.h,
-                  height: 36.h,
-                  padding: EdgeInsets.all(6.h),
+                  width: 36,
+                  height: 36,
+                  padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
+                      borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                          width: 1.w, color: Theme.of(context).highlightColor)),
-                  child: Icon(
+                          width: 1, color: Theme.of(context).highlightColor)),
+                  child: const Icon(
                     Icons.arrow_back_ios_new_rounded,
-                    color: AppColor.textStrongDark,
-                    size: 20.w,
+                    color: AppColor.darkText1,
+                    size: 20,
                   ),
                 )),
-            16.0.width,
+            width(16),
             Expanded(
               child: Text(
                 "Scan QR Code",
-                style:
-                    AppFont.medium14.copyWith(color: AppColor.textStrongDark),
+                style: AppFont.medium14.copyWith(color: AppColor.darkText1),
                 textAlign: TextAlign.center,
               ),
             ),
-            56.0.width,
+            width(56)
           ],
         ),
       )
@@ -156,8 +152,8 @@ class BorderPainter extends CustomPainter {
 }
 
 class BarReaderSize {
-  static double width = 240.w;
-  static double height = 240.w;
+  static double width = 240;
+  static double height = 240;
 }
 
 class OverlayWithHolePainter extends CustomPainter {

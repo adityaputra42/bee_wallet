@@ -8,7 +8,8 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../config/config.dart';
 import '../../data/model/account/account.dart';
 import '../../data/model/model.dart';
-import '../util.dart';
+import '../blockchain_helper/eth_helper.dart';
+import 'encrypt_helper.dart';
 
 class MethodHelper {
   String urlValidator(String url) {
@@ -36,17 +37,17 @@ class MethodHelper {
       required String name,
       bool backup = false}) async {
     var accountETH = EthHelper().getEthInfo(mnemonic);
-    var accountSolana = await SolanaHelper().getAccountInfo(mnemonic);
-    var accountSui = SuiHelper().getAccountInfo(mnemonic);
+    // var accountSolana = await SolanaHelper().getAccountInfo(mnemonic);
+    // var accountSui = SuiHelper().getAccountInfo(mnemonic);
     // var accountBtc = await BtcHelper().getBtcAccountInfo(mnemonic);
 
     final mnemonicEncrypted = EcryptionHelper().encrypt(mnemonic);
     final privataKeyEthEncrypted =
         EcryptionHelper().encrypt(accountETH['private_key']!);
-    final privataKeySolanaEncrypted =
-        EcryptionHelper().encrypt(accountSolana['private_key']!);
-    final privataKeySuiEncrypted =
-        EcryptionHelper().encrypt(accountSui['private_key']!);
+    // final privataKeySolanaEncrypted =
+    //     EcryptionHelper().encrypt(accountSolana['private_key']!);
+    // final privataKeySuiEncrypted =
+    //     EcryptionHelper().encrypt(accountSui['private_key']!);
     // final privateKeyBtcEncrypted =
     //     EcryptionHelper().encrypt(accountBtc['private_key']!);
 
@@ -57,10 +58,10 @@ class MethodHelper {
       backup: backup,
       keyETH: privataKeyEthEncrypted,
       addressETH: accountETH['address'],
-      keySolana: privataKeySolanaEncrypted,
-      addressSolana: accountSolana['address'],
-      keySui: privataKeySuiEncrypted,
-      addressSui: accountSui['address'],
+      // keySolana: privataKeySolanaEncrypted,
+      // addressSolana: accountSolana['address'],
+      // keySui: privataKeySuiEncrypted,
+      // addressSui: accountSui['address'],
       // keyBTC: privateKeyBtcEncrypted,
       // addressBTC: accountBtc['address'],
     );
@@ -78,7 +79,7 @@ class MethodHelper {
         icon: const SizedBox(),
         messagePadding: const EdgeInsets.symmetric(horizontal: 12),
         backgroundColor: backgorund,
-        textStyle: AppFont.medium16.copyWith(color: AppColor.textStrongDark),
+        textStyle: AppFont.medium16.copyWith(color: AppColor.darkText1),
         message: content,
       ),
       displayDuration: const Duration(milliseconds: 1000),
@@ -92,6 +93,16 @@ class MethodHelper {
     } else {
       return '';
     }
+  }
+
+  List<Map<String, dynamic>> generateMnemonic(Account address) {
+    String mnemonic = EcryptionHelper().decrypt(address.mnemonic ?? '');
+    final words = mnemonic.replaceAll(" ", ",").split(',');
+    List<Map<String, dynamic>> wordList = [];
+    for (int i = 0; i < words.length; i++) {
+      wordList.add({"id": i + 1, "data": words[i]});
+    }
+    return wordList;
   }
 
   Future<void> pasteFromClipboard(TextEditingController controller) async {

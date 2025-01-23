@@ -1,16 +1,20 @@
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../config/config.dart';
+import '../../config/theme/theme.dart';
 
 class InputText extends StatelessWidget {
   final String? title;
+  final String? initialValue;
   final String hintText;
   final bool obscureText;
   final Widget? icon;
+  final Widget? suffix;
+  final Widget? prefixIcon;
+  final Widget? prefix;
   final Color? color;
+  final Color? filledColor;
   final Function()? ontaped;
   final Function(String)? onChange;
   final String? Function(String?)? validator;
@@ -21,53 +25,90 @@ class InputText extends StatelessWidget {
   final Widget? crossTitle;
   final List<TextInputFormatter>? inputFormatters;
   final FocusNode? focusNode;
+  final int? maxLength;
+  final TextStyle? titleStyle;
   final bool enable;
-
+  final bool cursor;
   final bool autoFocus;
-  const InputText({
-    super.key,
-    this.obscureText = false,
-    this.title,
-    required this.hintText,
-    this.enable = true,
-    this.autoFocus = false,
-    this.onChange,
-    this.ontaped,
-    this.textInputAction,
-    this.icon,
-    this.maxLine = 1,
-    this.crossTitle,
-    this.validator,
-    this.controller,
-    this.keyboardType,
-    this.color,
-    this.inputFormatters,
-    this.focusNode,
-  });
+  final bool filled;
+  final TextStyle? textStyle;
+  final TextStyle? hintStyle;
+  final EdgeInsetsGeometry? contentPadding;
+  final BorderRadius? borderRadius;
+  final BorderSide? borderSide;
+  final Color? borderColor;
+  final Function()? onComplete;
+  final TextAlign? textAlign;
+  const InputText(
+      {super.key,
+      this.obscureText = false,
+      this.title,
+      this.initialValue,
+      required this.hintText,
+      this.enable = true,
+      this.cursor = true,
+      this.autoFocus = false,
+      this.filled = false,
+      this.onChange,
+      this.ontaped,
+      this.borderSide,
+      this.textInputAction,
+      this.icon,
+      this.maxLine = 1,
+      this.crossTitle,
+      this.validator,
+      this.controller,
+      this.keyboardType,
+      this.color,
+      this.filledColor,
+      this.inputFormatters,
+      this.focusNode,
+      this.prefixIcon,
+      this.prefix,
+      this.suffix,
+      this.maxLength,
+      this.textStyle,
+      this.hintStyle,
+      this.contentPadding,
+      this.borderRadius,
+      this.borderColor,
+      this.textAlign,
+      this.onComplete,
+      this.titleStyle});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            title == null
-                ? const SizedBox()
-                : Text(title ?? '',
-                    style: AppFont.medium14.copyWith(
-                      color: Theme.of(context).indicatorColor,
-                    )),
-            crossTitle ?? const SizedBox()
-          ],
-        ),
-        8.0.height,
+        title == null
+            ? const SizedBox()
+            : Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        title ?? '',
+                        style: titleStyle ??
+                            AppFont.medium14.copyWith(
+                              color: Theme.of(context).indicatorColor,
+                            ),
+                      ),
+                      crossTitle ?? const SizedBox()
+                    ],
+                  ),
+                  height(8),
+                ],
+              ),
         TextFormField(
             focusNode: focusNode,
+            initialValue: initialValue,
             onChanged: onChange,
             validator: validator,
             autofocus: autoFocus,
+            showCursor: cursor,
+            textAlign: textAlign ?? TextAlign.start,
             textInputAction: textInputAction,
             inputFormatters: inputFormatters,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -76,36 +117,50 @@ class InputText extends StatelessWidget {
             controller: controller,
             onTap: ontaped,
             maxLines: maxLine,
-            style: AppFont.medium14
-                .copyWith(color: Theme.of(context).indicatorColor),
+            maxLength: maxLength,
+            onEditingComplete: onComplete,
+            style: textStyle ??
+                AppFont.medium14
+                    .copyWith(color: Theme.of(context).indicatorColor),
             decoration: InputDecoration(
               enabled: enable,
-              filled: true,
-              fillColor: color ?? Theme.of(context).cardColor,
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+              contentPadding: contentPadding ??
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               suffixIcon: icon,
+              suffix: suffix,
+              prefixIcon: prefixIcon,
+              prefix: prefix,
               hintText: hintText,
-              hintStyle: AppFont.reguler14.copyWith(
-                  fontWeight: FontWeight.w300, color: AppColor.grayColor),
+              filled: filled,
+              fillColor: filledColor,
+              hintStyle: hintStyle ??
+                  AppFont.reguler12
+                      .copyWith(color: Theme.of(context).highlightColor),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.r),
-                borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.5),
+                borderRadius: borderRadius ?? BorderRadius.circular(8),
+                borderSide: borderSide ??
+                    BorderSide(
+                        color: borderColor ?? Theme.of(context).canvasColor,
+                        width: 0.5),
               ),
               disabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.r),
-                borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.5),
+                borderRadius: borderRadius ?? BorderRadius.circular(8),
+                borderSide: borderSide ??
+                    BorderSide(
+                        color: borderColor ?? Theme.of(context).canvasColor,
+                        width: 0.5),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.r),
-                borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.5),
+                borderRadius: borderRadius ?? BorderRadius.circular(8),
+                borderSide: borderSide ??
+                    BorderSide(
+                        color: borderColor ?? Theme.of(context).canvasColor,
+                        width: 0.5),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.r),
-                borderSide: const BorderSide(color: AppColor.primaryColor),
+                borderRadius: borderRadius ?? BorderRadius.circular(8),
+                borderSide: borderSide ??
+                    const BorderSide(color: AppColor.primaryColor),
               ),
             )),
       ],

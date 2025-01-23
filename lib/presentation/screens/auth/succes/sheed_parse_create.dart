@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import '../../../../utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/config.dart';
 import '../../../provider/backup/backup_provider.dart';
@@ -31,34 +30,34 @@ class SheedPharseCreate extends ConsumerWidget {
             context.goNamed('confirm_parse_create');
           }
         },
-        margin: EdgeInsets.only(bottom: 36.w, left: 16.w, right: 16.w),
+        margin: EdgeInsets.only(bottom: 36, left: 16, right: 16),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              16.0.height,
+              height(16),
               Text(
                 'Secret recovery phrase',
                 style: AppFont.semibold18
                     .copyWith(color: Theme.of(context).indicatorColor),
               ),
-              4.0.height,
+              height(4),
               Text(
                 'This 12-word phrase allows you to recover your wallet and access to the coins inside.',
                 style: AppFont.reguler14
                     .copyWith(color: Theme.of(context).hintColor),
               ),
-              16.0.height,
+              height(16),
               Center(
                 child: Wrap(
                     crossAxisAlignment: WrapCrossAlignment.center,
                     runAlignment: WrapAlignment.center,
                     alignment: WrapAlignment.center,
-                    spacing: 8.h,
-                    runSpacing: 8.h,
+                    spacing: 8,
+                    runSpacing: 8,
                     direction: Axis.horizontal,
                     children: mnemonic
                         .map(
@@ -67,7 +66,7 @@ class SheedPharseCreate extends ConsumerWidget {
                         )
                         .toList()),
               ),
-              16.0.height,
+              height(16),
             ],
           ),
         ),
@@ -78,9 +77,9 @@ class SheedPharseCreate extends ConsumerWidget {
   Widget cardPniomoni(BuildContext context,
       {required int number, required String text}) {
     return Container(
-      height: 42.h,
+      height: 42,
       width: MediaQuery.of(context).size.width * 0.45,
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -88,7 +87,7 @@ class SheedPharseCreate extends ConsumerWidget {
                 spreadRadius: 0.1,
                 color: AppColor.grayColor.withOpacity(0.15))
           ],
-          borderRadius: BorderRadius.circular(4.r),
+          borderRadius: BorderRadius.circular(4),
           color: Theme.of(context).cardColor),
       child: Text("$number. $text",
           style: AppFont.medium14.copyWith(

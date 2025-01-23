@@ -1,7 +1,6 @@
 import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bee_wallet/presentation/provider/account/account_provider.dart';
 import 'package:bee_wallet/utils/util.dart';
@@ -19,7 +18,7 @@ class ChangeAccountScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final accountList = ref.watch(accountListProvider).valueOrNull ?? [];
     return Padding(
-      padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 24.h),
+      padding: EdgeInsets.fromLTRB(16, 0, 16, 24),
       child: SizedBox(
         height: MediaQuery.sizeOf(context).height * 0.6,
         child: Column(
@@ -31,13 +30,13 @@ class ChangeAccountScreen extends ConsumerWidget {
                   .copyWith(color: Theme.of(context).indicatorColor),
               textAlign: TextAlign.center,
             ),
-            16.0.height,
+            height(16),
             Expanded(
                 child: Padding(
-              padding: EdgeInsets.only(bottom: 16.h),
+              padding: EdgeInsets.only(bottom: 16),
               child: ListView.builder(
                 itemBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.only(bottom: 16.h),
+                  padding: EdgeInsets.only(bottom: 16),
                   child: cardAccount(
                       context: context, ref: ref, account: accountList[index]),
                 ),
@@ -54,8 +53,8 @@ class ChangeAccountScreen extends ConsumerWidget {
                       backgroundColor: Theme.of(context).colorScheme.surface,
                       showDragHandle: true,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(16.r))));
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(16))));
                 })
           ],
         ),
@@ -75,11 +74,11 @@ class ChangeAccountScreen extends ConsumerWidget {
         context.pop();
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             border: Border.all(
-                width: 1.w,
+                width: 1,
                 color: account.mnemonic == selectedAccount?.mnemonic
                     ? AppColor.primaryColor
                     : Theme.of(context).cardColor),
@@ -87,11 +86,11 @@ class ChangeAccountScreen extends ConsumerWidget {
         child: Row(
           children: [
             Container(
-              width: 42.w,
-              height: 42.w,
+              width: 42,
+              height: 42,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(width: 1.w, color: AppColor.primaryColor)),
+                  border: Border.all(width: 1, color: AppColor.primaryColor)),
               child: Center(
                 child: Blockies(
                     size: 0.55,
@@ -99,7 +98,7 @@ class ChangeAccountScreen extends ConsumerWidget {
                     shape: BlockiesShape.circle),
               ),
             ),
-            8.0.width,
+            width(8),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,7 +109,7 @@ class ChangeAccountScreen extends ConsumerWidget {
                       color: Theme.of(context).indicatorColor,
                     ),
                   ),
-                  2.0.height,
+                  height(2),
                   Text(
                     'EVM : ${MethodHelper().shortAddress(address: account.addressETH ?? '', length: 8)}',
                     style: AppFont.reguler12.copyWith(
@@ -131,12 +130,11 @@ class ChangeAccountScreen extends ConsumerWidget {
                       context.goNamed('backup_setting');
                     },
                     child: Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 6.h, horizontal: 8.w),
+                      padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.r),
+                        borderRadius: BorderRadius.circular(4),
                         border:
-                            Border.all(width: 1.w, color: AppColor.yellowColor),
+                            Border.all(width: 1, color: AppColor.yellowColor),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -146,10 +144,10 @@ class ChangeAccountScreen extends ConsumerWidget {
                             style: AppFont.medium12
                                 .copyWith(color: AppColor.yellowColor),
                           ),
-                          4.0.width,
+                          width(4),
                           Icon(
                             Icons.error_outline_rounded,
-                            size: 16.w,
+                            size: 16,
                             color: AppColor.yellowColor,
                           ),
                         ],
@@ -168,7 +166,7 @@ class ChangeAccountScreen extends ConsumerWidget {
             //     context.goNamed('detail_wallet');
             //   },
             //   child: Icon(Icons.more_vert_rounded,
-            //       size: 24.w, color: AppColor.primaryColor),
+            //       size: 24, color: AppColor.primaryColor),
             // )
           ],
         ),

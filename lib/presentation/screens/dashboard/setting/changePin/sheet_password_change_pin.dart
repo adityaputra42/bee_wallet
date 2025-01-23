@@ -3,7 +3,6 @@
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../config/config.dart';
@@ -20,27 +19,26 @@ class SheetPasswordChangePin extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 24.h),
+      padding: EdgeInsets.fromLTRB(16, 0, 16, 24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          
           Text(
             "Enter Security Pin",
             style: AppFont.semibold16
                 .copyWith(color: Theme.of(context).indicatorColor),
             textAlign: TextAlign.center,
           ),
-          8.0.height,
+          height(8),
           Text(
             "Security Pin used for open Wallet, Transaction, and Mnemonik Frase. Remember it and dont give password to anyoone",
             style:
                 AppFont.reguler12.copyWith(color: Theme.of(context).hintColor),
             textAlign: TextAlign.center,
           ),
-          24.0.height,
+          height(24),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            padding: EdgeInsets.symmetric(horizontal: 24),
             child: InputPin(
               keyboardType: TextInputType.none,
               controller: ref.watch(pinChangeController),
@@ -61,9 +59,8 @@ class SheetPasswordChangePin extends ConsumerWidget {
               },
             ),
           ),
-          16.0.height,
+          height(16),
           Numpadcustom(
-            height: 54.h,
               controller: ref.watch(pinChangeController),
               delete: () {
                 ref.watch(pinChangeController).text =

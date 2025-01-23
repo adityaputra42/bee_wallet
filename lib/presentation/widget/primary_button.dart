@@ -1,75 +1,79 @@
-import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../config/config.dart';
+import '../../config/theme/theme.dart';
 
-class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({
-    super.key,
-    required this.title,
-    this.height = 48,
-    this.width = double.infinity,
-    this.margin = EdgeInsets.zero,
-    required this.onPressed,
-    this.disable = false,
-    this.activeColor = AppColor.primaryColor,
-    this.disableColor = AppColor.primaryColor,
-    this.icon,
-    this.loading = false,
-  });
+class PrimaryButton extends ConsumerWidget {
+  const PrimaryButton(
+      {super.key,
+      required this.title,
+      this.width = double.infinity,
+      this.margin = EdgeInsets.zero,
+      required this.onPressed,
+      this.disable = false,
+      this.activeColor = AppColor.primaryColor,
+      this.disableColor,
+      this.bgColor,
+      this.textColor,
+      this.useExpanded = false,
+      this.child,
+      this.borderRadius,
+      this.borderWidth,
+      this.borderColor,
+      this.textStyle,
+      this.buttonPadding,
+      this.height = 48});
 
   final String title;
   final double width;
   final EdgeInsets margin;
-  final double height;
+  final EdgeInsets? buttonPadding;
+  final double? height;
   final Function() onPressed;
   final Color activeColor;
-  final Color disableColor;
+  final Color? disableColor;
+  final Color? bgColor;
+  final TextStyle? textStyle;
   final bool disable;
-  final bool loading;
-  final Widget? icon;
+  // final bool loading;
+
+  final Widget? child;
+  final double? borderRadius;
+  final double? borderWidth;
+  final Color? borderColor;
+  final Color? textColor;
+  final bool? useExpanded;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       width: width,
-      height: height.h,
+      height: height,
       margin: margin,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.r),
-          color: disable ? disableColor.withOpacity(0.4) : activeColor),
+          borderRadius: BorderRadius.circular(8),
+          gradient: disable ? null : AppColor.primaryGradient,
+          color:
+              !disable ? null : (disableColor ?? Theme.of(context).cardColor)),
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.r))),
-        onPressed: disable || loading ? () {} : onPressed,
-        child: loading
-            ? Padding(
-                padding: EdgeInsets.all(8.h),
-                child: const Center(
-                  child: CircularProgressIndicator(
-                    color: AppColor.textStrongLight,
-                  ),
-                ),
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  icon ?? const SizedBox(),
-                  icon != null ? 8.0.width : 0.0.width,
-                  Text(
-                    title,
-                    style: AppFont.medium16.copyWith(
-                        color: disable
-                            ? AppColor.textStrongLight
-                            : AppColor.textStrongLight),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-      ),
+          style: ElevatedButton.styleFrom(
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8))),
+          onPressed: disable ? () {} : onPressed,
+          child: child ??
+              Text(
+                title,
+                style: textStyle ??
+                    AppFont.medium14.copyWith(
+                      color: disable
+                          ? Theme.of(context).hintColor
+                          : (textColor ?? AppColor.darkText1),
+                    ),
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              )),
     );
   }
 }

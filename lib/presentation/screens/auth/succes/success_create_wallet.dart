@@ -4,7 +4,6 @@ import 'package:bee_wallet/presentation/widget/widget.dart';
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../provider/account/account_provider.dart';
@@ -19,28 +18,28 @@ class SuccesCreateAccount extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Image.asset(
                   AppImage.ilustrasi1,
-                  width: 320.w,
+                  width: 320,
                 ),
-                100.0.height,
+                height(100),
                 Text(
                   "Yeay 🎉",
                   style: AppFont.semibold24
                       .copyWith(color: Theme.of(context).indicatorColor),
                 ),
-                8.0.height,
+                height(8),
                 Text(
                   "successfully created a new wallet",
                   style: AppFont.reguler16
                       .copyWith(color: Theme.of(context).hintColor),
                 ),
-                48.0.height,
+                height(48),
                 PrimaryButton(
                     title: "Back Up Now",
                     onPressed: () {
@@ -53,7 +52,7 @@ class SuccesCreateAccount extends ConsumerWidget {
                             backgorund: AppColor.redColor);
                       }
                     }),
-                16.0.height,
+                height(16),
                 SecondaryButton(
                     title: "Remind Me Later",
                     onPressed: () {

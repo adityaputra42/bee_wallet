@@ -1,23 +1,20 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'component/qr_scanner_overlay.dart';
 
-class ScanPage extends ConsumerWidget {
+class ScanPage extends StatelessWidget {
   final Function(String) onScan;
   const ScanPage({
     super.key,
     required this.onScan,
   });
 
-  onResult(String code) {
-    onScan(code);
-  }
-
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(
+    BuildContext context,
+  ) {
     Widget scan() {
       return Stack(
         children: [
@@ -32,8 +29,7 @@ class ScanPage extends ConsumerWidget {
                 log('Failed to scan Barcode');
               } else {
                 final String code = barcodes.first.rawValue!;
-                onResult(code);
-                Navigator.pop(context);
+                onScan(code);
               }
             },
           ),

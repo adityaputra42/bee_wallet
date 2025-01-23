@@ -1,8 +1,6 @@
-
 import '../../../../../utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../provider/account/account_provider.dart';
@@ -23,27 +21,27 @@ class SheedPharseShow extends ConsumerWidget {
       ),
       body: Container(
         width: double.infinity,
-        margin: EdgeInsets.all(16.w),
-        padding: EdgeInsets.all(16.w),
+        margin: EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(12),
             color: Theme.of(context).cardColor),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            16.0.height,
+            height(16),
             Text(
               'Write down the Seed Phrase in order.',
               style: AppFont.medium14
                   .copyWith(color: Theme.of(context).indicatorColor),
             ),
-            16.0.height,
+            height(16),
             Wrap(
                 crossAxisAlignment: WrapCrossAlignment.center,
                 runAlignment: WrapAlignment.center,
                 alignment: WrapAlignment.center,
-                spacing: 8.h,
-                runSpacing: 8.h,
+                spacing: 8,
+                runSpacing: 8,
                 direction: Axis.horizontal,
                 children: mnemonic
                     .map(
@@ -51,7 +49,7 @@ class SheedPharseShow extends ConsumerWidget {
                           number: e['id'], text: e['data']),
                     )
                     .toList()),
-            16.0.height,
+            height(16),
             // Row(
             //   children: [
             //     Icon(
@@ -73,7 +71,7 @@ class SheedPharseShow extends ConsumerWidget {
             //   style:
             //       AppFont.medium12.copyWith(color: Theme.of(context).hintColor),
             // ),
-            // 16.0.height,
+            // height(16),
             // Row(
             //   children: [
             //     Icon(
@@ -143,7 +141,7 @@ class SheedPharseShow extends ConsumerWidget {
             //     )
             //   ],
             // ),
-            // 16.0.height,
+            // height(16),
             // Text(
             //   "Learn more about Seed Phrase Code.",
             //   style: AppFont.medium12.copyWith(color: AppColor.primaryColor),
@@ -165,17 +163,17 @@ class SheedPharseShow extends ConsumerWidget {
   Widget cardPniomoni(BuildContext context,
       {required int number, required String text}) {
     return Container(
-      // height: 42.h,
+      // height: 42,
       width: MediaQuery.of(context).size.width * 0.41,
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
                 blurRadius: 0.1,
                 spreadRadius: 0.1,
-                color: AppColor.grayColor.withOpacity(0.15))
+                color: AppColor.grayColor.withValues(alpha: 0.15))
           ],
-          borderRadius: BorderRadius.circular(8.r),
+          borderRadius: BorderRadius.circular(8),
           color: Theme.of(context).colorScheme.surface),
       child: Text("$number. $text",
           style: AppFont.medium12.copyWith(

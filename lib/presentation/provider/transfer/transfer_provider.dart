@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../config/config.dart';
-import '../../../data/model/token_chain/selected_token_chain.dart';
+import '../../../data/model/model.dart';
 import '../../../utils/util.dart';
 import '../account/account_provider.dart';
 
@@ -27,6 +27,17 @@ class ChainTransfer extends _$ChainTransfer {
 }
 
 @riverpod
+class RecentAddress extends _$RecentAddress {
+  @override
+  Future<List<RecentTransactionAddress>> build() async {
+    var account = ref.watch(selectedAccountProvider).valueOrNull;
+    var data = await DbHelper.instance.getAllRecentTransaction() ?? [];
+    data.removeWhere((v) => v.address == account?.addressETH);
+    return data;
+  }
+}
+
+@riverpod
 class AmountTransfer extends _$AmountTransfer {
   @override
   TextEditingController build() => TextEditingController();
@@ -35,20 +46,20 @@ class AmountTransfer extends _$AmountTransfer {
     state.text = chain.balance.toString();
   }
 
-  onAmountChange(String value) {
-    String address = ref.watch(receiveAddressProvider).text;
-    final chain = ref.watch(chainTransferProvider);
-    ref.read(validateAddressTransferProvider.notifier).validateAddress(address);
-    bool isValid = ref.watch(validateAddressTransferProvider);
-    if (state.text != '' &&
-        address != '' &&
-        isValid == true &&
-        chain.balance! >= double.parse(state.text)) {
-      ref.read(disableNextTransferProvider.notifier).changeValue(false);
-    } else {
-      ref.read(disableNextTransferProvider.notifier).changeValue(true);
-    }
-  }
+  // onAmountChange(String value) {
+  //   String address = ref.watch(receiveAddressProvider).text;
+  //   final chain = ref.watch(chainTransferProvider);
+  //   ref.read(validateAddressTransferProvider.notifier).validateAddress(address);
+  //   bool isValid = ref.watch(validateAddressTransferProvider);
+  //   if (state.text != '' &&
+  //       address != '' &&
+  //       isValid == true &&
+  //       chain.balance! >= double.parse(state.text)) {
+  //     ref.read(disableNextTransferProvider.notifier).changeValue(false);
+  //   } else {
+  //     ref.read(disableNextTransferProvider.notifier).changeValue(true);
+  //   }
+  // }
 }
 
 @riverpod
@@ -87,7 +98,7 @@ class ValidateAddressTransfer extends _$ValidateAddressTransfer {
     if (chain.baseChain == 'eth') {
       state = EthHelper().validateAddress(address);
     } else if (chain.baseChain == 'sol') {
-      state = SolanaHelper().isValidSolanaAddress(address);
+      state = true;
     } else if (chain.baseChain == 'sui') {
       state = true;
     } else {
@@ -104,6 +115,48 @@ class DisableNextTransfer extends _$DisableNextTransfer {
   changeValue(bool value) {
     state = value;
   }
+
+  onChangeAmount(String value) {
+    double amount = double.parse(value.isEmpty ? "0.0" : value);
+    var chain = ref.watch(chainTransferProvider);
+    var fee = ref.watch(networkFeeProvider);
+
+    if (!(amount == chain.balance)) {
+      if (chain.contractAddress == null) {
+        ref.read(totalAmountProvider.notifier).setAmount(amount + fee);
+        ref.watch(totalAmountProvider);
+      } else {
+        ref.read(totalAmountProvider.notifier).setAmount(amount);
+        ref.watch(totalAmountProvider);
+      }
+      ref.read(amountInputProvider.notifier).setAmount(amount);
+      ref.watch(amountInputProvider);
+    } else {
+      if (chain.contractAddress == null) {
+        final totalSentBalance = amount - fee;
+        ref.read(amountInputProvider.notifier).setAmount(totalSentBalance);
+        ref.watch(amountInputProvider);
+        ref
+            .read(totalAmountProvider.notifier)
+            .setAmount(totalSentBalance + fee);
+        ref.watch(totalAmountProvider);
+      } else {
+        final totalSentBalance = amount - fee;
+        ref.read(amountInputProvider.notifier).setAmount(amount);
+        ref.watch(amountInputProvider);
+        ref
+            .read(totalAmountProvider.notifier)
+            .setAmount(totalSentBalance + fee);
+        ref.watch(totalAmountProvider);
+      }
+    }
+
+    if (value != '' && chain.balance! >= double.parse(value)) {
+      state = false;
+    } else {
+      state = true;
+    }
+  }
 }
 
 @riverpod
@@ -112,7 +165,9 @@ class NetworkFee extends _$NetworkFee {
   double build() => 0;
   Future<void> getNetworkFee() async {
     var chain = ref.watch(chainTransferProvider);
-    var amount = double.parse(ref.watch(amountTransferProvider).text);
+    var amount = double.parse(ref.watch(amountTransferProvider).text != ''
+        ? ref.watch(amountTransferProvider).text
+        : "0");
     var account = ref.watch(selectedAccountProvider).valueOrNull;
     double fee = 0.0;
     if (chain.baseChain == 'eth') {
@@ -146,39 +201,47 @@ class NetworkFee extends _$NetworkFee {
         state = fee;
       }
     } else if (chain.baseChain == 'sol') {
-      var data = await SolanaHelper().getEstimateFee(
-          from: account?.addressSolana ?? '',
-          to: ref.watch(receiveAddressProvider).text);
-      fee = data['txFee'];
-      ref
-          .read(gasLimitProvider.notifier)
-          .changeInit(data['gasLimit'].toString());
-      ref
-          .read(gasPriceProvider.notifier)
-          .changeInit(data['gasPrice'].ceilToDouble().toString());
-      state = fee;
-    } else if (chain.baseChain == 'sui') {
-      var data = await SuiHelper().getEstimateFee(
-          amount: amount,
-          isTestnet: chain.isTestnet!,
-          from: account!,
-          to: ref.watch(receiveAddressProvider).text);
-      fee = data['txFee'];
-      ref
-          .read(gasLimitProvider.notifier)
-          .changeInit(data['gasLimit'].toString());
-      ref
-          .read(gasPriceProvider.notifier)
-          .changeInit(data['gasPrice'].ceilToDouble().toString());
-      state = fee;
+      // var data = await SolanaHelper().getEstimateFee(
+      //     from: account?.addressSolana ?? '',
+      //     to: ref.watch(receiveAddressProvider).text);
+      // fee = data['txFee'];
+      // ref
+      //     .read(gasLimitProvider.notifier)
+      //     .changeInit(data['gasLimit'].toString());
+      // ref
+      //     .read(gasPriceProvider.notifier)
+      //     .changeInit(data['gasPrice'].ceilToDouble().toString());
+      // state = fee;
     }
-
+    dev.log("fee => $fee");
     if (amount < (chain.balance ?? 0)) {
-      ref.read(amountSendProvider.notifier).setAmount(amount - fee);
-      ref.watch(amountSendProvider);
+      if (chain.contractAddress == null) {
+        ref.read(totalAmountProvider.notifier).setAmount(amount + fee);
+        ref.watch(totalAmountProvider);
+      } else {
+        ref.read(totalAmountProvider.notifier).setAmount(amount);
+        ref.watch(totalAmountProvider);
+      }
+      ref.read(amountInputProvider.notifier).setAmount(amount);
+      ref.watch(amountInputProvider);
     } else {
-      ref.read(amountSendProvider.notifier).setAmount(amount);
-      ref.watch(amountSendProvider);
+      if (chain.contractAddress == null) {
+        final totalSentBalance = amount - fee;
+        ref.read(amountInputProvider.notifier).setAmount(totalSentBalance);
+        ref.watch(amountInputProvider);
+        ref
+            .read(totalAmountProvider.notifier)
+            .setAmount(totalSentBalance + fee);
+        ref.watch(totalAmountProvider);
+      } else {
+        final totalSentBalance = amount - fee;
+        ref.read(amountInputProvider.notifier).setAmount(amount);
+        ref.watch(amountInputProvider);
+        ref
+            .read(totalAmountProvider.notifier)
+            .setAmount(totalSentBalance + fee);
+        ref.watch(totalAmountProvider);
+      }
     }
     ref.read(slowNetworkFeeProvider.notifier).setNetworkFee(fee);
     ref.read(averageNetworkFeeProvider.notifier).setNetworkFee(fee);
@@ -198,14 +261,9 @@ class NetworkFee extends _$NetworkFee {
     var fee = txFee / BigInt.from(10).pow(9);
     state = fee;
   }
-}
 
-@riverpod
-class SlowNetworkFee extends _$SlowNetworkFee {
-  @override
-  double build() => 0;
-  setNetworkFee(double fee) {
-    state = fee - (fee * 0.33);
+  void changeNetworkFee(double value) {
+    state = value;
   }
 }
 
@@ -215,6 +273,15 @@ class AverageNetworkFee extends _$AverageNetworkFee {
   double build() => 0;
   setNetworkFee(double fee) {
     state = fee;
+  }
+}
+
+@riverpod
+class SlowNetworkFee extends _$SlowNetworkFee {
+  @override
+  double build() => 0;
+  setNetworkFee(double fee) {
+    state = fee - (fee * 0.33);
   }
 }
 
@@ -237,7 +304,7 @@ class SelectedFee extends _$SelectedFee {
 }
 
 @riverpod
-class AmountSend extends _$AmountSend {
+class AmountInput extends _$AmountInput {
   @override
   double build() => 0;
 
@@ -248,17 +315,38 @@ class AmountSend extends _$AmountSend {
 }
 
 @riverpod
+class TotalAmount extends _$TotalAmount {
+  @override
+  double build() => 0;
+
+  setAmount(double value) {
+    state = value;
+  }
+}
+
+@riverpod
+class TransferLoading extends _$TransferLoading {
+  @override
+  bool build() => false;
+
+  setValue(bool value) {
+    state = value;
+  }
+}
+
+@riverpod
 class TransferChain extends _$TransferChain {
   @override
   Future<bool> build() async => false;
 
   Future<void> tranfer(BuildContext context) async {
     var chain = ref.watch(chainTransferProvider);
-    var amount = ref.watch(amountSendProvider);
+    var amount = ref.watch(amountInputProvider);
     var account = ref.watch(selectedAccountProvider).valueOrNull;
+    state = const AsyncValue.loading();
 
-    state = const AsyncLoading();
     try {
+      ref.watch(transferLoadingProvider);
       if (chain.baseChain == 'eth') {
         if (chain.contractAddress == null) {
           await EthHelper().transferChain(
@@ -278,34 +366,27 @@ class TransferChain extends _$TransferChain {
           state = const AsyncData(true);
         }
       } else if (chain.baseChain == 'sol') {
-        await SolanaHelper().sendSolanaTransaction(
-            from: account!,
-            to: ref.watch(receiveAddressProvider).text,
-            amount: amount);
-        state = const AsyncData(true);
-      } else if (chain.baseChain == 'sui') {
-        await SuiHelper().transfer(
-            to: ref.watch(receiveAddressProvider).text,
-            amount: amount,
-            from: account!,
-            isTestnet: chain.isTestnet!);
-        state = const AsyncData(true);
+        // await SolanaHelper().sendSolanaTransaction(
+        //     from: account!,
+        //     to: ref.watch(receiveAddressProvider).text,
+        //     amount: amount);
+        // state = true;
       }
-      
-      //  else if (chain.baseChain == 'btc') {
-      //   await BtcHelper().sendTx(
-      //       amount: amount.toInt(),
-      //       addressStr: ref.watch(receiveAddressProvider).text,
-      //       secretKey: EcryptionHelper().decrypt(account?.keyBTC ?? ''));
-      //   state = const AsyncData(true);
-      // }
-
-      context.goNamed('transaction_progress');
+      await DbHelper.instance.addRecentAddress(RecentTransactionAddress(
+        address: ref.watch(receiveAddressProvider).text,
+      ));
+      MethodHelper().showSnack(
+          context: context,
+          content: "Transaction Successfully",
+          backgorund: AppColor.greenColor);
+      context.goNamed('detail_token');
     } catch (e) {
+      state = const AsyncData(false);
       dev.log("error => $e");
       MethodHelper().showSnack(
           context: context, content: "Error $e", backgorund: AppColor.redColor);
-      state = const AsyncData(false);
+
+      ref.read(transferLoadingProvider.notifier).setValue(false);
     }
   }
 }

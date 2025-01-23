@@ -1,15 +1,15 @@
-import 'package:bee_wallet/presentation/screens/dashboard/scan/scann_page.dart';
+import 'package:bee_wallet/presentation/widget/button_loading.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/ant_design.dart';
 
 import '../../../../utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/config.dart';
 import '../../../provider/provider.dart';
 import '../../../widget/widget.dart';
+import '../../scan/scann_page.dart';
 
 class ImportAccountScreen extends ConsumerWidget {
   const ImportAccountScreen({super.key});
@@ -20,33 +20,34 @@ class ImportAccountScreen extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
           context: context, title: "Import an Existing Wallet"),
-      bottomNavigationBar: PrimaryButton(
-        margin: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 32.h),
-        title: "Import",
-        loading: ref.watch(importAccountProvider).isLoading,
-        disable: ref.watch(disableImportProvider),
-        onPressed: () {
-          ref.read(importAccountProvider.notifier).import(context);
-        },
-      ),
+      bottomNavigationBar: ref.watch(importAccountProvider).isLoading
+          ? ButtonLoading()
+          : PrimaryButton(
+              margin: EdgeInsets.fromLTRB(16, 8, 16, 32),
+              title: "Import",
+              disable: ref.watch(disableImportProvider),
+              onPressed: () {
+                ref.read(importAccountProvider.notifier).import(context);
+              },
+            ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            16.0.height,
+            height(16),
             Text(
               "Import via Seed Phrase",
               style: AppFont.semibold18
                   .copyWith(color: Theme.of(context).indicatorColor),
             ),
-            4.0.height,
+            height(4),
             Text(
               "To import an existing wallet, please enter the recovery seed phrase here:",
               style: AppFont.reguler14
                   .copyWith(color: Theme.of(context).hintColor),
             ),
-            24.0.height,
+            height(24),
             InputText(
               title: "Secret Pharse",
               icon: Row(
@@ -64,7 +65,7 @@ class ImportAccountScreen extends ConsumerWidget {
                       },
                       child: Iconify(
                         AntDesign.scan,
-                        size: 36.w,
+                        size: 36,
                         color: AppColor.primaryColor,
                       )),
                 ],
@@ -76,7 +77,7 @@ class ImportAccountScreen extends ConsumerWidget {
               },
               maxLine: 5,
             ),
-            16.0.height,
+            height(16),
             InputText(
               hintText: "Enter your name account",
               title: "Account Name",

@@ -14,8 +14,6 @@ import 'package:http/http.dart' as http;
 
 import '../../config/config.dart';
 import '../../data/model/model.dart';
-import '../../data/model/token_chain/selected_token_chain.dart';
-import '../../data/model/token_chain/token_chain.dart';
 import '../util.dart';
 
 class EthHelper {
@@ -181,8 +179,6 @@ class EthHelper {
       http.Client(),
     );
 
-    dev.log("web3 => ${credentials.address.toString()}");
-
     try {
       EtherAmount gasprice = await web3client.getGasPrice();
 
@@ -193,10 +189,12 @@ class EthHelper {
         gasPrice: gasprice,
       );
 
+      dev.log("gas Price => $gasprice");
+      dev.log("gas Limit => $gaslimit");
       var gasLimit = gaslimit.toDouble();
       var gasPrice = (gasprice.getInWei / BigInt.from(pow(10, 9)));
-      dev.log("gas Price => $gasPrice");
-      dev.log("gas Limit => $gasLimit");
+      dev.log("gas Price 2=> $gasPrice");
+      dev.log("gas Limit 2=> $gasLimit");
 
       final txFee = gasprice.getInWei * gaslimit;
       dev.log("tx Fee => $txFee");
@@ -204,7 +202,6 @@ class EthHelper {
       return {"txFee": fee, "gasLimit": gasLimit, "gasPrice": gasPrice};
     } catch (e) {
       dev.log("Error estimate gas fee => $e");
-
       return {"txFee": 0.0, "gasLimit": 0.0, "gasPrice": 0.0};
     }
   }
@@ -253,9 +250,11 @@ class EthHelper {
         for (var uri in tokenURI) {
           if (uri.startsWith('ipfs://')) {
             final ipfsHash = uri.replaceFirst('ipfs://', '');
+            dev.log("hash ipfs nft => $ipfsHash");
             final ipfsUrl = 'https://ipfs.io/ipfs/$ipfsHash';
             final response = await http.Client().get(Uri.parse(ipfsUrl));
-            dev.log(response.statusCode.toString());
+            dev.log("reposponse nft => ${response.body}");
+            dev.log("reposponse nft => ${response.statusCode}");
             if (response.statusCode == 200) {
               final metadata = jsonDecode(response.body);
               final imageURL = metadata['image'];
@@ -445,5 +444,70 @@ class EthHelper {
     } catch (e) {
       return null;
     }
+  }
+
+  Future<bool> chekRPC(String rpc) async {
+    try {
+      final web3client = Web3Client(
+        rpc,
+        http.Client(),
+      );
+      int block = await web3client.getBlockNumber();
+      dev.log("block number $block");
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<List<TokenChain>?> getTokenFromContract(TokenChain chain) async {
+    if (chain.tokenRegister != '' && chain.tokenRegister != null) {
+      final tokenRegistryAbiString =
+          await rootBundle.loadString('assets/abi/token_registry.json');
+      var tokenRegistryAbi =
+          ContractAbi.fromJson(tokenRegistryAbiString, "TokenRegistry");
+      final web3client = Web3Client(
+        chain.rpc ?? '',
+        http.Client(),
+      );
+      final contract = DeployedContract(
+          tokenRegistryAbi, EthereumAddress.fromHex(chain.tokenRegister!));
+      final query = contract.function('getTokenList');
+
+      final List<dynamic> result = await web3client.call(
+        contract: contract,
+        function: query,
+        params: [],
+      );
+
+      var token = <TokenChain>[];
+      dev.log("result => $result");
+      for (var element in result) {
+        if (element is List) {
+          for (var item in element) {
+            dev.log("token from contract => $item");
+            final data = TokenChain(
+                chainId: chain.chainId,
+                balance: 0,
+                tokenRegister: null,
+                contractAddress: item[0].toString(),
+                name: item[1],
+                symbol: item[2],
+                decimal: item[3].toInt(),
+                logo: item[4],
+                baseLogo: chain.baseLogo,
+                explorer: chain.explorer,
+                explorerApi: chain.explorerApi,
+                baseChain: chain.baseChain,
+                rpc: chain.rpc,
+                isTestnet: null);
+            token.add(data);
+          }
+        }
+      }
+
+      return token;
+    }
+    return null;
   }
 }

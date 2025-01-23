@@ -1,6 +1,5 @@
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../config/config.dart';
@@ -14,28 +13,28 @@ class DialogVerifyFailed extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget content() {
       return SizedBox(
-        width: 430.w,
+        width: 430,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
               AppImage.logo,
-              width: 80.w,
+              width: 80,
             ),
-            16.0.height,
+            height(16),
             Text(
               "Losing the mnemonic phrase will result in asset loss. We stongly recommend that you back up the mnemonic phrase before using the wallet",
               style: AppFont.reguler12
                   .copyWith(color: Theme.of(context).hintColor),
               textAlign: TextAlign.center,
             ),
-            16.0.height,
+            height(16),
             PrimaryButton(
                 title: "Close",
                 onPressed: () {
                   Navigator.pop(context);
                 }),
-            8.0.height,
+            height(8),
             SecondaryButton(
                 title: "Skip for now",
                 onPressed: () {
@@ -50,7 +49,7 @@ class DialogVerifyFailed extends StatelessWidget {
     return AlertDialog(
       backgroundColor: Theme.of(context).colorScheme.surface,
       titlePadding: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       content: content(),
     );
   }

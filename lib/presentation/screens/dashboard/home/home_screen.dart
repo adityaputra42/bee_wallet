@@ -1,9 +1,7 @@
-
 import 'package:bee_wallet/presentation/screens/dashboard/home/changeAccount/change_account_screen.dart';
 import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/ant_design.dart';
 import 'package:iconify_flutter_plus/icons/ic.dart';
@@ -24,41 +22,39 @@ class HomeScreen extends ConsumerWidget {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          toolbarHeight: 72.h,
+          toolbarHeight: 72,
           elevation: 0,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                width: 48.w,
-                height: 48.w,
+                width: 48,
+                height: 48,
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border:
-                        Border.all(width: 1.w, color: AppColor.primaryColor)),
+                    border: Border.all(width: 1, color: AppColor.primaryColor)),
                 child: Center(
                   child: Blockies(
-                      size: 0.66.w,
+                      size: 0.66,
                       data: account?.addressETH ?? '-',
                       shape: BlockiesShape.circle),
                 ),
               ),
-              12.0.width,
+              width(12),
               Expanded(
                 child: GestureDetector(
                   onTap: () {
                     showModalBottomSheet(
                         context: context,
                         builder: (context) => const ChangeAccountScreen(),
-                        backgroundColor:
-                            Theme.of(context).colorScheme.surface,
+                        backgroundColor: Theme.of(context).colorScheme.surface,
                         showDragHandle: true,
                         isDismissible: false,
                         isScrollControlled: true,
                         useSafeArea: true,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(16.r))));
+                                top: Radius.circular(16))));
                   },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,15 +67,15 @@ class HomeScreen extends ConsumerWidget {
                               color: Theme.of(context).indicatorColor,
                             ),
                           ),
-                          4.0.width,
+                          width(4),
                           Iconify(
                             Ic.round_expand_more,
-                            size: 24.w,
+                            size: 24,
                             color: Theme.of(context).indicatorColor,
                           )
                         ],
                       ),
-                      2.0.height,
+                      height(2),
                       Text(
                         'EVM : ${MethodHelper().shortAddress(address: account?.addressETH ?? '', length: 5)}',
                         style: AppFont.reguler12.copyWith(
@@ -91,21 +87,19 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ),
               GestureDetector(
-                  onTap: () {
-                   
-                  },
+                  onTap: () {},
                   child: Container(
-                    width: 36.w,
-                    height: 36.w,
-                    padding: EdgeInsets.all(6.h),
+                    width: 36,
+                    height: 36,
+                    padding: EdgeInsets.all(6),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.r),
+                        borderRadius: BorderRadius.circular(8),
                         border:
-                            Border.all(width: 1.w, color: AppColor.grayColor)),
+                            Border.all(width: 1, color: AppColor.grayColor)),
                     child: Iconify(
                       AntDesign.scan,
                       color: AppColor.primaryColor,
-                      size: 20.w,
+                      size: 20,
                     ),
                   ))
             ],
@@ -116,14 +110,14 @@ class HomeScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              12.0.height,
+              height(12),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 16.w),
+                margin: EdgeInsets.symmetric(horizontal: 16),
                 width: double.infinity,
-                height: 48.h,
-                padding: EdgeInsets.all(3.w),
+                height: 48,
+                padding: EdgeInsets.all(3),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
+                  borderRadius: BorderRadius.circular(8),
                   color: Theme.of(context).cardColor,
                 ),
                 child: TabBar(
@@ -131,11 +125,11 @@ class HomeScreen extends ConsumerWidget {
                   automaticIndicatorColorAdjustment: false,
                   indicator: BoxDecoration(
                       color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(5.r)),
+                      borderRadius: BorderRadius.circular(5)),
                   isScrollable: false,
                   dividerColor: Theme.of(context).colorScheme.surface,
                   indicatorColor: Theme.of(context).colorScheme.surface,
-                  labelColor: AppColor.textStrongLight,
+                  labelColor: AppColor.lightText1,
                   labelPadding: EdgeInsets.zero,
                   labelStyle: AppFont.medium16,
                   unselectedLabelColor: AppColor.grayColor,
@@ -156,7 +150,7 @@ class HomeScreen extends ConsumerWidget {
                   ],
                 ),
               ),
-              16.0.height,
+              height(16),
               const Expanded(
                   child: TabBarView(
                       physics: NeverScrollableScrollPhysics(),

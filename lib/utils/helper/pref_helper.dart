@@ -29,6 +29,18 @@ class PrefHelper {
 
   bool get isLogin => _pref.getBool("islogin") ?? true;
 
+  Future<bool> setFingerprint(bool login) async {
+    return await _pref.setBool("fingerprint", login);
+  }
+
+  bool get isFingerprint => _pref.getBool("fingerprint") ?? false;
+
+  Future<bool> setSecurty(String securityTyep) async {
+    return await _pref.setString("securityType", securityTyep);
+  }
+
+  String? get securityType => _pref.getString("securityType");
+
   setDarkTheme(bool value) {
     _pref.setBool("THEMESTATUS", value);
   }

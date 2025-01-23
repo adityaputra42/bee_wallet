@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bee_wallet/config/config.dart';
 import 'package:bee_wallet/data/model/chain_network/chain_network.dart';
@@ -23,31 +22,31 @@ class SheetPasswordAddNetwork extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 24.h),
+      padding: EdgeInsets.fromLTRB(16, 0, 16, 24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset(
             AppImage.logo,
-            height: 32.w,
+            height: 32,
           ),
-          8.0.height,
+          height(8),
           Text(
             "Enter Security Password",
             style: AppFont.semibold16
                 .copyWith(color: Theme.of(context).indicatorColor),
             textAlign: TextAlign.center,
           ),
-          16.0.height,
+          height(16),
           Text(
             "Security Password used for open Wallet, Transaction, and Mnemonik Frase. Remember it and dont give password to anyoone",
             style:
                 AppFont.medium12.copyWith(color: Theme.of(context).hintColor),
             textAlign: TextAlign.center,
           ),
-          24.0.height,
+          height(24),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 34.w),
+            padding: EdgeInsets.symmetric(horizontal: 34),
             child: InputPin(
               keyboardType: TextInputType.none,
               controller: ref.watch(pinAddNetworkController),
@@ -82,7 +81,7 @@ class SheetPasswordAddNetwork extends ConsumerWidget {
               },
             ),
           ),
-          16.0.height,
+          height(16),
           Numpadcustom(
               controller: ref.watch(pinAddNetworkController),
               delete: () {

@@ -1,7 +1,5 @@
-
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../config/config.dart';
 import '../../data/src/app_image.dart';
@@ -18,9 +16,9 @@ class Empty extends StatelessWidget {
         children: [
           Image.asset(
             AppImage.empty,
-            width: width.w,
+            width: width,
           ),
-          8.0.height,
+          height(8),
           Text(
             title,
             style: AppFont.medium16

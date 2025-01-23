@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/config.dart';
 import '../../../../utils/util.dart';
@@ -37,11 +36,11 @@ class ConfirmPharseCreate extends ConsumerWidget {
           rejected,
         ) {
           return Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
-            height: 42.h,
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            height: 42,
             width: MediaQuery.of(context).size.width * 0.45,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(8),
                 color: Theme.of(context).cardColor),
             child: Text(
                 "$number. ${confirmList.singleWhere((element) => element['id'] == number, orElse: () => <String, dynamic>{})['data'] ?? ''}",
@@ -61,31 +60,29 @@ class ConfirmPharseCreate extends ConsumerWidget {
         child: Draggable(
           data: text,
           feedback: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
-            height: 42.h,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            height: 42,
             width: MediaQuery.of(context).size.width * 0.292,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(8),
                 color: Theme.of(context).primaryColor),
             child: Center(
               child: Text(text,
                   style: AppFont.medium14.copyWith(
-                    color: AppColor.textStrongLight,
+                    color: AppColor.lightText1,
                   )),
             ),
           ),
           childWhenDragging: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-            height: 42.h,
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            height: 42,
             width: MediaQuery.of(context).size.width * 0.292,
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                      blurRadius: 0.1.h,
-                      spreadRadius: 0.1.h,
-                      color: Colors.black12)
+                      blurRadius: 0.1, spreadRadius: 0.1, color: Colors.black12)
                 ],
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(8),
                 color: Theme.of(context).cardColor),
             child: Center(
               child: Text(text,
@@ -95,22 +92,22 @@ class ConfirmPharseCreate extends ConsumerWidget {
             ),
           ),
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
-            height: 42.h,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            height: 42,
             width: MediaQuery.of(context).size.width * 0.292,
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                      blurRadius: 0.1.h,
-                      spreadRadius: 0.1.h,
-                      color: AppColor.grayColor.withOpacity(0.25))
+                      blurRadius: 0.1,
+                      spreadRadius: 0.1,
+                      color: AppColor.grayColor.withValues(alpha: 0.25))
                 ],
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(8),
                 color: AppColor.primaryColor),
             child: Center(
               child: Text(text,
                   style: AppFont.medium14.copyWith(
-                    color: AppColor.textStrongLight,
+                    color: AppColor.lightText1,
                   )),
             ),
           ),
@@ -125,30 +122,30 @@ class ConfirmPharseCreate extends ConsumerWidget {
         title: "Back Up Pharse",
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            16.0.height,
+            height(16),
             Text(
               'Enter Your Secret Recovery Phrase',
               style: AppFont.semibold18
                   .copyWith(color: Theme.of(context).indicatorColor),
             ),
-            4.0.height,
+            height(4),
             Text(
               'Drag and drop to sort your phrases exactly as you saw them on the previous screen',
               style: AppFont.reguler14
                   .copyWith(color: Theme.of(context).hintColor),
             ),
-            16.0.height,
+            height(16),
             Center(
               child: Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
                   runAlignment: WrapAlignment.center,
                   alignment: WrapAlignment.center,
-                  spacing: 8.h,
-                  runSpacing: 8.h,
+                  spacing: 8,
+                  runSpacing: 8,
                   direction: Axis.horizontal,
                   children: [
                     cardPniomoni(
@@ -189,21 +186,22 @@ class ConfirmPharseCreate extends ConsumerWidget {
                     ),
                   ]),
             ),
-            24.0.height,
+            height(24),
             random.isEmpty
                 ? const SizedBox()
                 : Center(
-                  child: Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      runAlignment: WrapAlignment.center,
-                      alignment: WrapAlignment.center,
-                      spacing: 8.h,
-                      runSpacing: 8.h,
-                      direction: Axis.horizontal,
-                      children: random
-                          .map((element) => cardPilihan(text: element['data']))
-                          .toList()),
-                ),
+                    child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        runAlignment: WrapAlignment.center,
+                        alignment: WrapAlignment.center,
+                        spacing: 8,
+                        runSpacing: 8,
+                        direction: Axis.horizontal,
+                        children: random
+                            .map(
+                                (element) => cardPilihan(text: element['data']))
+                            .toList()),
+                  ),
           ],
         ),
       ),
@@ -215,10 +213,8 @@ class ConfirmPharseCreate extends ConsumerWidget {
               .read(confirmMnemonicProvider.notifier)
               .validatePharse(ref, context);
         },
-        margin:
-            EdgeInsets.only(top: 8.h, bottom: 36.w, left: 16.w, right: 16.w),
+        margin: EdgeInsets.only(top: 8, bottom: 36, left: 16, right: 16),
       ),
     );
   }
 }
-

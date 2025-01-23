@@ -2,15 +2,12 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:math' as math;
 
-import 'package:bdk_flutter/bdk_flutter.dart';
-import 'package:connectivity_checker/connectivity_checker.dart';
 import 'package:erc20/erc20.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:solana_web3/solana_web3.dart' as sol;
-import 'package:sui/sui.dart';
+
 import 'package:web3dart/web3dart.dart';
 import '../../../data/model/chain_network/chain_network.dart';
 import '../../../data/model/model.dart';
@@ -28,7 +25,6 @@ part 'chain_provider.g.dart';
 class ChainOther extends _$ChainOther {
   @override
   Future<List<ChainNetwork>> build() async {
-    state = const AsyncLoading();
     final networkList = await DbHelper.instance.getAllChainNetwork();
     if (networkList.isEmpty) {
       final chainlist =
@@ -57,15 +53,21 @@ class ChainOther extends _$ChainOther {
   addTokenChain(TokenChain token) async {
     await DbHelper.instance.addTokenChain(token);
     ref.read(tokenChainOriginProvider.notifier).initChainOrigin();
+    ref.watch(tokenChainOriginProvider);
     ref.read(listTokenChainProvider.notifier).setTokenChain(token);
+    ref.watch(listTokenChainProvider);
     ref.read(selectedChainTokenProvider.notifier).changeNework(isAll: true);
+    ref.watch(selectedChainTokenProvider);
   }
 
   deleteTokenChain(ChainNetwork chain) async {
     await DbHelper.instance.deleteTokenChain(chain.chainId ?? "");
     ref.read(tokenChainOriginProvider.notifier).initChainOrigin();
+    ref.watch(tokenChainOriginProvider);
     ref.read(listTokenChainProvider.notifier).delete(chain.chainId ?? "");
+    ref.watch(listTokenChainProvider);
     ref.read(selectedChainTokenProvider.notifier).changeNework(isAll: true);
+    ref.watch(selectedChainTokenProvider);
   }
 }
 
@@ -111,7 +113,7 @@ class BalanceChain extends _$BalanceChain {
             chain.rpc ?? '',
             http.Client(),
           );
-          if (await ConnectivityWrapper.instance.isConnected) {
+          if (await checkInternetConnectivity()) {
             if (chain.contractAddress == null) {
               EtherAmount balance = await web3client.getBalance(
                   EthereumAddress.fromHex(account?.addressETH ?? ''));
@@ -120,6 +122,7 @@ class BalanceChain extends _$BalanceChain {
                   .getValueInUnit(EtherUnit.ether)
                   .toStringAsPrecision(5));
               chain.balance = balanceParsed;
+              log("chain symbol ==> ${chain.symbol}");
               log("new EVM Chain => $balanceParsed");
               await DbHelper.instance.updateNetwork(chain.id!, balanceParsed);
             } else {
@@ -141,50 +144,19 @@ class BalanceChain extends _$BalanceChain {
               await DbHelper.instance.updateNetwork(chain.id!, balanceParsed);
             }
           }
-        } else if (chain.baseChain == "sol") {
-          final cluster = sol.Cluster.mainnet;
-          final connection = sol.Connection(cluster);
-
-          if (await ConnectivityWrapper.instance.isConnected) {
-            final balanceSol = await connection.getBalance(
-                sol.Pubkey.fromString(account?.addressSolana ?? ''));
-            final balance = balanceSol / sol.lamportsPerSol;
-            log("new Balance Solana => $balance");
-            chain.balance = balance;
-            await DbHelper.instance.updateNetwork(chain.id!, balance);
-          }
-        } else if (chain.baseChain == "sui") {
-          if (chain.isTestnet == true) {
-            final clientTestnet = SuiClient(SuiUrls.testnet);
-
-            final suiBalance =
-                await clientTestnet.getBalance(account?.addressSui ?? '');
-            double balanceTestnet =
-                suiBalance.totalBalance / BigInt.from(10).pow(9);
-            log("new Balance sui Testnet => $balanceTestnet");
-            chain.balance = balanceTestnet;
-            await DbHelper.instance.updateNetwork(chain.id!, balanceTestnet);
-          } else {
-            final clientTestnet = SuiClient(SuiUrls.mainnet);
-            final suiBalance =
-                await clientTestnet.getBalance(account?.addressSui ?? '');
-            double balanceMainet =
-                suiBalance.totalBalance / BigInt.from(10).pow(9);
-            log("new Balance sui Mainnet => $balanceMainet");
-            chain.balance = balanceMainet;
-            await DbHelper.instance.updateNetwork(chain.id!, balanceMainet);
-          }
         }
-        
-        //  else if (chain.baseChain == "btc") {
-        //   var walletBtc = await BtcHelper().createOrRestoreWallet(
-        //       EcryptionHelper().decrypt(account?.keyBTC ?? ''),
-        //       Network.Testnet);
-        //   final balance = await walletBtc.getBalance();
-        //     log("new Balance BTC => ${balance.total}");
-        //   chain.balance = balance.total.toDouble();
-        //   await DbHelper.instance
-        //       .updateNetwork(chain.id!, balance.total.toDouble());
+        // else if (chain.baseChain == "sol") {
+        // final cluster = sol.Cluster.mainnet;
+        // final connection = sol.Connection(cluster);
+
+        // if (await ConnectivityWrapper.instance.isConnected) {
+        //   final balanceSol = await connection.getBalance(
+        //       sol.Pubkey.fromString(account?.addressSolana ?? ''));
+        //   final balance = balanceSol / sol.lamportsPerSol;
+        //   log("new Balance Solana => $balance");
+        //   chain.balance = balance;
+        //   await DbHelper.instance.updateNetwork(chain.id!, balance);
+        // }
         // }
       } catch (error) {
         log("error get balance => $error");
@@ -263,15 +235,15 @@ class ChainHistory extends _$ChainHistory {
     if (chain.baseChain == 'eth') {
       try {
         List<Activity> response = [];
-        if (chain.chainId == '234') {
-          response = await repository.findPetaActivity(
-              account?.addressETH ?? '',
-              page: pageKey,
-              chain: chain);
-        } else {
-          response = await repository.findAllActivity(account?.addressETH ?? '',
-              page: pageKey, chain: chain);
-        }
+        // if (chain.chainId == '7676') {
+        //   response = await repository.findPetaActivity(
+        //       account?.addressETH ?? '',
+        //       page: pageKey,
+        //       chain: chain);
+        // } else {
+        response = await repository.findAllActivity(account?.addressETH ?? '',
+            page: pageKey, chain: chain);
+        // }
 
         log(response.length.toString());
         final isLastPage = response.length < pageSize;

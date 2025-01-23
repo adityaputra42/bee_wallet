@@ -11,9 +11,13 @@ class SelectedTokenChain {
       this.decimal,
       this.balance,
       this.mnemonicAccount,
+      this.estimateUsd,
+      this.changePercent,
       this.logo,
       this.baseLogo,
       this.chainId,
+      this.chainType,
+      this.apiKey,
       this.rpc,
       this.explorer,
       this.explorerApi,
@@ -26,9 +30,13 @@ class SelectedTokenChain {
   int? decimal;
   double? balance;
   String? mnemonicAccount;
+  double? estimateUsd;
+  String? changePercent;
   String? logo;
   String? baseLogo;
   String? chainId;
+  String? chainType;
+  String? apiKey;
   String? rpc;
   String? explorer;
   String? explorerApi;
@@ -42,9 +50,13 @@ class SelectedTokenChain {
     int? decimal,
     double? balance,
     String? mnemonicAccount,
+    double? estimateUsd,
+    String? changePercent,
     String? logo,
     String? baseLogo,
     String? chainId,
+    String? chainType,
+    String? apiKey,
     String? rpc,
     String? explorer,
     String? explorerApi,
@@ -58,9 +70,13 @@ class SelectedTokenChain {
           decimal: decimal ?? this.decimal,
           balance: balance ?? this.balance,
           mnemonicAccount: mnemonicAccount ?? this.mnemonicAccount,
+          estimateUsd: estimateUsd ?? this.estimateUsd,
+          changePercent: changePercent ?? this.changePercent,
           logo: logo ?? this.logo,
           baseLogo: baseLogo ?? this.baseLogo,
           chainId: chainId ?? this.chainId,
+          chainType: chainType ?? this.chainType,
+          apiKey: apiKey ?? this.apiKey,
           rpc: rpc ?? this.rpc,
           explorer: explorer ?? this.explorer,
           explorerApi: explorerApi ?? this.explorerApi,
@@ -78,6 +94,8 @@ class SelectedTokenChain {
         logo: json["logo"],
         baseLogo: json["baseLogo"],
         baseChain: json["baseNetwork"],
+        chainType: json["chainType"],
+        apiKey: json["apiKey"],
         decimal: json["decimal"],
         contractAddress: json["contractAddress"],
         isTestnet: json["isTestnet"],
@@ -93,6 +111,8 @@ class SelectedTokenChain {
         "logo": logo,
         "baseLogo": baseLogo,
         "baseNetwork": baseChain,
+        "chainType": chainType,
+        "apiKey": apiKey,
         "decimal": decimal,
         "contractAddress": contractAddress,
         "isTestnet": isTestnet,

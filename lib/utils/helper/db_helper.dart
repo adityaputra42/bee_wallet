@@ -1,11 +1,8 @@
-import 'package:bee_wallet/data/model/dapp_history/dapp_link.dart';
+import 'dart:developer';
+
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
-import '../../data/model/account/account.dart';
-import '../../data/model/chain_network/chain_network.dart';
 import '../../data/model/model.dart';
-import '../../data/model/token_chain/selected_token_chain.dart';
-import '../../data/model/token_chain/token_chain.dart';
 
 class DbHelper {
   DbHelper._privateConstructor();
@@ -21,6 +18,7 @@ class DbHelper {
       [
         AccountSchema,
         PasswordSchema,
+        RecentAddressSchema,
         BrowserTabSchema,
         DappsHistorySchema,
         DappLinkSchema,
@@ -28,7 +26,8 @@ class DbHelper {
         NftSchema,
         TokenChainSchema,
         SelectedTokenChainSchema,
-        ChainNetworkSchema
+        ChainNetworkSchema,
+        RecentTransactionAddressSchema,
       ],
       inspector: true,
       directory: dir.path,
@@ -60,10 +59,14 @@ class DbHelper {
     });
   }
 
-  Future<void> addAccount(Account account) async {
+  Future<Account> addAccount(Account account) async {
+    var dataResult = Account();
     await isar.writeTxn(() async {
-      await isar.accounts.put(account);
+      var id = await isar.accounts.put(account);
+      var result = await isar.accounts.get(id);
+      dataResult = result ?? Account();
     });
+    return dataResult;
   }
 
   Future<void> addTokenChain(TokenChain chain) async {
@@ -72,8 +75,22 @@ class DbHelper {
     });
   }
 
+  Future<void> deleteToken(TokenChain chain) async {
+    var token = await isar.tokenChains
+        .filter()
+        .symbolEqualTo(chain.symbol)
+        .contractAddressEqualTo(chain.contractAddress)
+        .findFirst();
+    await isar.writeTxn(() async {
+      if (token != null) {
+        await isar.tokenChains.delete(token.id!);
+      }
+    });
+  }
+
   Future<void> setSelectedChain(SelectedChain chain) async {
     await isar.writeTxn(() async {
+      await isar.selectedChains.clear();
       await isar.selectedChains.put(chain);
     });
   }
@@ -95,6 +112,7 @@ class DbHelper {
   Future<void> changeBackupAccount(int id) async {
     await isar.writeTxn(() async {
       final add = await isar.accounts.get(id);
+      log("account backup? ${add?.addressETH}");
       add!.backup = true;
       await isar.accounts.put(add);
     });
@@ -353,6 +371,15 @@ class DbHelper {
     return accountList;
   }
 
+  Future<List<RecentAddress>> getRecentAddress() async {
+    List<RecentAddress> list = [];
+    await isar.txn(() async {
+      list = await isar.recentAddress.where().findAll();
+    });
+
+    return list;
+  }
+
   Future<void> setSelectedTokenChain(SelectedTokenChain chains) async {
     await isar.writeTxn(() async {
       await isar.selectedTokenChains.put(chains);
@@ -432,6 +459,21 @@ class DbHelper {
     });
   }
 
+  Future<SelectedTokenChain> getSelectedChainbyChainIdSymbolContractAddress(
+      String chainId, String symbol, String contract) async {
+    SelectedTokenChain token = SelectedTokenChain();
+    await isar.writeTxn(() async {
+      final chain = await isar.selectedTokenChains
+          .filter()
+          .chainIdEqualTo(chainId)
+          .symbolEqualTo(symbol)
+          .contractAddressEqualTo(contract)
+          .findFirst();
+      token = chain ?? SelectedTokenChain();
+    });
+    return token;
+  }
+
   /// ######################### NFT #######################
   Future<List<Nft>> getAllNFT(
       {required String chainId, required String owner}) async {
@@ -468,6 +510,35 @@ class DbHelper {
   Future<void> deleteAllNft() async {
     await isar.writeTxn(() async {
       await isar.nfts.clear();
+    });
+  }
+
+  // ########## Recemt Address Transaction ################# //
+
+  Future<void> addRecentAddress(RecentTransactionAddress address) async {
+    await isar.writeTxn(() async {
+      await isar.recentTransactionAddress.put(address);
+    });
+  }
+
+  Future<List<RecentTransactionAddress>?> getAllRecentTransaction() async {
+    final List<RecentTransactionAddress> addressList = [];
+    final allAddress = await isar.recentTransactionAddress
+        .where(distinct: true, sort: Sort.asc)
+        .findAll();
+    addressList.addAll(allAddress);
+    return addressList;
+  }
+
+  Future<void> deleteRecentAddress(int id) async {
+    await isar.writeTxn(() async {
+      await isar.recentTransactionAddress.delete(id);
+    });
+  }
+
+  Future<void> deleteAllRecentAddress() async {
+    await isar.writeTxn(() async {
+      await isar.recentTransactionAddress.clear();
     });
   }
 
@@ -523,7 +594,10 @@ class DbHelper {
 
   Future<void> addHistoryDapps(DappsHistory history) async {
     await isar.writeTxn(() async {
-      await isar.dappsHistorys.put(history);
+      List<DappsHistory> list = await isar.dappsHistorys.where().findAll();
+      if (!list.any((e) => e.title == history.title)) {
+        await isar.dappsHistorys.put(history);
+      }
     });
   }
 

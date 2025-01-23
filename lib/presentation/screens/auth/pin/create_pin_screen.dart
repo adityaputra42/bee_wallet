@@ -2,7 +2,6 @@ import 'package:bee_wallet/presentation/provider/provider.dart';
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../config/config.dart';
 import '../../../provider/getStarted/getstarted_provider.dart';
@@ -18,7 +17,7 @@ class CreatePinScreen extends ConsumerWidget {
       appBar: WidgetHelper.appBar(context: context, title: ''),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -26,23 +25,23 @@ class CreatePinScreen extends ConsumerWidget {
               //   AppImage.logo,
               //   width: 115.w,
               // ),
-              16.0.height,
+              height(16),
               Text(
                 "Create Security Pin",
                 style: AppFont.semibold24
                     .copyWith(color: Theme.of(context).indicatorColor),
                 textAlign: TextAlign.center,
               ),
-              8.0.height,
+              height(8),
               Text(
                 "Security Pin used for open Wallet, Transaction, and Mnemonik Frase. Remember it and dont give password to anyoone",
                 style: AppFont.reguler14
                     .copyWith(color: Theme.of(context).hintColor),
                 textAlign: TextAlign.center,
               ),
-              48.0.height,
+              height(48),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: InputPin(
                   keyboardType: TextInputType.none,
                   controller: ref.watch(createPinRegisterProvider),
@@ -61,7 +60,7 @@ class CreatePinScreen extends ConsumerWidget {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: 24.h),
+        padding: EdgeInsets.only(bottom: 24),
         child: Numpadcustom(
             controller: ref.watch(createPinRegisterProvider),
             delete: () {

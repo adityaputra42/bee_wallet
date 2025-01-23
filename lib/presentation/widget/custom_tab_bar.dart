@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../config/config.dart';
 
 class CustomTabBar extends StatelessWidget {
@@ -22,7 +20,7 @@ class CustomTabBar extends StatelessWidget {
     return Row(
       children: titles
           .map((e) => Padding(
-                padding: EdgeInsets.only(left: (e == titles.first ? 0 : 8.w)),
+                padding: EdgeInsets.only(left: (e == titles.first ? 0 : 8)),
                 child: GestureDetector(
                   onTap: () {
                     if (onTap != null) {
@@ -30,22 +28,21 @@ class CustomTabBar extends StatelessWidget {
                     }
                   },
                   child: Container(
-                    height: 36.h,
-                    padding:
-                        EdgeInsets.symmetric(vertical: 8.h, horizontal: 12.w),
+                    height: 36,
+                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.r),
+                        borderRadius: BorderRadius.circular(6),
                         color: titles.indexOf(e) == selectedIndex
                             ? AppColor.primaryColor
                             : Colors.transparent,
-                        border: Border.all(
-                            width: 1.h, color: AppColor.primaryColor)),
+                        border:
+                            Border.all(width: 1, color: AppColor.primaryColor)),
                     child: Center(
                       child: Text(
                         e,
                         style: (titles.indexOf(e) == selectedIndex
                             ? AppFont.medium14
-                                .copyWith(color: AppColor.textStrongLight)
+                                .copyWith(color: AppColor.lightText1)
                             : AppFont.reguler14.copyWith(
                                 color: Theme.of(context).indicatorColor)),
                         textAlign: TextAlign.center,
@@ -57,6 +54,4 @@ class CustomTabBar extends StatelessWidget {
           .toList(),
     );
   }
-
- 
 }

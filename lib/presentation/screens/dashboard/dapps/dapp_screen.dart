@@ -7,9 +7,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:reown_walletkit/reown_walletkit.dart';
 
 import '../../../../config/config.dart';
+import '../../../../utils/walletConnect/deep_link_handler.dart';
+import '../../../../utils/walletConnect/eth_utils.dart';
+import '../../../provider/dapp/walletconnect_provider.dart';
 import '../../../provider/provider.dart';
 import '../../../widget/widget.dart';
 import 'components/new_dapps.dart';
@@ -17,58 +20,114 @@ import 'components/sheet_select_network.dart';
 
 final indexbarDapp = StateProvider.autoDispose<int>((ref) => 0);
 
-class DappScreen extends ConsumerWidget {
+class DappScreen extends ConsumerStatefulWidget {
   const DappScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DappScreen> createState() => _DappScreenState();
+}
+
+class _DappScreenState extends ConsumerState<DappScreen> {
+  List<PairingInfo> _pairings = [];
+  ReownWalletKit? walletKit;
+  @override
+  void initState() {
+    walletKit = ref.read(walletconnectProvider).valueOrNull;
+    _pairings = walletKit!.pairings.getAll();
+    _pairings = _pairings.where((p) => p.active).toList();
+
+    _registerListeners();
+
+    DeepLinkHandler.checkInitialLink();
+    super.initState();
+  }
+
+  void _registerListeners() {
+    walletKit?.core.relayClient.onRelayClientMessage.subscribe(
+      _onRelayClientMessage,
+    );
+    walletKit?.pairings.onSync.subscribe(_refreshState);
+    walletKit?.pairings.onUpdate.subscribe(_refreshState);
+    walletKit?.onSessionConnect.subscribe(_refreshState);
+    walletKit?.onSessionDelete.subscribe(_refreshState);
+  }
+
+  void _unregisterListeners() {
+    walletKit?.onSessionDelete.unsubscribe(_refreshState);
+    walletKit?.onSessionConnect.unsubscribe(_refreshState);
+    walletKit?.pairings.onSync.unsubscribe(_refreshState);
+    walletKit?.pairings.onUpdate.unsubscribe(_refreshState);
+    walletKit?.core.relayClient.onRelayClientMessage.unsubscribe(
+      _onRelayClientMessage,
+    );
+  }
+
+  @override
+  void dispose() {
+    _unregisterListeners();
+    super.dispose();
+  }
+
+  void _refreshState(dynamic event) async {
+    setState(() {});
+  }
+
+  void _onRelayClientMessage(MessageEvent? event) async {
+    _refreshState(event);
+    if (event != null) {
+      final jsonObject = await EthUtils.decodeMessageEvent(event, walletKit!);
+      if (!mounted) return;
+      if (jsonObject is JsonRpcRequest &&
+          jsonObject.method == MethodConstants.WC_SESSION_PING) {
+        MethodHelper().showSnack(
+          context: context,
+          content: "onRelay ${jsonObject.method}",
+          backgorund: AppColor.greenColor,
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final listChain = ref.watch(listChainSearchProvider);
+
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
           elevation: 0,
           shadowColor: AppColor.grayColor,
           title: Padding(
-              padding: EdgeInsets.only(top: 12.h),
+              padding: EdgeInsets.only(top: 12),
               child: SearchField(
                 controller: ref.watch(searchWebProvider),
                 onEditingComplete: () {
                   if (ref.watch(searchWebProvider).text.isNotEmpty) {
-                    if (ref.watch(chainDappProvider).chainId != null) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DappsWeb3(
-                                    initialUrl:
-                                        ref.watch(searchWebProvider).text,
-                                  )));
-                    } else {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (context) => SheetSelectNetworkDapp(
-                                url: ref.watch(searchWebProvider).text,
-                              ),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.surface,
-                          showDragHandle: true,
-                          isDismissible: false,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(16.r))));
-                    }
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) => SheetSelectNetworkDapp(
+                              url: ref.watch(searchWebProvider).text,
+                              onSelect: () {},
+                            ),
+                        backgroundColor: Theme.of(context).colorScheme.surface,
+                        showDragHandle: true,
+                        isDismissible: false,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(16))));
                   }
                 },
               )),
           automaticallyImplyLeading: false,
           backgroundColor: Theme.of(context).colorScheme.surface,
-          toolbarHeight: 76.h,
+          toolbarHeight: 76,
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            16.0.height,
+            widget.height(16),
             overview(ref),
-            8.0.height,
+            widget.height(8),
             ref.watch(browserHistoryProvider).when(
               data: (data) {
                 return data.isEmpty
@@ -78,7 +137,7 @@ class DappScreen extends ConsumerWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.w),
+                            padding: EdgeInsets.symmetric(horizontal: 16),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -95,7 +154,7 @@ class DappScreen extends ConsumerWidget {
                               ],
                             ),
                           ),
-                          16.0.height,
+                          widget.height(16),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
@@ -104,35 +163,35 @@ class DappScreen extends ConsumerWidget {
                                   data.length > 10 ? 10 : data.length,
                                   (index) => Padding(
                                         padding: EdgeInsets.only(
-                                            left: index == 0 ? 16.w : 0,
-                                            right: index == 4 ? 16.w : 12.w),
+                                            left: index == 0 ? 16 : 0,
+                                            right: index == 4 ? 16 : 12),
                                         child: InkWell(
                                           onTap: () {
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        DappsWeb3(
+                                                        NewWeb3Webview(
                                                             initialUrl:
                                                                 data[index]
                                                                         .url ??
                                                                     '')));
                                           },
                                           child: SizedBox(
-                                            width: 54.w,
+                                            width: 54,
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
                                                 SizedBox(
-                                                  width: 42.w,
-                                                  height: 42.w,
+                                                  width: 42,
+                                                  height: 42,
                                                   child: ClipPolygon(
                                                       sides: 6,
                                                       child: Image.asset(
                                                           AppImage
                                                               .defaultBrowser)),
                                                 ),
-                                                8.0.height,
+                                                widget.height(8),
                                                 Text(
                                                   data[index].title ?? "",
                                                   style: AppFont.reguler12
@@ -162,13 +221,13 @@ class DappScreen extends ConsumerWidget {
                   children: List.generate(
                       6,
                       (index) => ShimmerLoading(
-                            width: 54.w,
-                            height: 54.w,
+                            width: 54,
+                            height: 54,
                           )),
                 );
               },
             ),
-            16.0.height,
+            widget.height(16),
             Expanded(
               child: DefaultTabController(
                 length: listChain.length,
@@ -198,18 +257,18 @@ class DappScreen extends ConsumerWidget {
                               listChain.length,
                               (index) => Container(
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 8.w, vertical: 6.h),
+                                        horizontal: 8, vertical: 6),
                                     margin: EdgeInsets.only(
                                         left:
                                             listChain[index] == listChain.first
-                                                ? 16.w
+                                                ? 16
                                                 : 0,
                                         right:
                                             listChain[index] == listChain.last
-                                                ? 16.w
-                                                : 8.w),
+                                                ? 16
+                                                : 8),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(6.r),
+                                      borderRadius: BorderRadius.circular(6),
                                       color: ref.watch(indexbarDapp) == index
                                           ? AppColor.primaryColor
                                           : Theme.of(context).cardColor,
@@ -218,12 +277,12 @@ class DappScreen extends ConsumerWidget {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         SizedBox(
-                                          width: 24.w,
-                                          height: 24.w,
+                                          width: 24,
+                                          height: 24,
                                           child: ClipPolygon(
                                             sides: 6,
                                             child: Container(
-                                              padding: EdgeInsets.all(0.5.h),
+                                              padding: EdgeInsets.all(0.5),
                                               color: Theme.of(context)
                                                   .colorScheme
                                                   .surface,
@@ -233,13 +292,13 @@ class DappScreen extends ConsumerWidget {
                                             ),
                                           ),
                                         ),
-                                        8.0.width,
+                                        widget.width(8),
                                         Text(
                                           listChain[index].symbol ?? '',
                                           style: AppFont.medium12.copyWith(
                                               color: ref.watch(indexbarDapp) ==
                                                       index
-                                                  ? AppColor.textStrongLight
+                                                  ? AppColor.lightText1
                                                   : Theme.of(context)
                                                       .hintColor),
                                         ),
@@ -247,11 +306,11 @@ class DappScreen extends ConsumerWidget {
                                     ),
                                   ))),
                     ),
-                    8.0.height,
+                    widget.height(8),
                     Expanded(
                         child: Container(
-                            padding: EdgeInsets.all(16.w),
-                            margin: EdgeInsets.symmetric(horizontal: 16.w),
+                            padding: EdgeInsets.all(16),
+                            margin: EdgeInsets.symmetric(horizontal: 16),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: Theme.of(context).cardColor),
@@ -267,33 +326,30 @@ class DappScreen extends ConsumerWidget {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        DappsWeb3(
+                                                        NewWeb3Webview(
                                                             initialUrl:
                                                                 data[index]
                                                                         .url ??
                                                                     '')));
                                           },
                                           child: Container(
-                                            margin:
-                                                EdgeInsets.only(bottom: 8.h),
+                                            margin: EdgeInsets.only(bottom: 8),
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 12.w,
-                                                vertical: 8.h),
+                                                horizontal: 12, vertical: 8),
                                             decoration: BoxDecoration(
                                                 borderRadius:
-                                                    BorderRadius.circular(8.r),
+                                                    BorderRadius.circular(8),
                                                 color: Theme.of(context)
                                                     .colorScheme
                                                     .surface),
                                             child: Row(
                                               children: [
                                                 SizedBox(
-                                                  width: 36.w,
-                                                  height: 36.w,
+                                                  width: 36,
+                                                  height: 36,
                                                   child: ClipPolygon(
                                                     sides: 6,
                                                     child: Container(
-                                                     
                                                       color: AppColor.cardLight,
                                                       child: Image.asset(
                                                           data[index].image ??
@@ -301,9 +357,10 @@ class DappScreen extends ConsumerWidget {
                                                     ),
                                                   ),
                                                 ),
-                                                8.0.width,
+                                                widget.width(8),
                                                 Expanded(
                                                     child: Column(
+                                                  spacing: 1,
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
@@ -315,7 +372,6 @@ class DappScreen extends ConsumerWidget {
                                                                       context)
                                                                   .indicatorColor),
                                                     ),
-                                                    1.0.height,
                                                     Text(
                                                       data[index].subtitle ??
                                                           '',
@@ -360,32 +416,32 @@ class DappScreen extends ConsumerWidget {
 
   Widget overview(WidgetRef ref) {
     return SizedBox(
-      height: 122.h,
+      height: 122,
       child: Stack(
         children: [
           CarouselSlider(
               items: List.generate(
                   ref.watch(newsDappProvider).length,
                   (index) => Container(
-                        margin: EdgeInsets.symmetric(
-                            horizontal: 16.w, vertical: 1.h),
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 1),
                         width: double.infinity,
-                        height: 120.h,
+                        height: 120,
                         decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                  spreadRadius: 0.5.w,
-                                  blurRadius: 0.3.w,
+                                  spreadRadius: 0.5,
+                                  blurRadius: 0.3,
                                   color: Colors.white12)
                             ],
-                            borderRadius: BorderRadius.circular(8.r),
+                            borderRadius: BorderRadius.circular(8),
                             image: DecorationImage(
                                 image: NetworkImage(
                                     ref.watch(newsDappProvider)[index]),
                                 fit: BoxFit.cover)),
                       )),
               options: CarouselOptions(
-                  height: 122.h,
+                  height: 122,
                   viewportFraction: 1,
                   autoPlay: true,
                   initialPage: 0,
@@ -395,7 +451,7 @@ class DappScreen extends ConsumerWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.only(bottom: 8.h),
+              padding: EdgeInsets.only(bottom: 8),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(ref.watch(newsDappProvider).length,
@@ -413,14 +469,14 @@ class DappScreen extends ConsumerWidget {
 
   Widget indicator(int index, WidgetRef ref) {
     return Container(
-      width: ref.watch(indexCarouselProvider) == index ? 30.w : 6.w,
-      height: 6.w,
-      margin: EdgeInsets.symmetric(horizontal: 2.w),
+      width: ref.watch(indexCarouselProvider) == index ? 30 : 6,
+      height: 6,
+      margin: EdgeInsets.symmetric(horizontal: 2),
       decoration: BoxDecoration(
           color: ref.watch(indexCarouselProvider) == index
               ? AppColor.primaryColor
               : AppColor.grayColor,
-          borderRadius: BorderRadius.circular(3.w)),
+          borderRadius: BorderRadius.circular(3)),
     );
   }
 }

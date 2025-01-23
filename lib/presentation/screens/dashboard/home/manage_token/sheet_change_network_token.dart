@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bee_wallet/data/model/token_chain/token_chain.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
 import 'package:bee_wallet/utils/util.dart';
@@ -18,7 +17,7 @@ class SheetChangeNetworkToken extends ConsumerWidget {
         .where((e) => e.contractAddress == null)
         .toList();
     return Padding(
-      padding: EdgeInsets.fromLTRB(24.w, 0.h, 24.w, 0.w),
+      padding: EdgeInsets.fromLTRB(24, 0, 24, 0),
       child: SizedBox(
         height: MediaQuery.sizeOf(context).height * 0.65,
         child: Column(
@@ -28,18 +27,18 @@ class SheetChangeNetworkToken extends ConsumerWidget {
               style: AppFont.medium18
                   .copyWith(color: Theme.of(context).indicatorColor),
             ),
-            16.0.height,
+            height(16),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
                     cardSelectAll(context, ref),
-                    12.0.height,
+                    height(12),
                     Column(
                         children: List.generate(
                       chainList.length,
                       (index) => Padding(
-                        padding: EdgeInsets.only(bottom: 12.h),
+                        padding: EdgeInsets.only(bottom: 12),
                         child: cardChain(context, chainList[index], ref),
                       ),
                     )),
@@ -67,11 +66,11 @@ class SheetChangeNetworkToken extends ConsumerWidget {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             border: Border.all(
-                width: 1.w,
+                width: 1,
                 color: listchain.length == selectedChain.length
                     ? AppColor.primaryColor
                     : Theme.of(context).cardColor),
@@ -82,10 +81,10 @@ class SheetChangeNetworkToken extends ConsumerWidget {
               children: [
                 Iconify(
                   MaterialSymbols.widgets_outline_rounded,
-                  size: 32.w,
+                  size: 32,
                   color: Theme.of(context).hintColor,
                 ),
-                8.0.width,
+                width(8),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,11 +126,11 @@ class SheetChangeNetworkToken extends ConsumerWidget {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             border: Border.all(
-                width: 1.w,
+                width: 1,
                 color: listchain.length != selectedChain.length &&
                         selectedChain
                             .any((element) => element.chainId == chain.chainId)
@@ -143,12 +142,12 @@ class SheetChangeNetworkToken extends ConsumerWidget {
             Row(
               children: [
                 SizedBox(
-                  width: 32.w,
-                  height: 32.w,
+                  width: 32,
+                  height: 32,
                   child: ClipPolygon(
                     sides: 6,
                     child: Container(
-                      padding: EdgeInsets.all(0.5.h),
+                      padding: EdgeInsets.all(0.5),
                       color: Theme.of(context).colorScheme.surface,
                       child: (chain.logo != null)
                           ? Image.asset(chain.logo!)
@@ -156,7 +155,7 @@ class SheetChangeNetworkToken extends ConsumerWidget {
                     ),
                   ),
                 ),
-                8.0.width,
+                width(8),
                 Expanded(
                   child: Text(
                     chain.name ?? '',

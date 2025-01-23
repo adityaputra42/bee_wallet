@@ -18,73 +18,93 @@ const SelectedTokenChainSchema = CollectionSchema(
   name: r'SelectedTokenChain',
   id: -2614624367387837306,
   properties: {
-    r'balance': PropertySchema(
+    r'apiKey': PropertySchema(
       id: 0,
+      name: r'apiKey',
+      type: IsarType.string,
+    ),
+    r'balance': PropertySchema(
+      id: 1,
       name: r'balance',
       type: IsarType.double,
     ),
     r'baseChain': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'baseChain',
       type: IsarType.string,
     ),
     r'baseLogo': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'baseLogo',
       type: IsarType.string,
     ),
     r'chainId': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'chainId',
       type: IsarType.string,
     ),
+    r'chainType': PropertySchema(
+      id: 5,
+      name: r'chainType',
+      type: IsarType.string,
+    ),
+    r'changePercent': PropertySchema(
+      id: 6,
+      name: r'changePercent',
+      type: IsarType.string,
+    ),
     r'contractAddress': PropertySchema(
-      id: 4,
+      id: 7,
       name: r'contractAddress',
       type: IsarType.string,
     ),
     r'decimal': PropertySchema(
-      id: 5,
+      id: 8,
       name: r'decimal',
       type: IsarType.long,
     ),
+    r'estimateUsd': PropertySchema(
+      id: 9,
+      name: r'estimateUsd',
+      type: IsarType.double,
+    ),
     r'explorer': PropertySchema(
-      id: 6,
+      id: 10,
       name: r'explorer',
       type: IsarType.string,
     ),
     r'explorerApi': PropertySchema(
-      id: 7,
+      id: 11,
       name: r'explorerApi',
       type: IsarType.string,
     ),
     r'isTestnet': PropertySchema(
-      id: 8,
+      id: 12,
       name: r'isTestnet',
       type: IsarType.bool,
     ),
     r'logo': PropertySchema(
-      id: 9,
+      id: 13,
       name: r'logo',
       type: IsarType.string,
     ),
     r'mnemonicAccount': PropertySchema(
-      id: 10,
+      id: 14,
       name: r'mnemonicAccount',
       type: IsarType.string,
     ),
     r'name': PropertySchema(
-      id: 11,
+      id: 15,
       name: r'name',
       type: IsarType.string,
     ),
     r'rpc': PropertySchema(
-      id: 12,
+      id: 16,
       name: r'rpc',
       type: IsarType.string,
     ),
     r'symbol': PropertySchema(
-      id: 13,
+      id: 17,
       name: r'symbol',
       type: IsarType.string,
     )
@@ -100,7 +120,7 @@ const SelectedTokenChainSchema = CollectionSchema(
   getId: _selectedTokenChainGetId,
   getLinks: _selectedTokenChainGetLinks,
   attach: _selectedTokenChainAttach,
-  version: '3.1.0+1',
+  version: '3.1.8',
 );
 
 int _selectedTokenChainEstimateSize(
@@ -109,6 +129,12 @@ int _selectedTokenChainEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  {
+    final value = object.apiKey;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   {
     final value = object.baseChain;
     if (value != null) {
@@ -123,6 +149,18 @@ int _selectedTokenChainEstimateSize(
   }
   {
     final value = object.chainId;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.chainType;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.changePercent;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -184,20 +222,24 @@ void _selectedTokenChainSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeDouble(offsets[0], object.balance);
-  writer.writeString(offsets[1], object.baseChain);
-  writer.writeString(offsets[2], object.baseLogo);
-  writer.writeString(offsets[3], object.chainId);
-  writer.writeString(offsets[4], object.contractAddress);
-  writer.writeLong(offsets[5], object.decimal);
-  writer.writeString(offsets[6], object.explorer);
-  writer.writeString(offsets[7], object.explorerApi);
-  writer.writeBool(offsets[8], object.isTestnet);
-  writer.writeString(offsets[9], object.logo);
-  writer.writeString(offsets[10], object.mnemonicAccount);
-  writer.writeString(offsets[11], object.name);
-  writer.writeString(offsets[12], object.rpc);
-  writer.writeString(offsets[13], object.symbol);
+  writer.writeString(offsets[0], object.apiKey);
+  writer.writeDouble(offsets[1], object.balance);
+  writer.writeString(offsets[2], object.baseChain);
+  writer.writeString(offsets[3], object.baseLogo);
+  writer.writeString(offsets[4], object.chainId);
+  writer.writeString(offsets[5], object.chainType);
+  writer.writeString(offsets[6], object.changePercent);
+  writer.writeString(offsets[7], object.contractAddress);
+  writer.writeLong(offsets[8], object.decimal);
+  writer.writeDouble(offsets[9], object.estimateUsd);
+  writer.writeString(offsets[10], object.explorer);
+  writer.writeString(offsets[11], object.explorerApi);
+  writer.writeBool(offsets[12], object.isTestnet);
+  writer.writeString(offsets[13], object.logo);
+  writer.writeString(offsets[14], object.mnemonicAccount);
+  writer.writeString(offsets[15], object.name);
+  writer.writeString(offsets[16], object.rpc);
+  writer.writeString(offsets[17], object.symbol);
 }
 
 SelectedTokenChain _selectedTokenChainDeserialize(
@@ -207,21 +249,25 @@ SelectedTokenChain _selectedTokenChainDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = SelectedTokenChain(
-    balance: reader.readDoubleOrNull(offsets[0]),
-    baseChain: reader.readStringOrNull(offsets[1]),
-    baseLogo: reader.readStringOrNull(offsets[2]),
-    chainId: reader.readStringOrNull(offsets[3]),
-    contractAddress: reader.readStringOrNull(offsets[4]),
-    decimal: reader.readLongOrNull(offsets[5]),
-    explorer: reader.readStringOrNull(offsets[6]),
-    explorerApi: reader.readStringOrNull(offsets[7]),
+    apiKey: reader.readStringOrNull(offsets[0]),
+    balance: reader.readDoubleOrNull(offsets[1]),
+    baseChain: reader.readStringOrNull(offsets[2]),
+    baseLogo: reader.readStringOrNull(offsets[3]),
+    chainId: reader.readStringOrNull(offsets[4]),
+    chainType: reader.readStringOrNull(offsets[5]),
+    changePercent: reader.readStringOrNull(offsets[6]),
+    contractAddress: reader.readStringOrNull(offsets[7]),
+    decimal: reader.readLongOrNull(offsets[8]),
+    estimateUsd: reader.readDoubleOrNull(offsets[9]),
+    explorer: reader.readStringOrNull(offsets[10]),
+    explorerApi: reader.readStringOrNull(offsets[11]),
     id: id,
-    isTestnet: reader.readBoolOrNull(offsets[8]),
-    logo: reader.readStringOrNull(offsets[9]),
-    mnemonicAccount: reader.readStringOrNull(offsets[10]),
-    name: reader.readStringOrNull(offsets[11]),
-    rpc: reader.readStringOrNull(offsets[12]),
-    symbol: reader.readStringOrNull(offsets[13]),
+    isTestnet: reader.readBoolOrNull(offsets[12]),
+    logo: reader.readStringOrNull(offsets[13]),
+    mnemonicAccount: reader.readStringOrNull(offsets[14]),
+    name: reader.readStringOrNull(offsets[15]),
+    rpc: reader.readStringOrNull(offsets[16]),
+    symbol: reader.readStringOrNull(offsets[17]),
   );
   return object;
 }
@@ -234,9 +280,9 @@ P _selectedTokenChainDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readDoubleOrNull(offset)) as P;
-    case 1:
       return (reader.readStringOrNull(offset)) as P;
+    case 1:
+      return (reader.readDoubleOrNull(offset)) as P;
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
@@ -244,22 +290,30 @@ P _selectedTokenChainDeserializeProp<P>(
     case 4:
       return (reader.readStringOrNull(offset)) as P;
     case 5:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 6:
       return (reader.readStringOrNull(offset)) as P;
     case 7:
       return (reader.readStringOrNull(offset)) as P;
     case 8:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 9:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 10:
       return (reader.readStringOrNull(offset)) as P;
     case 11:
       return (reader.readStringOrNull(offset)) as P;
     case 12:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 13:
+      return (reader.readStringOrNull(offset)) as P;
+    case 14:
+      return (reader.readStringOrNull(offset)) as P;
+    case 15:
+      return (reader.readStringOrNull(offset)) as P;
+    case 16:
+      return (reader.readStringOrNull(offset)) as P;
+    case 17:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -362,6 +416,160 @@ extension SelectedTokenChainQueryWhere
 
 extension SelectedTokenChainQueryFilter
     on QueryBuilder<SelectedTokenChain, SelectedTokenChain, QFilterCondition> {
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      apiKeyIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'apiKey',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      apiKeyIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'apiKey',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      apiKeyEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'apiKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      apiKeyGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'apiKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      apiKeyLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'apiKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      apiKeyBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'apiKey',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      apiKeyStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'apiKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      apiKeyEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'apiKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      apiKeyContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'apiKey',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      apiKeyMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'apiKey',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      apiKeyIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'apiKey',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      apiKeyIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'apiKey',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
       balanceIsNull() {
     return QueryBuilder.apply(this, (query) {
@@ -909,6 +1117,314 @@ extension SelectedTokenChainQueryFilter
   }
 
   QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      chainTypeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'chainType',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      chainTypeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'chainType',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      chainTypeEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'chainType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      chainTypeGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'chainType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      chainTypeLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'chainType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      chainTypeBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'chainType',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      chainTypeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'chainType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      chainTypeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'chainType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      chainTypeContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'chainType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      chainTypeMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'chainType',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      chainTypeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'chainType',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      chainTypeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'chainType',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      changePercentIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'changePercent',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      changePercentIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'changePercent',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      changePercentEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'changePercent',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      changePercentGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'changePercent',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      changePercentLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'changePercent',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      changePercentBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'changePercent',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      changePercentStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'changePercent',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      changePercentEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'changePercent',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      changePercentContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'changePercent',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      changePercentMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'changePercent',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      changePercentIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'changePercent',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      changePercentIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'changePercent',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
       contractAddressIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1132,6 +1648,90 @@ extension SelectedTokenChainQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      estimateUsdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'estimateUsd',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      estimateUsdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'estimateUsd',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      estimateUsdEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'estimateUsd',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      estimateUsdGreaterThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'estimateUsd',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      estimateUsdLessThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'estimateUsd',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      estimateUsdBetween(
+    double? lower,
+    double? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'estimateUsd',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
       ));
     });
   }
@@ -2326,6 +2926,20 @@ extension SelectedTokenChainQueryLinks
 extension SelectedTokenChainQuerySortBy
     on QueryBuilder<SelectedTokenChain, SelectedTokenChain, QSortBy> {
   QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByApiKey() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'apiKey', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByApiKeyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'apiKey', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
       sortByBalance() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'balance', Sort.asc);
@@ -2382,6 +2996,34 @@ extension SelectedTokenChainQuerySortBy
   }
 
   QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByChainType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'chainType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByChainTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'chainType', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByChangePercent() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'changePercent', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByChangePercentDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'changePercent', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
       sortByContractAddress() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'contractAddress', Sort.asc);
@@ -2406,6 +3048,20 @@ extension SelectedTokenChainQuerySortBy
       sortByDecimalDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'decimal', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByEstimateUsd() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'estimateUsd', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByEstimateUsdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'estimateUsd', Sort.desc);
     });
   }
 
@@ -2525,6 +3181,20 @@ extension SelectedTokenChainQuerySortBy
 extension SelectedTokenChainQuerySortThenBy
     on QueryBuilder<SelectedTokenChain, SelectedTokenChain, QSortThenBy> {
   QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByApiKey() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'apiKey', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByApiKeyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'apiKey', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
       thenByBalance() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'balance', Sort.asc);
@@ -2581,6 +3251,34 @@ extension SelectedTokenChainQuerySortThenBy
   }
 
   QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByChainType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'chainType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByChainTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'chainType', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByChangePercent() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'changePercent', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByChangePercentDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'changePercent', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
       thenByContractAddress() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'contractAddress', Sort.asc);
@@ -2605,6 +3303,20 @@ extension SelectedTokenChainQuerySortThenBy
       thenByDecimalDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'decimal', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByEstimateUsd() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'estimateUsd', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByEstimateUsdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'estimateUsd', Sort.desc);
     });
   }
 
@@ -2738,6 +3450,13 @@ extension SelectedTokenChainQuerySortThenBy
 extension SelectedTokenChainQueryWhereDistinct
     on QueryBuilder<SelectedTokenChain, SelectedTokenChain, QDistinct> {
   QueryBuilder<SelectedTokenChain, SelectedTokenChain, QDistinct>
+      distinctByApiKey({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'apiKey', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QDistinct>
       distinctByBalance() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'balance');
@@ -2766,6 +3485,21 @@ extension SelectedTokenChainQueryWhereDistinct
   }
 
   QueryBuilder<SelectedTokenChain, SelectedTokenChain, QDistinct>
+      distinctByChainType({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'chainType', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QDistinct>
+      distinctByChangePercent({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'changePercent',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QDistinct>
       distinctByContractAddress({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'contractAddress',
@@ -2777,6 +3511,13 @@ extension SelectedTokenChainQueryWhereDistinct
       distinctByDecimal() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'decimal');
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QDistinct>
+      distinctByEstimateUsd() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'estimateUsd');
     });
   }
 
@@ -2846,6 +3587,12 @@ extension SelectedTokenChainQueryProperty
     });
   }
 
+  QueryBuilder<SelectedTokenChain, String?, QQueryOperations> apiKeyProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'apiKey');
+    });
+  }
+
   QueryBuilder<SelectedTokenChain, double?, QQueryOperations>
       balanceProperty() {
     return QueryBuilder.apply(this, (query) {
@@ -2875,6 +3622,20 @@ extension SelectedTokenChainQueryProperty
   }
 
   QueryBuilder<SelectedTokenChain, String?, QQueryOperations>
+      chainTypeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'chainType');
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, String?, QQueryOperations>
+      changePercentProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'changePercent');
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, String?, QQueryOperations>
       contractAddressProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'contractAddress');
@@ -2884,6 +3645,13 @@ extension SelectedTokenChainQueryProperty
   QueryBuilder<SelectedTokenChain, int?, QQueryOperations> decimalProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'decimal');
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, double?, QQueryOperations>
+      estimateUsdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'estimateUsd');
     });
   }
 

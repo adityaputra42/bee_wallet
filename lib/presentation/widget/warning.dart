@@ -1,7 +1,5 @@
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../config/config.dart';
 
 class Warning extends StatelessWidget {
@@ -12,16 +10,16 @@ class Warning extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        border: Border.all(width: 1.w, color: color ?? AppColor.yellowColor),
-        borderRadius: BorderRadius.circular(8.r),
+        border: Border.all(width: 1, color: color ?? AppColor.yellowColor),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
         children: [
           Icon(Icons.error_outline_rounded,
-              size: 28.h, color: color ?? AppColor.yellowColor),
-          12.0.width,
+              size: 28, color: color ?? AppColor.yellowColor),
+          width(12),
           Expanded(
             child: Text(
               warning,

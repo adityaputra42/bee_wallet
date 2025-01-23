@@ -15,12 +15,15 @@ class TokenChain {
       {this.id,
       this.name,
       this.contractAddress,
+      this.tokenRegister,
       this.symbol,
       this.decimal,
       this.balance,
       this.logo,
       this.baseLogo,
       this.chainId,
+      this.chainType,
+      this.apiKey,
       this.rpc,
       this.explorer,
       this.explorerApi,
@@ -29,12 +32,15 @@ class TokenChain {
   Id? id = Isar.autoIncrement;
   String? name;
   String? contractAddress;
+  String? tokenRegister;
   String? symbol;
   int? decimal;
   double? balance;
   String? logo;
   String? baseLogo;
   String? chainId;
+  String? chainType;
+  String? apiKey;
   String? rpc;
   String? explorer;
   String? explorerApi;
@@ -51,8 +57,11 @@ class TokenChain {
     String? logo,
     String? baseLogo,
     String? baseChain,
+    String? chainType,
+    String? apiKey,
     int? decimal,
     String? contractAddress,
+    String? tokenRegister,
     bool? isTestnet,
   }) =>
       TokenChain(
@@ -65,8 +74,11 @@ class TokenChain {
         logo: logo ?? this.logo,
         baseLogo: baseLogo ?? this.baseLogo,
         baseChain: baseChain ?? this.baseChain,
+        chainType: chainType ?? this.chainType,
+        apiKey: apiKey ?? this.apiKey,
         decimal: decimal ?? this.decimal,
         contractAddress: contractAddress ?? this.contractAddress,
+        tokenRegister: tokenRegister ?? this.tokenRegister,
         isTestnet: isTestnet ?? this.isTestnet,
       );
 
@@ -80,8 +92,11 @@ class TokenChain {
         logo: json["logo"],
         baseLogo: json['baseLogo'],
         baseChain: json["baseNetwork"],
+        chainType: json["chainType"],
+        apiKey: json["apiKey"],
         decimal: json["decimal"],
         contractAddress: json["contractAddress"],
+        tokenRegister: json["token_registry"],
         isTestnet: json["isTestnet"],
       );
 
@@ -95,8 +110,11 @@ class TokenChain {
         "logo": logo,
         "baseLogo": baseLogo,
         "baseNetwork": baseChain,
+        "chainType": chainType,
+        "apiKey": apiKey,
         "decimal": decimal,
         "contractAddress": contractAddress,
+        "token_registry": tokenRegister,
         "isTestnet": isTestnet,
       };
 }

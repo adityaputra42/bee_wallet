@@ -1,8 +1,4 @@
-
-
 import '../../data/model/model.dart';
-import '../../data/model/token_chain/selected_token_chain.dart';
-import '../../data/model/token_chain/token_chain.dart';
 
 abstract class ActivityRepository {
   Future<List<Activity>> findAllActivity(String address,

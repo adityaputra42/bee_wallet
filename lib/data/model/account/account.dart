@@ -14,8 +14,8 @@ class Account {
   String? addressSolana;
   String? keyBTC;
   String? addressBTC;
-  // String? keyTron;
-  // String? addressTron;
+  String? keyTron;
+  String? addressTron;
   String? keySui;
   String? addressSui;
 
@@ -31,8 +31,8 @@ class Account {
       this.addressSolana,
       this.keyBTC,
       this.addressBTC,
-      // this.keyTron,
-      // this.addressTron,
+      this.keyTron,
+      this.addressTron,
       this.keySui,
       this.addressSui});
   Account copyWith({
@@ -46,8 +46,8 @@ class Account {
     String? addressSolana,
     String? keyBTC,
     String? addressBTC,
-    // String? keyTron,
-    // String? addressTron,
+    String? keyTron,
+    String? addressTron,
     String? keySui,
     String? addressSui,
   }) =>
@@ -62,8 +62,8 @@ class Account {
         addressSolana: addressSolana ?? this.addressSolana,
         keyBTC: keyBTC ?? this.keyBTC,
         addressBTC: addressBTC ?? this.addressBTC,
-        // keyTron: keyTron ?? this.keyTron,
-        // addressTron: addressTron ?? this.addressTron,
+        keyTron: keyTron ?? this.keyTron,
+        addressTron: addressTron ?? this.addressTron,
         keySui: keySui ?? this.keySui,
         addressSui: addressSui ?? this.addressSui,
       );
@@ -79,8 +79,8 @@ class Account {
         addressSolana: json['addressSolana'],
         keyBTC: json['keyBTC'],
         addressBTC: json['addressBTC'],
-        // keyTron: json['keyTron'],
-        // addressTron: json['addressTron'],
+        keyTron: json['keyTron'],
+        addressTron: json['addressTron'],
         keySui: json['keySui'],
         addressSui: json['addressSui'],
       );
@@ -96,8 +96,8 @@ class Account {
         "addressSolana": addressSolana,
         "keyBTC": keyBTC,
         "addressBTC": addressBTC,
-        // "keyTron": keyTron,
-        // "addressTron": addressTron,
+        "keyTron": keyTron,
+        "addressTron": addressTron,
         "keySui": keySui,
         "addressSui": addressSui
       };

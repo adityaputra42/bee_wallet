@@ -3,7 +3,6 @@
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../config/config.dart';
@@ -21,7 +20,7 @@ class SheetPasswordAddWallet extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 24.h),
+      padding: EdgeInsets.fromLTRB(8, 0, 8, 24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -31,16 +30,16 @@ class SheetPasswordAddWallet extends ConsumerWidget {
                 .copyWith(color: Theme.of(context).indicatorColor),
             textAlign: TextAlign.center,
           ),
-          4.0.height,
+          height(4),
           Text(
             "Please enter your pin to create new account",
             style:
                 AppFont.reguler14.copyWith(color: Theme.of(context).hintColor),
             textAlign: TextAlign.center,
           ),
-          24.0.height,
+          height(24),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            padding: EdgeInsets.symmetric(horizontal: 24),
             child: InputPin(
               keyboardType: TextInputType.none,
               controller: ref.watch(pinController),
@@ -70,9 +69,8 @@ class SheetPasswordAddWallet extends ConsumerWidget {
               },
             ),
           ),
-          16.0.height,
+          height(16),
           Numpadcustom(
-              height: 52.h,
               controller: ref.watch(pinController),
               delete: () {
                 ref.watch(pinController).text = ref.watch(pinController).text !=

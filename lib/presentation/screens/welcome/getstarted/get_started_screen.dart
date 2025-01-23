@@ -1,7 +1,7 @@
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:go_router/go_router.dart';
 
 import 'package:iconify_flutter_plus/icons/mdi.dart';
@@ -25,31 +25,31 @@ class GetStartedScreen extends ConsumerWidget {
       body: SafeArea(
           child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: 24.w,
+          horizontal: 24,
         ),
         child: Column(
           children: [
-            80.0.height,
+            height(80),
             Image.asset(
               AppImage.logo,
-              width: 96.w,
+              width: 96,
             ),
-            24.0.height,
+            height(24),
             Text(
               'Welcome to Crypto Wallet',
               style: AppFont.semibold24
                   .copyWith(color: Theme.of(context).indicatorColor),
               textAlign: TextAlign.center,
             ),
-            8.0.height,
+            height(8),
             Text(
               'Please set up your account to explore more features in the crypto wallet.',
               style: AppFont.reguler16
                   .copyWith(color: Theme.of(context).hintColor),
               textAlign: TextAlign.center,
             ),
-            76.0.height,
-            GestureDetector(
+            height(76),
+            InkWell(
               onTap: () {
                 ref.read(typeRegisterProvider.notifier).state =
                     TypeRegister.create;
@@ -57,25 +57,25 @@ class GetStartedScreen extends ConsumerWidget {
               },
               child: Container(
                 width: double.infinity,
-                padding: EdgeInsets.all(16.w),
+                padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
                     color: Theme.of(context).cardColor,
-                    borderRadius: BorderRadius.circular(12.r)),
+                    borderRadius: BorderRadius.circular(12)),
                 child: Row(
                   children: [
                     Container(
-                        width: 48.w,
-                        height: 48.w,
-                        padding: EdgeInsets.all(8.r),
+                        width: 48,
+                        height: 48,
+                        padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.r),
+                            borderRadius: BorderRadius.circular(8),
                             color: Theme.of(context).colorScheme.surface),
                         child: Iconify(
                           Mdi.wallet_outline,
-                          size: 32.w,
+                          size: 32,
                           color: AppColor.primaryColor,
                         )),
-                    16.0.width,
+                    width(32),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +85,7 @@ class GetStartedScreen extends ConsumerWidget {
                             style: AppFont.semibold16.copyWith(
                                 color: Theme.of(context).indicatorColor),
                           ),
-                          4.0.height,
+                          height(4),
                           Text(
                             'Start your transaction with BeeWallet',
                             style: AppFont.reguler12
@@ -98,8 +98,8 @@ class GetStartedScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            16.0.height,
-            GestureDetector(
+            height(16),
+            InkWell(
               onTap: () {
                 ref.read(typeRegisterProvider.notifier).state =
                     TypeRegister.import;
@@ -107,25 +107,25 @@ class GetStartedScreen extends ConsumerWidget {
               },
               child: Container(
                 width: double.infinity,
-                padding: EdgeInsets.all(16.w),
+                padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
                     color: Theme.of(context).cardColor,
-                    borderRadius: BorderRadius.circular(12.r)),
+                    borderRadius: BorderRadius.circular(12)),
                 child: Row(
                   children: [
                     Container(
-                        width: 48.w,
-                        height: 48.w,
-                        padding: EdgeInsets.all(8.r),
+                        width: 48,
+                        height: 48,
+                        padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.r),
+                            borderRadius: BorderRadius.circular(8),
                             color: Theme.of(context).colorScheme.surface),
                         child: Iconify(
                           Mdi.wallet_outline,
-                          size: 32.w,
+                          size: 32,
                           color: AppColor.primaryColor,
                         )),
-                    16.0.width,
+                    width(16),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,7 +135,7 @@ class GetStartedScreen extends ConsumerWidget {
                             style: AppFont.semibold16.copyWith(
                                 color: Theme.of(context).indicatorColor),
                           ),
-                          4.0.height,
+                          height(4),
                           Text(
                             'Setting your mnemonik phrase to import wallet',
                             style: AppFont.reguler12

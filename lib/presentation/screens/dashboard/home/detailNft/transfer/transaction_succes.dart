@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bee_wallet/config/config.dart';
 import 'package:bee_wallet/data/src/src.dart';
@@ -21,10 +20,10 @@ class TransactionSuccesScreen extends ConsumerWidget {
       backgroundColor: Theme.of(context).cardColor,
       body: SafeArea(
         child: Container(
-          margin: EdgeInsets.all(16.w),
-          padding: EdgeInsets.all(16.w),
+          margin: EdgeInsets.all(16),
+          padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: BorderRadius.circular(12),
               color: Theme.of(context).colorScheme.surface),
           child: Column(
             children: [
@@ -38,18 +37,18 @@ class TransactionSuccesScreen extends ConsumerWidget {
               const Spacer(),
               Image.asset(
                 AppImage.ilustrasi1,
-                width: 284.w,
+                width: 284,
               ),
-              36.0.height,
+              height(36),
               Center(
                   child: loading == true
                       ? const CircularProgressIndicator()
                       : Icon(
                           Icons.check_circle_outline_rounded,
-                          size: 60.w,
+                          size: 60,
                           color: AppColor.secondaryColor,
                         )),
-              24.0.height,
+              height(24),
               Text(
                 'The transaction is sent to the ${chain.name} Blockchain.\nIt might take few minutes to be confirmed by\nminers',
                 style: AppFont.reguler12

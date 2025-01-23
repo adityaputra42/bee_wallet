@@ -1,7 +1,6 @@
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/mdi.dart';
 
@@ -15,7 +14,7 @@ class SheetAddWallet extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(24.w, 0, 24.w, 24.h),
+      padding: EdgeInsets.fromLTRB(24, 0, 24, 24),
       child: Column(
         children: [
           Text(
@@ -24,7 +23,7 @@ class SheetAddWallet extends ConsumerWidget {
                 .copyWith(color: Theme.of(context).indicatorColor),
             textAlign: TextAlign.center,
           ),
-          16.0.height,
+          height(16),
           GestureDetector(
             onTap: () {
               Navigator.pop(context);
@@ -39,30 +38,30 @@ class SheetAddWallet extends ConsumerWidget {
                   useSafeArea: true,
                   shape: RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(16.r))));
+                          BorderRadius.vertical(top: Radius.circular(16))));
             },
             child: Container(
               width: double.infinity,
-              padding: EdgeInsets.all(12.w),
+              padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
-                  borderRadius: BorderRadius.circular(8.r)),
+                  borderRadius: BorderRadius.circular(8)),
               child: Row(
                 children: [
                   Container(
-                    width: 42.w,
-                    height: 42.w,
-                    padding: EdgeInsets.all(8.r),
+                    width: 42,
+                    height: 42,
+                    padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.r),
+                        borderRadius: BorderRadius.circular(6),
                         color: Theme.of(context).colorScheme.surface),
                     child: Iconify(
                       Mdi.wallet_outline,
                       color: AppColor.primaryColor,
-                      size: 28.w,
+                      size: 28,
                     ),
                   ),
-                  16.0.width,
+                  width(16),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +71,7 @@ class SheetAddWallet extends ConsumerWidget {
                           style: AppFont.semibold14
                               .copyWith(color: AppColor.primaryColor),
                         ),
-                        4.0.height,
+                        height(4),
                         Text(
                           'Start your transaction with PetaWallet',
                           style: AppFont.reguler12
@@ -85,7 +84,7 @@ class SheetAddWallet extends ConsumerWidget {
               ),
             ),
           ),
-          16.0.height,
+          height(16),
           GestureDetector(
             onTap: () {
               Navigator.pop(context);
@@ -100,30 +99,30 @@ class SheetAddWallet extends ConsumerWidget {
                   useSafeArea: true,
                   shape: RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(16.r))));
+                          BorderRadius.vertical(top: Radius.circular(16))));
             },
             child: Container(
               width: double.infinity,
-              padding: EdgeInsets.all(12.w),
+              padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
-                  borderRadius: BorderRadius.circular(8.r)),
+                  borderRadius: BorderRadius.circular(8)),
               child: Row(
                 children: [
-                   Container(
-                    width: 42.w,
-                    height: 42.w,
-                    padding: EdgeInsets.all(8.r),
+                  Container(
+                    width: 42,
+                    height: 42,
+                    padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.r),
+                        borderRadius: BorderRadius.circular(6),
                         color: Theme.of(context).colorScheme.surface),
                     child: Iconify(
                       Mdi.wallet_outline,
                       color: AppColor.primaryColor,
-                      size: 28.w,
+                      size: 28,
                     ),
                   ),
-                  16.0.width,
+                  width(16),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,7 +132,7 @@ class SheetAddWallet extends ConsumerWidget {
                           style: AppFont.semibold14
                               .copyWith(color: AppColor.primaryColor),
                         ),
-                        4.0.height,
+                        height(4),
                         Text(
                           'Setting your mnemonik phrase to import wallet',
                           style: AppFont.reguler12

@@ -54,7 +54,7 @@ const DappLinkSchema = CollectionSchema(
   getId: _dappLinkGetId,
   getLinks: _dappLinkGetLinks,
   attach: _dappLinkAttach,
-  version: '3.1.0+1',
+  version: '3.1.8',
 );
 
 int _dappLinkEstimateSize(

@@ -5,7 +5,6 @@ import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/material_symbols.dart';
 import 'package:iconify_flutter_plus/icons/mdi.dart';
@@ -21,10 +20,10 @@ class SwapScreen extends ConsumerWidget {
       appBar: WidgetHelper.appBar(
           context: context, title: "Swap", isCanBack: false),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16.w),
-        padding: EdgeInsets.all(16.w),
+        margin: EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             color: Theme.of(context).cardColor),
         child: LayoutBuilder(
           builder: (context, constraints) => SingleChildScrollView(
@@ -41,13 +40,11 @@ class SwapScreen extends ConsumerWidget {
                             Expanded(
                               child: Container(
                                 width: double.infinity,
-                                padding:
-                                    EdgeInsets.fromLTRB(16.w, 16.w, 16.w, 32.w),
+                                padding: EdgeInsets.fromLTRB(16, 16, 16, 32),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .surface),
+                                    borderRadius: BorderRadius.circular(8),
+                                    color:
+                                        Theme.of(context).colorScheme.surface),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -69,9 +66,9 @@ class SwapScreen extends ConsumerWidget {
                                               Mdi.wallet_outline,
                                               color:
                                                   Theme.of(context).hintColor,
-                                              size: 16.w,
+                                              size: 16,
                                             ),
-                                            8.0.width,
+                                            width(8),
                                             Text(
                                               "0.00",
                                               style: AppFont.medium12.copyWith(
@@ -82,26 +79,25 @@ class SwapScreen extends ConsumerWidget {
                                         )
                                       ],
                                     ),
-                                    16.0.height,
+                                    height(16),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         SizedBox(
-                                          width: MediaQuery.sizeOf(context)
-                                                  .width
-                                                  .w *
-                                              0.45,
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.45,
                                           child: Row(
                                             children: [
                                               SizedBox(
-                                                width: 40.w,
-                                                height: 40.w,
+                                                width: 40,
+                                                height: 40,
                                                 child: ClipPolygon(
                                                   sides: 6,
                                                   child: Container(
                                                     padding:
-                                                        EdgeInsets.all(0.5.h),
+                                                        EdgeInsets.all(0.5),
                                                     color: Theme.of(context)
                                                         .colorScheme
                                                         .surface,
@@ -110,7 +106,7 @@ class SwapScreen extends ConsumerWidget {
                                                   ),
                                                 ),
                                               ),
-                                              12.0.width,
+                                              width(12),
                                               Expanded(
                                                 child: Column(
                                                   mainAxisAlignment:
@@ -129,10 +125,10 @@ class SwapScreen extends ConsumerWidget {
                                                                           context)
                                                                       .indicatorColor),
                                                         ),
-                                                        4.0.width,
+                                                        width(4),
                                                         Iconify(
                                                           Ic.expand_more,
-                                                          size: 18.w,
+                                                          size: 18,
                                                           color: Theme.of(
                                                                   context)
                                                               .indicatorColor,
@@ -173,8 +169,7 @@ class SwapScreen extends ConsumerWidget {
                                                             .indicatorColor),
                                                 border: OutlineInputBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.r),
+                                                      BorderRadius.circular(8),
                                                   borderSide: const BorderSide(
                                                       color: Colors.transparent,
                                                       width: 0.5),
@@ -182,8 +177,7 @@ class SwapScreen extends ConsumerWidget {
                                                 disabledBorder:
                                                     OutlineInputBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.r),
+                                                      BorderRadius.circular(8),
                                                   borderSide: const BorderSide(
                                                       color: Colors.transparent,
                                                       width: 0.5),
@@ -191,8 +185,7 @@ class SwapScreen extends ConsumerWidget {
                                                 enabledBorder:
                                                     OutlineInputBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.r),
+                                                      BorderRadius.circular(8),
                                                   borderSide: const BorderSide(
                                                       color: Colors.transparent,
                                                       width: 0.5),
@@ -200,8 +193,7 @@ class SwapScreen extends ConsumerWidget {
                                                 focusedBorder:
                                                     OutlineInputBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.r),
+                                                      BorderRadius.circular(8),
                                                   borderSide: const BorderSide(
                                                       color:
                                                           Colors.transparent),
@@ -214,17 +206,15 @@ class SwapScreen extends ConsumerWidget {
                                 ),
                               ),
                             ),
-                            8.0.height,
+                            height(8),
                             Expanded(
                               child: Container(
                                 width: double.infinity,
-                                padding:
-                                    EdgeInsets.fromLTRB(16.w, 24.w, 16.w, 16.w),
+                                padding: EdgeInsets.fromLTRB(16, 24, 16, 16),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .surface),
+                                    borderRadius: BorderRadius.circular(8),
+                                    color:
+                                        Theme.of(context).colorScheme.surface),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -246,9 +236,9 @@ class SwapScreen extends ConsumerWidget {
                                               Mdi.wallet_outline,
                                               color:
                                                   Theme.of(context).hintColor,
-                                              size: 16.w,
+                                              size: 16,
                                             ),
-                                            8.0.width,
+                                            width(8),
                                             Text(
                                               "0.00",
                                               style: AppFont.medium12.copyWith(
@@ -259,26 +249,25 @@ class SwapScreen extends ConsumerWidget {
                                         )
                                       ],
                                     ),
-                                    16.0.height,
+                                    height(16),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         SizedBox(
-                                          width: MediaQuery.sizeOf(context)
-                                                  .width
-                                                  .w *
-                                              0.45,
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.45,
                                           child: Row(
                                             children: [
                                               SizedBox(
-                                                width: 40.w,
-                                                height: 40.w,
+                                                width: 40,
+                                                height: 40,
                                                 child: ClipPolygon(
                                                   sides: 6,
                                                   child: Container(
                                                     padding:
-                                                        EdgeInsets.all(0.5.h),
+                                                        EdgeInsets.all(0.5),
                                                     color: Theme.of(context)
                                                         .colorScheme
                                                         .surface,
@@ -287,7 +276,7 @@ class SwapScreen extends ConsumerWidget {
                                                   ),
                                                 ),
                                               ),
-                                              12.0.width,
+                                              width(12),
                                               Expanded(
                                                 child: Column(
                                                   crossAxisAlignment:
@@ -304,10 +293,10 @@ class SwapScreen extends ConsumerWidget {
                                                                           context)
                                                                       .indicatorColor),
                                                         ),
-                                                        4.0.width,
+                                                        width(4),
                                                         Iconify(
                                                           Ic.expand_more,
-                                                          size: 18.w,
+                                                          size: 18,
                                                           color: Theme.of(
                                                                   context)
                                                               .indicatorColor,
@@ -348,8 +337,7 @@ class SwapScreen extends ConsumerWidget {
                                                             .indicatorColor),
                                                 border: OutlineInputBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.r),
+                                                      BorderRadius.circular(8),
                                                   borderSide: const BorderSide(
                                                       color: Colors.transparent,
                                                       width: 0.5),
@@ -357,8 +345,7 @@ class SwapScreen extends ConsumerWidget {
                                                 disabledBorder:
                                                     OutlineInputBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.r),
+                                                      BorderRadius.circular(8),
                                                   borderSide: const BorderSide(
                                                       color: Colors.transparent,
                                                       width: 0.5),
@@ -366,8 +353,7 @@ class SwapScreen extends ConsumerWidget {
                                                 enabledBorder:
                                                     OutlineInputBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.r),
+                                                      BorderRadius.circular(8),
                                                   borderSide: const BorderSide(
                                                       color: Colors.transparent,
                                                       width: 0.5),
@@ -375,8 +361,7 @@ class SwapScreen extends ConsumerWidget {
                                                 focusedBorder:
                                                     OutlineInputBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.r),
+                                                      BorderRadius.circular(8),
                                                   borderSide: const BorderSide(
                                                       color:
                                                           Colors.transparent),
@@ -394,9 +379,9 @@ class SwapScreen extends ConsumerWidget {
                         Align(
                           alignment: Alignment.center,
                           child: Container(
-                            width: 52.w,
-                            height: 52.w,
-                            padding: EdgeInsets.all(10.w),
+                            width: 52,
+                            height: 52,
+                            padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: AppColor.primaryColor,
@@ -406,25 +391,25 @@ class SwapScreen extends ConsumerWidget {
                                       spreadRadius: 5,
                                       color: Theme.of(context)
                                           .indicatorColor
-                                          .withOpacity(0.1))
+                                          .withValues(alpha: 0.1))
                                 ]),
                             child: Iconify(
                               MaterialSymbols.swap_vert_rounded,
-                              size: 24.w,
-                              color: AppColor.textStrongLight,
+                              size: 24,
+                              color: AppColor.lightText1,
                             ),
                           ),
                         )
                       ],
                     ),
                   ),
-                  16.0.height,
+                  height(16),
                   PrimaryButton(title: "Swap", onPressed: () {}),
-                  16.0.height,
+                  height(16),
                   Container(
-                    padding: EdgeInsets.all(16.w),
+                    padding: EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.r),
+                        borderRadius: BorderRadius.circular(8),
                         color: Theme.of(context).colorScheme.surface),
                     child: Column(
                       children: [
@@ -443,25 +428,25 @@ class SwapScreen extends ConsumerWidget {
                                   style: AppFont.medium12.copyWith(
                                       color: Theme.of(context).indicatorColor),
                                 ),
-                                4.0.width,
+                                width(4),
                                 Icon(
                                   Icons.arrow_forward_ios_rounded,
-                                  size: 16.w,
+                                  size: 16,
                                   color: Theme.of(context).indicatorColor,
                                 )
                               ],
                             )
                           ],
                         ),
-                        12.0.height,
+                        height(12),
                         SizedBox(
-                          height: 1.h,
+                          height: 1,
                           child: Divider(
-                            thickness: 1.h,
+                            thickness: 1,
                             color: AppColor.grayColor,
                           ),
                         ),
-                        12.0.height,
+                        height(12),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -477,7 +462,7 @@ class SwapScreen extends ConsumerWidget {
                             ),
                           ],
                         ),
-                        8.0.height,
+                        height(8),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -493,7 +478,7 @@ class SwapScreen extends ConsumerWidget {
                             ),
                           ],
                         ),
-                        8.0.height,
+                        height(8),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

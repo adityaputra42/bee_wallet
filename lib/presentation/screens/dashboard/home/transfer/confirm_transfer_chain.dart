@@ -1,7 +1,7 @@
+import 'package:bee_wallet/presentation/widget/button_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bee_wallet/config/config.dart';
 import 'package:bee_wallet/presentation/provider/account/account_provider.dart';
@@ -22,10 +22,10 @@ class ConfirmTransferChain extends ConsumerWidget {
     return Scaffold(
       appBar: WidgetHelper.appBar(context: context, title: "Confirm Transfer"),
       body: Container(
-        margin: EdgeInsets.all(16.w),
-        padding: EdgeInsets.all(16.w),
+        margin: EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             color: Theme.of(context).cardColor),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,26 +34,25 @@ class ConfirmTransferChain extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  padding: EdgeInsets.all(16.w),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
+                      borderRadius: BorderRadius.circular(8),
                       color: Theme.of(context).colorScheme.surface),
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 34.w,
-                        height: 34.w,
+                        width: 34,
+                        height: 34,
                         child: Stack(
                           children: [
                             SizedBox(
-                              width: 32.w,
-                              height: 32.w,
+                              width: 32,
+                              height: 32,
                               child: ClipPolygon(
                                 sides: 6,
                                 child: Container(
-                                  padding: EdgeInsets.all(0.5.h),
-                                  color:
-                                      Theme.of(context).colorScheme.surface,
+                                  padding: EdgeInsets.all(0.5),
+                                  color: Theme.of(context).colorScheme.surface,
                                   child: (chain.logo != null)
                                       ? Image.asset(chain.logo!)
                                       : Image.asset(AppImage.logo),
@@ -63,15 +62,15 @@ class ConfirmTransferChain extends ConsumerWidget {
                             Align(
                               alignment: Alignment.bottomRight,
                               child: SizedBox(
-                                width: 16.w,
-                                height: 16.w,
+                                width: 16,
+                                height: 16,
                                 child: ClipPolygon(
                                   sides: 6,
                                   child: Container(
-                                    padding: EdgeInsets.all(0.1.h),
+                                    padding: EdgeInsets.all(0.1),
                                     decoration: BoxDecoration(
                                         border: Border.all(
-                                            width: 0.1.w,
+                                            width: 0.1,
                                             color: Theme.of(context).cardColor),
                                         color: Theme.of(context)
                                             .colorScheme
@@ -86,12 +85,12 @@ class ConfirmTransferChain extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      8.0.width,
+                      width(8),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${ref.watch(amountSendProvider)} ${chain.symbol}",
+                            "${ref.watch(totalAmountProvider)} ${chain.symbol}",
                             style: AppFont.medium14.copyWith(
                                 color: Theme.of(context).indicatorColor),
                           ),
@@ -105,11 +104,11 @@ class ConfirmTransferChain extends ConsumerWidget {
                     ],
                   ),
                 ),
-                16.0.height,
+                height(16),
                 Container(
-                  padding: EdgeInsets.all(16.w),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
+                      borderRadius: BorderRadius.circular(8),
                       color: Theme.of(context).colorScheme.surface),
                   child: Column(
                     children: [
@@ -136,7 +135,7 @@ class ConfirmTransferChain extends ConsumerWidget {
                           )
                         ],
                       ),
-                      8.0.height,
+                      height(8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -157,11 +156,11 @@ class ConfirmTransferChain extends ConsumerWidget {
                     ],
                   ),
                 ),
-                16.0.height,
+                height(16),
                 Container(
-                  padding: EdgeInsets.all(16.w),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.r),
+                    borderRadius: BorderRadius.circular(8),
                     color: Theme.of(context).colorScheme.surface,
                   ),
                   child: Column(
@@ -181,7 +180,7 @@ class ConfirmTransferChain extends ConsumerWidget {
                           )
                         ],
                       ),
-                      8.0.height,
+                      height(8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -193,13 +192,13 @@ class ConfirmTransferChain extends ConsumerWidget {
                                     .setSelectedFee(0);
                               },
                               child: Container(
-                                height: 64.h,
-                                padding: EdgeInsets.all(8.w),
+                                height: 64,
+                                padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                     color: Theme.of(context).cardColor,
                                     border: Border.all(
-                                      width: 1.w,
+                                      width: 1,
                                       color: selectedFee == 0
                                           ? AppColor.primaryColor
                                           : Theme.of(context).cardColor,
@@ -214,7 +213,7 @@ class ConfirmTransferChain extends ConsumerWidget {
                                                 ? AppColor.primaryColor
                                                 : Theme.of(context).hintColor),
                                       ),
-                                      2.0.height,
+                                      height(2),
                                       Text(
                                         '~${((ref.watch(slowNetworkFeeProvider) * BigInt.from(10).pow(9).toDouble()) / double.parse(ref.watch(gasLimitProvider).text)).toStringAsFixed(1)}  Gwei',
                                         style: AppFont.reguler12.copyWith(
@@ -226,7 +225,7 @@ class ConfirmTransferChain extends ConsumerWidget {
                               ),
                             ),
                           ),
-                          8.0.width,
+                          width(8),
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
@@ -235,13 +234,13 @@ class ConfirmTransferChain extends ConsumerWidget {
                                     .setSelectedFee(1);
                               },
                               child: Container(
-                                height: 64.h,
-                                padding: EdgeInsets.all(8.w),
+                                height: 64,
+                                padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                     color: Theme.of(context).cardColor,
                                     border: Border.all(
-                                      width: 1.w,
+                                      width: 1,
                                       color: selectedFee == 1
                                           ? AppColor.primaryColor
                                           : Theme.of(context).cardColor,
@@ -256,7 +255,7 @@ class ConfirmTransferChain extends ConsumerWidget {
                                                 ? AppColor.primaryColor
                                                 : Theme.of(context).hintColor),
                                       ),
-                                      2.0.height,
+                                      height(2),
                                       Text(
                                         '~${((ref.watch(averageNetworkFeeProvider) * BigInt.from(10).pow(9).toDouble()) / double.parse(ref.watch(gasLimitProvider).text)).toStringAsFixed(1)} Gwei',
                                         style: AppFont.reguler12.copyWith(
@@ -268,7 +267,7 @@ class ConfirmTransferChain extends ConsumerWidget {
                               ),
                             ),
                           ),
-                          8.0.width,
+                          width(8),
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
@@ -277,13 +276,13 @@ class ConfirmTransferChain extends ConsumerWidget {
                                     .setSelectedFee(2);
                               },
                               child: Container(
-                                height: 64.h,
-                                padding: EdgeInsets.all(8.w),
+                                height: 64,
+                                padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                     color: Theme.of(context).cardColor,
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                     border: Border.all(
-                                      width: 1.w,
+                                      width: 1,
                                       color: selectedFee == 2
                                           ? AppColor.primaryColor
                                           : Theme.of(context).cardColor,
@@ -298,7 +297,7 @@ class ConfirmTransferChain extends ConsumerWidget {
                                                 ? AppColor.primaryColor
                                                 : Theme.of(context).hintColor),
                                       ),
-                                      2.0.height,
+                                      height(2),
                                       Text(
                                         '~ ${((ref.watch(fastNetworkFeeProvider) * BigInt.from(10).pow(9).toDouble()) / double.parse(ref.watch(gasLimitProvider).text)).toStringAsFixed(1)} Gwei',
                                         style: AppFont.reguler12.copyWith(
@@ -310,20 +309,20 @@ class ConfirmTransferChain extends ConsumerWidget {
                               ),
                             ),
                           ),
-                          8.0.width,
+                          width(8),
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
                                 context.goNamed('custom_gas_fee');
                               },
                               child: Container(
-                                height: 64.h,
-                                padding: EdgeInsets.all(8.w),
+                                height: 64,
+                                padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                     color: Theme.of(context).cardColor,
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                     border: Border.all(
-                                      width: 1.w,
+                                      width: 1,
                                       color: selectedFee == 3
                                           ? AppColor.primaryColor
                                           : Theme.of(context).cardColor,
@@ -338,13 +337,13 @@ class ConfirmTransferChain extends ConsumerWidget {
                                                 ? AppColor.primaryColor
                                                 : Theme.of(context).hintColor),
                                       ),
-                                      2.0.height,
+                                      height(2),
                                       Icon(
                                         Icons.mode_edit_rounded,
                                         color: selectedFee == 3
                                             ? AppColor.primaryColor
                                             : Theme.of(context).hintColor,
-                                        size: 20.w,
+                                        size: 20,
                                       )
                                     ]),
                               ),
@@ -357,14 +356,15 @@ class ConfirmTransferChain extends ConsumerWidget {
                 ),
               ],
             ),
-            PrimaryButton(
-              margin: EdgeInsets.only(top: 16.w),
-              title: "Send",
-              loading: ref.watch(transferChainProvider).isLoading,
-              onPressed: () {
-                ref.read(transferChainProvider.notifier).tranfer(context);
-              },
-            ),
+            ref.watch(transferChainProvider).isLoading
+                ? ButtonLoading()
+                : PrimaryButton(
+                    margin: EdgeInsets.only(top: 16),
+                    title: "Send",
+                    onPressed: () {
+                      ref.read(transferChainProvider.notifier).tranfer(context);
+                    },
+                  ),
           ],
         ),
       ),

@@ -1,7 +1,6 @@
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../config/config.dart';
 import '../../../../../provider/backup/backup_provider.dart';
@@ -14,7 +13,7 @@ class SheetConfirmationBackup extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 24.h),
+      padding: EdgeInsets.fromLTRB(16, 0, 16, 24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -28,7 +27,7 @@ class SheetConfirmationBackup extends ConsumerWidget {
               ref.read(disableUnderstodProvider.notifier).checkButtonConfirm();
             },
           ),
-          16.0.height,
+          height(16),
           cardConfirm(
             context,
             title:
@@ -39,7 +38,7 @@ class SheetConfirmationBackup extends ConsumerWidget {
               ref.read(disableUnderstodProvider.notifier).checkButtonConfirm();
             },
           ),
-          16.0.height,
+          height(16),
           cardConfirm(
             context,
             title:
@@ -50,7 +49,7 @@ class SheetConfirmationBackup extends ConsumerWidget {
               ref.read(disableUnderstodProvider.notifier).checkButtonConfirm();
             },
           ),
-          24.0.height,
+          height(24),
           PrimaryButton(
               disable: ref.watch(disableUnderstodProvider),
               title: 'Understood',
@@ -64,7 +63,7 @@ class SheetConfirmationBackup extends ConsumerWidget {
                     showDragHandle: true,
                     shape: RoundedRectangleBorder(
                         borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(16.r))));
+                            BorderRadius.vertical(top: Radius.circular(16))));
               })
         ],
       ),
@@ -74,9 +73,9 @@ class SheetConfirmationBackup extends ConsumerWidget {
   Widget cardConfirm(BuildContext context,
       {required String title, required bool value, Function(bool?)? onChange}) {
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.r),
+          borderRadius: BorderRadius.circular(8),
           color: Theme.of(context).cardColor),
       child: Row(
         children: [
@@ -86,16 +85,16 @@ class SheetConfirmationBackup extends ConsumerWidget {
             style:
                 AppFont.medium14.copyWith(color: Theme.of(context).hintColor),
           )),
-          8.0.width,
+          width(8),
           SizedBox(
-            width: 16.w,
-            height: 16.w,
+            width: 16,
+            height: 16,
             child: Checkbox(
               value: value,
               onChanged: onChange,
               activeColor: AppColor.primaryColor,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4.r)),
+                  borderRadius: BorderRadius.circular(4)),
             ),
           )
         ],

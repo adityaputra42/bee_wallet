@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bee_wallet/data/src/app_chain_logo.dart';
 import 'package:bee_wallet/utils/util.dart';
@@ -27,22 +26,22 @@ class AssetWallet extends ConsumerWidget {
     final chain = ref.watch(selectedChainTokenProvider).valueOrNull ?? [];
     final chainList = (ref.watch(listTokenChainProvider).valueOrNull ?? []);
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          8.0.height,
+          height(8),
           Text(
             "\$${0.toStringAsFixed(2)}",
             style: AppFont.semibold30
                 .copyWith(color: Theme.of(context).indicatorColor),
           ),
-          2.0.height,
+          height(2),
           Text(
             "Estimate Balance in USD",
             style:
                 AppFont.medium12.copyWith(color: Theme.of(context).hintColor),
           ),
-          16.0.height,
+          height(16),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -53,24 +52,23 @@ class AssetWallet extends ConsumerWidget {
                   ref.read(chainSelectedSearchProvider.notifier).onSearch(v);
                 },
               )),
-              8.0.width,
+              width(8),
               GestureDetector(
                 onTap: () {
                   context.goNamed('select_network');
                 },
                 child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-                    height: 48.w,
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    height: 48,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.r),
+                        borderRadius: BorderRadius.circular(8),
                         color: Theme.of(context).cardColor),
                     child: Row(
                       children: [
                         chainList.length != chain.length && chain.isNotEmpty
                             ? SizedBox(
-                                width: 32.w,
-                                height: 32.w,
+                                width: 32,
+                                height: 32,
                                 child: ClipPolygon(
                                     sides: 6,
                                     child: Image.asset(
@@ -80,39 +78,39 @@ class AssetWallet extends ConsumerWidget {
                               )
                             : Iconify(
                                 MaterialSymbols.widgets_outline_rounded,
-                                size: 24.w,
+                                size: 24,
                                 color: AppColor.grayColor,
                               ),
-                        2.0.width,
+                        width(2),
                         Icon(Icons.expand_more,
-                            size: 24.w, color: AppColor.grayColor)
+                            size: 24, color: AppColor.grayColor)
                       ],
                     )),
               ),
-              8.0.width,
+              width(8),
               GestureDetector(
                 onTap: () {
                   context.goNamed('manage_token');
                 },
                 child: Container(
-                  width: 48.w,
-                  height: 48.w,
+                  width: 48,
+                  height: 48,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
+                      borderRadius: BorderRadius.circular(8),
                       color: Theme.of(context).cardColor),
                   child: Icon(
                     Icons.tune,
-                    size: 24.w,
+                    size: 24,
                     color: AppColor.grayColor,
                   ),
                 ),
               )
             ],
           ),
-          16.0.height,
+          height(16),
           Expanded(
               child: Container(
-            padding: EdgeInsets.all(16.w),
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: Theme.of(context).cardColor),
@@ -124,7 +122,7 @@ class AssetWallet extends ConsumerWidget {
                   ? const Empty(title: "No Data")
                   : ListView.builder(
                       itemBuilder: (context, index) => Padding(
-                            padding: EdgeInsets.only(bottom: 8.h),
+                            padding: EdgeInsets.only(bottom: 8),
                             child: cardChain(context, ref, listChain[index]),
                           ),
                       itemCount: listChain.length),
@@ -144,26 +142,26 @@ class AssetWallet extends ConsumerWidget {
         context.goNamed('detail_token');
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             color: Theme.of(context).colorScheme.surface),
         child: Row(
           children: [
             SizedBox(
-              width: 34.w,
-              height: 32.w,
+              width: 34,
+              height: 32,
               child: Stack(
                 children: [
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: SizedBox(
-                      width: 32.w,
-                      height: 32.w,
+                      width: 32,
+                      height: 32,
                       child: ClipPolygon(
                         sides: 6,
                         child: Container(
-                          padding: EdgeInsets.all(0.5.h),
+                          padding: EdgeInsets.all(0.5),
                           color: Theme.of(context).colorScheme.surface,
                           child: (chain.logo != null)
                               ? Image.asset(chain.logo!)
@@ -175,15 +173,15 @@ class AssetWallet extends ConsumerWidget {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: SizedBox(
-                      width: 16.w,
-                      height: 16.w,
+                      width: 16,
+                      height: 16,
                       child: ClipPolygon(
                         sides: 6,
                         child: Container(
-                            padding: EdgeInsets.all(0.1.h),
+                            padding: EdgeInsets.all(0.1),
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                    width: 0.1.w,
+                                    width: 0.1,
                                     color: Theme.of(context).primaryColor),
                                 color: Theme.of(context).colorScheme.surface),
                             child:
@@ -194,7 +192,7 @@ class AssetWallet extends ConsumerWidget {
                 ],
               ),
             ),
-            8.0.width,
+            width(8),
             Expanded(
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,15 +207,15 @@ class AssetWallet extends ConsumerWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    16.0.width,
+                    width(16),
                     Text(
-                      "${roundDouble((chain.balance ?? 0),5)} ${chain.symbol}",
+                      "${roundDouble((chain.balance ?? 0), 5)} ${chain.symbol}",
                       style: AppFont.medium12
                           .copyWith(color: Theme.of(context).indicatorColor),
                     ),
                   ],
                 ),
-                // 2.0.height,
+                // height(2),
                 Row(
                   children: [
                     Expanded(
@@ -228,7 +226,7 @@ class AssetWallet extends ConsumerWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    16.0.width,
+                    width(16),
                     Text(
                       "~\$ 0.0",
                       style: AppFont.medium10

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:bee_wallet/data/model/token_chain/selected_token_chain.dart';
@@ -42,26 +41,26 @@ class ManageToken extends ConsumerWidget {
                   isScrollControlled: true,
                   shape: RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(16.r))));
+                          BorderRadius.vertical(top: Radius.circular(16))));
             },
             child: Container(
-              height: 40.w,
-              padding: EdgeInsets.all(8.h),
+              height: 40,
+              padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  border: Border.all(width: 1.w, color: AppColor.grayColor)),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(width: 1, color: AppColor.grayColor)),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   chainSelected.isNotEmpty &&
                           chainList.length != chainSelected.length
                       ? SizedBox(
-                          width: 20.w,
-                          height: 20.w,
+                          width: 20,
+                          height: 20,
                           child: ClipPolygon(
                             sides: 6,
                             child: Container(
-                              padding: EdgeInsets.all(0.5.h),
+                              padding: EdgeInsets.all(0.5),
                               color: Theme.of(context).colorScheme.surface,
                               child: (chainSelected.first.logo != null)
                                   ? Image.asset(chainSelected.first.logo!)
@@ -71,20 +70,20 @@ class ManageToken extends ConsumerWidget {
                         )
                       : Iconify(
                           MaterialSymbols.widgets_outline_rounded,
-                          size: 32.w,
+                          size: 32,
                           color: AppColor.primaryColor,
                         ),
                   Icon(
                     Icons.arrow_drop_down_rounded,
                     color: Theme.of(context).hintColor,
-                    size: 20.w,
+                    size: 20,
                   ),
                 ],
               ),
             )),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.all(16),
         child: Column(
           children: [
             Row(
@@ -97,30 +96,30 @@ class ManageToken extends ConsumerWidget {
                         .onSearch(ref.watch(searchManageToken).text),
                   ),
                 ),
-                8.0.width,
+                width(8),
                 GestureDetector(
                   onTap: () {
                     context.goNamed('add_token');
                   },
                   child: Container(
-                    width: 48.w,
-                    height: 48.w,
+                    width: 48,
+                    height: 48,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.r),
+                        borderRadius: BorderRadius.circular(8),
                         color: Theme.of(context).cardColor),
                     child: Icon(
                       Icons.add_rounded,
-                      size: 32.w,
+                      size: 32,
                       color: Theme.of(context).indicatorColor,
                     ),
                   ),
                 )
               ],
             ),
-            16.0.height,
+            height(16),
             Expanded(
                 child: Container(
-              padding: EdgeInsets.all(16.w),
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Theme.of(context).cardColor),
@@ -128,7 +127,7 @@ class ManageToken extends ConsumerWidget {
                   ? const Empty(title: "Token not found")
                   : ListView.builder(
                       itemBuilder: (context, index) => Padding(
-                        padding: EdgeInsets.only(bottom: 8.h),
+                        padding: EdgeInsets.only(bottom: 8),
                         child: cardChain(context, ref, chainSelected[index]),
                       ),
                       itemCount: chainSelected.length,
@@ -145,26 +144,26 @@ class ManageToken extends ConsumerWidget {
     final mnemonic = ref.watch(selectedAccountProvider).valueOrNull?.mnemonic;
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.r),
+          borderRadius: BorderRadius.circular(8),
           color: Theme.of(context).colorScheme.surface),
       child: Column(
         children: [
           Row(
             children: [
               SizedBox(
-                width: 36.w,
-                height: 36.w,
+                width: 36,
+                height: 36,
                 child: Stack(
                   children: [
                     SizedBox(
-                      width: 34.w,
-                      height: 34.w,
+                      width: 34,
+                      height: 34,
                       child: ClipPolygon(
                         sides: 6,
                         child: Container(
-                          padding: EdgeInsets.all(0.5.h),
+                          padding: EdgeInsets.all(0.5),
                           color: Theme.of(context).colorScheme.surface,
                           child: (chain.logo != null)
                               ? Image.asset(chain.logo!)
@@ -175,18 +174,17 @@ class ManageToken extends ConsumerWidget {
                     Align(
                       alignment: Alignment.bottomRight,
                       child: SizedBox(
-                        width: 14.w,
-                        height: 14.w,
+                        width: 14,
+                        height: 14,
                         child: ClipPolygon(
                           sides: 6,
                           child: Container(
-                            padding: EdgeInsets.all(0.1.h),
+                            padding: EdgeInsets.all(0.1),
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                    width: 0.3.w,
+                                    width: 0.3,
                                     color: Theme.of(context).cardColor),
-                                color:
-                                    Theme.of(context).colorScheme.surface),
+                                color: Theme.of(context).colorScheme.surface),
                             child: (chain.baseLogo != null)
                                 ? Image.asset(chain.baseLogo!)
                                 : Image.asset(AppImage.logo),
@@ -197,7 +195,7 @@ class ManageToken extends ConsumerWidget {
                   ],
                 ),
               ),
-              12.0.width,
+              width(12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -212,7 +210,7 @@ class ManageToken extends ConsumerWidget {
                           style: AppFont.medium10
                               .copyWith(color: Theme.of(context).hintColor))
                     ])),
-                    2.0.height,
+                    height(2),
                     Text(
                       chain.name ?? "",
                       style: AppFont.reguler12
@@ -222,24 +220,24 @@ class ManageToken extends ConsumerWidget {
                 ),
               ),
               FlutterSwitch(
-                width: 48.w,
-                height: 24.h,
+                width: 48,
+                height: 24,
                 toggleColor: listSelected.any((element) =>
                         element.chainId == chain.chainId &&
                         element.symbol == chain.symbol)
-                    ? AppColor.textStrongDark
+                    ? AppColor.darkText1
                     : AppColor.grayColor,
                 activeColor: AppColor.primaryColor,
                 inactiveColor: Theme.of(context).cardColor,
                 valueFontSize: 20.0,
-                toggleSize: 20.h,
+                toggleSize: 20,
                 value: listSelected.any((element) =>
                         element.chainId == chain.chainId &&
                         element.symbol == chain.symbol)
                     ? true
                     : false,
                 borderRadius: 16,
-                padding: 2.h,
+                padding: 2,
                 showOnOff: false,
                 onToggle: (val) {
                   ref.read(listTokenChainProvider.notifier).setChain(

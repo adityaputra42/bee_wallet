@@ -22,7 +22,24 @@ final chainTransferProvider =
 );
 
 typedef _$ChainTransfer = AutoDisposeNotifier<SelectedTokenChain>;
-String _$amountTransferHash() => r'd2e23474445fd84774420841fe49ff767d2ccf7a';
+String _$recentAddressHash() => r'64e91ef8cf4b3ff9201f1a5f84cb6832e8fe5b14';
+
+/// See also [RecentAddress].
+@ProviderFor(RecentAddress)
+final recentAddressProvider = AutoDisposeAsyncNotifierProvider<RecentAddress,
+    List<RecentTransactionAddress>>.internal(
+  RecentAddress.new,
+  name: r'recentAddressProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$recentAddressHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$RecentAddress
+    = AutoDisposeAsyncNotifier<List<RecentTransactionAddress>>;
+String _$amountTransferHash() => r'de5690bbae6a77452680f419daa4af3aeb210477';
 
 /// See also [AmountTransfer].
 @ProviderFor(AmountTransfer)
@@ -55,7 +72,7 @@ final receiveAddressProvider =
 
 typedef _$ReceiveAddress = AutoDisposeNotifier<TextEditingController>;
 String _$validateAddressTransferHash() =>
-    r'658fcee2527e8d5a02afe4e45929ee96a6a661ec';
+    r'd5bc9fd4c3675c3ec37a5708a9819286bc2dad5b';
 
 /// See also [ValidateAddressTransfer].
 @ProviderFor(ValidateAddressTransfer)
@@ -72,7 +89,7 @@ final validateAddressTransferProvider =
 
 typedef _$ValidateAddressTransfer = AutoDisposeNotifier<bool>;
 String _$disableNextTransferHash() =>
-    r'3d87bbb6b59fedd840f999037b19636189062c23';
+    r'5f8ca863e955a35c967f494d090323e45766bc82';
 
 /// See also [DisableNextTransfer].
 @ProviderFor(DisableNextTransfer)
@@ -88,7 +105,7 @@ final disableNextTransferProvider =
 );
 
 typedef _$DisableNextTransfer = AutoDisposeNotifier<bool>;
-String _$networkFeeHash() => r'2e329bc823e20c1fb01bffd7d95f982e7b5650e9';
+String _$networkFeeHash() => r'ad6d86baa0cfcf40df37f812822eb71f3e80fa37';
 
 /// See also [NetworkFee].
 @ProviderFor(NetworkFee)
@@ -103,22 +120,6 @@ final networkFeeProvider =
 );
 
 typedef _$NetworkFee = AutoDisposeNotifier<double>;
-String _$slowNetworkFeeHash() => r'0ec21e297387cd70a309d720a3fac2c1deec0f50';
-
-/// See also [SlowNetworkFee].
-@ProviderFor(SlowNetworkFee)
-final slowNetworkFeeProvider =
-    AutoDisposeNotifierProvider<SlowNetworkFee, double>.internal(
-  SlowNetworkFee.new,
-  name: r'slowNetworkFeeProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$slowNetworkFeeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$SlowNetworkFee = AutoDisposeNotifier<double>;
 String _$averageNetworkFeeHash() => r'125403eeb5a870cf36769728b9c7d36328171611';
 
 /// See also [AverageNetworkFee].
@@ -135,6 +136,22 @@ final averageNetworkFeeProvider =
 );
 
 typedef _$AverageNetworkFee = AutoDisposeNotifier<double>;
+String _$slowNetworkFeeHash() => r'0ec21e297387cd70a309d720a3fac2c1deec0f50';
+
+/// See also [SlowNetworkFee].
+@ProviderFor(SlowNetworkFee)
+final slowNetworkFeeProvider =
+    AutoDisposeNotifierProvider<SlowNetworkFee, double>.internal(
+  SlowNetworkFee.new,
+  name: r'slowNetworkFeeProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$slowNetworkFeeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$SlowNetworkFee = AutoDisposeNotifier<double>;
 String _$fastNetworkFeeHash() => r'07a3110ab89aa6221c2fca46c3c9ad586b724020';
 
 /// See also [FastNetworkFee].
@@ -166,22 +183,53 @@ final selectedFeeProvider =
 );
 
 typedef _$SelectedFee = AutoDisposeNotifier<int>;
-String _$amountSendHash() => r'8920c38152a1fa2229f9117383b5e2333fbcc28c';
+String _$amountInputHash() => r'ac4c8dbf08434bc60aea9abf69286783caac0def';
 
-/// See also [AmountSend].
-@ProviderFor(AmountSend)
-final amountSendProvider =
-    AutoDisposeNotifierProvider<AmountSend, double>.internal(
-  AmountSend.new,
-  name: r'amountSendProvider',
+/// See also [AmountInput].
+@ProviderFor(AmountInput)
+final amountInputProvider =
+    AutoDisposeNotifierProvider<AmountInput, double>.internal(
+  AmountInput.new,
+  name: r'amountInputProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$amountSendHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$amountInputHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$AmountSend = AutoDisposeNotifier<double>;
-String _$transferChainHash() => r'729570eca4fa66f59c1e8e6dc294f56ddcdf7114';
+typedef _$AmountInput = AutoDisposeNotifier<double>;
+String _$totalAmountHash() => r'f242766f17a27c49f5683401ff4b3361e1c55999';
+
+/// See also [TotalAmount].
+@ProviderFor(TotalAmount)
+final totalAmountProvider =
+    AutoDisposeNotifierProvider<TotalAmount, double>.internal(
+  TotalAmount.new,
+  name: r'totalAmountProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$totalAmountHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$TotalAmount = AutoDisposeNotifier<double>;
+String _$transferLoadingHash() => r'a3a328e64dfcc6bdd16b977704550b817861b759';
+
+/// See also [TransferLoading].
+@ProviderFor(TransferLoading)
+final transferLoadingProvider =
+    AutoDisposeNotifierProvider<TransferLoading, bool>.internal(
+  TransferLoading.new,
+  name: r'transferLoadingProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$transferLoadingHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$TransferLoading = AutoDisposeNotifier<bool>;
+String _$transferChainHash() => r'ed09419e2f027821ef313c896ed4f82f8b4abbc9';
 
 /// See also [TransferChain].
 @ProviderFor(TransferChain)
@@ -228,4 +276,4 @@ final gasPriceProvider =
 
 typedef _$GasPrice = AutoDisposeNotifier<TextEditingController>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -1,7 +1,7 @@
+import 'package:bee_wallet/presentation/widget/button_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bee_wallet/utils/util.dart';
 
@@ -20,10 +20,10 @@ class ConfrimTransferNft extends ConsumerWidget {
     return Scaffold(
       appBar: WidgetHelper.appBar(context: context, title: "Confirm Transfer"),
       body: Container(
-        margin: EdgeInsets.all(16.w),
-        padding: EdgeInsets.all(16.w),
+        margin: EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             color: Theme.of(context).cardColor),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,26 +32,26 @@ class ConfrimTransferNft extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  padding: EdgeInsets.all(16.w),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
+                      borderRadius: BorderRadius.circular(8),
                       color: Theme.of(context).colorScheme.surface),
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 48.w,
-                        height: 48.w,
+                        width: 48,
+                        height: 48,
                         child: ClipPolygon(
                           sides: 6,
                           child: Container(
-                            padding: EdgeInsets.all(2.h),
+                            padding: EdgeInsets.all(2),
                             decoration: BoxDecoration(
                               color: Theme.of(context).cardColor,
                             ),
                             child: ClipPolygon(
                               sides: 6,
                               child: Container(
-                                padding: EdgeInsets.all(1.h),
+                                padding: EdgeInsets.all(1),
                                 decoration: BoxDecoration(
                                   color: Theme.of(context).cardColor,
                                 ),
@@ -65,7 +65,7 @@ class ConfrimTransferNft extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      8.0.width,
+                      width(8),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +75,7 @@ class ConfrimTransferNft extends ConsumerWidget {
                               style: AppFont.medium14.copyWith(
                                   color: Theme.of(context).indicatorColor),
                             ),
-                            4.0.height,
+                            height(4),
                             Text(
                               "Token ID : ${nft.tokenId}",
                               style: AppFont.reguler12
@@ -87,11 +87,11 @@ class ConfrimTransferNft extends ConsumerWidget {
                     ],
                   ),
                 ),
-                16.0.height,
+                height(16),
                 Container(
-                  padding: EdgeInsets.all(16.w),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
+                      borderRadius: BorderRadius.circular(8),
                       color: Theme.of(context).colorScheme.surface),
                   child: Column(
                     children: [
@@ -111,7 +111,7 @@ class ConfrimTransferNft extends ConsumerWidget {
                           )
                         ],
                       ),
-                      8.0.height,
+                      height(8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -132,11 +132,11 @@ class ConfrimTransferNft extends ConsumerWidget {
                     ],
                   ),
                 ),
-                16.0.height,
+                height(16),
                 Container(
-                  padding: EdgeInsets.all(16.w),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
+                      borderRadius: BorderRadius.circular(8),
                       color: Theme.of(context).colorScheme.surface),
                   child: Column(
                     children: [
@@ -155,7 +155,7 @@ class ConfrimTransferNft extends ConsumerWidget {
                           )
                         ],
                       ),
-                      8.0.height,
+                      height(8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -167,13 +167,13 @@ class ConfrimTransferNft extends ConsumerWidget {
                                     .setSelectedFee(0);
                               },
                               child: Container(
-                                height: 64.h,
-                                padding: EdgeInsets.all(8.w),
+                                height: 64,
+                                padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                     color: Theme.of(context).cardColor,
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                     border: Border.all(
-                                      width: 1.w,
+                                      width: 1,
                                       color: selectedFee == 0
                                           ? AppColor.primaryColor
                                           : Theme.of(context).cardColor,
@@ -189,7 +189,7 @@ class ConfrimTransferNft extends ConsumerWidget {
                                               : Theme.of(context).hintColor,
                                         ),
                                       ),
-                                      2.0.height,
+                                      height(2),
                                       Text(
                                         '~${((ref.watch(slowNetworkFeeNftProvider) * BigInt.from(10).pow(9).toDouble()) / double.parse(ref.watch(gasLimitNFTProvider).text)).toStringAsFixed(1)}  Gwei',
                                         style: AppFont.reguler12.copyWith(
@@ -202,7 +202,7 @@ class ConfrimTransferNft extends ConsumerWidget {
                               ),
                             ),
                           ),
-                          8.0.width,
+                          width(8),
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
@@ -211,13 +211,13 @@ class ConfrimTransferNft extends ConsumerWidget {
                                     .setSelectedFee(1);
                               },
                               child: Container(
-                                height: 64.h,
-                                padding: EdgeInsets.all(8.w),
+                                height: 64,
+                                padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                     color: Theme.of(context).cardColor,
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                     border: Border.all(
-                                      width: 1.w,
+                                      width: 1,
                                       color: selectedFee == 1
                                           ? AppColor.primaryColor
                                           : Theme.of(context).cardColor,
@@ -233,7 +233,7 @@ class ConfrimTransferNft extends ConsumerWidget {
                                               : Theme.of(context).hintColor,
                                         ),
                                       ),
-                                      2.0.height,
+                                      height(2),
                                       Text(
                                         '~${((ref.watch(averageNetworkFeeNftProvider) * BigInt.from(10).pow(9).toDouble()) / double.parse(ref.watch(gasLimitNFTProvider).text)).toStringAsFixed(1)} Gwei',
                                         style: AppFont.reguler12.copyWith(
@@ -246,7 +246,7 @@ class ConfrimTransferNft extends ConsumerWidget {
                               ),
                             ),
                           ),
-                          8.0.width,
+                          width(8),
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
@@ -255,13 +255,13 @@ class ConfrimTransferNft extends ConsumerWidget {
                                     .setSelectedFee(2);
                               },
                               child: Container(
-                                height: 64.h,
-                                padding: EdgeInsets.all(8.w),
+                                height: 64,
+                                padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                     color: Theme.of(context).cardColor,
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                     border: Border.all(
-                                      width: 1.w,
+                                      width: 1,
                                       color: selectedFee == 2
                                           ? AppColor.primaryColor
                                           : Theme.of(context).cardColor,
@@ -277,7 +277,7 @@ class ConfrimTransferNft extends ConsumerWidget {
                                               : Theme.of(context).hintColor,
                                         ),
                                       ),
-                                      2.0.height,
+                                      height(2),
                                       Text(
                                         '~ ${((ref.watch(fastNetworkFeeNftProvider) * BigInt.from(10).pow(9).toDouble()) / double.parse(ref.watch(gasLimitNFTProvider).text)).toStringAsFixed(1)} Gwei',
                                         style: AppFont.reguler12.copyWith(
@@ -290,20 +290,20 @@ class ConfrimTransferNft extends ConsumerWidget {
                               ),
                             ),
                           ),
-                          8.0.width,
+                          width(8),
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
                                 context.goNamed('custom_gas_fee_nft');
                               },
                               child: Container(
-                                height: 64.h,
-                                padding: EdgeInsets.all(8.w),
+                                height: 64,
+                                padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                     color: Theme.of(context).cardColor,
-                                    borderRadius: BorderRadius.circular(6.r),
+                                    borderRadius: BorderRadius.circular(6),
                                     border: Border.all(
-                                      width: 1.w,
+                                      width: 1,
                                       color: selectedFee == 3
                                           ? AppColor.primaryColor
                                           : Theme.of(context).cardColor,
@@ -319,13 +319,13 @@ class ConfrimTransferNft extends ConsumerWidget {
                                               : Theme.of(context).hintColor,
                                         ),
                                       ),
-                                      2.0.height,
+                                      height(2),
                                       Icon(
                                         Icons.mode_edit_rounded,
                                         color: selectedFee == 3
                                             ? AppColor.primaryColor
                                             : Theme.of(context).hintColor,
-                                        size: 20.w,
+                                        size: 20,
                                       )
                                     ]),
                               ),
@@ -338,13 +338,14 @@ class ConfrimTransferNft extends ConsumerWidget {
                 ),
               ],
             ),
-            PrimaryButton(
-              loading: ref.watch(transferNftProvider).isLoading,
-              title: "Send",
-              onPressed: () {
-                ref.read(transferNftProvider.notifier).tranfer(context);
-              },
-            )
+            ref.watch(transferNftProvider).isLoading
+                ? ButtonLoading()
+                : PrimaryButton(
+                    title: "Send",
+                    onPressed: () {
+                      ref.read(transferNftProvider.notifier).tranfer(context);
+                    },
+                  )
           ],
         ),
       ),

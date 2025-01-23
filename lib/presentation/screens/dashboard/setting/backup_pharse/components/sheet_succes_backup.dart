@@ -1,7 +1,6 @@
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../config/config.dart';
@@ -14,7 +13,7 @@ class SheetSuccesBackup extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 24.h),
+      padding: EdgeInsets.fromLTRB(16, 0, 16, 24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -23,19 +22,19 @@ class SheetSuccesBackup extends ConsumerWidget {
             style: AppFont.semibold16
                 .copyWith(color: Theme.of(context).indicatorColor),
           ),
-          24.0.height,
+          height(24),
           Image.asset(
             AppImage.logo,
-            width: 320.w,
+            width: 320,
           ),
-          24.0.height,
+          height(24),
           Text(
             "Amet minim mollit non deserunt ullamco est sit aliqua\ndolor do amet sint.",
             style:
                 AppFont.reguler12.copyWith(color: Theme.of(context).hintColor),
             textAlign: TextAlign.center,
           ),
-          24.0.height,
+          height(24),
           PrimaryButton(
               title: "Start Using Wallet",
               onPressed: () {

@@ -34,7 +34,7 @@ const PasswordSchema = CollectionSchema(
   getId: _passwordGetId,
   getLinks: _passwordGetLinks,
   attach: _passwordAttach,
-  version: '3.1.0+1',
+  version: '3.1.8',
 );
 
 int _passwordEstimateSize(

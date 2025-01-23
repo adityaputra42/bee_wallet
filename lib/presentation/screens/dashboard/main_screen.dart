@@ -1,11 +1,15 @@
 // ignore_for_file: unused_result, invalid_use_of_visible_for_testing_member
 
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_overlay/loading_overlay.dart';
+import '../../../utils/walletConnect/bottom_sheet_listener.dart';
+import '../../../utils/walletConnect/deep_link_handler.dart';
 import '../../provider/account/account_provider.dart';
+import '../../provider/dapp/walletconnect_provider.dart';
 import '../../provider/provider.dart';
 import '../../widget/widget.dart';
 import 'dapps/dapp_screen.dart';
@@ -38,11 +42,10 @@ class MainScreen extends ConsumerWidget {
     loading() {
       return LoadingOverlay(
         isLoading: true,
-        color: Colors.black,
-        opacity: 0.3,
+        color: Colors.black.withValues(alpha: 0.25),
         progressIndicator: Center(
           child: CupertinoActivityIndicator(
-            radius: 20.r,
+            radius: 20,
             color: Theme.of(context).indicatorColor,
           ),
         ),
@@ -59,53 +62,88 @@ class MainScreen extends ConsumerWidget {
       body: Consumer(builder: (context, ref, _) {
         return ref.watch(selectedAccountProvider).when(
           data: (data) {
-            if (ref.watch(selectedAccountProvider).isRefreshing) {
-              return loading();
-            }
             return ref.watch(accountListProvider).when(
               data: (data) {
-                if (ref.watch(accountListProvider).isRefreshing) {
-                  return loading();
-                }
                 return ref.watch(tokenChainOriginProvider).when(
                   data: (data) {
-                    if (ref.watch(tokenChainOriginProvider).isRefreshing) {
-                      return loading();
-                    }
                     return ref.watch(listTokenChainProvider).when(
                       data: (data) {
-                        if (ref.watch(listTokenChainProvider).isRefreshing) {
-                          return loading();
-                        }
                         return ref.watch(selectedChainTokenProvider).when(
                           data: (data) {
-                            if (ref
-                                .watch(selectedChainTokenProvider)
-                                .isRefreshing) {
-                              return loading();
-                            }
                             return ref.watch(balanceChainProvider).when(
                               data: (data) {
-                                if (ref
-                                    .watch(balanceChainProvider)
-                                    .isRefreshing) {
-                                  return loading();
-                                }
                                 ref.watch(balancePeriodicProvider);
+                                return ref.watch(walletconnectProvider).when(
+                                  data: (data) {
+                                    DeepLinkHandler(walletKit: data)
+                                        .initListener(ref);
+                                    data.core.pairing.onPairingInvalid
+                                        .subscribe(ref
+                                            .read(
+                                                walletconnectProvider.notifier)
+                                            .onPairingInvalid);
+                                    data.core.pairing.onPairingCreate.subscribe(
+                                        ref
+                                            .read(
+                                                walletconnectProvider.notifier)
+                                            .onPairingCreate);
+                                    data.core.relayClient.onRelayClientError
+                                        .subscribe(
+                                      ref
+                                          .read(walletconnectProvider.notifier)
+                                          .onRelayClientError,
+                                    );
+                                    data.core.relayClient.onRelayClientMessage
+                                        .subscribe(
+                                      ref
+                                          .read(walletconnectProvider.notifier)
+                                          .onRelayClientMessage,
+                                    );
+                                    data.onSessionProposal.subscribe(ref
+                                        .read(walletconnectProvider.notifier)
+                                        .onSessionProposal);
+                                    data.onSessionProposalError.subscribe(ref
+                                        .read(walletconnectProvider.notifier)
+                                        .onSessionProposalError);
+                                    data.onSessionConnect.subscribe(ref
+                                        .read(walletconnectProvider.notifier)
+                                        .onSessionConnect);
+                                    data.onSessionAuthRequest.subscribe(ref
+                                        .read(walletconnectProvider.notifier)
+                                        .onSessionAuthRequest);
+                                    ref
+                                        .read(walletconnectProvider.notifier)
+                                        .registerAccount();
+                                    ref
+                                        .read(walletconnectProvider.notifier)
+                                        .registerEmitHandler();
+                                    data.init();
+                                    log(" wc init succes");
+                                    ref
+                                        .read(walletconnectProvider.notifier)
+                                        .emitEvent();
 
-                                return body();
+                                    return BottomSheetListener(child: body());
+                                  },
+                                  error: (Object error, StackTrace stackTrace) {
+                                    return ErrorView(
+                                      error: error.toString(),
+                                      ontap: () {
+                                        ref.refresh(balanceChainProvider);
+                                        ref.watch(balancePeriodicProvider);
+                                      },
+                                    );
+                                  },
+                                  loading: () {
+                                    return loading();
+                                  },
+                                );
                               },
                               error: (Object error, StackTrace stackTrace) {
                                 return ErrorView(
                                   error: error.toString(),
                                   ontap: () {
-                                    ref
-                                        .read(balanceChainProvider.notifier)
-                                        // ignore: invalid_use_of_protected_member
-                                        .state = const AsyncLoading();
-
                                     ref.refresh(balanceChainProvider);
-
                                     ref.watch(balancePeriodicProvider);
                                   },
                                 );

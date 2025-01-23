@@ -1,22 +1,21 @@
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../config/config.dart';
-import '../../../../../data/model/token_chain/selected_token_chain.dart';
+import '../../../../../data/model/token_chain/token_chain.dart';
 import '../../../../provider/provider.dart';
 import 'new_dapps.dart';
 
 class SheetSelectNetworkDapp extends ConsumerWidget {
-  const SheetSelectNetworkDapp({super.key, required this.url});
-  final String url;
+  const SheetSelectNetworkDapp({super.key, this.url, required this.onSelect});
+  final String? url;
+  final Function() onSelect;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final chainList = ref.watch(selectedChainTokenProvider).valueOrNull ?? [];
-
+    final listChain = ref.watch(listChainSearchProvider);
     return Padding(
-      padding: EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 16.w),
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       child: Column(
         children: [
           Text(
@@ -24,16 +23,32 @@ class SheetSelectNetworkDapp extends ConsumerWidget {
             style: AppFont.medium14
                 .copyWith(color: Theme.of(context).indicatorColor),
           ),
-          16.0.height,
+          height(16),
           // SearchField(),
           // 12.0.height,
           Expanded(
             child: ListView.builder(
               itemBuilder: (context, index) => Padding(
-                padding: EdgeInsets.only(bottom: 8.h),
-                child: cardChain(context, chainList[index], ref),
+                padding: const EdgeInsets.only(bottom: 8),
+                child: cardChain(context, chain: listChain[index], ref: ref,
+                    onTap: () {
+                  ref
+                      .read(tokenDappLinkProvider.notifier)
+                      .onChange(listChain[index]);
+
+                  Navigator.pop(context);
+                  if (url != null && url!.isNotEmpty) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                NewWeb3Webview(initialUrl: url ?? '')));
+                  } else {
+                    onSelect();
+                  }
+                }),
               ),
-              itemCount: chainList.length,
+              itemCount: listChain.length,
             ),
           ),
         ],
@@ -41,24 +56,19 @@ class SheetSelectNetworkDapp extends ConsumerWidget {
     );
   }
 
-  Widget cardChain(
-      BuildContext context, SelectedTokenChain chain, WidgetRef ref) {
-    final chainDapp = ref.watch(chainDappProvider);
+  Widget cardChain(BuildContext context,
+      {required TokenChain chain,
+      required WidgetRef ref,
+      required Function() onTap}) {
+    final chainDapp = ref.watch(tokenDappLinkProvider);
     return GestureDetector(
-      onTap: () {
-        ref.read(chainDappProvider.notifier).setChainTransfer(chain);
-        Navigator.pop(context);
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => DappsWeb3(initialUrl: url)));
-      },
+      onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(12),
             border: Border.all(
-                width: 1.h,
+                width: 1,
                 color: chainDapp.chainId == chain.chainId &&
                         chainDapp.symbol == chain.symbol
                     ? AppColor.primaryColor
@@ -69,13 +79,13 @@ class SheetSelectNetworkDapp extends ConsumerWidget {
             Row(
               children: [
                 SizedBox(
-                  width: 36.w,
-                  height: 36.w,
+                  width: 36,
+                  height: 36,
                   child: Stack(
                     children: [
                       Container(
-                        width: 34.w,
-                        height: 34.w,
+                        width: 34,
+                        height: 34,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
@@ -84,13 +94,12 @@ class SheetSelectNetworkDapp extends ConsumerWidget {
                       Align(
                         alignment: Alignment.bottomRight,
                         child: Container(
-                          width: 14.w,
-                          height: 14.w,
+                          width: 14,
+                          height: 14,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                  width: 1.w,
-                                  color: Theme.of(context).cardColor),
+                                  width: 1, color: Theme.of(context).cardColor),
                               image: DecorationImage(
                                   image: AssetImage(chain.baseLogo ?? ''))),
                         ),
@@ -98,7 +107,7 @@ class SheetSelectNetworkDapp extends ConsumerWidget {
                     ],
                   ),
                 ),
-                12.0.width,
+                width(12),
                 Expanded(
                   child: Text(
                     chain.name ?? '',

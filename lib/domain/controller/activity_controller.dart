@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:connectivity_checker/connectivity_checker.dart';
 import 'package:http/http.dart' as http;
 import 'package:ffcache/ffcache.dart';
 
 import '../../data/model/model.dart';
 import '../../data/model/token_chain/selected_token_chain.dart';
 import '../../data/model/token_chain/token_chain.dart';
+import '../../utils/helper/connection_checker.dart';
 import '../repository/repository.dart';
 
 class ActivityController implements ActivityRepository {
@@ -19,11 +19,16 @@ class ActivityController implements ActivityRepository {
       final cache = FFCache(debug: true);
 
       String url = chain.contractAddress == null
-          ? "$explorer/api?module=account&action=txlist&address=$address&sort=desc&page=$page"
-          : "$explorer/api?module=account&action=tokentx&address=$address&contractaddress=${chain.contractAddress}&sort=desc&page=$page";
+          ? "$explorer/api?module=account&action=txlist&address=$address&sort=desc&page=$page&"
+          : "$explorer/api?module=account&action=tokentx&address=$address&contractaddress=${chain.contractAddress}&sort=desc&page=$page&";
 
-      if (await ConnectivityWrapper.instance.isConnected) {
+      if (chain.apiKey != null) {
+        url += "apikey=${chain.apiKey}";
+      }
+      if (await checkInternetConnectivity()) {
         var response = await http.Client().get(Uri.parse(url));
+        log("response history => ${response.statusCode}");
+        log("response history => ${response.body}");
         var json = jsonDecode(response.body)['result'];
 
         if (json is List && json.isNotEmpty) {
@@ -53,9 +58,9 @@ class ActivityController implements ActivityRepository {
           ? "$explorer/api/v2/addresses/$address/transactions"
           : "$explorer/api/v2/addresses/$address/token-transfers?token=${chain.contractAddress}";
 
-      if (await ConnectivityWrapper.instance.isConnected) {
+      if (await checkInternetConnectivity()) {
         var response = await http.Client().get(Uri.parse(url));
-
+        log("response peta history ${response.statusCode}");
         List<Activity> activies = [];
         if (response.statusCode == 200 || response.statusCode == 201) {
           var json = jsonDecode(response.body)['items'];
@@ -142,7 +147,7 @@ class ActivityController implements ActivityRepository {
       String url =
           "$explorer/api?module=account&action=tokentx&address=$address&contractaddress=$contractAddress&sort=desc&page=$page";
 
-      if (await ConnectivityWrapper.instance.isConnected) {
+      if (await checkInternetConnectivity()) {
         var response = await http.Client().get(Uri.parse(url));
 
         log("Response Status => ${response.statusCode}");
@@ -182,7 +187,7 @@ class ActivityController implements ActivityRepository {
       String url =
           "$explorer/api/v2/addresses/$address/token-transfers?token=$contractAddress&type=ERC-721";
 
-      if (await ConnectivityWrapper.instance.isConnected) {
+      if (await checkInternetConnectivity()) {
         var response = await http.Client().get(Uri.parse(url));
 
         log("Response Status => ${response.statusCode}");

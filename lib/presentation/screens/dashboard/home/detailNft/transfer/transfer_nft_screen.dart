@@ -4,7 +4,6 @@ import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
 import 'package:bee_wallet/utils/util.dart';
 import 'package:go_router/go_router.dart';
@@ -13,7 +12,7 @@ import 'package:iconify_flutter_plus/icons/ant_design.dart';
 
 import '../../../../../../config/config.dart';
 import '../../../../../widget/widget.dart';
-import '../../../scan/scann_page.dart';
+import '../../../../scan/scann_page.dart';
 
 class TransferNftScreen extends ConsumerWidget {
   const TransferNftScreen({super.key});
@@ -26,10 +25,10 @@ class TransferNftScreen extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(context: context, title: "Transfer NFT"),
       body: Container(
-        margin: EdgeInsets.all(16.w),
-        padding: EdgeInsets.all(16.w),
+        margin: EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(12),
             color: Theme.of(context).cardColor),
         child: LayoutBuilder(
           builder: (context, constraints) => SingleChildScrollView(
@@ -46,28 +45,28 @@ class TransferNftScreen extends ConsumerWidget {
                         style: AppFont.medium14
                             .copyWith(color: Theme.of(context).hintColor),
                       ),
-                      8.0.height,
+                      height(8),
                       Container(
-                        padding: EdgeInsets.all(16.w),
+                        padding: EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.r),
+                            borderRadius: BorderRadius.circular(8),
                             color: Theme.of(context).colorScheme.surface),
                         child: Row(
                           children: [
                             SizedBox(
-                              width: 48.w,
-                              height: 48.w,
+                              width: 48,
+                              height: 48,
                               child: ClipPolygon(
                                 sides: 6,
                                 child: Container(
-                                  padding: EdgeInsets.all(2.h),
+                                  padding: EdgeInsets.all(2),
                                   decoration: BoxDecoration(
                                     color: Theme.of(context).cardColor,
                                   ),
                                   child: ClipPolygon(
                                     sides: 6,
                                     child: Container(
-                                      padding: EdgeInsets.all(1.h),
+                                      padding: EdgeInsets.all(1),
                                       decoration: BoxDecoration(
                                         color: Theme.of(context).cardColor,
                                       ),
@@ -81,7 +80,7 @@ class TransferNftScreen extends ConsumerWidget {
                                 ),
                               ),
                             ),
-                            8.0.width,
+                            width(8),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +91,7 @@ class TransferNftScreen extends ConsumerWidget {
                                         color:
                                             Theme.of(context).indicatorColor),
                                   ),
-                                  4.0.height,
+                                  height(4),
                                   Text(
                                     "Token ID : ${nft.tokenId}",
                                     style: AppFont.reguler12.copyWith(
@@ -104,36 +103,35 @@ class TransferNftScreen extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      16.0.height,
+                      height(16),
                       Text(
                         'From',
                         style: AppFont.medium14
                             .copyWith(color: Theme.of(context).hintColor),
                       ),
-                      8.0.height,
+                      height(8),
                       Container(
                         width: double.infinity,
-                        padding: EdgeInsets.all(12.w),
+                        padding: EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.r),
+                            borderRadius: BorderRadius.circular(8),
                             color: Theme.of(context).colorScheme.surface),
                         child: Row(
                           children: [
                             Container(
-                              width: 48.w,
-                              height: 48.w,
-                              padding: EdgeInsets.all(2.w),
+                              width: 48,
+                              height: 48,
+                              padding: EdgeInsets.all(2),
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                      width: 1.w,
-                                      color: AppColor.primaryColor)),
+                                      width: 1, color: AppColor.primaryColor)),
                               child: Blockies(
                                   size: 0.6,
                                   data: nft.owner ?? "-",
                                   shape: BlockiesShape.circle),
                             ),
-                            8.0.width,
+                            width(8),
                             Expanded(
                                 child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,7 +142,7 @@ class TransferNftScreen extends ConsumerWidget {
                                   style: AppFont.semibold14.copyWith(
                                       color: Theme.of(context).indicatorColor),
                                 ),
-                                4.0.height,
+                                height(4),
                                 Text(
                                   "${token.balance ?? 0.0} ${token.symbol}",
                                   style: AppFont.medium12
@@ -155,7 +153,7 @@ class TransferNftScreen extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      16.0.height,
+                      height(16),
                       InputText(
                         title: "To",
                         onChange: (v) =>
@@ -168,7 +166,7 @@ class TransferNftScreen extends ConsumerWidget {
                         icon: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            8.0.width,
+                            width(8),
                             GestureDetector(
                                 onTap: () {
                                   Navigator.push(
@@ -182,13 +180,13 @@ class TransferNftScreen extends ConsumerWidget {
                                 },
                                 child: Iconify(
                                   AntDesign.scan,
-                                  size: 24.w,
+                                  size: 24,
                                   color: AppColor.primaryColor,
                                 )),
                           ],
                         ),
                       ),
-                      16.0.height,
+                      height(16),
                       Warning(
                         warning:
                             'Please ensure that the receive address supports the ${token.baseChain == 'eth' ? 'ERC-721' : token.baseChain == 'sol' ? 'Solana' : token.baseChain == 'tron' ? 'TRC20' : 'BRC20'}',
@@ -197,7 +195,7 @@ class TransferNftScreen extends ConsumerWidget {
                   ),
                   PrimaryButton(
                       title: "Next",
-                      margin: EdgeInsets.only(top: 24.h),
+                      margin: EdgeInsets.only(top: 24),
                       disable: ref.watch(disableGasFeeNFTProvider),
                       onPressed: () async {
                         await ref

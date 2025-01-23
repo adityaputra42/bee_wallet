@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/config.dart';
 import '../../../../data/src/src.dart';
@@ -37,11 +36,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Stack(
         children: [
-          // Image.asset(
-          //   AppImage.mask,
-          //   width: double.infinity,
-          //   fit: BoxFit.cover,
-          // ),
           SafeArea(
             child: Center(
               child: ZoomIn(
@@ -49,7 +43,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                 duration: const Duration(seconds: 2),
                 child: Image.asset(
                   AppImage.logo,
-                  height: 148.w,
+                  height: 148,
                 ),
               ),
             ),

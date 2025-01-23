@@ -3,7 +3,6 @@
 import 'package:bee_wallet/presentation/screens/dashboard/setting/changePin/change_pin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../config/config.dart';
 import '../../../../../utils/util.dart';
@@ -21,7 +20,7 @@ class ConfirmPin extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(context: context, title: "Confirm Pin"),
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.all(16),
         child: Column(
           children: [
             Text(
@@ -30,16 +29,16 @@ class ConfirmPin extends ConsumerWidget {
                   .copyWith(color: Theme.of(context).indicatorColor),
               textAlign: TextAlign.center,
             ),
-            16.0.height,
+            height(16),
             Text(
               "Security Password used for open Wallet, Transaction, and Mnemonik Frase. Remember it and dont give password to anyoone",
               style:
                   AppFont.medium12.copyWith(color: Theme.of(context).hintColor),
               textAlign: TextAlign.center,
             ),
-            24.0.height,
+            height(24),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              padding: EdgeInsets.symmetric(horizontal: 24),
               child: InputPin(
                 keyboardType: TextInputType.none,
                 controller: ref.watch(pinConfirmController),
@@ -70,7 +69,7 @@ class ConfirmPin extends ConsumerWidget {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: 24.h),
+        padding: EdgeInsets.only(bottom: 24),
         child: Numpadcustom(
             controller: ref.watch(pinConfirmController),
             delete: () {

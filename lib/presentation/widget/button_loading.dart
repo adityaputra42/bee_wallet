@@ -1,0 +1,43 @@
+import 'package:flutter/material.dart';
+
+import '../../config/config.dart';
+
+class ButtonLoading extends StatelessWidget {
+  const ButtonLoading(
+      {super.key,
+      this.width = double.infinity,
+      this.margin = EdgeInsets.zero,
+      this.height = 48});
+  final double width;
+  final EdgeInsets margin;
+
+  final double? height;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      height: height,
+      margin: margin,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        gradient: AppColor.primaryGradient,
+      ),
+      child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8))),
+          onPressed: () {},
+          child: const Padding(
+            padding: EdgeInsets.all(2),
+            child: Center(
+              child: CircularProgressIndicator(
+                color: AppColor.darkText1,
+                strokeWidth: 2,
+              ),
+            ),
+          )),
+    );
+  }
+}

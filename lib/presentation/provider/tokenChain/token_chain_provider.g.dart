@@ -6,7 +6,7 @@ part of 'token_chain_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tokenChainOriginHash() => r'39a7f483c480b89ee525f324a86fdafd8b5ca84c';
+String _$tokenChainOriginHash() => r'b04f35575b9eb04bd11129e8ad7364c1e683caa1';
 
 /// See also [TokenChainOrigin].
 @ProviderFor(TokenChainOrigin)
@@ -23,7 +23,7 @@ final tokenChainOriginProvider = AutoDisposeAsyncNotifierProvider<
 
 typedef _$TokenChainOrigin = AutoDisposeAsyncNotifier<List<TokenChain>>;
 String _$selectedChainTokenHash() =>
-    r'baefcfd51d8cfff0c2ee1e0eaf1e8fad93c2eeac';
+    r'b0ab54f46fc7cbbe86fe7570376414527c769582';
 
 /// See also [SelectedChainToken].
 @ProviderFor(SelectedChainToken)
@@ -57,7 +57,7 @@ final chainSelectedSearchProvider = AutoDisposeNotifierProvider<
 );
 
 typedef _$ChainSelectedSearch = AutoDisposeNotifier<List<SelectedTokenChain>>;
-String _$listTokenChainHash() => r'a4f2ce6ebd0a3e8bed437100f42086231a0963cd';
+String _$listTokenChainHash() => r'7a017ef8229c0d219ea964dacb7b30ee977958cb';
 
 /// See also [ListTokenChain].
 @ProviderFor(ListTokenChain)
@@ -73,7 +73,7 @@ final listTokenChainProvider = AutoDisposeAsyncNotifierProvider<ListTokenChain,
 );
 
 typedef _$ListTokenChain = AutoDisposeAsyncNotifier<List<SelectedTokenChain>>;
-String _$listManageTokenHash() => r'225b4db6152478487ce7ab8e1ebf4713e54bdc9a';
+String _$listManageTokenHash() => r'1fe6ba90c55231f3c303f147f18f460555d60e23';
 
 /// See also [ListManageToken].
 @ProviderFor(ListManageToken)
@@ -121,22 +121,6 @@ final tokenChainNftProvider =
 );
 
 typedef _$TokenChainNft = AutoDisposeNotifier<TokenChain>;
-String _$tokenDappLinkHash() => r'75c7951f1f0bed828889ebd137e9ff3944ec6fec';
-
-/// See also [TokenDappLink].
-@ProviderFor(TokenDappLink)
-final tokenDappLinkProvider =
-    AutoDisposeNotifierProvider<TokenDappLink, TokenChain>.internal(
-  TokenDappLink.new,
-  name: r'tokenDappLinkProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$tokenDappLinkHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$TokenDappLink = AutoDisposeNotifier<TokenChain>;
 String _$chainNftTransferHash() => r'1cf0c160cfc170914c37c78e23708e0f21c0b94d';
 
 /// See also [ChainNftTransfer].
@@ -169,7 +153,7 @@ final networkAddTokenProvider =
 );
 
 typedef _$NetworkAddToken = AutoDisposeNotifier<TokenChain>;
-String _$contractAddressHash() => r'f37d34f9f47e2c145c1615ee504e854c9465cee3';
+String _$contractAddressHash() => r'581b71140e42a613ee949a1f195621dad64ee0a2';
 
 /// See also [ContractAddress].
 @ProviderFor(ContractAddress)
@@ -246,5 +230,37 @@ final disableAddTokenProvider =
 );
 
 typedef _$DisableAddToken = AutoDisposeNotifier<bool>;
+String _$tokenFromContractHash() => r'0efb0e96febe2d9ed49e8581a70a4d5eee8da96b';
+
+/// See also [TokenFromContract].
+@ProviderFor(TokenFromContract)
+final tokenFromContractProvider = AutoDisposeAsyncNotifierProvider<
+    TokenFromContract, List<TokenChain>>.internal(
+  TokenFromContract.new,
+  name: r'tokenFromContractProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$tokenFromContractHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$TokenFromContract = AutoDisposeAsyncNotifier<List<TokenChain>>;
+String _$tokenDappLinkHash() => r'75c7951f1f0bed828889ebd137e9ff3944ec6fec';
+
+/// See also [TokenDappLink].
+@ProviderFor(TokenDappLink)
+final tokenDappLinkProvider =
+    AutoDisposeNotifierProvider<TokenDappLink, TokenChain>.internal(
+  TokenDappLink.new,
+  name: r'tokenDappLinkProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$tokenDappLinkHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$TokenDappLink = AutoDisposeNotifier<TokenChain>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

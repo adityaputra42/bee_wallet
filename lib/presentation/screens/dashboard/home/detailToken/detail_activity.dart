@@ -2,11 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_web3_webview/flutter_web3_webview.dart';
 import 'package:intl/intl.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
 import 'package:bee_wallet/presentation/widget/widget.dart';
-import 'package:web3_provider/web3_provider.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../utils/util.dart';
@@ -28,42 +27,39 @@ class DetailActivity extends ConsumerWidget {
           icon: GestureDetector(
               onTap: () {},
               child: Container(
-                width: 40.w,
-                height: 40.w,
-                padding: EdgeInsets.all(8.h),
+                width: 40,
+                height: 40,
+                padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.r),
-                    border: Border.all(width: 1.w, color: AppColor.grayColor)),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(width: 1, color: AppColor.grayColor)),
                 child: Icon(
                   Icons.share_outlined,
                   color: AppColor.primaryColor,
-                  size: 24.w,
+                  size: 24,
                 ),
               )),
         ),
         body: Container(
-          margin: EdgeInsets.all(16.w),
-          padding: EdgeInsets.all(16.w),
+          margin: EdgeInsets.all(16),
+          padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: BorderRadius.circular(12),
               color: Theme.of(context).cardColor),
           child: Column(
+            spacing: 16,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _valueTransaction(context, ref),
-              16.0.height,
               _transactionHash(context, ref),
-              16.0.height,
               _fromTo(context, ref),
-              16.0.height,
               _infoFee(context, ref),
               const Spacer(),
               PrimaryButton(
                   title: 'View in Blockchain Explorer',
                   onPressed: () async {
                     await browser.open(
-                        url:
-                            Uri.parse('${chain.explorer}/tx/${activity.hash}'));
+                        url: WebUri('${chain.explorer}/tx/${activity.hash}'));
                     browser.close();
                   })
             ],
@@ -75,9 +71,9 @@ class DetailActivity extends ConsumerWidget {
     final activity = ref.watch(activityDetailProvider);
     final chain = ref.watch(chainDetailProvider);
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(12),
           color: Theme.of(context).colorScheme.surface),
       child: Column(
         children: [
@@ -96,7 +92,7 @@ class DetailActivity extends ConsumerWidget {
               )
             ],
           ),
-          8.0.height,
+          height(8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -112,7 +108,7 @@ class DetailActivity extends ConsumerWidget {
               )
             ],
           ),
-          8.0.height,
+          height(8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -128,7 +124,7 @@ class DetailActivity extends ConsumerWidget {
               )
             ],
           ),
-          8.0.height,
+          height(8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -144,7 +140,7 @@ class DetailActivity extends ConsumerWidget {
               )
             ],
           ),
-          8.0.height,
+          height(8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -163,7 +159,7 @@ class DetailActivity extends ConsumerWidget {
               )
             ],
           ),
-          8.0.height,
+          height(8),
         ],
       ),
     );
@@ -175,9 +171,9 @@ class DetailActivity extends ConsumerWidget {
       children: [
         Expanded(
           child: Container(
-            padding: EdgeInsets.all(16.w),
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: BorderRadius.circular(12),
                 color: Theme.of(context).colorScheme.surface),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,7 +183,7 @@ class DetailActivity extends ConsumerWidget {
                   style: AppFont.medium12
                       .copyWith(color: Theme.of(context).hintColor),
                 ),
-                4.0.height,
+                height(4),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -208,7 +204,7 @@ class DetailActivity extends ConsumerWidget {
                       child: Icon(
                         Icons.copy_rounded,
                         color: AppColor.primaryColor,
-                        size: 16.w,
+                        size: 16,
                       ),
                     )
                   ],
@@ -217,12 +213,12 @@ class DetailActivity extends ConsumerWidget {
             ),
           ),
         ),
-        12.0.width,
+        width(12),
         Expanded(
           child: Container(
-            padding: EdgeInsets.all(16.w),
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: BorderRadius.circular(12),
                 color: Theme.of(context).colorScheme.surface),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -232,7 +228,7 @@ class DetailActivity extends ConsumerWidget {
                   style: AppFont.medium12
                       .copyWith(color: Theme.of(context).hintColor),
                 ),
-                4.0.height,
+                height(4),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -245,7 +241,7 @@ class DetailActivity extends ConsumerWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    4.0.width,
+                    width(4),
                     GestureDetector(
                       onTap: () {
                         MethodHelper().handleCopy(
@@ -254,7 +250,7 @@ class DetailActivity extends ConsumerWidget {
                       child: Icon(
                         Icons.copy_rounded,
                         color: AppColor.primaryColor,
-                        size: 16.w,
+                        size: 16,
                       ),
                     )
                   ],
@@ -273,9 +269,9 @@ class DetailActivity extends ConsumerWidget {
 
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(12),
           color: Theme.of(context).colorScheme.surface),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -290,26 +286,26 @@ class DetailActivity extends ConsumerWidget {
               ),
               Image.asset(
                 chain.logo ?? "",
-                width: 24.w,
+                width: 24,
               )
             ],
           ),
-          8.0.height,
+          height(8),
           SizedBox(
             width: double.infinity,
-            height: 1.h,
+            height: 1,
             child: Divider(
-              thickness: 1.h,
+              thickness: 1,
               color: AppColor.grayColor,
             ),
           ),
-          8.0.height,
+          height(8),
           Text(
             "Transaction Hash :",
             style:
                 AppFont.medium12.copyWith(color: Theme.of(context).hintColor),
           ),
-          4.0.height,
+          height(4),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -327,7 +323,7 @@ class DetailActivity extends ConsumerWidget {
                 child: Icon(
                   Icons.copy_rounded,
                   color: AppColor.primaryColor,
-                  size: 16.w,
+                  size: 16,
                 ),
               )
             ],
@@ -344,9 +340,9 @@ class DetailActivity extends ConsumerWidget {
     String state = activity.from == account?.addressETH ? "Send" : "Receiced";
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(12),
           color: Theme.of(context).colorScheme.surface),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -356,7 +352,7 @@ class DetailActivity extends ConsumerWidget {
             style:
                 AppFont.medium12.copyWith(color: Theme.of(context).hintColor),
           ),
-          8.0.height,
+          height(8),
           Text(
             "$state ${BigInt.parse(activity.value!).toDouble() / pow(10, 18)}  ${activity.symbol == "" ? chain.symbol : activity.symbol}",
             style: AppFont.medium14

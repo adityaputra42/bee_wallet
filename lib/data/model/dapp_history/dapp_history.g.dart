@@ -44,7 +44,7 @@ const DappsHistorySchema = CollectionSchema(
   getId: _dappsHistoryGetId,
   getLinks: _dappsHistoryGetLinks,
   attach: _dappsHistoryAttach,
-  version: '3.1.0+1',
+  version: '3.1.8',
 );
 
 int _dappsHistoryEstimateSize(

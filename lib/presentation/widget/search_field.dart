@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../config/config.dart';
 
 class SearchField extends StatelessWidget {
@@ -30,7 +28,7 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 48.h,
+      height: 48,
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         style: AppFont.medium14.copyWith(
@@ -49,25 +47,24 @@ class SearchField extends StatelessWidget {
             filled: true,
             prefixIcon: Icon(
               Icons.search,
-              size: 20.w,
+              size: 20,
             ),
             hintText: "Search",
             hintStyle: AppFont.reguler14.copyWith(
                 fontWeight: FontWeight.w300, color: AppColor.grayColor),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
+              borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: Colors.transparent),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
+              borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: Colors.transparent),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.r),
+              borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: AppColor.primaryColor),
             ),
-            contentPadding:
-                EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h)),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14)),
       ),
     );
   }

@@ -34,7 +34,7 @@ const SelectedChainSchema = CollectionSchema(
   getId: _selectedChainGetId,
   getLinks: _selectedChainGetLinks,
   attach: _selectedChainAttach,
-  version: '3.1.0+1',
+  version: '3.1.8',
 );
 
 int _selectedChainEstimateSize(

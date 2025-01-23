@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../config/config.dart';
 import '../../../../../data/src/src.dart';
 import '../../../../../utils/util.dart';
@@ -17,11 +16,11 @@ class BackupSettingScreen extends ConsumerWidget {
       appBar:
           WidgetHelper.appBar(context: context, title: 'Backup Your Wallet'),
       body: Container(
-        margin: EdgeInsets.all(16.w),
-        padding: EdgeInsets.all(16.w),
+        margin: EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         width: double.infinity,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(12),
             color: Theme.of(context).cardColor),
         child: Column(
           children: [
@@ -33,9 +32,9 @@ class BackupSettingScreen extends ConsumerWidget {
             const Spacer(),
             Image.asset(
               AppImage.logo,
-              width: 225.w,
+              width: 225,
             ),
-            16.0.height,
+            height(16),
             Text(
               'Making backup is very simple and safe : just write down these 12/24 words and keep them in a secret place, offline',
               style: AppFont.reguler12
@@ -53,8 +52,8 @@ class BackupSettingScreen extends ConsumerWidget {
                       isScrollControlled: true,
                       showDragHandle: true,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(16.r))));
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(16))));
                 })
           ],
         ),

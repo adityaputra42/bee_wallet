@@ -48,6 +48,18 @@ class SelectedAccount extends _$SelectedAccount {
     state = AsyncData(account);
   }
 
+  Future<void> importByPrivateKey(String privateKey, String name) async {
+    state = const AsyncValue.loading();
+    var selectedAccount = state.valueOrNull;
+    final mnemonic = WalletHelper().generateMnemonicFromPrivateKey(privateKey);
+    var account = await MethodHelper()
+        .computeMnemonic(mnemonic: mnemonic, name: name, backup: true);
+    await DbHelper.instance.addAccount(account);
+    ref.read(accountListProvider.notifier).updateListAddress();
+    await DbHelper.instance.unSelectWallet(selectedAccount?.id ?? 0);
+    await DbHelper.instance.changeWallet(account.id!);
+    state = AsyncData(account);
+  }
 }
 
 @riverpod

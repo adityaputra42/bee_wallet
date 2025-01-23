@@ -4,7 +4,6 @@ import 'package:bee_wallet/presentation/widget/primary_button.dart';
 import 'package:bee_wallet/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EditRpcNetwork extends ConsumerWidget {
   const EditRpcNetwork({super.key});
@@ -15,10 +14,10 @@ class EditRpcNetwork extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(context: context, title: "Edit Network"),
       body: Container(
-        margin: EdgeInsets.all(16.w),
-        padding: EdgeInsets.all(16.w),
+        margin: EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             color: Theme.of(context).cardColor),
         child: LayoutBuilder(
           builder: (context, constraints) => SingleChildScrollView(
@@ -36,7 +35,7 @@ class EditRpcNetwork extends ConsumerWidget {
                         hintText: "Input Network name ",
                         color: Theme.of(context).colorScheme.surface,
                       ),
-                      16.0.height,
+                      height(16),
                       InputText(
                         title: "Symbol",
                         controller: ref.watch(symbolNetworkProvider),
@@ -44,7 +43,7 @@ class EditRpcNetwork extends ConsumerWidget {
                         hintText: "Input Network name ",
                         color: Theme.of(context).colorScheme.surface,
                       ),
-                      16.0.height,
+                      height(16),
                       InputText(
                         title: "Chain Id",
                         controller: ref.watch(chainIdNetworkProvider),
@@ -52,7 +51,7 @@ class EditRpcNetwork extends ConsumerWidget {
                         hintText: "Input Network name ",
                         color: Theme.of(context).colorScheme.surface,
                       ),
-                      16.0.height,
+                      height(16),
                       InputText(
                         title: "RPC",
                         controller: ref.watch(rpcNetworkProvider),
@@ -61,7 +60,7 @@ class EditRpcNetwork extends ConsumerWidget {
                         hintText: "Input Network name ",
                         color: Theme.of(context).colorScheme.surface,
                       ),
-                      16.0.height,
+                      height(16),
                       InputText(
                         title: "Explorer",
                         controller: ref.watch(explorerNetworkProvider),
@@ -69,7 +68,7 @@ class EditRpcNetwork extends ConsumerWidget {
                         hintText: "Input Network name ",
                         color: Theme.of(context).colorScheme.surface,
                       ),
-                      24.0.height,
+                      height(24),
                     ],
                   ),
                   PrimaryButton(

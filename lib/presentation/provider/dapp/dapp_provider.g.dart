@@ -21,7 +21,7 @@ final newsDappProvider =
 );
 
 typedef _$NewsDapp = AutoDisposeNotifier<List<String>>;
-String _$dappListHash() => r'24c8d50402bcdeebb9e31f3baceec852b87f073e';
+String _$dappListHash() => r'49748e940d99c599d48af3fd0992064c3c58d791';
 
 /// See also [DappList].
 @ProviderFor(DappList)
@@ -36,6 +36,21 @@ final dappListProvider =
 );
 
 typedef _$DappList = AutoDisposeAsyncNotifier<List<DappLink>>;
+String _$favoriteDappHash() => r'833bb2464b6e4d89d022507ce7561ee23b098fd4';
+
+/// See also [FavoriteDapp].
+@ProviderFor(FavoriteDapp)
+final favoriteDappProvider = AutoDisposeNotifierProvider<FavoriteDapp,
+    List<Map<String, dynamic>>>.internal(
+  FavoriteDapp.new,
+  name: r'favoriteDappProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$favoriteDappHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$FavoriteDapp = AutoDisposeNotifier<List<Map<String, dynamic>>>;
 String _$indexCarouselHash() => r'f0ac0f3ff65b5daf523ac892f06c43366b94e896';
 
 /// See also [IndexCarousel].
@@ -97,20 +112,5 @@ final searchWebProvider =
 );
 
 typedef _$SearchWeb = AutoDisposeNotifier<TextEditingController>;
-String _$chainDappHash() => r'1ca9da33148a72a8ff793fb4e2644de2ad0e7dee';
-
-/// See also [ChainDapp].
-@ProviderFor(ChainDapp)
-final chainDappProvider =
-    AutoDisposeNotifierProvider<ChainDapp, SelectedTokenChain>.internal(
-  ChainDapp.new,
-  name: r'chainDappProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$chainDappHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$ChainDapp = AutoDisposeNotifier<SelectedTokenChain>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

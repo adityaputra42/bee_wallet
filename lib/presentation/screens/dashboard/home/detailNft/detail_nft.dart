@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
 
@@ -19,10 +18,10 @@ class DetailNft extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(context: context, title: "Detail NFT"),
       body: Container(
-        padding: EdgeInsets.all(16.w),
-        margin: EdgeInsets.all(16.w),
+        padding: EdgeInsets.all(16),
+        margin: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(8),
             color: Theme.of(context).cardColor),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,16 +30,16 @@ class DetailNft extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(6.r),
+                  borderRadius: BorderRadius.circular(6),
                   child: Image.memory(
                     MethodHelper()
                         .convertBase64ToUint8List(nft.imageByte ?? ''),
                     width: double.infinity,
-                    height: ScreenUtil().screenHeight * 0.48,
+                    height: context.h(0.48),
                     fit: BoxFit.fill,
                   ),
                 ),
-                16.0.height,
+                height(16),
                 Text(
                   nft.name ?? '',
                   style: AppFont.semibold20
@@ -48,7 +47,7 @@ class DetailNft extends ConsumerWidget {
                 )
               ],
             ),
-            16.0.height,
+            height(16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -64,17 +63,17 @@ class DetailNft extends ConsumerWidget {
                       style: AppFont.medium14
                           .copyWith(color: Theme.of(context).indicatorColor),
                     ),
-                    8.0.width,
+                    width(8),
                     Icon(
                       Icons.copy_rounded,
-                      size: 16.w,
+                      size: 16,
                       color: AppColor.primaryColor,
                     )
                   ],
                 )
               ],
             ),
-            8.0.height,
+            height(8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -89,17 +88,17 @@ class DetailNft extends ConsumerWidget {
                       style: AppFont.medium14
                           .copyWith(color: Theme.of(context).indicatorColor),
                     ),
-                    8.0.width,
+                    width(8),
                     Icon(
                       Icons.copy_rounded,
-                      size: 16.w,
+                      size: 16,
                       color: AppColor.primaryColor,
                     )
                   ],
                 )
               ],
             ),
-            8.0.height,
+            height(8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -114,7 +113,7 @@ class DetailNft extends ConsumerWidget {
                 )
               ],
             ),
-            8.0.height,
+            height(8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -129,7 +128,7 @@ class DetailNft extends ConsumerWidget {
                 )
               ],
             ),
-            8.0.height,
+            height(8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -145,10 +144,10 @@ class DetailNft extends ConsumerWidget {
                       style: AppFont.medium14
                           .copyWith(color: Theme.of(context).indicatorColor),
                     ),
-                    8.0.width,
+                    width(8),
                     Icon(
                       Icons.copy_rounded,
-                      size: 16.w,
+                      size: 16,
                       color: AppColor.primaryColor,
                     )
                   ],
