@@ -31,6 +31,7 @@ class ListNft extends ConsumerWidget {
           SizedBox(
             height: 48,
             child: TabBar(
+                tabAlignment: TabAlignment.start,
                 automaticIndicatorColorAdjustment: false,
                 isScrollable: true,
                 dividerColor: Colors.transparent,
@@ -59,7 +60,7 @@ class ListNft extends ConsumerWidget {
                               right:
                                   listChain[index] == listChain.last ? 16 : 8),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(6),
                             color: ref.watch(indexbarNft) == index
                                 ? AppColor.primaryColor
                                 : Theme.of(context).cardColor,
@@ -74,8 +75,11 @@ class ListNft extends ConsumerWidget {
                                   sides: 6,
                                   child: Container(
                                     padding: EdgeInsets.all(0.5),
-                                    color:
-                                        Theme.of(context).colorScheme.surface,
+                                    decoration: BoxDecoration(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .surface,
+                                        borderRadius: BorderRadius.circular(4)),
                                     child: Image.asset(
                                       listChain[index].logo ?? '',
                                     ),
@@ -107,7 +111,7 @@ class ListNft extends ConsumerWidget {
                       ref.read(listViewNftProvider.notifier).onSearch(v),
                 )),
                 width(8),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     showModalBottomSheet(
                         context: context,

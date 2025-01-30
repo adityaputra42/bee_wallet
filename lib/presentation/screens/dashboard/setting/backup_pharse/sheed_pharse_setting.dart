@@ -24,7 +24,7 @@ class SheedPharseSetting extends ConsumerWidget {
         margin: EdgeInsets.all(16),
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(8),
             color: Theme.of(context).cardColor),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,19 +42,19 @@ class SheedPharseSetting extends ConsumerWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Theme.of(context).colorScheme.surface),
-              child: Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  runAlignment: WrapAlignment.center,
-                  alignment: WrapAlignment.center,
-                  spacing: 12,
-                  runSpacing: 12,
-                  direction: Axis.horizontal,
-                  children: mnemonic
-                      .map(
-                        (e) => cardPniomoni(context,
-                            number: e['id'], text: e['data']),
-                      )
-                      .toList()),
+              child: GridView.builder(
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 2.6,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
+                ),
+                itemBuilder: (context, index) => cardPniomoni(context,
+                    number: mnemonic[index]['id'],
+                    text: mnemonic[index]['data']),
+                itemCount: mnemonic.length,
+              ),
             ),
             height(16),
             Row(
@@ -175,8 +175,8 @@ class SheedPharseSetting extends ConsumerWidget {
       {required int number, required String text}) {
     return Container(
       // height: 42.h,
-      width: MediaQuery.of(context).size.width * 0.247,
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -186,10 +186,13 @@ class SheedPharseSetting extends ConsumerWidget {
           ],
           borderRadius: BorderRadius.circular(4),
           color: Theme.of(context).cardColor),
-      child: Text("$number. $text",
-          style: AppFont.medium12.copyWith(
-            color: Theme.of(context).indicatorColor,
-          )),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Text("$number. $text",
+            style: AppFont.medium12.copyWith(
+              color: Theme.of(context).indicatorColor,
+            )),
+      ),
     );
   }
 }

@@ -196,7 +196,7 @@ class ChooseReceiverScreen extends ConsumerWidget {
                               ),
                               width(16),
                               Text(
-                                '${chain.balance} ${chain.symbol}',
+                                '${roundDouble(chain.balance ?? 0, 6)} ${chain.symbol}',
                                 style: AppFont.medium14.copyWith(
                                     color: Theme.of(context).hintColor),
                               ),
@@ -208,10 +208,12 @@ class ChooseReceiverScreen extends ConsumerWidget {
                           title: "Amount",
                           controller: ref.watch(amountTransferProvider),
                           keyboardType: TextInputType.number,
+                          filled: true,
+                          filledColor: Theme.of(context).colorScheme.surface,
                           onChange: (value) {
-                            // ref
-                            //     .read(amountTransferProvider.notifier)
-                            //     .onAmountChange(value);
+                            ref
+                                .read(disableNextTransferProvider.notifier)
+                                .onChangeAmount(value);
                           },
                           hintText: "0.000",
                           color: Theme.of(context).colorScheme.surface,
@@ -244,6 +246,8 @@ class ChooseReceiverScreen extends ConsumerWidget {
                                 .read(receiveAddressProvider.notifier)
                                 .onAddressChange(value);
                           },
+                          filled: true,
+                          filledColor: Theme.of(context).colorScheme.surface,
                           hintText: "Please enter address",
                           color: Theme.of(context).colorScheme.surface,
                           icon: Row(
@@ -289,6 +293,7 @@ class ChooseReceiverScreen extends ConsumerWidget {
                     ),
                     PrimaryButton(
                         title: "Next",
+                        disableColor: Theme.of(context).colorScheme.surface,
                         disable: ref.watch(disableNextTransferProvider),
                         onPressed: () async {
                           await ref

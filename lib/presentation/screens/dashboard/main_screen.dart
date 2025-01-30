@@ -11,6 +11,7 @@ import '../../../utils/walletConnect/deep_link_handler.dart';
 import '../../provider/account/account_provider.dart';
 import '../../provider/dapp/walletconnect_provider.dart';
 import '../../provider/provider.dart';
+import '../../widget/custom_navbar.dart';
 import '../../widget/widget.dart';
 import 'dapps/dapp_screen.dart';
 import 'home/home_screen.dart';
@@ -55,7 +56,11 @@ class MainScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      bottomNavigationBar: CustomBottomNavBar(
+      // bottomNavigationBar: CustomBottomNavBar(
+      //   onTap: (index) => ref.read(indexNavBarProvider.notifier).state = index,
+      //   selectedIndex: ref.watch(indexNavBarProvider),
+      // ),
+      bottomNavigationBar: CustomNavbar(
         onTap: (index) => ref.read(indexNavBarProvider.notifier).state = index,
         selectedIndex: ref.watch(indexNavBarProvider),
       ),

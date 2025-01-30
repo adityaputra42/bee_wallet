@@ -86,7 +86,7 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ),
               ),
-              GestureDetector(
+              InkWell(
                   onTap: () {},
                   child: Container(
                     width: 36,
@@ -127,7 +127,7 @@ class HomeScreen extends ConsumerWidget {
                       color: Theme.of(context).primaryColor,
                       borderRadius: BorderRadius.circular(5)),
                   isScrollable: false,
-                  dividerColor: Theme.of(context).colorScheme.surface,
+                  dividerColor: Theme.of(context).cardColor,
                   indicatorColor: Theme.of(context).colorScheme.surface,
                   labelColor: AppColor.lightText1,
                   labelPadding: EdgeInsets.zero,

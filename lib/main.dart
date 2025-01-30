@@ -1,3 +1,4 @@
+import 'package:bee_wallet/presentation/provider/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
@@ -31,11 +32,12 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     final appRouter = ref.watch(appRouteProvider);
+    final isDark = ref.watch(darkThemeProvider);
     return MaterialApp.router(
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
       title: 'Bee Wallet',
-      theme: Styles.themeData(true, context),
+      theme: Styles.themeData(isDark, context),
     );
   }
 }

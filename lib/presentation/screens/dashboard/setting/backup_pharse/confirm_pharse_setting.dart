@@ -29,26 +29,13 @@ class ConfirmPharseSetting extends ConsumerWidget {
             ref.read(disableConfirmProvider.notifier).checkButtonConfirm();
           }
         },
-        // onAccept: (String value) {
-        //   if (!confirmList.any((element) => element['id'] == number) ||
-        //       confirmList.isEmpty) {
-        //     ref.read(confirmMnemonicProvider.notifier).add(number, value);
-        //     ref
-        //         .read(randomMnemonicProvider.notifier)
-        //         .removeRandomMnemonic(value);
-
-        //     ref.read(disableConfirmProvider.notifier).checkButtonConfirm();
-        //   }
-        // },
         builder: (
           context,
           accepted,
           rejected,
         ) {
           return Container(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            height: 36,
-            width: MediaQuery.of(context).size.width * 0.247,
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -56,13 +43,16 @@ class ConfirmPharseSetting extends ConsumerWidget {
                       spreadRadius: 0.5,
                       color: AppColor.grayColor.withValues(alpha: 0.15))
                 ],
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(6),
                 color: Theme.of(context).cardColor),
-            child: Text(
-                "$number. ${confirmList.singleWhere((element) => element['id'] == number, orElse: () => <String, dynamic>{})['data'] ?? ''}",
-                style: AppFont.medium12.copyWith(
-                  color: Theme.of(context).hintColor,
-                )),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                  "$number. ${confirmList.singleWhere((element) => element['id'] == number, orElse: () => <String, dynamic>{})['data'] ?? ''}",
+                  style: AppFont.medium12.copyWith(
+                    color: Theme.of(context).hintColor,
+                  )),
+            ),
           );
         },
       );
@@ -77,14 +67,12 @@ class ConfirmPharseSetting extends ConsumerWidget {
           data: text,
           feedback: Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-            height: 36,
-            width: MediaQuery.of(context).size.width * 0.247,
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
                       blurRadius: 0.1, spreadRadius: 0.1, color: Colors.black12)
                 ],
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(6),
                 color: Theme.of(context).cardColor),
             child: Center(
               child: Text(text,
@@ -95,14 +83,12 @@ class ConfirmPharseSetting extends ConsumerWidget {
           ),
           childWhenDragging: Container(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            height: 36,
-            width: MediaQuery.of(context).size.width * 0.247,
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
                       blurRadius: 0.1, spreadRadius: 0.1, color: Colors.black12)
                 ],
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(6),
                 color: Theme.of(context).cardColor),
             child: Center(
               child: Text(text,
@@ -113,8 +99,6 @@ class ConfirmPharseSetting extends ConsumerWidget {
           ),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-            height: 36,
-            width: MediaQuery.of(context).size.width * 0.247,
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -122,7 +106,7 @@ class ConfirmPharseSetting extends ConsumerWidget {
                       spreadRadius: 0.1,
                       color: AppColor.grayColor.withValues(alpha: 0.25))
                 ],
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(6),
                 color: Theme.of(context).cardColor),
             child: Center(
               child: Text(text,
@@ -166,53 +150,20 @@ class ConfirmPharseSetting extends ConsumerWidget {
                         spreadRadius: 0.5,
                         color: AppColor.grayColor.withValues(alpha: 0.25))
                   ],
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(8),
                   color: Theme.of(context).colorScheme.surface),
-              child: Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  runAlignment: WrapAlignment.center,
-                  alignment: WrapAlignment.center,
-                  spacing: 12,
-                  runSpacing: 12,
-                  direction: Axis.horizontal,
-                  children: [
-                    cardPniomoni(
-                      number: 1,
-                    ),
-                    cardPniomoni(
-                      number: 2,
-                    ),
-                    cardPniomoni(
-                      number: 3,
-                    ),
-                    cardPniomoni(
-                      number: 4,
-                    ),
-                    cardPniomoni(
-                      number: 5,
-                    ),
-                    cardPniomoni(
-                      number: 6,
-                    ),
-                    cardPniomoni(
-                      number: 7,
-                    ),
-                    cardPniomoni(
-                      number: 8,
-                    ),
-                    cardPniomoni(
-                      number: 9,
-                    ),
-                    cardPniomoni(
-                      number: 10,
-                    ),
-                    cardPniomoni(
-                      number: 11,
-                    ),
-                    cardPniomoni(
-                      number: 12,
-                    ),
-                  ]),
+              child: GridView.builder(
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 3.6,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
+                ),
+                itemBuilder: (context, index) =>
+                    cardPniomoni(number: index + 1),
+                itemCount: 12,
+              ),
             ),
             random.isEmpty
                 ? const SizedBox()
@@ -227,19 +178,21 @@ class ConfirmPharseSetting extends ConsumerWidget {
                               spreadRadius: 0.5,
                               color: AppColor.grayColor.withValues(alpha: 0.25))
                         ],
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(8),
                         color: Theme.of(context).colorScheme.surface),
-                    child: Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        runAlignment: WrapAlignment.center,
-                        alignment: WrapAlignment.center,
-                        spacing: 12,
-                        runSpacing: 12,
-                        direction: Axis.horizontal,
-                        children: random
-                            .map(
-                                (element) => cardPilihan(text: element['data']))
-                            .toList()),
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        childAspectRatio: 2.6,
+                        mainAxisSpacing: 8,
+                        crossAxisSpacing: 8,
+                      ),
+                      itemBuilder: (context, index) =>
+                          cardPilihan(text: random[index]['data']),
+                      itemCount: random.length,
+                    ),
                   ),
             const Spacer(),
             PrimaryButton(

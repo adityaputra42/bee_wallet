@@ -32,7 +32,7 @@ class SwapScreen extends ConsumerWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: MediaQuery.sizeOf(context).height * 0.32,
+                    height: context.h(0.36),
                     child: Stack(
                       children: [
                         Column(

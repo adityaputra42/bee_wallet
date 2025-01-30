@@ -7,6 +7,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
+import 'package:iconify_flutter_plus/icons/ant_design.dart';
 import 'package:reown_walletkit/reown_walletkit.dart';
 
 import '../../../../config/config.dart';
@@ -15,6 +17,7 @@ import '../../../../utils/walletConnect/eth_utils.dart';
 import '../../../provider/dapp/walletconnect_provider.dart';
 import '../../../provider/provider.dart';
 import '../../../widget/widget.dart';
+import '../../scan/scann_page.dart';
 import 'components/new_dapps.dart';
 import 'components/sheet_select_network.dart';
 
@@ -99,24 +102,93 @@ class _DappScreenState extends ConsumerState<DappScreen> {
           shadowColor: AppColor.grayColor,
           title: Padding(
               padding: EdgeInsets.only(top: 12),
-              child: SearchField(
-                controller: ref.watch(searchWebProvider),
-                onEditingComplete: () {
-                  if (ref.watch(searchWebProvider).text.isNotEmpty) {
-                    showModalBottomSheet(
-                        context: context,
-                        builder: (context) => SheetSelectNetworkDapp(
-                              url: ref.watch(searchWebProvider).text,
-                              onSelect: () {},
-                            ),
-                        backgroundColor: Theme.of(context).colorScheme.surface,
-                        showDragHandle: true,
-                        isDismissible: false,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(16))));
-                  }
-                },
+              child: Row(
+                children: [
+                  Expanded(
+                    child: SearchField(
+                      controller: ref.watch(searchWebProvider),
+                      onEditingComplete: () {
+                        if (ref.watch(searchWebProvider).text.isNotEmpty) {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) => SheetSelectNetworkDapp(
+                                    url: ref.watch(searchWebProvider).text,
+                                    onSelect: () {},
+                                  ),
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.surface,
+                              showDragHandle: true,
+                              isDismissible: false,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(16))));
+                        }
+                      },
+                    ),
+                  ),
+                  widget.width(12),
+                  InkWell(
+                      onTap: () {
+                        if (walletKit?.core.connectivity.isOnline.value ==
+                            true) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ScanPage(onScan: (v) {
+                                        Navigator.pop(context);
+                                        showModalBottomSheet(
+                                            context: context,
+                                            builder: (context) =>
+                                                SheetSelectNetworkDapp(
+                                                  url: null,
+                                                  onSelect: () {
+                                                    ref
+                                                        .read(
+                                                            walletconnectProvider
+                                                                .notifier)
+                                                        .registerAccount();
+                                                    ref.watch(
+                                                        walletconnectProvider);
+                                                    ref
+                                                        .read(
+                                                            walletconnectProvider
+                                                                .notifier)
+                                                        .connectWallet(v);
+                                                  },
+                                                ),
+                                            backgroundColor: Theme.of(context)
+                                                .colorScheme
+                                                .surface,
+                                            showDragHandle: true,
+                                            isDismissible: false,
+                                            shape: const RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.vertical(
+                                                        top: Radius.circular(
+                                                            16))));
+                                      })));
+                        } else {
+                          MethodHelper().showSnack(
+                            context: context,
+                            content: "Wallet connect is not initialize",
+                            backgorund: AppColor.redColor,
+                          );
+                        }
+                      },
+                      child: Container(
+                        width: 46,
+                        height: 46,
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Theme.of(context).cardColor),
+                        child: Iconify(
+                          AntDesign.scan,
+                          color: AppColor.primaryColor,
+                          size: 24,
+                        ),
+                      ))
+                ],
               )),
           automaticallyImplyLeading: false,
           backgroundColor: Theme.of(context).colorScheme.surface,
@@ -237,6 +309,7 @@ class _DappScreenState extends ConsumerState<DappScreen> {
                   children: [
                     SizedBox(
                       child: TabBar(
+                          tabAlignment: TabAlignment.start,
                           automaticIndicatorColorAdjustment: false,
                           isScrollable: true,
                           dividerColor: Colors.transparent,
@@ -252,6 +325,11 @@ class _DappScreenState extends ConsumerState<DappScreen> {
                             ref
                                 .read(tokenDappLinkProvider.notifier)
                                 .onChange(listChain[index]);
+                            ref.watch(tokenDappLinkProvider);
+                            ref
+                                .read(walletconnectProvider.notifier)
+                                .registerAccount();
+                            ref.watch(walletconnectProvider);
                           },
                           tabs: List.generate(
                               listChain.length,
