@@ -1,0 +1,52 @@
+[
+    {
+        "chain": "Beone Testnet",
+        "chainId": 223344,
+        "dex": "Uniswap V2",
+        "router": "0xd627FfF27633B6704a3eF15F9d66ea24a0eb17Ee",
+        "factory": "0x6a3e838fdf5fB908e76fB7886a22a1c7Ee0f1460"
+      },
+    {
+        "chain": "Ethereum",
+        "chainId": 1,
+        "dex": "Uniswap V2",
+        "router": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "factory": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+      },
+      {
+        "chain": "BNB Chain",
+        "chainId": 56,
+        "dex": "PancakeSwap",
+        "router": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+        "factory": "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
+      },
+      {
+        "chain": "BNB Testnet",
+        "chainId": 97,
+        "dex": "PancakeSwap",
+        "router": "0xD99D1c33F9fC3444f8101754aBC46c52416550D1",
+        "factory": "0x6725F303b657a9451d8BA641348b6761A6CC7a17"
+      },
+      {
+        "chain": "Polygon",
+        "chainId": 137,
+        "dex": "Uniswap V2",
+        "router": "0xedf6066a2b290C185783862C7F4776A2C8077AD1",
+        "factory": "0x9e5A52f57b3038F1B8EeE45F28b3C1967e22799C"
+      },
+      {
+        "chain": "Base",
+        "chainId": 8453,
+        "dex": "Uniswap V2",
+        "router": "0x4752ba5dbc23f44d87826276bf6fd6b1c372ad24",
+        "factory": "0x8909Dc15e40173Ff4699343b6eB8132c65e18eC6"
+      },
+      {
+        "chain": "Arbitrum",
+        "chainId": 42161,
+        "dex": "Uniswap V2",
+        "router": "0x4752ba5dbc23f44d87826276bf6fd6b1c372ad24",
+        "factory": "0xf1D7CC64Fb4452F05c498126312eBE29f30Fbcf9"
+      }
+      
+]

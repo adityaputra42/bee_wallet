@@ -1,9 +1,53 @@
 [
-
-  {
+{
+    "name" : "BioneTest",
+    "symbol" : "B-Test",
+    "RPC" : "https://rpc.beonescan.com",
+    "chainId" : "223344",
+    "explorer" : "https://beonescan.com",
+    "explorerAPI" : "https://api.beonescan.com/",
+    "token_registry" : "0xe8141Dde6230ed3A5391E64186800762dC5443D2",
+    "logo":"https://ecodex.beonechain.com/images/chains/223344.png",
+    "baseLogo":"https://ecodex.beonechain.com/images/chains/223344.png", 
+    "chainType":"ERC-20",
+    "baseNetwork":"eth",
+    "decimal":18,
+    "apiKey":null,
+    "contractAddress":null,
+    "coingeckoIdAPI":null,
+    "wraped_address":"0xB69Bc23b876daC67e1cE7E20322a12A664f543E6",
+    "pool_address":null,
+    "networkId":null,
+    "isTestnet": false
+    
+},
+{
+    "name" : "ECO Token",
+    "symbol" : "ECO",
+    "RPC" : "https://rpc.beonescan.com",
+    "chainId" : "223344",
+    "explorer" : "https://beonescan.com",
+    "explorerAPI" : "https://api.beonescan.com/",
+    "token_registry" : null,
+    "logo":"https://ecodex.beonechain.com/images/223344/tokens/0x782c172B784b46eab692E709532eDd7460473558.png",
+    "baseLogo":"https://ecodex.beonechain.com/images/chains/223344.png", 
+    "chainType":"ERC-20",
+    "baseNetwork":"eth",
+    "decimal":18,
+    "apiKey":null,
+    "contractAddress":"0x782c172B784b46eab692E709532eDd7460473558",
+    "coingeckoIdAPI":null,
+    "wraped_address":null,
+    "pool_address":null,
+    "networkId":null,
+    "isTestnet": false
+    
+},
+ 
+   {
      "name" : "Ethereum Mainnet",
      "symbol" : "ETH",
-     "RPC" : "https://1rpc.io/eth",
+     "RPC" : "https://eth.llamarpc.com",
      "chainId" : "1",
      "explorer" : "https://etherscan.io",
      "explorerAPI" : "https://api.etherscan.io",
@@ -15,13 +59,17 @@
      "decimal":18,
      "apiKey":"da54aa5b-ca38-458d-8549-9994a3c109d9",
      "contractAddress":null,
+     "coingeckoIdAPI":"ethereum",
+     "wraped_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+     "pool_address":"0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640",
+     "networkId":"eth",
      "isTestnet": false
      
  },
  {
      "name" : "Binance Smart Chain",
      "symbol" : "BNB",
-     "RPC" : "https://bsc-rpc.publicnode.com",
+     "RPC" :  "https://bsc-rpc.publicnode.com",
      "chainId" : "56",
      "explorer" : "https://bscscan.com",
      "explorerAPI" : "https://api.bscscan.com",
@@ -33,12 +81,16 @@
      "decimal":18,
      "apiKey":"HEG6412EV66QP21U7ED3DMBZT7845W6BQJ",
      "contractAddress":null,
+     "coingeckoIdAPI":"binancecoin",
+     "wraped_address":"0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+     "pool_address":"0xc736ca3d9b1e90af4230bd8f9626528b3d4e0ee0",
+     "networkId":"bsc",
      "isTestnet": false
  },
  {
      "name" : "Polygon Mainnet",
      "symbol" : "MATIC",
-     "RPC" : "https://1rpc.io/matic",
+     "RPC" : "https://polygon-bor-rpc.publicnode.com",
      "chainId" : "137",
      "explorer" : "https://polygonscan.com",
      "explorerAPI" : "https://api.polygonscan.com",
@@ -50,6 +102,31 @@
      "decimal":18,
      "apiKey":"RZPUWD55XW56NWXKBPA79TBMED8XEUBFJQ",
      "contractAddress":null,
+     "coingeckoIdAPI":"polygon-ecosystem-token",
+     "wraped_address":"0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
+     "pool_address":"0x9b08288c3be4f62bbf8d1c20ac9c5e6f9467d8b7",
+     "networkId":"polygon_pos",
+     "isTestnet": false
+ },
+ {
+     "name" : "Base",
+     "symbol" : "ETH",
+     "RPC" : "https://base-rpc.publicnode.com",
+     "chainId" : "8453",
+     "explorer" : "https://basescan.org",
+     "explorerAPI" : "https://api.basescan.org",
+     "token_registry" : null,
+     "logo":"assets/logo/base.png", 
+     "baseLogo":"assets/logo/base.png", 
+     "baseNetwork":"eth",
+     "chainType":"Base ERC-20",
+     "decimal":18,
+     "apiKey":null,
+     "contractAddress":null,
+     "coingeckoIdAPI":"base",
+     "wraped_address":"0x4200000000000000000000000000000000000006",
+     "pool_address":"0xb2cc224c1c9fee385f8ad6a55b4d94e92359dc59",
+     "networkId":"base",
      "isTestnet": false
  },
  
@@ -69,12 +146,16 @@
   "decimal":18,
   "apiKey":"HEG6412EV66QP21U7ED3DMBZT7845W6BQJ",
   "contractAddress":"0x55d398326f99059ff775485246999027b3197955",
+  "coingeckoIdAPI":"tether",
+  "wraped_address":null,
+  "pool_address":"0x36696169c63e42cd08ce11f5deebbcebae652050",
+  "networkId":"bsc",
   "isTestnet": null
 },
 {
   "name":"Tether USD",
   "symbol":"USDT",
-  "RPC" : "https://1rpc.io/matic",  
+  "RPC" : "https://polygon-bor-rpc.publicnode.com",   
   "chainId":"137",
   "explorer" : "https://polygonscan.com",
   "explorerAPI" : "https://api.polygonscan.com",
@@ -86,6 +167,10 @@
   "decimal":18,
   "apiKey":"RZPUWD55XW56NWXKBPA79TBMED8XEUBFJQ",
   "contractAddress":"0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+  "coingeckoIdAPI":"tether",
+  "wraped_address":null,
+  "pool_address":"0x9b08288c3be4f62bbf8d1c20ac9c5e6f9467d8b7",
+  "networkId":"polygon_pos",
   "isTestnet": null
 }  
 ]
