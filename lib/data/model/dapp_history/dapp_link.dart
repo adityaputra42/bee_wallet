@@ -32,28 +32,27 @@ class DappLink {
     String? image,
     String? chainId,
     String? url,
-  }) =>
-      DappLink(
-        title: title ?? this.title,
-        subtitle: subtitle ?? this.subtitle,
-        image: image ?? this.image,
-        chainId: chainId ?? this.chainId,
-        url: url ?? this.url,
-      );
+  }) => DappLink(
+    title: title ?? this.title,
+    subtitle: subtitle ?? this.subtitle,
+    image: image ?? this.image,
+    chainId: chainId ?? this.chainId,
+    url: url ?? this.url,
+  );
 
   factory DappLink.fromJson(Map<String, dynamic> json) => DappLink(
-        title: json["title"],
-        subtitle: json["subtitle"],
-        image: json["image"],
-        chainId: json["chainId"],
-        url: json["url"],
-      );
+    title: json["title"],
+    subtitle: json["subtitle"],
+    image: json["image"],
+    chainId: json["chainId"],
+    url: json["url"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "title": title,
-        "subtitle": subtitle,
-        "image": image,
-        "chainId": chainId,
-        "url": url,
-      };
+    "title": title,
+    "subtitle": subtitle,
+    "image": image,
+    "chainId": chainId,
+    "url": url,
+  };
 }

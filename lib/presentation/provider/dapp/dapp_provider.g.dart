@@ -112,5 +112,38 @@ final searchWebProvider =
 );
 
 typedef _$SearchWeb = AutoDisposeNotifier<TextEditingController>;
+String _$web3ControllerHash() => r'7e15b40873170faeec71916351a2f1321d63b398';
+
+/// See also [Web3Controller].
+@ProviderFor(Web3Controller)
+final web3ControllerProvider = AutoDisposeNotifierProvider<Web3Controller,
+    InAppWebViewController?>.internal(
+  Web3Controller.new,
+  name: r'web3ControllerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$web3ControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Web3Controller = AutoDisposeNotifier<InAppWebViewController?>;
+String _$refreshControllerHash() => r'511c2b9a0e29376c6de9dd1c17ef809f033242bc';
+
+/// See also [RefreshController].
+@ProviderFor(RefreshController)
+final refreshControllerProvider = AutoDisposeAsyncNotifierProvider<
+    RefreshController, PullToRefreshController?>.internal(
+  RefreshController.new,
+  name: r'refreshControllerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$refreshControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$RefreshController
+    = AutoDisposeAsyncNotifier<PullToRefreshController?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

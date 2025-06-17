@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_web3_webview/flutter_web3_webview.dart';
 import 'package:intl/intl.dart';
 import 'package:bee_wallet/presentation/provider/provider.dart';
 import 'package:bee_wallet/presentation/widget/widget.dart';
+import 'package:web3_webview/web3_webview.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../../utils/util.dart';

@@ -5,13 +5,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
+
+import 'package:k_chart_plus_deeping/entity/k_line_entity.dart';
 import '../../config/config.dart';
-import '../../data/model/account/account.dart';
 import '../../data/model/model.dart';
 import '../blockchain_helper/eth_helper.dart';
 import 'encrypt_helper.dart';
 
 class MethodHelper {
+  Future<Map<String, dynamic>?> getDexForChain(int chainId) async {
+    final dexList = await rootBundle.loadString('assets/abi/dex-list.json');
+    var dexPerChain = jsonDecode(dexList);
+    return dexPerChain.firstWhere(
+      (dex) => dex['chainId'] == chainId,
+      orElse: () => {},
+    );
+  }
+
+  BigInt doubleToBigInt(double value, int decimals) {
+    return BigInt.from(value * BigInt.from(10).pow(decimals).toDouble());
+  }
+
+  double bigIntToDouble(BigInt value, int decimals) {
+    return value.toDouble() / BigInt.from(10).pow(decimals).toDouble();
+  }
+
   String urlValidator(String url) {
     String value = '';
     if (isURL(url)) {
@@ -29,21 +47,26 @@ class MethodHelper {
   handleCopy({required String data, required BuildContext context}) {
     Clipboard.setData(ClipboardData(text: data));
     showSnack(
-        context: context, content: "Succes copy", backgorund: Colors.teal);
+      context: context,
+      content: "Succes copy",
+      backgorund: Colors.teal,
+    );
   }
 
-  Future<Account> computeMnemonic(
-      {required String mnemonic,
-      required String name,
-      bool backup = false}) async {
+  Future<Account> computeMnemonic({
+    required String mnemonic,
+    required String name,
+    bool backup = false,
+  }) async {
     var accountETH = EthHelper().getEthInfo(mnemonic);
     // var accountSolana = await SolanaHelper().getAccountInfo(mnemonic);
     // var accountSui = SuiHelper().getAccountInfo(mnemonic);
     // var accountBtc = await BtcHelper().getBtcAccountInfo(mnemonic);
 
     final mnemonicEncrypted = EcryptionHelper().encrypt(mnemonic);
-    final privataKeyEthEncrypted =
-        EcryptionHelper().encrypt(accountETH['private_key']!);
+    final privataKeyEthEncrypted = EcryptionHelper().encrypt(
+      accountETH['private_key']!,
+    );
     // final privataKeySolanaEncrypted =
     //     EcryptionHelper().encrypt(accountSolana['private_key']!);
     // final privataKeySuiEncrypted =
@@ -152,17 +175,49 @@ class MethodHelper {
     for (var item in itemContract) {
       var nftByContract =
           list.where((element) => element.contractAddress == item).toList();
-      nftView.add(NftView(
-        contract: item,
-        name: nftByContract.first.name,
-        length: nftByContract.length,
-        chainID: nftByContract.first.chainId,
-        image: nftByContract.first.imageByte ?? '',
-        listNft: nftByContract,
-      ));
+      nftView.add(
+        NftView(
+          contract: item,
+          name: nftByContract.first.name,
+          length: nftByContract.length,
+          chainID: nftByContract.first.chainId,
+          image: nftByContract.first.imageByte ?? '',
+          listNft: nftByContract,
+        ),
+      );
     }
 
     return nftView;
+  }
+
+  List<KLineEntity> generateCandle(List<List<double>> data) {
+    var keys = ['time', 'open', 'high', 'low', 'close', 'vol'];
+    List<KLineEntity> candles = [];
+    for (var i = 0; i < data.length; i++) {
+      Map<String, dynamic> newObj = {};
+      for (var j = 0; j < keys.length; j++) {
+        newObj.addAll({keys[j]: data[i][j]});
+      }
+      int? tempTime = newObj['time']?.toInt() * 1000;
+
+      if (tempTime == null) {
+        tempTime = newObj['id']?.toInt() ?? 0;
+        tempTime = tempTime! * 1000;
+      }
+
+      candles.add(
+        KLineEntity.fromCustom(
+          time: tempTime,
+          high: double.parse(newObj['high'].toString()),
+          low: double.parse(newObj['low'].toString()),
+          open: double.parse(newObj['open'].toString()),
+          close: double.parse(newObj['close'].toString()),
+          vol: double.parse(newObj['vol'].toString()),
+        ),
+      );
+    }
+
+    return candles;
   }
 }
 

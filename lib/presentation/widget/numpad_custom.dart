@@ -21,10 +21,7 @@ class Numpadcustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: margin ??
-          const EdgeInsets.symmetric(
-            horizontal: 24,
-          ),
+      margin: margin ?? const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -107,20 +104,24 @@ class Numpadcustom extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                    height: heightWidget ?? 60,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: color ?? Theme.of(context).cardColor),
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Center(
-                        child: Text(
-                          ".",
-                          style: AppFont.semibold24.copyWith(
-                              color: Theme.of(context).indicatorColor),
+                  height: heightWidget ?? 48,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: color ?? Theme.of(context).cardColor,
+                  ),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Center(
+                      child: Text(
+                        ".",
+                        style: AppFont.semibold18.copyWith(
+                          fontSize: 20,
+                          color: Theme.of(context).indicatorColor,
                         ),
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               ),
               width(12),
               NumbButton(
@@ -132,20 +133,23 @@ class Numpadcustom extends StatelessWidget {
               width(12),
               Expanded(
                 child: Container(
-                    height: heightWidget ?? 60,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: color ?? Theme.of(context).cardColor),
-                    child: TextButton(
-                      onPressed: () => delete(),
-                      child: Center(
-                          child: Icon(
+                  height: heightWidget ?? 48,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: color ?? Theme.of(context).cardColor,
+                  ),
+                  child: TextButton(
+                    onPressed: () => delete(),
+                    child: Center(
+                      child: Icon(
                         Icons.backspace_outlined,
                         color: Theme.of(context).indicatorColor,
-                        size: 28,
-                      )),
-                    )),
-              )
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ],
@@ -171,22 +175,25 @@ class NumbButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        height: heightWidget ?? 60,
+        height: heightWidget ?? 48,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: color ?? Theme.of(context).cardColor),
+          borderRadius: BorderRadius.circular(8),
+          color: color ?? Theme.of(context).cardColor,
+        ),
         child: TextButton(
-            onPressed: () {
-              controller.text += number.toString();
-            },
-            child: Center(
-              child: Text(
-                number.toString(),
-                style: AppFont.medium24.copyWith(
-                  color: Theme.of(context).indicatorColor,
-                ),
+          onPressed: () {
+            controller.text += number.toString();
+          },
+          child: Center(
+            child: Text(
+              number.toString(),
+              style: AppFont.medium18.copyWith(
+                fontSize: 20,
+                color: Theme.of(context).indicatorColor,
               ),
-            )),
+            ),
+          ),
+        ),
       ),
     );
   }

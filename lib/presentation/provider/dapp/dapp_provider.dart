@@ -1,10 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:web3_webview/web3_webview.dart';
 
-import '../../../data/model/dapp_history/dapp_link.dart';
+import '../../../data/model/model.dart';
 import '../../../utils/util.dart';
 import '../provider.dart';
+import 'browser_provider.dart';
 part 'dapp_provider.g.dart';
 
 @riverpod
@@ -31,8 +34,9 @@ class DappList extends _$DappList {
     final listLink = dappLinkFromJson(initLink);
     await DbHelper.instance.deleteAllDappLink();
     await DbHelper.instance.addAllDappLink(listLink);
-    final newlinks =
-        await DbHelper.instance.getAllDappLink(chainId: chain.chainId!);
+    final newlinks = await DbHelper.instance.getAllDappLink(
+      chainId: chain.chainId!,
+    );
     return newlinks;
   }
 }
@@ -47,43 +51,43 @@ class FavoriteDapp extends _$FavoriteDapp {
         "title": "PancakeSwap",
         "subtitle":
             "Trade, earn and win crypto in decentralize app and more oportunity",
-        "link": "https://pancakeswap.finance/"
+        "link": "https://pancakeswap.finance/",
       },
       {
         // "image": AppImage.uniswap,
         "title": "UniSwap",
         "subtitle":
             "Trade, earn and win crypto in decentralize app and more oportunity",
-        "link": "https://app.uniswap.org/"
+        "link": "https://app.uniswap.org/",
       },
       {
         // "image": AppImage.opensea,
         "title": "OpenSea",
         "subtitle":
             "Trade, earn and win crypto in decentralize app and more oportunity",
-        "link": "https://opensea.io/"
+        "link": "https://opensea.io/",
       },
       {
         // "image": AppImage.quickswap,
         "title": "QuickSwap",
         "subtitle":
             "Trade, earn and win crypto in decentralize app and more oportunity",
-        "link": "https://quickswap.exchange/#/"
+        "link": "https://quickswap.exchange/#/",
       },
       {
         // "image": AppImage.chainlink,
         "title": "ChainLink",
         "subtitle":
             "Trade, earn and win crypto in decentralize app and more oportunity",
-        "link": "https://chain.link/"
+        "link": "https://chain.link/",
       },
       {
         // "image": AppImage.ens,
         "title": "ENS",
         "subtitle":
             "Trade, earn and win crypto in decentralize app and more oportunity",
-        "link": "https://ens.domains/"
-      }
+        "link": "https://ens.domains/",
+      },
     ];
     return favorite;
   }
@@ -119,14 +123,86 @@ class SearchWeb extends _$SearchWeb {
   TextEditingController build() => TextEditingController();
 }
 
-// @riverpod
-// class ChainDapp extends _$ChainDapp {
-//   @override
-//   SelectedTokenChain build() {
-//     return SelectedTokenChain();
-//   }
+@riverpod
+class Web3Controller extends _$Web3Controller {
+  @override
+  InAppWebViewController? build() => null;
 
-//   setChainTransfer(SelectedTokenChain chain) {
-//     state = chain;
-//   }
-// }
+  initWebController(InAppWebViewController controller) async {
+    state = controller;
+    final title = await controller.getTitle();
+    final uri = await controller.getUrl();
+    final image = await controller.requestImageRef();
+    var newimage = image?.url?.path;
+
+    if (title != "") {
+      await ref
+          .read(browserHistoryProvider.notifier)
+          .addDappsHistory(
+            DappsHistory(title: title, url: uri.toString(), image: newimage),
+          );
+    }
+  }
+}
+
+@riverpod
+class RefreshController extends _$RefreshController {
+  @override
+  Future<PullToRefreshController?> build() async {
+    var pullRefresh =
+        kIsWeb ||
+                ![
+                  TargetPlatform.iOS,
+                  TargetPlatform.android,
+                ].contains(defaultTargetPlatform)
+            ? null
+            : PullToRefreshController(
+              settings: PullToRefreshSettings(color: Colors.blue),
+              onRefresh: () async {
+                if (defaultTargetPlatform == TargetPlatform.android) {
+                  ref.watch(web3ControllerProvider)?.reload();
+                } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+                  ref
+                      .watch(web3ControllerProvider)
+                      ?.loadUrl(
+                        urlRequest: URLRequest(
+                          url:
+                              await ref.watch(web3ControllerProvider)?.getUrl(),
+                        ),
+                      );
+                }
+              },
+            );
+
+    return pullRefresh;
+  }
+
+  void initRefresh() {
+    var pullRefresh =
+        kIsWeb ||
+                ![
+                  TargetPlatform.iOS,
+                  TargetPlatform.android,
+                ].contains(defaultTargetPlatform)
+            ? null
+            : PullToRefreshController(
+              settings: PullToRefreshSettings(color: Colors.blue),
+              onRefresh: () async {
+                if (defaultTargetPlatform == TargetPlatform.android) {
+                  ref.watch(web3ControllerProvider)?.reload();
+                } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+                  ref
+                      .watch(web3ControllerProvider)
+                      ?.loadUrl(
+                        urlRequest: URLRequest(
+                          url:
+                              await ref.watch(web3ControllerProvider)?.getUrl(),
+                        ),
+                      );
+                }
+              },
+            );
+
+    state = AsyncData(pullRefresh);
+  }
+}

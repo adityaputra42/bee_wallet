@@ -57,7 +57,7 @@ final chainSelectedSearchProvider = AutoDisposeNotifierProvider<
 );
 
 typedef _$ChainSelectedSearch = AutoDisposeNotifier<List<SelectedTokenChain>>;
-String _$listTokenChainHash() => r'7a017ef8229c0d219ea964dacb7b30ee977958cb';
+String _$listTokenChainHash() => r'1bae2f6521fd8057aeb829ae2685dba41ded9276';
 
 /// See also [ListTokenChain].
 @ProviderFor(ListTokenChain)
@@ -230,7 +230,7 @@ final disableAddTokenProvider =
 );
 
 typedef _$DisableAddToken = AutoDisposeNotifier<bool>;
-String _$tokenFromContractHash() => r'0efb0e96febe2d9ed49e8581a70a4d5eee8da96b';
+String _$tokenFromContractHash() => r'9d10af7cb738501276a323ea634c4628a3751091';
 
 /// See also [TokenFromContract].
 @ProviderFor(TokenFromContract)

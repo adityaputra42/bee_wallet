@@ -165,18 +165,21 @@ class NetworkFee extends _$NetworkFee {
   double build() => 0;
   Future<void> getNetworkFee() async {
     var chain = ref.watch(chainTransferProvider);
-    var amount = double.parse(ref.watch(amountTransferProvider).text != ''
-        ? ref.watch(amountTransferProvider).text
-        : "0");
+    var amount = double.parse(
+      ref.watch(amountTransferProvider).text != ''
+          ? ref.watch(amountTransferProvider).text
+          : "0",
+    );
     var account = ref.watch(selectedAccountProvider).valueOrNull;
     double fee = 0.0;
     if (chain.baseChain == 'eth') {
       if (chain.contractAddress == null) {
         var data = await EthHelper().getEstimateGasFee(
-            to: ref.watch(receiveAddressProvider).text,
-            amount: 0,
-            privateKey: EcryptionHelper().decrypt(account?.keyETH ?? ''),
-            chain: chain);
+          to: ref.watch(receiveAddressProvider).text,
+          amount: 0,
+          privateKey: EcryptionHelper().decrypt(account?.keyETH ?? ''),
+          chain: chain,
+        );
         fee = data['txFee'];
         ref
             .read(gasLimitProvider.notifier)
@@ -187,10 +190,11 @@ class NetworkFee extends _$NetworkFee {
         state = fee;
       } else {
         var data = await EthHelper().getEstimateGasTokenTransfer(
-            to: ref.watch(receiveAddressProvider).text,
-            amount: 0,
-            privateKey: EcryptionHelper().decrypt(account?.keyETH ?? ''),
-            chainToken: chain);
+          to: ref.watch(receiveAddressProvider).text,
+          amount: 0,
+          privateKey: EcryptionHelper().decrypt(account?.keyETH ?? ''),
+          chainToken: chain,
+        );
         fee = data['txFee'];
         ref
             .read(gasLimitProvider.notifier)
@@ -256,7 +260,8 @@ class NetworkFee extends _$NetworkFee {
   void setAdvanceGasFee() {
     var gasPrice = ref.watch(gasPriceProvider).text;
     var gasLimit = ref.watch(gasLimitProvider).text;
-    final txFee = BigInt.from(double.parse(gasPrice)) *
+    final txFee =
+        BigInt.from(double.parse(gasPrice)) *
         BigInt.from(double.parse(gasLimit));
     var fee = txFee / BigInt.from(10).pow(9);
     state = fee;
@@ -372,19 +377,25 @@ class TransferChain extends _$TransferChain {
         //     amount: amount);
         // state = true;
       }
-      await DbHelper.instance.addRecentAddress(RecentTransactionAddress(
-        address: ref.watch(receiveAddressProvider).text,
-      ));
+      await DbHelper.instance.addRecentAddress(
+        RecentTransactionAddress(
+          address: ref.watch(receiveAddressProvider).text,
+        ),
+      );
       MethodHelper().showSnack(
-          context: context,
-          content: "Transaction Successfully",
-          backgorund: AppColor.greenColor);
+        context: context,
+        content: "Transaction Successfully",
+        backgorund: AppColor.greenColor,
+      );
       context.goNamed('detail_token');
     } catch (e) {
       state = const AsyncData(false);
       dev.log("error => $e");
       MethodHelper().showSnack(
-          context: context, content: "Error $e", backgorund: AppColor.redColor);
+        context: context,
+        content: "Error $e",
+        backgorund: AppColor.redColor,
+      );
 
       ref.read(transferLoadingProvider.notifier).setValue(false);
     }

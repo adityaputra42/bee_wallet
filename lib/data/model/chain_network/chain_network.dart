@@ -3,7 +3,8 @@ import 'dart:convert';
 part 'chain_network.g.dart';
 
 List<ChainNetwork> chainNetworkFromJson(String str) => List<ChainNetwork>.from(
-    json.decode(str).map((x) => ChainNetwork.fromJson(x)));
+  json.decode(str).map((x) => ChainNetwork.fromJson(x)),
+);
 
 String chainNetworkToJson(List<ChainNetwork> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -44,40 +45,39 @@ class ChainNetwork {
     String? explorer,
     String? explorerApi,
     bool? isTestnet,
-  }) =>
-      ChainNetwork(
-        name: name ?? this.name,
-        symbol: symbol ?? this.symbol,
-        chainId: chainId ?? this.chainId,
-        chainType: chainType ?? this.chainType,
-        apiKey: apiKey ?? this.apiKey,
-        rpc: rpc ?? this.rpc,
-        explorer: explorer ?? this.explorer,
-        explorerApi: explorerApi ?? this.explorerApi,
-        isTestnet: isTestnet ?? this.isTestnet,
-      );
+  }) => ChainNetwork(
+    name: name ?? this.name,
+    symbol: symbol ?? this.symbol,
+    chainId: chainId ?? this.chainId,
+    chainType: chainType ?? this.chainType,
+    apiKey: apiKey ?? this.apiKey,
+    rpc: rpc ?? this.rpc,
+    explorer: explorer ?? this.explorer,
+    explorerApi: explorerApi ?? this.explorerApi,
+    isTestnet: isTestnet ?? this.isTestnet,
+  );
 
   factory ChainNetwork.fromJson(Map<String, dynamic> json) => ChainNetwork(
-        name: json["name"],
-        symbol: json["symbol"],
-        chainId: json["chainId"],
-        chainType: json["chainType"],
-        apiKey: json["apiKey"],
-        rpc: json["RPC"],
-        explorer: json["explorer"],
-        explorerApi: json["explorerAPI"],
-        isTestnet: json["isTestnet"],
-      );
+    name: json["name"],
+    symbol: json["symbol"],
+    chainId: json["chainId"],
+    chainType: json["chainType"],
+    apiKey: json["apiKey"],
+    rpc: json["RPC"],
+    explorer: json["explorer"],
+    explorerApi: json["explorerAPI"],
+    isTestnet: json["isTestnet"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "name": name,
-        "symbol": symbol,
-        "chainId": chainId,
-        "chainType": chainType,
-        "apiKey": apiKey,
-        "RPC": rpc,
-        "explorer": explorer,
-        "explorerAPI": explorerApi,
-        "isTestnet": isTestnet,
-      };
+    "name": name,
+    "symbol": symbol,
+    "chainId": chainId,
+    "chainType": chainType,
+    "apiKey": apiKey,
+    "RPC": rpc,
+    "explorer": explorer,
+    "explorerAPI": explorerApi,
+    "isTestnet": isTestnet,
+  };
 }

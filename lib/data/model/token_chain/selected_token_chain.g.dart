@@ -53,59 +53,79 @@ const SelectedTokenChainSchema = CollectionSchema(
       name: r'changePercent',
       type: IsarType.string,
     ),
-    r'contractAddress': PropertySchema(
+    r'coingeckoIdAPI': PropertySchema(
       id: 7,
+      name: r'coingeckoIdAPI',
+      type: IsarType.string,
+    ),
+    r'contractAddress': PropertySchema(
+      id: 8,
       name: r'contractAddress',
       type: IsarType.string,
     ),
     r'decimal': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'decimal',
       type: IsarType.long,
     ),
     r'estimateUsd': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'estimateUsd',
       type: IsarType.double,
     ),
     r'explorer': PropertySchema(
-      id: 10,
+      id: 11,
       name: r'explorer',
       type: IsarType.string,
     ),
     r'explorerApi': PropertySchema(
-      id: 11,
+      id: 12,
       name: r'explorerApi',
       type: IsarType.string,
     ),
     r'isTestnet': PropertySchema(
-      id: 12,
+      id: 13,
       name: r'isTestnet',
       type: IsarType.bool,
     ),
     r'logo': PropertySchema(
-      id: 13,
+      id: 14,
       name: r'logo',
       type: IsarType.string,
     ),
     r'mnemonicAccount': PropertySchema(
-      id: 14,
+      id: 15,
       name: r'mnemonicAccount',
       type: IsarType.string,
     ),
     r'name': PropertySchema(
-      id: 15,
+      id: 16,
       name: r'name',
       type: IsarType.string,
     ),
+    r'networkId': PropertySchema(
+      id: 17,
+      name: r'networkId',
+      type: IsarType.string,
+    ),
+    r'poolAddress': PropertySchema(
+      id: 18,
+      name: r'poolAddress',
+      type: IsarType.string,
+    ),
     r'rpc': PropertySchema(
-      id: 16,
+      id: 19,
       name: r'rpc',
       type: IsarType.string,
     ),
     r'symbol': PropertySchema(
-      id: 17,
+      id: 20,
       name: r'symbol',
+      type: IsarType.string,
+    ),
+    r'wrapedAddress': PropertySchema(
+      id: 21,
+      name: r'wrapedAddress',
       type: IsarType.string,
     )
   },
@@ -166,6 +186,12 @@ int _selectedTokenChainEstimateSize(
     }
   }
   {
+    final value = object.coingeckoIdAPI;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.contractAddress;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -202,6 +228,18 @@ int _selectedTokenChainEstimateSize(
     }
   }
   {
+    final value = object.networkId;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.poolAddress;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.rpc;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -209,6 +247,12 @@ int _selectedTokenChainEstimateSize(
   }
   {
     final value = object.symbol;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.wrapedAddress;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -229,17 +273,21 @@ void _selectedTokenChainSerialize(
   writer.writeString(offsets[4], object.chainId);
   writer.writeString(offsets[5], object.chainType);
   writer.writeString(offsets[6], object.changePercent);
-  writer.writeString(offsets[7], object.contractAddress);
-  writer.writeLong(offsets[8], object.decimal);
-  writer.writeDouble(offsets[9], object.estimateUsd);
-  writer.writeString(offsets[10], object.explorer);
-  writer.writeString(offsets[11], object.explorerApi);
-  writer.writeBool(offsets[12], object.isTestnet);
-  writer.writeString(offsets[13], object.logo);
-  writer.writeString(offsets[14], object.mnemonicAccount);
-  writer.writeString(offsets[15], object.name);
-  writer.writeString(offsets[16], object.rpc);
-  writer.writeString(offsets[17], object.symbol);
+  writer.writeString(offsets[7], object.coingeckoIdAPI);
+  writer.writeString(offsets[8], object.contractAddress);
+  writer.writeLong(offsets[9], object.decimal);
+  writer.writeDouble(offsets[10], object.estimateUsd);
+  writer.writeString(offsets[11], object.explorer);
+  writer.writeString(offsets[12], object.explorerApi);
+  writer.writeBool(offsets[13], object.isTestnet);
+  writer.writeString(offsets[14], object.logo);
+  writer.writeString(offsets[15], object.mnemonicAccount);
+  writer.writeString(offsets[16], object.name);
+  writer.writeString(offsets[17], object.networkId);
+  writer.writeString(offsets[18], object.poolAddress);
+  writer.writeString(offsets[19], object.rpc);
+  writer.writeString(offsets[20], object.symbol);
+  writer.writeString(offsets[21], object.wrapedAddress);
 }
 
 SelectedTokenChain _selectedTokenChainDeserialize(
@@ -256,18 +304,22 @@ SelectedTokenChain _selectedTokenChainDeserialize(
     chainId: reader.readStringOrNull(offsets[4]),
     chainType: reader.readStringOrNull(offsets[5]),
     changePercent: reader.readStringOrNull(offsets[6]),
-    contractAddress: reader.readStringOrNull(offsets[7]),
-    decimal: reader.readLongOrNull(offsets[8]),
-    estimateUsd: reader.readDoubleOrNull(offsets[9]),
-    explorer: reader.readStringOrNull(offsets[10]),
-    explorerApi: reader.readStringOrNull(offsets[11]),
+    coingeckoIdAPI: reader.readStringOrNull(offsets[7]),
+    contractAddress: reader.readStringOrNull(offsets[8]),
+    decimal: reader.readLongOrNull(offsets[9]),
+    estimateUsd: reader.readDoubleOrNull(offsets[10]),
+    explorer: reader.readStringOrNull(offsets[11]),
+    explorerApi: reader.readStringOrNull(offsets[12]),
     id: id,
-    isTestnet: reader.readBoolOrNull(offsets[12]),
-    logo: reader.readStringOrNull(offsets[13]),
-    mnemonicAccount: reader.readStringOrNull(offsets[14]),
-    name: reader.readStringOrNull(offsets[15]),
-    rpc: reader.readStringOrNull(offsets[16]),
-    symbol: reader.readStringOrNull(offsets[17]),
+    isTestnet: reader.readBoolOrNull(offsets[13]),
+    logo: reader.readStringOrNull(offsets[14]),
+    mnemonicAccount: reader.readStringOrNull(offsets[15]),
+    name: reader.readStringOrNull(offsets[16]),
+    networkId: reader.readStringOrNull(offsets[17]),
+    poolAddress: reader.readStringOrNull(offsets[18]),
+    rpc: reader.readStringOrNull(offsets[19]),
+    symbol: reader.readStringOrNull(offsets[20]),
+    wrapedAddress: reader.readStringOrNull(offsets[21]),
   );
   return object;
 }
@@ -296,17 +348,17 @@ P _selectedTokenChainDeserializeProp<P>(
     case 7:
       return (reader.readStringOrNull(offset)) as P;
     case 8:
-      return (reader.readLongOrNull(offset)) as P;
-    case 9:
-      return (reader.readDoubleOrNull(offset)) as P;
-    case 10:
       return (reader.readStringOrNull(offset)) as P;
+    case 9:
+      return (reader.readLongOrNull(offset)) as P;
+    case 10:
+      return (reader.readDoubleOrNull(offset)) as P;
     case 11:
       return (reader.readStringOrNull(offset)) as P;
     case 12:
-      return (reader.readBoolOrNull(offset)) as P;
-    case 13:
       return (reader.readStringOrNull(offset)) as P;
+    case 13:
+      return (reader.readBoolOrNull(offset)) as P;
     case 14:
       return (reader.readStringOrNull(offset)) as P;
     case 15:
@@ -314,6 +366,14 @@ P _selectedTokenChainDeserializeProp<P>(
     case 16:
       return (reader.readStringOrNull(offset)) as P;
     case 17:
+      return (reader.readStringOrNull(offset)) as P;
+    case 18:
+      return (reader.readStringOrNull(offset)) as P;
+    case 19:
+      return (reader.readStringOrNull(offset)) as P;
+    case 20:
+      return (reader.readStringOrNull(offset)) as P;
+    case 21:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1419,6 +1479,160 @@ extension SelectedTokenChainQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'changePercent',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      coingeckoIdAPIIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'coingeckoIdAPI',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      coingeckoIdAPIIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'coingeckoIdAPI',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      coingeckoIdAPIEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'coingeckoIdAPI',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      coingeckoIdAPIGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'coingeckoIdAPI',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      coingeckoIdAPILessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'coingeckoIdAPI',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      coingeckoIdAPIBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'coingeckoIdAPI',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      coingeckoIdAPIStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'coingeckoIdAPI',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      coingeckoIdAPIEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'coingeckoIdAPI',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      coingeckoIdAPIContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'coingeckoIdAPI',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      coingeckoIdAPIMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'coingeckoIdAPI',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      coingeckoIdAPIIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'coingeckoIdAPI',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      coingeckoIdAPIIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'coingeckoIdAPI',
         value: '',
       ));
     });
@@ -2609,6 +2823,314 @@ extension SelectedTokenChainQueryFilter
   }
 
   QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      networkIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'networkId',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      networkIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'networkId',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      networkIdEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'networkId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      networkIdGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'networkId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      networkIdLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'networkId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      networkIdBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'networkId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      networkIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'networkId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      networkIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'networkId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      networkIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'networkId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      networkIdMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'networkId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      networkIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'networkId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      networkIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'networkId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      poolAddressIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'poolAddress',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      poolAddressIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'poolAddress',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      poolAddressEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'poolAddress',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      poolAddressGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'poolAddress',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      poolAddressLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'poolAddress',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      poolAddressBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'poolAddress',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      poolAddressStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'poolAddress',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      poolAddressEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'poolAddress',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      poolAddressContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'poolAddress',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      poolAddressMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'poolAddress',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      poolAddressIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'poolAddress',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      poolAddressIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'poolAddress',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
       rpcIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -2915,6 +3437,160 @@ extension SelectedTokenChainQueryFilter
       ));
     });
   }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      wrapedAddressIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'wrapedAddress',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      wrapedAddressIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'wrapedAddress',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      wrapedAddressEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'wrapedAddress',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      wrapedAddressGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'wrapedAddress',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      wrapedAddressLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'wrapedAddress',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      wrapedAddressBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'wrapedAddress',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      wrapedAddressStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'wrapedAddress',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      wrapedAddressEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'wrapedAddress',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      wrapedAddressContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'wrapedAddress',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      wrapedAddressMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'wrapedAddress',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      wrapedAddressIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'wrapedAddress',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterFilterCondition>
+      wrapedAddressIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'wrapedAddress',
+        value: '',
+      ));
+    });
+  }
 }
 
 extension SelectedTokenChainQueryObject
@@ -3020,6 +3696,20 @@ extension SelectedTokenChainQuerySortBy
       sortByChangePercentDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'changePercent', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByCoingeckoIdAPI() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'coingeckoIdAPI', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByCoingeckoIdAPIDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'coingeckoIdAPI', Sort.desc);
     });
   }
 
@@ -3150,6 +3840,34 @@ extension SelectedTokenChainQuerySortBy
   }
 
   QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByNetworkId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'networkId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByNetworkIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'networkId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByPoolAddress() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'poolAddress', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByPoolAddressDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'poolAddress', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
       sortByRpc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'rpc', Sort.asc);
@@ -3174,6 +3892,20 @@ extension SelectedTokenChainQuerySortBy
       sortBySymbolDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'symbol', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByWrapedAddress() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'wrapedAddress', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      sortByWrapedAddressDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'wrapedAddress', Sort.desc);
     });
   }
 }
@@ -3275,6 +4007,20 @@ extension SelectedTokenChainQuerySortThenBy
       thenByChangePercentDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'changePercent', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByCoingeckoIdAPI() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'coingeckoIdAPI', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByCoingeckoIdAPIDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'coingeckoIdAPI', Sort.desc);
     });
   }
 
@@ -3419,6 +4165,34 @@ extension SelectedTokenChainQuerySortThenBy
   }
 
   QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByNetworkId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'networkId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByNetworkIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'networkId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByPoolAddress() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'poolAddress', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByPoolAddressDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'poolAddress', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
       thenByRpc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'rpc', Sort.asc);
@@ -3443,6 +4217,20 @@ extension SelectedTokenChainQuerySortThenBy
       thenBySymbolDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'symbol', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByWrapedAddress() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'wrapedAddress', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QAfterSortBy>
+      thenByWrapedAddressDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'wrapedAddress', Sort.desc);
     });
   }
 }
@@ -3495,6 +4283,14 @@ extension SelectedTokenChainQueryWhereDistinct
       distinctByChangePercent({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'changePercent',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QDistinct>
+      distinctByCoingeckoIdAPI({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'coingeckoIdAPI',
           caseSensitive: caseSensitive);
     });
   }
@@ -3564,6 +4360,20 @@ extension SelectedTokenChainQueryWhereDistinct
     });
   }
 
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QDistinct>
+      distinctByNetworkId({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'networkId', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QDistinct>
+      distinctByPoolAddress({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'poolAddress', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<SelectedTokenChain, SelectedTokenChain, QDistinct> distinctByRpc(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -3575,6 +4385,14 @@ extension SelectedTokenChainQueryWhereDistinct
       distinctBySymbol({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'symbol', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, SelectedTokenChain, QDistinct>
+      distinctByWrapedAddress({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'wrapedAddress',
+          caseSensitive: caseSensitive);
     });
   }
 }
@@ -3632,6 +4450,13 @@ extension SelectedTokenChainQueryProperty
       changePercentProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'changePercent');
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, String?, QQueryOperations>
+      coingeckoIdAPIProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'coingeckoIdAPI');
     });
   }
 
@@ -3695,6 +4520,20 @@ extension SelectedTokenChainQueryProperty
     });
   }
 
+  QueryBuilder<SelectedTokenChain, String?, QQueryOperations>
+      networkIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'networkId');
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, String?, QQueryOperations>
+      poolAddressProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'poolAddress');
+    });
+  }
+
   QueryBuilder<SelectedTokenChain, String?, QQueryOperations> rpcProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'rpc');
@@ -3704,6 +4543,13 @@ extension SelectedTokenChainQueryProperty
   QueryBuilder<SelectedTokenChain, String?, QQueryOperations> symbolProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'symbol');
+    });
+  }
+
+  QueryBuilder<SelectedTokenChain, String?, QQueryOperations>
+      wrapedAddressProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'wrapedAddress');
     });
   }
 }

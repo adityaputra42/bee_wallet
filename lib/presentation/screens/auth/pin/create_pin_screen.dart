@@ -28,15 +28,17 @@ class CreatePinScreen extends ConsumerWidget {
               height(16),
               Text(
                 "Create Security Pin",
-                style: AppFont.semibold24
-                    .copyWith(color: Theme.of(context).indicatorColor),
+                style: AppFont.semibold24.copyWith(
+                  color: Theme.of(context).indicatorColor,
+                ),
                 textAlign: TextAlign.center,
               ),
               height(8),
               Text(
                 "Security Pin used for open Wallet, Transaction, and Mnemonik Frase. Remember it and dont give password to anyoone",
-                style: AppFont.reguler14
-                    .copyWith(color: Theme.of(context).hintColor),
+                style: AppFont.reguler14.copyWith(
+                  color: Theme.of(context).hintColor,
+                ),
                 textAlign: TextAlign.center,
               ),
               height(48),
@@ -59,17 +61,26 @@ class CreatePinScreen extends ConsumerWidget {
           ),
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: 24),
-        child: Numpadcustom(
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 24),
+          child: Numpadcustom(
             controller: ref.watch(createPinRegisterProvider),
             delete: () {
               ref.watch(createPinRegisterProvider).text =
                   ref.watch(createPinRegisterProvider).text != ''
-                      ? ref.watch(createPinRegisterProvider).text.substring(0,
-                          ref.watch(createPinRegisterProvider).text.length - 1)
+                      ? ref
+                          .watch(createPinRegisterProvider)
+                          .text
+                          .substring(
+                            0,
+                            ref.watch(createPinRegisterProvider).text.length -
+                                1,
+                          )
                       : ref.watch(createPinRegisterProvider).text;
-            }),
+            },
+          ),
+        ),
       ),
     );
   }

@@ -1,5 +1,5 @@
-import 'package:flutter_web3_webview/flutter_web3_webview.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:web3_webview/web3_webview.dart';
 
 import '../../../data/model/model.dart';
 import '../../../utils/util.dart';
