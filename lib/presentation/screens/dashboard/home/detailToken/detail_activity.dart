@@ -24,7 +24,7 @@ class DetailActivity extends ConsumerWidget {
         appBar: WidgetHelper.appBar(
           context: context,
           title: "Transaction Details",
-          icon: GestureDetector(
+          icon: InkWell(
               onTap: () {},
               child: Container(
                 width: 40,
@@ -40,29 +40,31 @@ class DetailActivity extends ConsumerWidget {
                 ),
               )),
         ),
-        body: Container(
-          margin: EdgeInsets.all(16),
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Theme.of(context).cardColor),
-          child: Column(
-            spacing: 16,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _valueTransaction(context, ref),
-              _transactionHash(context, ref),
-              _fromTo(context, ref),
-              _infoFee(context, ref),
-              const Spacer(),
-              PrimaryButton(
-                  title: 'View in Blockchain Explorer',
-                  onPressed: () async {
-                    await browser.open(
-                        url: WebUri('${chain.explorer}/tx/${activity.hash}'));
-                    browser.close();
-                  })
-            ],
+        body: SafeArea(
+          child: Container(
+            margin: EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Theme.of(context).cardColor),
+            child: Column(
+              spacing: 16,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _valueTransaction(context, ref),
+                _transactionHash(context, ref),
+                _fromTo(context, ref),
+                _infoFee(context, ref),
+                const Spacer(),
+                PrimaryButton(
+                    title: 'View in Blockchain Explorer',
+                    onPressed: () async {
+                      await browser.open(
+                          url: WebUri('${chain.explorer}/tx/${activity.hash}'));
+                      browser.close();
+                    })
+              ],
+            ),
           ),
         ));
   }

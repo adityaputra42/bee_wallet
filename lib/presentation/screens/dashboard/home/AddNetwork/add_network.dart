@@ -18,77 +18,90 @@ class AddNetwork extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(
-          context: context,
-          title: 'Add Network',
-          icon: GestureDetector(
-            onTap: () {
-              context.goNamed('add_custom_network');
-            },
-            child: Container(
-              width: 36,
-              height: 36,
-              padding: EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(width: 1, color: AppColor.grayColor)),
-              child: Icon(
-                Icons.add_rounded,
-                color: AppColor.primaryColor,
-                size: 24,
-              ),
+        context: context,
+        title: 'Add Network',
+        icon: InkWell(
+          onTap: () {
+            context.goNamed('add_custom_network');
+          },
+          child: Container(
+            width: 36,
+            height: 36,
+            padding: EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(width: 1, color: AppColor.grayColor),
             ),
-          )),
+            child: Icon(
+              Icons.add_rounded,
+              color: AppColor.primaryColor,
+              size: 24,
+            ),
+          ),
+        ),
+      ),
       // bottomNavigationBar: PrimaryButton(
       //     margin: EdgeInsets.fromLTRB(24, 0, 24, 32.h),
       //     title: "Add Manually",
       //     onPressed: () {
       //       context.goNamed('add_custom_network');
       //     }),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            SearchField(
-              onChange: (v) =>
-                  ref.read(chainOtherSearchProvider.notifier).onSearch(v),
-            ),
-            height(16),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              SearchField(
+                onChange:
+                    (v) =>
+                        ref.read(chainOtherSearchProvider.notifier).onSearch(v),
+              ),
+              height(16),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Theme.of(context).cardColor),
-                child: ref.watch(chainOtherProvider).when(
-                  data: (data) {
-                    final listChain = ref.watch(chainOtherSearchProvider);
-                    return listChain.isEmpty
-                        ? const Empty(title: "Network not found")
-                        : ListView.builder(
-                            itemBuilder: (context, index) => Padding(
-                              padding: EdgeInsets.only(bottom: 8),
-                              child: cardChain(context, listChain[index], ref),
-                            ),
-                            itemCount: listChain.length,
+                    color: Theme.of(context).cardColor,
+                  ),
+                  child: ref
+                      .watch(chainOtherProvider)
+                      .when(
+                        data: (data) {
+                          final listChain = ref.watch(chainOtherSearchProvider);
+                          return listChain.isEmpty
+                              ? const Empty(title: "Network not found")
+                              : ListView.builder(
+                                itemBuilder:
+                                    (context, index) => Padding(
+                                      padding: EdgeInsets.only(bottom: 8),
+                                      child: cardChain(
+                                        context,
+                                        listChain[index],
+                                        ref,
+                                      ),
+                                    ),
+                                itemCount: listChain.length,
+                              );
+                        },
+                        error: (Object error, StackTrace stackTrace) {
+                          return ErrorView(
+                            error: error.toString(),
+                            ontap: () {
+                              ref.refresh(chainOtherProvider);
+                            },
                           );
-                  },
-                  error: (Object error, StackTrace stackTrace) {
-                    return ErrorView(
-                      error: error.toString(),
-                      ontap: () {
-                        ref.refresh(chainOtherProvider);
-                      },
-                    );
-                  },
-                  loading: () {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
+                        },
+                        loading: () {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -99,28 +112,29 @@ class AddNetwork extends ConsumerWidget {
         ref.watch(tokenChainOriginProvider).valueOrNull ?? [];
     return GestureDetector(
       onTap: () {
-        if (tokenChainOrigin
-            .any((element) => element.chainId == chain.chainId)) {
+        if (tokenChainOrigin.any(
+          (element) => element.chainId == chain.chainId,
+        )) {
           ref.read(chainOtherProvider.notifier).deleteTokenChain(chain);
         } else {
           showModalBottomSheet(
-              context: context,
-              builder: (context) => SheetPasswordAddNetwork(
-                    chain: chain,
-                  ),
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              isScrollControlled: true,
-              showDragHandle: true,
-              shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(16))));
+            context: context,
+            builder: (context) => SheetPasswordAddNetwork(chain: chain),
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            isScrollControlled: true,
+            showDragHandle: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+            ),
+          );
         }
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Theme.of(context).colorScheme.surface),
+          borderRadius: BorderRadius.circular(8),
+          color: Theme.of(context).colorScheme.surface,
+        ),
         child: Column(
           children: [
             Row(
@@ -131,14 +145,16 @@ class AddNetwork extends ConsumerWidget {
                     children: [
                       Text(
                         chain.name ?? "",
-                        style: AppFont.medium14
-                            .copyWith(color: Theme.of(context).indicatorColor),
+                        style: AppFont.medium14.copyWith(
+                          color: Theme.of(context).indicatorColor,
+                        ),
                       ),
                       height(2),
                       Text(
                         "Default Token: ${chain.symbol} | Chain ID: ${chain.chainId}",
-                        style: AppFont.reguler12
-                            .copyWith(color: Theme.of(context).hintColor),
+                        style: AppFont.reguler12.copyWith(
+                          color: Theme.of(context).hintColor,
+                        ),
                       ),
                     ],
                   ),
@@ -148,20 +164,24 @@ class AddNetwork extends ConsumerWidget {
                   height: 18,
                   padding: EdgeInsets.all(2),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2),
-                      color: tokenChainOrigin.any(
-                              (element) => element.chainId == chain.chainId)
-                          ? AppColor.redColor
-                          : AppColor.greenColor),
+                    borderRadius: BorderRadius.circular(2),
+                    color:
+                        tokenChainOrigin.any(
+                              (element) => element.chainId == chain.chainId,
+                            )
+                            ? AppColor.redColor
+                            : AppColor.greenColor,
+                  ),
                   child: Icon(
-                    tokenChainOrigin
-                            .any((element) => element.chainId == chain.chainId)
+                    tokenChainOrigin.any(
+                          (element) => element.chainId == chain.chainId,
+                        )
                         ? Icons.remove_rounded
                         : Icons.add_rounded,
                     color: AppColor.darkText1,
                     size: 14,
                   ),
-                )
+                ),
               ],
             ),
           ],

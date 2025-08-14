@@ -13,8 +13,9 @@ import '../../../../../data/src/src.dart';
 import '../../../../provider/provider.dart';
 import '../../../../widget/widget.dart';
 
-final pinAddNetworkController =
-    StateProvider<TextEditingController>((ref) => TextEditingController());
+final pinAddNetworkController = StateProvider<TextEditingController>(
+  (ref) => TextEditingController(),
+);
 
 class SheetPasswordAddNetwork extends ConsumerWidget {
   const SheetPasswordAddNetwork({super.key, required this.chain});
@@ -23,75 +24,88 @@ class SheetPasswordAddNetwork extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: EdgeInsets.fromLTRB(16, 0, 16, 24),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(
-            AppImage.logo,
-            height: 32,
-          ),
-          height(8),
-          Text(
-            "Enter Security Password",
-            style: AppFont.semibold16
-                .copyWith(color: Theme.of(context).indicatorColor),
-            textAlign: TextAlign.center,
-          ),
-          height(16),
-          Text(
-            "Security Password used for open Wallet, Transaction, and Mnemonik Frase. Remember it and dont give password to anyoone",
-            style:
-                AppFont.medium12.copyWith(color: Theme.of(context).hintColor),
-            textAlign: TextAlign.center,
-          ),
-          height(24),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 34),
-            child: InputPin(
-              keyboardType: TextInputType.none,
-              controller: ref.watch(pinAddNetworkController),
-              obsecure: true,
-              onCompleted: (value) async {
-                var pin = await DbHelper.instance.getPassword();
-                if (pin.password == value) {
-                  ref.read(pinAddNetworkController).clear();
-                  context.pop();
-                  ref.read(chainOtherProvider.notifier).addTokenChain(
-                      TokenChain(
-                          name: chain.name,
-                          contractAddress: null,
-                          symbol: chain.symbol,
-                          decimal: 18,
-                          balance: 0,
-                          baseLogo: AppChainLogo.evm,
-                          chainId: chain.chainId,
-                          logo: AppChainLogo.evm,
-                          explorer: chain.explorer,
-                          explorerApi: chain.explorerApi,
-                          baseChain: 'eth',
-                          rpc: chain.rpc,
-                          isTestnet: chain.isTestnet));
-                } else {
-                  ref.read(pinAddNetworkController).clear();
-                  MethodHelper().showSnack(
+      child: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(AppImage.logo, height: 32),
+            height(8),
+            Text(
+              "Enter Security Password",
+              style: AppFont.semibold16.copyWith(
+                color: Theme.of(context).indicatorColor,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            height(16),
+            Text(
+              "Security Password used for open Wallet, Transaction, and Mnemonik Frase. Remember it and dont give password to anyoone",
+              style: AppFont.medium12.copyWith(
+                color: Theme.of(context).hintColor,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            height(24),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 34),
+              child: InputPin(
+                keyboardType: TextInputType.none,
+                controller: ref.watch(pinAddNetworkController),
+                obsecure: true,
+                onCompleted: (value) async {
+                  var pin = await DbHelper.instance.getPassword();
+                  if (pin.password == value) {
+                    ref.read(pinAddNetworkController).clear();
+                    context.pop();
+                    ref
+                        .read(chainOtherProvider.notifier)
+                        .addTokenChain(
+                          TokenChain(
+                            name: chain.name,
+                            contractAddress: null,
+                            symbol: chain.symbol,
+                            decimal: 18,
+                            balance: 0,
+                            baseLogo: AppChainLogo.evm,
+                            chainId: chain.chainId,
+                            logo: AppChainLogo.evm,
+                            explorer: chain.explorer,
+                            explorerApi: chain.explorerApi,
+                            baseChain: 'eth',
+                            rpc: chain.rpc,
+                            isTestnet: chain.isTestnet,
+                          ),
+                        );
+                  } else {
+                    ref.read(pinAddNetworkController).clear();
+                    MethodHelper().showSnack(
                       context: context,
                       content: "Pin Didn't Match!",
-                      backgorund: AppColor.redColor);
-                }
-              },
+                      backgorund: AppColor.redColor,
+                    );
+                  }
+                },
+              ),
             ),
-          ),
-          height(16),
-          Numpadcustom(
+            height(16),
+            Numpadcustom(
               controller: ref.watch(pinAddNetworkController),
               delete: () {
                 ref.watch(pinAddNetworkController).text =
                     ref.watch(pinAddNetworkController).text != ''
-                        ? ref.watch(pinAddNetworkController).text.substring(0,
-                            ref.watch(pinAddNetworkController).text.length - 1)
+                        ? ref
+                            .watch(pinAddNetworkController)
+                            .text
+                            .substring(
+                              0,
+                              ref.watch(pinAddNetworkController).text.length -
+                                  1,
+                            )
                         : ref.watch(pinAddNetworkController).text;
-              })
-        ],
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

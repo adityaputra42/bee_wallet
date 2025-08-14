@@ -11,7 +11,8 @@ import '../../../../../utils/util.dart';
 import '../../../../widget/widget.dart';
 
 final searchNetworkSetting = StateProvider.autoDispose<TextEditingController>(
-    (ref) => TextEditingController());
+  (ref) => TextEditingController(),
+);
 
 class NetworkSetting extends ConsumerWidget {
   const NetworkSetting({super.key});
@@ -22,35 +23,47 @@ class NetworkSetting extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(context: context, title: "Network Setting"),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            height(16),
-            SearchField(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              height(16),
+              SearchField(
                 controller: ref.watch(searchNetworkSetting),
-                onChange: (v) => ref
-                    .read(listNetworkSettingProvider.notifier)
-                    .onSearch(ref.watch(searchNetworkSetting).text)),
-            height(16),
-            Expanded(
+                onChange:
+                    (v) => ref
+                        .read(listNetworkSettingProvider.notifier)
+                        .onSearch(ref.watch(searchNetworkSetting).text),
+              ),
+              height(16),
+              Expanded(
                 child: Container(
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Theme.of(context).cardColor),
-              child: listChain.isEmpty
-                  ? const Empty(title: "Chain Not Found")
-                  : ListView.builder(
-                      itemBuilder: (context, index) => Padding(
-                        padding: EdgeInsets.only(bottom: 8),
-                        child: cardChain(context, listChain[index], ref),
-                      ),
-                      itemCount: listChain.length,
-                    ),
-            )),
-            height(16),
-          ],
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Theme.of(context).cardColor,
+                  ),
+                  child:
+                      listChain.isEmpty
+                          ? const Empty(title: "Chain Not Found")
+                          : ListView.builder(
+                            itemBuilder:
+                                (context, index) => Padding(
+                                  padding: EdgeInsets.only(bottom: 8),
+                                  child: cardChain(
+                                    context,
+                                    listChain[index],
+                                    ref,
+                                  ),
+                                ),
+                            itemCount: listChain.length,
+                          ),
+                ),
+              ),
+              height(16),
+            ],
+          ),
         ),
       ),
     );
@@ -66,10 +79,13 @@ class NetworkSetting extends ConsumerWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-                width: 1, color: Theme.of(context).colorScheme.surface),
-            color: Theme.of(context).colorScheme.surface),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            width: 1,
+            color: Theme.of(context).colorScheme.surface,
+          ),
+          color: Theme.of(context).colorScheme.surface,
+        ),
         child: Column(
           children: [
             Row(
@@ -82,12 +98,10 @@ class NetworkSetting extends ConsumerWidget {
                     child: Container(
                       padding: EdgeInsets.all(0.5),
                       color: Theme.of(context).colorScheme.surface,
-                      child: (chain.logo != null)
-                          ? Image.asset(
-                              chain.logo!,
-                              fit: BoxFit.cover,
-                            )
-                          : Image.asset(AppImage.logo),
+                      child:
+                          (chain.logo != null)
+                              ? Image.asset(chain.logo!, fit: BoxFit.cover)
+                              : Image.asset(AppImage.logo),
                     ),
                   ),
                 ),
@@ -95,16 +109,18 @@ class NetworkSetting extends ConsumerWidget {
                 Expanded(
                   child: Text(
                     chain.name ?? '',
-                    style: AppFont.medium14
-                        .copyWith(color: Theme.of(context).indicatorColor),
+                    style: AppFont.medium14.copyWith(
+                      color: Theme.of(context).indicatorColor,
+                    ),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 width(8),
                 Text(
                   chain.symbol ?? '',
-                  style: AppFont.medium14
-                      .copyWith(color: Theme.of(context).hintColor),
+                  style: AppFont.medium14.copyWith(
+                    color: Theme.of(context).hintColor,
+                  ),
                 ),
               ],
             ),

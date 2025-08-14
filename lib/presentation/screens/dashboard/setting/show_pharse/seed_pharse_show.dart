@@ -15,170 +15,89 @@ class SheedPharseShow extends ConsumerWidget {
     final mnemonic = ref.watch(selectedMnemonicProvider);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: WidgetHelper.appBar(
-        context: context,
-        title: "Backup",
-      ),
-      body: Container(
-        width: double.infinity,
-        margin: EdgeInsets.all(16),
-        padding: EdgeInsets.all(16),
-        decoration: BoxDecoration(
+      appBar: WidgetHelper.appBar(context: context, title: "Backup"),
+      body: SafeArea(
+        child: Container(
+          width: double.infinity,
+          margin: EdgeInsets.all(16),
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            color: Theme.of(context).cardColor),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            height(16),
-            Text(
-              'Write down the Seed Phrase in order.',
-              style: AppFont.medium14
-                  .copyWith(color: Theme.of(context).indicatorColor),
-            ),
-            height(16),
-            Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                runAlignment: WrapAlignment.center,
-                alignment: WrapAlignment.center,
-                spacing: 8,
-                runSpacing: 8,
-                direction: Axis.horizontal,
-                children: mnemonic
-                    .map(
-                      (e) => cardPniomoni(context,
-                          number: e['id'], text: e['data']),
-                    )
-                    .toList()),
-            height(16),
-            // Row(
-            //   children: [
-            //     Icon(
-            //       Icons.check_rounded,
-            //       color: Colors.green,
-            //       size: 14.w,
-            //     ),
-            //     4.0.width,
-            //     Text(
-            //       'Recomend :',
-            //       style: AppFont.medium12
-            //           .copyWith(color: Theme.of(context).indicatorColor),
-            //     )
-            //   ],
-            // ),
-            // 8.0.height,
-            // Text(
-            //   'Write down on a piece of paper and store\nsomewhere secure.',
-            //   style:
-            //       AppFont.medium12.copyWith(color: Theme.of(context).hintColor),
-            // ),
-            // height(16),
-            // Row(
-            //   children: [
-            //     Icon(
-            //       Icons.close_rounded,
-            //       color: Colors.red,
-            //       size: 14.w,
-            //     ),
-            //     4.0.width,
-            //     Text(
-            //       'Avoid :',
-            //       style: AppFont.medium12
-            //           .copyWith(color: Theme.of(context).indicatorColor),
-            //     )
-            //   ],
-            // ),
-            // 8.0.height,
-            // Row(
-            //   children: [
-            //     Container(
-            //       width: 6.w,
-            //       height: 6.w,
-            //       decoration: BoxDecoration(
-            //           shape: BoxShape.circle,
-            //           color: Theme.of(context).hintColor),
-            //     ),
-            //     4.0.width,
-            //     Text(
-            //       'Do not screenshot or copy it to the clipboard',
-            //       style: AppFont.medium12
-            //           .copyWith(color: Theme.of(context).hintColor),
-            //     )
-            //   ],
-            // ),
-            // 2.0.height,
-            // Row(
-            //   children: [
-            //     Container(
-            //       width: 6.w,
-            //       height: 6.w,
-            //       decoration: BoxDecoration(
-            //           shape: BoxShape.circle,
-            //           color: Theme.of(context).hintColor),
-            //     ),
-            //     4.0.width,
-            //     Text(
-            //       'Do not store the Seed Phrase online',
-            //       style: AppFont.medium12
-            //           .copyWith(color: Theme.of(context).hintColor),
-            //     )
-            //   ],
-            // ),
-            // 2.0.height,
-            // Row(
-            //   children: [
-            //     Container(
-            //       width: 6.w,
-            //       height: 6.w,
-            //       decoration: BoxDecoration(
-            //           shape: BoxShape.circle,
-            //           color: Theme.of(context).hintColor),
-            //     ),
-            //     4.0.width,
-            //     Text(
-            //       'Do not send the Seed Phrase to anyone.',
-            //       style: AppFont.medium12
-            //           .copyWith(color: Theme.of(context).hintColor),
-            //     )
-            //   ],
-            // ),
-            // height(16),
-            // Text(
-            //   "Learn more about Seed Phrase Code.",
-            //   style: AppFont.medium12.copyWith(color: AppColor.primaryColor),
-            // ),
-            const Spacer(),
-            PrimaryButton(
-              title: 'Close',
-              onPressed: () {
-                context.pop();
-                context.pop();
-              },
-            ),
-          ],
+            color: Theme.of(context).cardColor,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              height(16),
+              Text(
+                'Write down the Seed Phrase in order.',
+                style: AppFont.medium14.copyWith(
+                  color: Theme.of(context).indicatorColor,
+                ),
+              ),
+              height(16),
+              GridView.builder(
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 2.6,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
+                ),
+                itemBuilder:
+                    (context, index) => cardPniomoni(
+                      context,
+                      number: mnemonic[index]['id'],
+                      text: mnemonic[index]['data'],
+                    ),
+                itemCount: mnemonic.length,
+              ),
+
+              height(16),
+
+              const Spacer(),
+              PrimaryButton(
+                title: 'Close',
+                onPressed: () {
+                  context.pop();
+                  context.pop();
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget cardPniomoni(BuildContext context,
-      {required int number, required String text}) {
+  Widget cardPniomoni(
+    BuildContext context, {
+    required int number,
+    required String text,
+  }) {
     return Container(
-      // height: 42,
-      width: MediaQuery.of(context).size.width * 0.41,
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      // height: 42.h,
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-                blurRadius: 0.1,
-                spreadRadius: 0.1,
-                color: AppColor.grayColor.withValues(alpha: 0.15))
-          ],
-          borderRadius: BorderRadius.circular(8),
-          color: Theme.of(context).colorScheme.surface),
-      child: Text("$number. $text",
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 0.1,
+            spreadRadius: 0.1,
+            color: AppColor.grayColor.withValues(alpha: 0.15),
+          ),
+        ],
+        borderRadius: BorderRadius.circular(4),
+        color: Theme.of(context).colorScheme.surface,
+      ),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          "$number. $text",
           style: AppFont.medium12.copyWith(
             color: Theme.of(context).indicatorColor,
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

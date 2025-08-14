@@ -1,3 +1,5 @@
+import 'package:bee_wallet/data/model/account/account.dart';
+import 'package:bee_wallet/presentation/provider/editWallet/edit_wallet_provider.dart';
 import 'package:blockies_ethereum/blockies_ethereum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,8 +27,9 @@ class SettingScreen extends ConsumerWidget {
           margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
           padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Theme.of(context).cardColor),
+            borderRadius: BorderRadius.circular(8),
+            color: Theme.of(context).cardColor,
+          ),
           child: ListView(
             children: [
               Row(
@@ -36,14 +39,18 @@ class SettingScreen extends ConsumerWidget {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border:
-                            Border.all(width: 1, color: AppColor.primaryColor)),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        width: 1,
+                        color: AppColor.primaryColor,
+                      ),
+                    ),
                     child: Center(
                       child: Blockies(
-                          size: 0.68,
-                          data: account?.addressETH ?? '-',
-                          shape: BlockiesShape.circle),
+                        size: 0.68,
+                        data: account?.addressETH ?? '-',
+                        shape: BlockiesShape.circle,
+                      ),
                     ),
                   ),
                   width(16),
@@ -82,9 +89,10 @@ class SettingScreen extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       width: 1,
-                      color: account?.backup == true
-                          ? AppColor.greenColor
-                          : AppColor.yellowColor,
+                      color:
+                          account?.backup == true
+                              ? AppColor.greenColor
+                              : AppColor.yellowColor,
                     ),
                     // color: account?.backup == true
                     //     ? AppColor.greenColor
@@ -97,9 +105,10 @@ class SettingScreen extends ConsumerWidget {
                             ? Icons.check_circle_outline_rounded
                             : Icons.error_outline_outlined,
                         size: 24,
-                        color: account?.backup == true
-                            ? AppColor.greenColor
-                            : AppColor.yellowColor,
+                        color:
+                            account?.backup == true
+                                ? AppColor.greenColor
+                                : AppColor.yellowColor,
                       ),
                       width(8),
                       Expanded(
@@ -108,9 +117,10 @@ class SettingScreen extends ConsumerWidget {
                               ? "Your account has been backed up"
                               : "Please backup your sheed pharse, to secure your account.",
                           style: AppFont.reguler12.copyWith(
-                            color: account?.backup == true
-                                ? AppColor.greenColor
-                                : AppColor.yellowColor,
+                            color:
+                                account?.backup == true
+                                    ? AppColor.greenColor
+                                    : AppColor.yellowColor,
                           ),
                         ),
                       ),
@@ -131,6 +141,10 @@ class SettingScreen extends ConsumerWidget {
                 context,
                 title: "Edit Wallet",
                 onTap: () {
+                  ref
+                      .read(accountSelectedEditProvider.notifier)
+                      .selectEditAccount(account ?? Account());
+                  ref.watch(accountSelectedEditProvider);
                   context.goNamed('edit_wallet');
                 },
               ),
@@ -140,14 +154,17 @@ class SettingScreen extends ConsumerWidget {
                 title: 'Show Seed Phrase',
                 onTap: () {
                   showModalBottomSheet(
-                      context: context,
-                      builder: (context) => const SheetPasswordShow(),
-                      backgroundColor: Theme.of(context).colorScheme.surface,
-                      isScrollControlled: true,
-                      showDragHandle: true,
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(16))));
+                    context: context,
+                    builder: (context) => const SheetPasswordShow(),
+                    backgroundColor: Theme.of(context).colorScheme.surface,
+                    isScrollControlled: true,
+                    showDragHandle: true,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(16),
+                      ),
+                    ),
+                  );
                 },
               ),
               height(12),
@@ -164,14 +181,17 @@ class SettingScreen extends ConsumerWidget {
                 title: "Change Pin",
                 onTap: () {
                   showModalBottomSheet(
-                      context: context,
-                      builder: (context) => const SheetPasswordChangePin(),
-                      backgroundColor: Theme.of(context).colorScheme.surface,
-                      isScrollControlled: true,
-                      showDragHandle: true,
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(16))));
+                    context: context,
+                    builder: (context) => const SheetPasswordChangePin(),
+                    backgroundColor: Theme.of(context).colorScheme.surface,
+                    isScrollControlled: true,
+                    showDragHandle: true,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(16),
+                      ),
+                    ),
+                  );
                 },
               ),
               height(12),
@@ -200,9 +220,10 @@ class SettingScreen extends ConsumerWidget {
                 widget: FlutterSwitch(
                   width: 42,
                   height: 20,
-                  toggleColor: isDark
-                      ? AppColor.darkText1
-                      : Theme.of(context).canvasColor,
+                  toggleColor:
+                      isDark
+                          ? AppColor.darkText1
+                          : Theme.of(context).canvasColor,
                   activeColor: AppColor.primaryColor,
                   inactiveColor: Theme.of(context).cardColor,
                   valueFontSize: 20.0,
@@ -226,14 +247,16 @@ class SettingScreen extends ConsumerWidget {
                   children: [
                     Text(
                       "Version",
-                      style: AppFont.medium12
-                          .copyWith(color: Theme.of(context).hintColor),
+                      style: AppFont.medium12.copyWith(
+                        color: Theme.of(context).hintColor,
+                      ),
                     ),
                     Text(
                       "v1.0.0",
-                      style: AppFont.medium12
-                          .copyWith(color: Theme.of(context).hintColor),
-                    )
+                      style: AppFont.medium12.copyWith(
+                        color: Theme.of(context).hintColor,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -245,17 +268,19 @@ class SettingScreen extends ConsumerWidget {
                   children: [
                     Text(
                       "TokenScriptCompability",
-                      style: AppFont.medium12
-                          .copyWith(color: Theme.of(context).hintColor),
+                      style: AppFont.medium12.copyWith(
+                        color: Theme.of(context).hintColor,
+                      ),
                     ),
                     Text(
                       "2023/12",
-                      style: AppFont.medium12
-                          .copyWith(color: Theme.of(context).hintColor),
-                    )
+                      style: AppFont.medium12.copyWith(
+                        color: Theme.of(context).hintColor,
+                      ),
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -263,22 +288,28 @@ class SettingScreen extends ConsumerWidget {
     );
   }
 
-  Widget cardMenu(BuildContext context,
-      {required String title, Widget? widget, Function()? onTap}) {
+  Widget cardMenu(
+    BuildContext context, {
+    required String title,
+    Widget? widget,
+    Function()? onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Theme.of(context).colorScheme.surface),
+          borderRadius: BorderRadius.circular(8),
+          color: Theme.of(context).colorScheme.surface,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               title,
-              style:
-                  AppFont.medium12.copyWith(color: Theme.of(context).hintColor),
+              style: AppFont.medium12.copyWith(
+                color: Theme.of(context).hintColor,
+              ),
             ),
             widget ??
                 Icon(

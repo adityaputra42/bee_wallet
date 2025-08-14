@@ -13,53 +13,60 @@ class SheetChangeNetworkToken extends ConsumerWidget {
   const SheetChangeNetworkToken({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final chainList = (ref.watch(tokenChainOriginProvider).valueOrNull ?? [])
-        .where((e) => e.contractAddress == null)
-        .toList();
+    final chainList =
+        (ref.watch(tokenChainOriginProvider).valueOrNull ?? [])
+            .where((e) => e.contractAddress == null)
+            .toList();
     return Padding(
       padding: EdgeInsets.fromLTRB(24, 0, 24, 0),
-      child: SizedBox(
-        height: MediaQuery.sizeOf(context).height * 0.65,
-        child: Column(
-          children: [
-            Text(
-              "Select Network",
-              style: AppFont.medium18
-                  .copyWith(color: Theme.of(context).indicatorColor),
-            ),
-            height(16),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    cardSelectAll(context, ref),
-                    height(12),
-                    Column(
-                        children: List.generate(
-                      chainList.length,
-                      (index) => Padding(
-                        padding: EdgeInsets.only(bottom: 12),
-                        child: cardChain(context, chainList[index], ref),
-                      ),
-                    )),
-                  ],
+      child: SafeArea(
+        child: SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.65,
+          child: Column(
+            children: [
+              Text(
+                "Select Network",
+                style: AppFont.medium18.copyWith(
+                  color: Theme.of(context).indicatorColor,
                 ),
               ),
-            ),
-          ],
+              height(16),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      cardSelectAll(context, ref),
+                      height(12),
+                      Column(
+                        children: List.generate(
+                          chainList.length,
+                          (index) => Padding(
+                            padding: EdgeInsets.only(bottom: 12),
+                            child: cardChain(context, chainList[index], ref),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget cardSelectAll(BuildContext context, WidgetRef ref) {
-    final listchain = (ref.watch(tokenChainOriginProvider).valueOrNull ?? [])
-        .where((e) => e.contractAddress == null)
-        .toList();
-    final selectedChain = ref
-        .watch(listManageTokenProvider)
-        .where((e) => e.contractAddress == null)
-        .toList();
+    final listchain =
+        (ref.watch(tokenChainOriginProvider).valueOrNull ?? [])
+            .where((e) => e.contractAddress == null)
+            .toList();
+    final selectedChain =
+        ref
+            .watch(listManageTokenProvider)
+            .where((e) => e.contractAddress == null)
+            .toList();
     return GestureDetector(
       onTap: () {
         ref.read(listManageTokenProvider.notifier).changeSelected(isAll: true);
@@ -68,13 +75,16 @@ class SheetChangeNetworkToken extends ConsumerWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-                width: 1,
-                color: listchain.length == selectedChain.length
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            width: 1,
+            color:
+                listchain.length == selectedChain.length
                     ? AppColor.primaryColor
-                    : Theme.of(context).cardColor),
-            color: Theme.of(context).cardColor),
+                    : Theme.of(context).cardColor,
+          ),
+          color: Theme.of(context).cardColor,
+        ),
         child: Column(
           children: [
             Row(
@@ -91,14 +101,16 @@ class SheetChangeNetworkToken extends ConsumerWidget {
                     children: [
                       Text(
                         "All",
-                        style: AppFont.medium14
-                            .copyWith(color: Theme.of(context).indicatorColor),
+                        style: AppFont.medium14.copyWith(
+                          color: Theme.of(context).indicatorColor,
+                        ),
                       ),
                       Text(
                         "Select all added network",
-                        style: AppFont.reguler12
-                            .copyWith(color: Theme.of(context).hintColor),
-                      )
+                        style: AppFont.reguler12.copyWith(
+                          color: Theme.of(context).hintColor,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -111,13 +123,15 @@ class SheetChangeNetworkToken extends ConsumerWidget {
   }
 
   Widget cardChain(BuildContext context, TokenChain chain, WidgetRef ref) {
-    final selectedChain = ref
-        .watch(listManageTokenProvider)
-        .where((e) => e.contractAddress == null)
-        .toList();
-    final listchain = (ref.watch(tokenChainOriginProvider).valueOrNull ?? [])
-        .where((e) => e.contractAddress == null)
-        .toList();
+    final selectedChain =
+        ref
+            .watch(listManageTokenProvider)
+            .where((e) => e.contractAddress == null)
+            .toList();
+    final listchain =
+        (ref.watch(tokenChainOriginProvider).valueOrNull ?? [])
+            .where((e) => e.contractAddress == null)
+            .toList();
     return GestureDetector(
       onTap: () {
         ref
@@ -128,15 +142,19 @@ class SheetChangeNetworkToken extends ConsumerWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-                width: 1,
-                color: listchain.length != selectedChain.length &&
-                        selectedChain
-                            .any((element) => element.chainId == chain.chainId)
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            width: 1,
+            color:
+                listchain.length != selectedChain.length &&
+                        selectedChain.any(
+                          (element) => element.chainId == chain.chainId,
+                        )
                     ? AppColor.primaryColor
-                    : Theme.of(context).cardColor),
-            color: Theme.of(context).cardColor),
+                    : Theme.of(context).cardColor,
+          ),
+          color: Theme.of(context).cardColor,
+        ),
         child: Column(
           children: [
             Row(
@@ -149,9 +167,10 @@ class SheetChangeNetworkToken extends ConsumerWidget {
                     child: Container(
                       padding: EdgeInsets.all(0.5),
                       color: Theme.of(context).colorScheme.surface,
-                      child: (chain.logo != null)
-                          ? Image.asset(chain.logo!)
-                          : Image.asset(AppImage.logo),
+                      child:
+                          (chain.logo != null)
+                              ? Image.asset(chain.logo!)
+                              : Image.asset(AppImage.logo),
                     ),
                   ),
                 ),
@@ -159,8 +178,9 @@ class SheetChangeNetworkToken extends ConsumerWidget {
                 Expanded(
                   child: Text(
                     chain.name ?? '',
-                    style: AppFont.medium14
-                        .copyWith(color: Theme.of(context).indicatorColor),
+                    style: AppFont.medium14.copyWith(
+                      color: Theme.of(context).indicatorColor,
+                    ),
                   ),
                 ),
               ],

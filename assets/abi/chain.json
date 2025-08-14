@@ -1,50 +1,5 @@
 [
-{
-    "name" : "BioneTest",
-    "symbol" : "B-Test",
-    "RPC" : "https://rpc.beonescan.com",
-    "chainId" : "223344",
-    "explorer" : "https://beonescan.com",
-    "explorerAPI" : "https://api.beonescan.com/",
-    "token_registry" : "0xe8141Dde6230ed3A5391E64186800762dC5443D2",
-    "logo":"https://ecodex.beonechain.com/images/chains/223344.png",
-    "baseLogo":"https://ecodex.beonechain.com/images/chains/223344.png", 
-    "chainType":"ERC-20",
-    "baseNetwork":"eth",
-    "decimal":18,
-    "apiKey":null,
-    "contractAddress":null,
-    "coingeckoIdAPI":null,
-    "wraped_address":"0xB69Bc23b876daC67e1cE7E20322a12A664f543E6",
-    "pool_address":null,
-    "networkId":null,
-    "isTestnet": false
-    
-},
-{
-    "name" : "ECO Token",
-    "symbol" : "ECO",
-    "RPC" : "https://rpc.beonescan.com",
-    "chainId" : "223344",
-    "explorer" : "https://beonescan.com",
-    "explorerAPI" : "https://api.beonescan.com/",
-    "token_registry" : null,
-    "logo":"https://ecodex.beonechain.com/images/223344/tokens/0x782c172B784b46eab692E709532eDd7460473558.png",
-    "baseLogo":"https://ecodex.beonechain.com/images/chains/223344.png", 
-    "chainType":"ERC-20",
-    "baseNetwork":"eth",
-    "decimal":18,
-    "apiKey":null,
-    "contractAddress":"0x782c172B784b46eab692E709532eDd7460473558",
-    "coingeckoIdAPI":null,
-    "wraped_address":null,
-    "pool_address":null,
-    "networkId":null,
-    "isTestnet": false
-    
-},
- 
-   {
+    {
      "name" : "Ethereum Mainnet",
      "symbol" : "ETH",
      "RPC" : "https://eth.llamarpc.com",
@@ -109,14 +64,14 @@
      "isTestnet": false
  },
  {
-     "name" : "Base",
+     "name" : "Ethereum Base",
      "symbol" : "ETH",
      "RPC" : "https://base-rpc.publicnode.com",
      "chainId" : "8453",
      "explorer" : "https://basescan.org",
      "explorerAPI" : "https://api.basescan.org",
      "token_registry" : null,
-     "logo":"assets/logo/base.png", 
+     "logo":"assets/logo/eth.png", 
      "baseLogo":"assets/logo/base.png", 
      "baseNetwork":"eth",
      "chainType":"Base ERC-20",

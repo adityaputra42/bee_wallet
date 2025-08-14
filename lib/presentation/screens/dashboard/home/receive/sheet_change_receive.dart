@@ -18,43 +18,55 @@ class SheetChangeReceive extends ConsumerWidget {
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
-          24, 0, 24, MediaQuery.of(context).viewInsets.bottom),
-      child: SizedBox(
-        height: MediaQuery.sizeOf(context).height * 0.7,
-        child: Column(
-          children: [
-            Text(
-              "Change Asset",
-              style: AppFont.semibold16
-                  .copyWith(color: Theme.of(context).indicatorColor),
-            ),
-            height(16),
-            const SearchField(),
-            height(16),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Theme.of(context).cardColor),
-                child: ListView.builder(
-                  itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.only(bottom: 8),
-                    child: cardChain(context, chainList[index], ref),
-                  ),
-                  itemCount: chainList.length,
+        24,
+        0,
+        24,
+        MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: SafeArea(
+        child: SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.7,
+          child: Column(
+            children: [
+              Text(
+                "Change Asset",
+                style: AppFont.semibold16.copyWith(
+                  color: Theme.of(context).indicatorColor,
                 ),
               ),
-            ),
-            height(24)
-          ],
+              height(16),
+              const SearchField(),
+              height(16),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Theme.of(context).cardColor,
+                  ),
+                  child: ListView.builder(
+                    itemBuilder:
+                        (context, index) => Padding(
+                          padding: EdgeInsets.only(bottom: 8),
+                          child: cardChain(context, chainList[index], ref),
+                        ),
+                    itemCount: chainList.length,
+                  ),
+                ),
+              ),
+              height(24),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget cardChain(
-      BuildContext context, SelectedTokenChain chain, WidgetRef ref) {
+    BuildContext context,
+    SelectedTokenChain chain,
+    WidgetRef ref,
+  ) {
     final chainDetail = ref.watch(chainDetailProvider);
     return GestureDetector(
       onTap: () {
@@ -64,14 +76,17 @@ class SheetChangeReceive extends ConsumerWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-                width: 1,
-                color: chainDetail.chainId == chain.chainId &&
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            width: 1,
+            color:
+                chainDetail.chainId == chain.chainId &&
                         chainDetail.symbol == chain.symbol
                     ? AppColor.primaryColor
-                    : Theme.of(context).colorScheme.surface),
-            color: Theme.of(context).colorScheme.surface),
+                    : Theme.of(context).colorScheme.surface,
+          ),
+          color: Theme.of(context).colorScheme.surface,
+        ),
         child: Column(
           children: [
             Row(
@@ -89,9 +104,10 @@ class SheetChangeReceive extends ConsumerWidget {
                           child: Container(
                             padding: EdgeInsets.all(0.5),
                             color: Theme.of(context).colorScheme.surface,
-                            child: (chain.logo != null)
-                                ? Image.asset(chain.logo!)
-                                : Image.asset(AppImage.logo),
+                            child:
+                                (chain.logo != null)
+                                    ? Image.asset(chain.logo!)
+                                    : Image.asset(AppImage.logo),
                           ),
                         ),
                       ),
@@ -105,13 +121,16 @@ class SheetChangeReceive extends ConsumerWidget {
                             child: Container(
                               padding: EdgeInsets.all(0.1),
                               decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 0.1,
-                                      color: Theme.of(context).cardColor),
-                                  color: Theme.of(context).colorScheme.surface),
-                              child: (chain.baseLogo != null)
-                                  ? Image.asset(chain.baseLogo!)
-                                  : Image.asset(AppImage.logo),
+                                border: Border.all(
+                                  width: 0.1,
+                                  color: Theme.of(context).cardColor,
+                                ),
+                                color: Theme.of(context).colorScheme.surface,
+                              ),
+                              child:
+                                  (chain.baseLogo != null)
+                                      ? Image.asset(chain.baseLogo!)
+                                      : Image.asset(AppImage.logo),
                             ),
                           ),
                         ),
@@ -123,8 +142,9 @@ class SheetChangeReceive extends ConsumerWidget {
                 Expanded(
                   child: Text(
                     chain.name ?? '',
-                    style: AppFont.reguler14
-                        .copyWith(color: Theme.of(context).indicatorColor),
+                    style: AppFont.reguler14.copyWith(
+                      color: Theme.of(context).indicatorColor,
+                    ),
                   ),
                 ),
                 // SizedBox(

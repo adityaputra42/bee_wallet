@@ -21,26 +21,30 @@ class EditWalletScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: WidgetHelper.appBar(context: context, title: "Edit Wallet"),
-      body: Container(
+      body: SafeArea(
+        child: Container(
           width: double.infinity,
           margin: EdgeInsets.all(16),
           padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Theme.of(context).cardColor),
+            borderRadius: BorderRadius.circular(8),
+            color: Theme.of(context).cardColor,
+          ),
           child: Column(
             children: [
               Container(
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(width: 1, color: AppColor.primaryColor)),
+                  shape: BoxShape.circle,
+                  border: Border.all(width: 1, color: AppColor.primaryColor),
+                ),
                 child: Center(
                   child: Blockies(
-                      size: 1.03,
-                      data: account.addressETH ?? '-',
-                      shape: BlockiesShape.circle),
+                    size: 1.03,
+                    data: account.addressETH ?? '-',
+                    shape: BlockiesShape.circle,
+                  ),
                 ),
               ),
               height(12),
@@ -70,9 +74,10 @@ class EditWalletScreen extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       width: 1,
-                      color: account.backup == true
-                          ? AppColor.greenColor
-                          : AppColor.yellowColor,
+                      color:
+                          account.backup == true
+                              ? AppColor.greenColor
+                              : AppColor.yellowColor,
                     ),
                     // color: account?.backup == true
                     //     ? AppColor.greenColor
@@ -85,9 +90,10 @@ class EditWalletScreen extends ConsumerWidget {
                             ? Icons.check_circle_outline_rounded
                             : Icons.error_outline_outlined,
                         size: 24,
-                        color: account.backup == true
-                            ? AppColor.greenColor
-                            : AppColor.yellowColor,
+                        color:
+                            account.backup == true
+                                ? AppColor.greenColor
+                                : AppColor.yellowColor,
                       ),
                       width(8),
                       Expanded(
@@ -96,9 +102,10 @@ class EditWalletScreen extends ConsumerWidget {
                               ? "Your account has been backed up"
                               : "Please backup your sheed pharse, to secure your account.",
                           style: AppFont.reguler12.copyWith(
-                            color: account.backup == true
-                                ? AppColor.greenColor
-                                : AppColor.yellowColor,
+                            color:
+                                account.backup == true
+                                    ? AppColor.greenColor
+                                    : AppColor.yellowColor,
                           ),
                         ),
                       ),
@@ -108,6 +115,8 @@ class EditWalletScreen extends ConsumerWidget {
               ),
               height(16),
               InputText(
+                filled: true,
+                filledColor: Theme.of(context).colorScheme.surface,
                 title: "Account Name",
                 hintText: "Entry Account Name",
                 enable: enableEdit,
@@ -115,23 +124,29 @@ class EditWalletScreen extends ConsumerWidget {
                 color: Theme.of(context).colorScheme.surface,
               ),
               const Spacer(),
-              ref.watch(selectedAccountProvider).isLoading ? ButtonLoading(): PrimaryButton(
-                  
-                  title: enableEdit == true ? "Save" : "Edit",
-                  onPressed: () {
-                    if (enableEdit == true) {
-                      ref
-                          .read(accountSelectedEditProvider.notifier)
-                          .changeEditAccount(
-                              context, ref.watch(accountNameProvider).text);
-                    } else {
-                      ref
-                          .read(enableEditWalletProvider.notifier)
-                          .changeState(true);
-                    }
-                  })
+              ref.watch(selectedAccountProvider).isLoading
+                  ? ButtonLoading()
+                  : PrimaryButton(
+                    title: enableEdit == true ? "Save" : "Edit",
+                    onPressed: () {
+                      if (enableEdit == true) {
+                        ref
+                            .read(accountSelectedEditProvider.notifier)
+                            .changeEditAccount(
+                              context,
+                              ref.watch(accountNameProvider).text,
+                            );
+                      } else {
+                        ref
+                            .read(enableEditWalletProvider.notifier)
+                            .changeState(true);
+                      }
+                    },
+                  ),
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

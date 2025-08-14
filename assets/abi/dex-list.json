@@ -1,12 +1,5 @@
 [
     {
-        "chain": "Beone Testnet",
-        "chainId": 223344,
-        "dex": "Uniswap V2",
-        "router": "0xd627FfF27633B6704a3eF15F9d66ea24a0eb17Ee",
-        "factory": "0x6a3e838fdf5fB908e76fB7886a22a1c7Ee0f1460"
-      },
-    {
         "chain": "Ethereum",
         "chainId": 1,
         "dex": "Uniswap V2",
