@@ -1,11 +1,15 @@
 // ignore_for_file: unused_result
 
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import '../../../utils/walletConnect/bottom_sheet_listener.dart';
+import '../../../utils/walletConnect/deep_link_handler.dart';
 import '../../provider/account/account_provider.dart';
+import '../../provider/dapp/walletconnect_provider.dart';
 import '../../provider/provider.dart';
 import '../../widget/custom_navbar.dart';
 import '../../widget/widget.dart';
@@ -94,145 +98,145 @@ class MainScreen extends ConsumerWidget {
                                                           ref.watch(
                                                             balancePeriodicProvider,
                                                           );
-                                                          // return ref
-                                                          //     .watch(
-                                                          //       walletconnectProvider,
-                                                          //     )
-                                                          //     .when(
-                                                          //       data: (data) {
-                                                          //         DeepLinkHandler(
-                                                          //           walletKit:
-                                                          //               data,
-                                                          //         ).initListener(
-                                                          //           ref,
-                                                          //         );
-                                                          //         data
-                                                          //             .core
-                                                          //             .pairing
-                                                          //             .onPairingInvalid
-                                                          //             .subscribe(
-                                                          //               ref
-                                                          //                   .read(
-                                                          //                     walletconnectProvider.notifier,
-                                                          //                   )
-                                                          //                   .onPairingInvalid,
-                                                          //             );
-                                                          //         data
-                                                          //             .core
-                                                          //             .pairing
-                                                          //             .onPairingCreate
-                                                          //             .subscribe(
-                                                          //               ref
-                                                          //                   .read(
-                                                          //                     walletconnectProvider.notifier,
-                                                          //                   )
-                                                          //                   .onPairingCreate,
-                                                          //             );
-                                                          //         data
-                                                          //             .core
-                                                          //             .relayClient
-                                                          //             .onRelayClientError
-                                                          //             .subscribe(
-                                                          //               ref
-                                                          //                   .read(
-                                                          //                     walletconnectProvider.notifier,
-                                                          //                   )
-                                                          //                   .onRelayClientError,
-                                                          //             );
-                                                          //         data
-                                                          //             .core
-                                                          //             .relayClient
-                                                          //             .onRelayClientMessage
-                                                          //             .subscribe(
-                                                          //               ref
-                                                          //                   .read(
-                                                          //                     walletconnectProvider.notifier,
-                                                          //                   )
-                                                          //                   .onRelayClientMessage,
-                                                          //             );
-                                                          //         data.onSessionProposal.subscribe(
-                                                          //           ref
-                                                          //               .read(
-                                                          //                 walletconnectProvider
-                                                          //                     .notifier,
-                                                          //               )
-                                                          //               .onSessionProposal,
-                                                          //         );
-                                                          //         data.onSessionProposalError.subscribe(
-                                                          //           ref
-                                                          //               .read(
-                                                          //                 walletconnectProvider
-                                                          //                     .notifier,
-                                                          //               )
-                                                          //               .onSessionProposalError,
-                                                          //         );
-                                                          //         data.onSessionConnect.subscribe(
-                                                          //           ref
-                                                          //               .read(
-                                                          //                 walletconnectProvider
-                                                          //                     .notifier,
-                                                          //               )
-                                                          //               .onSessionConnect,
-                                                          //         );
-                                                          //         data.onSessionAuthRequest.subscribe(
-                                                          //           ref
-                                                          //               .read(
-                                                          //                 walletconnectProvider
-                                                          //                     .notifier,
-                                                          //               )
-                                                          //               .onSessionAuthRequest,
-                                                          //         );
-                                                          //         ref
-                                                          //             .read(
-                                                          //               walletconnectProvider
-                                                          //                   .notifier,
-                                                          //             )
-                                                          //             .registerAccount();
-                                                          //         ref
-                                                          //             .read(
-                                                          //               walletconnectProvider
-                                                          //                   .notifier,
-                                                          //             )
-                                                          //             .registerEmitHandler();
-                                                          //         data.init();
-                                                          //         log(
-                                                          //           " wc init succes",
-                                                          //         );
-                                                          //         ref
-                                                          //             .read(
-                                                          //               walletconnectProvider
-                                                          //                   .notifier,
-                                                          //             )
-                                                          //             .emitEvent();
+                                                          return ref
+                                                              .watch(
+                                                                walletconnectProvider,
+                                                              )
+                                                              .when(
+                                                                data: (data) {
+                                                                  DeepLinkHandler(
+                                                                    walletKit:
+                                                                        data,
+                                                                  ).initListener(
+                                                                    ref,
+                                                                  );
+                                                                  data
+                                                                      .core
+                                                                      .pairing
+                                                                      .onPairingInvalid
+                                                                      .subscribe(
+                                                                        ref
+                                                                            .read(
+                                                                              walletconnectProvider.notifier,
+                                                                            )
+                                                                            .onPairingInvalid,
+                                                                      );
+                                                                  data
+                                                                      .core
+                                                                      .pairing
+                                                                      .onPairingCreate
+                                                                      .subscribe(
+                                                                        ref
+                                                                            .read(
+                                                                              walletconnectProvider.notifier,
+                                                                            )
+                                                                            .onPairingCreate,
+                                                                      );
+                                                                  data
+                                                                      .core
+                                                                      .relayClient
+                                                                      .onRelayClientError
+                                                                      .subscribe(
+                                                                        ref
+                                                                            .read(
+                                                                              walletconnectProvider.notifier,
+                                                                            )
+                                                                            .onRelayClientError,
+                                                                      );
+                                                                  data
+                                                                      .core
+                                                                      .relayClient
+                                                                      .onRelayClientMessage
+                                                                      .subscribe(
+                                                                        ref
+                                                                            .read(
+                                                                              walletconnectProvider.notifier,
+                                                                            )
+                                                                            .onRelayClientMessage,
+                                                                      );
+                                                                  data.onSessionProposal.subscribe(
+                                                                    ref
+                                                                        .read(
+                                                                          walletconnectProvider
+                                                                              .notifier,
+                                                                        )
+                                                                        .onSessionProposal,
+                                                                  );
+                                                                  data.onSessionProposalError.subscribe(
+                                                                    ref
+                                                                        .read(
+                                                                          walletconnectProvider
+                                                                              .notifier,
+                                                                        )
+                                                                        .onSessionProposalError,
+                                                                  );
+                                                                  data.onSessionConnect.subscribe(
+                                                                    ref
+                                                                        .read(
+                                                                          walletconnectProvider
+                                                                              .notifier,
+                                                                        )
+                                                                        .onSessionConnect,
+                                                                  );
+                                                                  data.onSessionAuthRequest.subscribe(
+                                                                    ref
+                                                                        .read(
+                                                                          walletconnectProvider
+                                                                              .notifier,
+                                                                        )
+                                                                        .onSessionAuthRequest,
+                                                                  );
+                                                                  ref
+                                                                      .read(
+                                                                        walletconnectProvider
+                                                                            .notifier,
+                                                                      )
+                                                                      .registerAccount();
+                                                                  ref
+                                                                      .read(
+                                                                        walletconnectProvider
+                                                                            .notifier,
+                                                                      )
+                                                                      .registerEmitHandler();
+                                                                  data.init();
+                                                                  log(
+                                                                    " wc init succes",
+                                                                  );
+                                                                  ref
+                                                                      .read(
+                                                                        walletconnectProvider
+                                                                            .notifier,
+                                                                      )
+                                                                      .emitEvent();
 
                                                           return BottomSheetListener(
                                                             child: body(),
                                                           );
                                                         },
-                                                        //   error: (
-                                                        //     Object error,
-                                                        //     StackTrace
-                                                        //     stackTrace,
-                                                        //   ) {
-                                                        //     return ErrorView(
-                                                        //       error:
-                                                        //           error
-                                                        //               .toString(),
-                                                        //       ontap: () {
-                                                        //         ref.refresh(
-                                                        //           balanceChainProvider,
-                                                        //         );
-                                                        //         ref.watch(
-                                                        //           balancePeriodicProvider,
-                                                        //         );
-                                                        //       },
-                                                        //     );
-                                                        //   },
-                                                        //   loading: () {
-                                                        //     return loading();
-                                                        //   },
-                                                        // );
-                                                        // },
+                                                          error: (
+                                                            Object error,
+                                                            StackTrace
+                                                            stackTrace,
+                                                          ) {
+                                                            return ErrorView(
+                                                              error:
+                                                                  error
+                                                                      .toString(),
+                                                              ontap: () {
+                                                                ref.refresh(
+                                                                  balanceChainProvider,
+                                                                );
+                                                                ref.watch(
+                                                                  balancePeriodicProvider,
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                          loading: () {
+                                                            return loading();
+                                                          },
+                                                        );
+                                                        },
                                                         error: (
                                                           Object error,
                                                           StackTrace stackTrace,

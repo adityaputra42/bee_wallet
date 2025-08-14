@@ -9,11 +9,16 @@ import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/ant_design.dart';
+import 'package:reown_walletkit/reown_walletkit.dart';
 
 import '../../../../config/config.dart';
+import '../../../../utils/walletConnect/deep_link_handler.dart';
+import '../../../../utils/walletConnect/eth_utils.dart';
+import '../../../provider/dapp/walletconnect_provider.dart';
 import '../../../provider/provider.dart';
 import '../../../widget/widget.dart';
 
+import '../../scan/scann_page.dart';
 import 'components/new_dapps.dart';
 import 'components/sheet_select_network.dart';
 
@@ -27,65 +32,65 @@ class DappScreen extends ConsumerStatefulWidget {
 }
 
 class _DappScreenState extends ConsumerState<DappScreen> {
-  // List<PairingInfo> _pairings = [];
-  // ReownWalletKit? walletKit;
+  List<PairingInfo> _pairings = [];
+  ReownWalletKit? walletKit;
   @override
   void initState() {
-    // walletKit = ref.read(walletconnectProvider).valueOrNull;
-    // _pairings = walletKit!.pairings.getAll();
-    // _pairings = _pairings.where((p) => p.active).toList();
+    walletKit = ref.read(walletconnectProvider).valueOrNull;
+    _pairings = walletKit!.pairings.getAll();
+    _pairings = _pairings.where((p) => p.active).toList();
 
-    // _registerListeners();
+    _registerListeners();
 
-    // DeepLinkHandler.checkInitialLink();
+    DeepLinkHandler.checkInitialLink();
     super.initState();
   }
 
-  // void _registerListeners() {
-  //   walletKit?.core.relayClient.onRelayClientMessage.subscribe(
-  //     _onRelayClientMessage,
-  //   );
-  //   walletKit?.pairings.onSync.subscribe(_refreshState);
-  //   walletKit?.pairings.onUpdate.subscribe(_refreshState);
-  //   walletKit?.onSessionConnect.subscribe(_refreshState);
-  //   walletKit?.onSessionDelete.subscribe(_refreshState);
-  // }
+  void _registerListeners() {
+    walletKit?.core.relayClient.onRelayClientMessage.subscribe(
+      _onRelayClientMessage,
+    );
+    walletKit?.pairings.onSync.subscribe(_refreshState);
+    walletKit?.pairings.onUpdate.subscribe(_refreshState);
+    walletKit?.onSessionConnect.subscribe(_refreshState);
+    walletKit?.onSessionDelete.subscribe(_refreshState);
+  }
 
-  // void _unregisterListeners() {
-  //   walletKit?.onSessionDelete.unsubscribe(_refreshState);
-  //   walletKit?.onSessionConnect.unsubscribe(_refreshState);
-  //   walletKit?.pairings.onSync.unsubscribe(_refreshState);
-  //   walletKit?.pairings.onUpdate.unsubscribe(_refreshState);
-  //   walletKit?.core.relayClient.onRelayClientMessage.unsubscribe(
-  //     _onRelayClientMessage,
-  //   );
-  // }
+  void _unregisterListeners() {
+    walletKit?.onSessionDelete.unsubscribe(_refreshState);
+    walletKit?.onSessionConnect.unsubscribe(_refreshState);
+    walletKit?.pairings.onSync.unsubscribe(_refreshState);
+    walletKit?.pairings.onUpdate.unsubscribe(_refreshState);
+    walletKit?.core.relayClient.onRelayClientMessage.unsubscribe(
+      _onRelayClientMessage,
+    );
+  }
 
-  // @override
-  // void dispose() {
-  //   _unregisterListeners();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _unregisterListeners();
+    super.dispose();
+  }
 
-  // void _refreshState(dynamic event) async {
-  //   setState(() {});
-  // }
+  void _refreshState(dynamic event) async {
+    setState(() {});
+  }
 
-  // void _onRelayClientMessage(MessageEvent? event) async {
-  //   _refreshState(event);
-  //   if (event != null) {
-  //     final jsonObject = await EthUtils.decodeMessageEvent(event, walletKit!);
-  //     if (!mounted) return;
-  //     if (jsonObject is JsonRpcRequest &&
-  //         jsonObject.method == MethodConstants.WC_SESSION_PING) {
-  //       MethodHelper().showSnack(
-  //         context: context,
-  //         content: "onRelay ${jsonObject.method}",
-  //         backgorund: AppColor.greenColor,
-  //       );
-  //     }
-  //   }
-  // }
+  void _onRelayClientMessage(MessageEvent? event) async {
+    _refreshState(event);
+    if (event != null) {
+      final jsonObject = await EthUtils.decodeMessageEvent(event, walletKit!);
+      if (!mounted) return;
+      if (jsonObject is JsonRpcRequest &&
+          jsonObject.method == MethodConstants.WC_SESSION_PING) {
+        MethodHelper().showSnack(
+          context: context,
+          content: "onRelay ${jsonObject.method}",
+          backgorund: AppColor.greenColor,
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,51 +133,51 @@ class _DappScreenState extends ConsumerState<DappScreen> {
               widget.width(12),
               InkWell(
                 onTap: () {
-                  // if (walletKit?.core.connectivity.isOnline.value ==
-                  //     true) {
-                  //   Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //           builder: (context) => ScanPage(onScan: (v) {
-                  //                 Navigator.pop(context);
-                  //                 showModalBottomSheet(
-                  //                     context: context,
-                  //                     builder: (context) =>
-                  //                         SheetSelectNetworkDapp(
-                  //                           url: null,
-                  //                           onSelect: () {
-                  //                             ref
-                  //                                 .read(
-                  //                                     walletconnectProvider
-                  //                                         .notifier)
-                  //                                 .registerAccount();
-                  //                             ref.watch(
-                  //                                 walletconnectProvider);
-                  //                             ref
-                  //                                 .read(
-                  //                                     walletconnectProvider
-                  //                                         .notifier)
-                  //                                 .connectWallet(v);
-                  //                           },
-                  //                         ),
-                  //                     backgroundColor: Theme.of(context)
-                  //                         .colorScheme
-                  //                         .surface,
-                  //                     showDragHandle: true,
-                  //                     isDismissible: false,
-                  //                     shape: const RoundedRectangleBorder(
-                  //                         borderRadius:
-                  //                             BorderRadius.vertical(
-                  //                                 top: Radius.circular(
-                  //                                     16))));
-                  //               })));
-                  // } else {
+                  if (walletKit?.core.connectivity.isOnline.value ==
+                      true) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ScanPage(onScan: (v) {
+                                  Navigator.pop(context);
+                                  showModalBottomSheet(
+                                      context: context,
+                                      builder: (context) =>
+                                          SheetSelectNetworkDapp(
+                                            url: null,
+                                            onSelect: () {
+                                              ref
+                                                  .read(
+                                                      walletconnectProvider
+                                                          .notifier)
+                                                  .registerAccount();
+                                              ref.watch(
+                                                  walletconnectProvider);
+                                              ref
+                                                  .read(
+                                                      walletconnectProvider
+                                                          .notifier)
+                                                  .connectWallet(v);
+                                            },
+                                          ),
+                                      backgroundColor: Theme.of(context)
+                                          .colorScheme
+                                          .surface,
+                                      showDragHandle: true,
+                                      isDismissible: false,
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.vertical(
+                                                  top: Radius.circular(
+                                                      16))));
+                                })));
+                  } else {
                   MethodHelper().showSnack(
                     context: context,
                     content: "Wallet connect is not initialize",
                     backgorund: AppColor.redColor,
                   );
-                  // }
+                  }
                 },
                 child: Container(
                   width: 46,

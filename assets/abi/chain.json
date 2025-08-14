@@ -64,14 +64,14 @@
      "isTestnet": false
  },
  {
-     "name" : "Ethereum Base",
+     "name" : "Base",
      "symbol" : "ETH",
      "RPC" : "https://base-rpc.publicnode.com",
      "chainId" : "8453",
      "explorer" : "https://basescan.org",
      "explorerAPI" : "https://api.basescan.org",
      "token_registry" : null,
-     "logo":"assets/logo/eth.png", 
+     "logo":"assets/logo/base.png", 
      "baseLogo":"assets/logo/base.png", 
      "baseNetwork":"eth",
      "chainType":"Base ERC-20",

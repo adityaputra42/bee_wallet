@@ -48,7 +48,7 @@ dependencies:
   pin_code_fields: ^8.0.1
   pointycastle: ^3.7.4
   qr_flutter: ^4.1.0
-  # reown_walletkit: ^1.1.6
+  reown_walletkit: ^1.2.0
   riverpod: ^2.6.1
   riverpod_annotation: ^2.6.1
   share_plus: ^11.0.0
